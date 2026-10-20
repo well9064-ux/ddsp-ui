@@ -239,7 +239,7 @@ class Component extends DCLogic {
       lab1: lab[0], lab2: lab[1], lab3: lab[2], lab4: lab[3], lab5: lab[4],
       layers: LAYERS.map(function (l) {
         var on = l.id === cur;
-        return { label: l.label, pressed: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#0E1C31' : '#FFFFFF', pick: function () { self.setState({ layer: l.id }); } };
+        return { label: l.label, pressed: on ? 'true' : 'false', bg: on ? '#EF4122' : 'transparent', fg: '#FFFFFF', pick: function () { self.setState({ layer: l.id }); } };
       }),
       exports: [
         { value: 'csv', label: '작업 · 로그 CSV' },

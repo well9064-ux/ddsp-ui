@@ -56,7 +56,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="진행률" value="{{kProg}}" unit="%" sub="{{kArea}}"></x-import>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="누적 파종량" value="{{kSeed}}" unit="kg" sub="처방 대비 101%"></x-import>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="경과 시간" value="{{kElapsed}}" sub="{{kRemain}}"></x-import>
-        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="미확인 알림" value="{{kAlerts}}" unit="건" accent="#EC4023"></x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="미확인 알림" value="{{kAlerts}}" unit="건" accent="#EF4122"></x-import>
       </div>
 
       <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch;">
@@ -65,9 +65,19 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
           <div style="position: absolute; left: 50%; top: 50%; width: 2415px; height: 1354px; margin-left: -1243px; margin-top: -643px;">
           <img src="../assets/satellite_gimje_wide.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%;">
           <svg role="img" aria-label="김제 A-03 필지 위성지도 위 계획 경로, 실제 비행 궤적, 드론 위치" viewBox="-795 -285 2415 1354" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+            <defs><clipPath id="mGJS1"><path d="M308 245 L630 357 L589 472 L267 360 Z"></path></clipPath></defs>
             <path d="M308 245 L630 357 L669 248 L347 136 Z" fill="none" stroke="#B4E319" stroke-width="2" opacity="0.7"></path>
             <path d="M267 360 L589 472 L550 581 L228 469 Z" fill="none" stroke="#B4E319" stroke-width="2" opacity="0.7"></path>
             <path d="M308 245 L630 357 L589 472 L267 360 Z" fill="rgba(14,28,49,0.25)" stroke="#B4E319" stroke-width="3.5"></path>
+            <sc-if value="{{ovl}}" hint-placeholder-val="{{false}}">
+              <g clip-path="url(#mGJS1)" opacity="0.6">
+                <rect x="200" y="200" width="500" height="320" fill="#5FBF86"></rect>
+                <path d="M308 245 L420.7 284.2 L398.2 347.4 L285.5 308.3 Z" fill="#CDEBD7"></path>
+                <path d="M549.5 329 L630 357 L617.7 391.5 L537.2 363.5 Z" fill="#CDEBD7"></path>
+                <path d="M458.6 358.3 L611.6 408.8 L589 472 L444.1 421.6 Z" fill="#107C41"></path>
+                <path d="M279.3 325.5 L375.9 359.1 L363.6 393.6 L267 360 Z" fill="#107C41"></path>
+              </g>
+            </sc-if>
             <path d="M420.7 284.2 L398.2 347.4 L285.5 308.3 M549.5 329 L537.2 363.5 L617.7 391.5 M458.6 358.3 L611.6 408.8 M458.6 358.3 L444.1 421.6 M279.3 325.5 L375.9 359.1 L363.6 393.6" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.7"></path>
             <polyline points="{{d1.done}}" fill="none" stroke="#5FD18F" stroke-width="11" stroke-linejoin="round" opacity="0.4"></polyline>
             <polyline points="{{d3.done}}" fill="none" stroke="#5FD18F" stroke-width="11" stroke-linejoin="round" opacity="0.4"></polyline>
@@ -101,13 +111,13 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
               <rect x="-3.2" y="-3.2" width="6.4" height="6.4" rx="1.6" fill="#667085"></rect>
             </g>
             <g transform="translate({{d1.x}} {{d1.y}})">
-              <circle r="16" fill="#FFFFFF" stroke="#EC4023" stroke-width="3.5"></circle>
+              <circle r="16" fill="#FFFFFF" stroke="#EF4122" stroke-width="3.5"></circle>
               <path d="M-6.5 -6.5 L6.5 6.5 M6.5 -6.5 L-6.5 6.5" stroke="#0E1C31" stroke-width="2.2" stroke-linecap="round"></path>
               <circle cx="-7" cy="-7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
               <circle cx="7" cy="-7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
               <circle cx="-7" cy="7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
               <circle cx="7" cy="7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
-              <rect x="-3.2" y="-3.2" width="6.4" height="6.4" rx="1.6" fill="#EC4023"></rect>
+              <rect x="-3.2" y="-3.2" width="6.4" height="6.4" rx="1.6" fill="#EF4122"></rect>
             </g>
             <g transform="translate({{d3.x}} {{d3.y}})">
               <circle r="16" fill="#FFFFFF" stroke="{{d3Ring}}" stroke-width="3.5"></circle>
@@ -140,8 +150,8 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
           </div>
 
           <div role="group" aria-label="지도 레이어" style="position: absolute; top: 12px; right: 12px; display: flex; gap: 6px;">
-            <button type="button" aria-pressed="true" style="width: 76px; padding: 4px; border: 2px solid #EC4023; border-radius: 6px; background: rgba(14,28,49,0.86); display: flex; flex-direction: column; gap: 4px; align-items: stretch; color: #FFFFFF; font: 600 11px var(--font-primary);"><span style="height: 34px; border-radius: 3px; background: #3B4A3A;"></span>위성</button>
-            <button type="button" aria-pressed="false" style="width: 76px; padding: 4px; border: 2px solid transparent; border-radius: 6px; background: rgba(14,28,49,0.86); display: flex; flex-direction: column; gap: 4px; align-items: stretch; color: #FFFFFF; font: 400 11px var(--font-primary);"><span style="height: 34px; border-radius: 3px; background: #5FBF86; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));"><span style="background: #CDEBD7;"></span><span></span><span style="background: #107C41;"></span></span>처방맵 겹침</button>
+            <button type="button" aria-pressed="{{satOn}}" onClick="{{pickSat}}" style="width: 76px; padding: 4px; border: 2px solid {{satBorder}}; border-radius: 6px; background: rgba(14,28,49,0.86); display: flex; flex-direction: column; gap: 4px; align-items: stretch; color: {{satText}}; font: 600 11px var(--font-primary); cursor: pointer;"><span style="height: 34px; border-radius: 3px; background: #3B4A3A;"></span>위성</button>
+            <button type="button" aria-pressed="{{ovlOn}}" onClick="{{pickOvl}}" style="width: 76px; padding: 4px; border: 2px solid {{ovlBorder}}; border-radius: 6px; background: rgba(14,28,49,0.86); display: flex; flex-direction: column; gap: 4px; align-items: stretch; color: {{ovlText}}; font: 600 11px var(--font-primary); cursor: pointer;"><span style="height: 34px; border-radius: 3px; background: #5FBF86; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));"><span style="background: #CDEBD7;"></span><span></span><span style="background: #107C41;"></span></span>처방맵 겹침</button>
           </div>
 
           <div style="position: absolute; right: 12px; top: 92px; display: flex; flex-direction: column; gap: 4px;">
@@ -174,7 +184,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 
           <div style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
             <h2 style="margin: 0; font-size: 16px; font-weight: 600;">투입 기체</h2>
-            <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #EC4023; border-radius: 6px; background: #FDECEA;">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #EF4122; border-radius: 6px; background: #FDECEA;">
               <span style="font-weight: 600; width: 52px; white-space: nowrap;">DR-01</span>
               <span style="flex-grow: 1; font-size: 12px; color: #475467;">박OO · 배터리 {{bat}}%</span>
               <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{d1Badge}}">{{d1Label}}</x-import>
@@ -316,13 +326,18 @@ class Component extends DCLogic {
     var finished = t >= 1;
     var alerts = (t >= 0.3 ? 1 : 0) + (t >= 0.58 ? 1 : 0);
     return {
+      ovl: !!s.ovl, satOn: s.ovl ? 'false' : 'true', ovlOn: s.ovl ? 'true' : 'false',
+      satBorder: s.ovl ? 'transparent' : '#EF4122', satText: s.ovl ? '#FFFFFF' : '#EF4122',
+      ovlBorder: s.ovl ? '#EF4122' : 'transparent', ovlText: s.ovl ? '#EF4122' : '#FFFFFF',
+      pickSat: function () { self.setState({ ovl: false }); },
+      pickOvl: function () { self.setState({ ovl: true }); },
       d1: d1, d3: d3,
       playing: playing, paused: !playing,
       playLabel: playing ? '일시정지' : '재생',
       tInt: Math.round(t * 1000),
       clockText: (live ? '실시간 · ' : '재생 · ') + clockAt(el),
       speedLabel: s.fast ? '빠르게' : '보통 속도',
-      liveBg: live ? '#EC4023' : 'rgba(255,255,255,0.2)',
+      liveBg: live ? '#EF4122' : 'rgba(255,255,255,0.2)',
       missionBadge: finished ? 'success' : 'progress',
       missionLabel: finished ? '완료' : '작업중',
       linkColor: live ? '#066B36' : '#475467',
@@ -334,7 +349,7 @@ class Component extends DCLogic {
       kRemain: finished ? '작업 완료' : '예상 잔여 ' + Math.ceil(remain / 60) + '분',
       kAlerts: String(alerts),
       bat: bat,
-      batColor: bat < 30 ? '#EC4023' : (bat < 50 ? '#FD9009' : '#107C41'),
+      batColor: bat < 30 ? '#EF4122' : (bat < 50 ? '#FD9009' : '#107C41'),
       alt: (3.0 + 0.1 * Math.sin(t * 70)).toFixed(1),
       spd: (4.9 + 0.15 * Math.cos(t * 55)).toFixed(1),
       rate: rate.toFixed(1),

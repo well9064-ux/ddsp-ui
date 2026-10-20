@@ -87,7 +87,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
           </div>
 
           <div role="tablist" aria-label="기체 정보" style="display: flex; gap: 4px; border-bottom: 1px solid #DFE7EB;">
-            <a href="#ac-info" role="tab" aria-selected="true" style="padding: 10px 14px; font-size: 14px; font-weight: 600; color: #EC4023; border-bottom: 2px solid #EC4023; margin-bottom: -1px;">기본 정보</a>
+            <a href="#ac-info" role="tab" aria-selected="true" style="padding: 10px 14px; font-size: 14px; font-weight: 600; color: #EF4122; border-bottom: 2px solid #EF4122; margin-bottom: -1px;">기본 정보</a>
             <a href="#ac-module" role="tab" aria-selected="false" style="padding: 10px 14px; font-size: 14px; color: #475467;">파종 모듈 · 펌웨어</a>
             <a href="#ac-battery" role="tab" aria-selected="false" style="padding: 10px 14px; font-size: 14px; color: #475467;">배터리</a>
             <a href="#ac-service" role="tab" aria-selected="false" style="padding: 10px 14px; font-size: 14px; color: #475467;">정비 · A/S 이력</a>
@@ -189,7 +189,7 @@ class Component extends DCLogic {
         var on = x.id === sel;
         return {
           id: x.id, state: x.state, badge: x.badge, model: x.model, owner: x.owner,
-          pressed: on ? 'true' : 'false', border: on ? '1px solid #EC4023' : '1px solid #DFE7EB', bg: on ? '#FDECEA' : '#FFFFFF',
+          pressed: on ? 'true' : 'false', border: on ? '1px solid #EF4122' : '1px solid #DFE7EB', bg: on ? '#FDECEA' : '#FFFFFF',
           pick: function () { self.setState({ sel: x.id }); }
         };
       }),
