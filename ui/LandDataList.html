@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>필지 데이터 관리 · 목록 · 드론 파종 컨셉 UI</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<link rel="stylesheet" href="../lib/bundle.css">
+<style>body{margin:0;background:#FFFFFF} a{text-decoration:none}</style>
+<script src="../lib/morphdom.js"></script>
+<script src="../lib/runtime.js"></script>
+<script src="../lib/components.js"></script>
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/x-dc-template" id="dc-tpl">
+<helmet>
+<style>
+body{margin:0}
+a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
+</style>
+</helmet>
+<div style="min-height: 1000px; display: flex; background: #FFFFFF; font-family: var(--font-primary); color: #222222; font-variant-numeric: tabular-nums;">
+
+  <div style="flex: 0 0 230px; display: flex;">
+    <dc-import name="Nav" active="landdata" hint-size="230px,1000px"></dc-import>
+  </div>
+
+  <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column;">
+    <header style="height: 50px; flex-shrink: 0; display: flex; align-items: center; gap: 16px; padding: 0 20px; background: #231F20; color: #FFFFFF;">
+      <span style="font-size: 13px; font-weight: 600;">2027년 4월 12일</span>
+      <div style="flex-grow: 1;"></div>
+      <span style="font-size: 13px; font-weight: 600;">안녕하세요, 관리자 님</span>
+    </header>
+    <div role="tablist" aria-label="열린 화면" style="height: 34px; flex-shrink: 0; display: flex; align-items: flex-end; gap: 2px; padding: 0 10px; background: #EEEEEE;">
+      <a href="#" role="tab" aria-selected="true" style="height: 30px; padding: 0 22px; display: flex; align-items: center; background: #FFFFFF; color: #222222; font-size: 12px; font-weight: 600;">필지 데이터 관리</a>
+    </div>
+
+    <main style="flex: 1 1 auto; box-sizing: border-box; padding: 18px 16px 32px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #DDDDDD;">
+        <h1 style="margin: 0; font-size: 18px; font-weight: 800;">필지 데이터 관리</h1>
+        <div style="flex-grow: 1;"></div>
+        <span style="font-size: 12px; color: #888888;">정밀 농업 › <b style="color: #333333;">필지 데이터 관리</b></span>
+      </div>
+
+      <form role="search" aria-label="필지 데이터 검색" style="padding: 14px 16px; background: #F5F5F5; border: 1px solid #E2E2E2; display: grid; grid-template-columns: 90px 1fr; gap: 9px 10px; align-items: center; font-size: 12px;">
+        <span style="font-weight: 700;">농장 주소</span>
+        <div style="display: flex; align-items: center; gap: 40px;">
+          <span style="width: 360px; height: 28px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">전북특별자치도 <span aria-hidden="true">⌄</span></span>
+          <span style="display: flex; align-items: center; gap: 40px;"><span style="font-weight: 700;">작물</span><span style="width: 360px; height: 28px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;"><span>IRG <span style="font-size: 10px; font-weight: 700; color: #FFFFFF; background: #025996; padding: 1px 6px; border-radius: 999px;">추가: IRG · 청보리</span></span><span aria-hidden="true">⌄</span></span></span>
+        </div>
+
+        <span style="font-weight: 700;">데이터 분류</span>
+        <div role="group" aria-label="데이터 분류" style="display: flex;">
+          <sc-for list="{{cats}}" as="c" hint-placeholder-count="6">
+            <button type="button" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}" style="height: 28px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; gap: 5px; background: #FFFFFF; border: {{c.border}}; color: #222222; font: {{c.font}} 12px var(--font-primary); cursor: pointer; position: relative; z-index: {{c.z}};">{{c.label}}<sc-if value="{{c.isNew}}" hint-placeholder-val="{{false}}"><span style="font-size: 10px; font-weight: 700; color: #FFFFFF; background: #025996; padding: 0 5px; border-radius: 999px;">신규</span></sc-if></button>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{showGrowthSub}}" hint-placeholder-val="{{false}}">
+          <span style="font-weight: 600; color: #555555; padding-left: 8px;">┗ 드론 생육진단</span>
+          <div style="display: flex; flex-wrap: wrap;">
+            <sc-for list="{{droneLayers}}" as="d" hint-placeholder-count="13">
+              <span style="height: 26px; padding: 0 10px; margin-left: -1px; display: inline-flex; align-items: center; gap: 4px; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">{{d.name}}<sc-if value="{{d.isNew}}" hint-placeholder-val="{{false}}"><span style="font-size: 10px; font-weight: 700; color: #FFFFFF; background: #025996; padding: 0 5px; border-radius: 999px;">신규</span></sc-if></span>
+            </sc-for>
+          </div>
+          <span style="font-weight: 600; color: #555555; padding-left: 8px;">┗ 위성 기본 · 정밀</span>
+          <div style="display: flex; flex-wrap: wrap; color: #555555; font-size: 11px;">NDVI · GNDVI · NDRE · OSAVI · LCI · 항공 (기존 유지)</div>
+        </sc-if>
+
+        <sc-if value="{{showSeedSub}}" hint-placeholder-val="{{true}}">
+          <span style="font-weight: 600; color: #555555; padding-left: 8px;">┗ 처방 기관</span>
+          <div style="display: flex;">
+            <span style="height: 26px; padding: 0 12px; display: inline-flex; align-items: center; background: #FFFFFF; border: 2px solid #222222; font-size: 11px; font-weight: 700;">전체</span>
+            <span style="height: 26px; padding: 0 12px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">경상국립대학교</span>
+            <span style="height: 26px; padding: 0 12px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">수동 보정본</span>
+          </div>
+          <span style="font-weight: 600; color: #555555; padding-left: 8px;">┗ 처방 상태</span>
+          <div style="display: flex;">
+            <span style="height: 26px; padding: 0 12px; display: inline-flex; align-items: center; background: #FFFFFF; border: 2px solid #222222; font-size: 11px; font-weight: 700;">전체</span>
+            <span style="height: 26px; padding: 0 12px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">검토 대기</span>
+            <span style="height: 26px; padding: 0 12px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">승인</span>
+            <span style="height: 26px; padding: 0 12px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">반려</span>
+          </div>
+        </sc-if>
+
+        <span style="font-weight: 700;">분석일</span>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="width: 140px; height: 28px; box-sizing: border-box; display: flex; align-items: center; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">2027-04-01</span>~<span style="width: 140px; height: 28px; box-sizing: border-box; display: flex; align-items: center; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">2027-04-30</span>
+          <span style="display: flex; margin-left: 4px;"><span style="height: 28px; padding: 0 18px; display: inline-flex; align-items: center; background: #FFFFFF; border: 2px solid #222222; font-size: 11px;">전체</span><span style="height: 28px; padding: 0 18px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">1주일</span><span style="height: 28px; padding: 0 18px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">1개월</span><span style="height: 28px; padding: 0 18px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">6개월</span><span style="height: 28px; padding: 0 18px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">직접입력</span></span>
+        </div>
+        <span style="font-weight: 700;">등록일</span>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="width: 140px; height: 28px; box-sizing: border-box; display: flex; align-items: center; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">2027-04-01</span>~<span style="width: 140px; height: 28px; box-sizing: border-box; display: flex; align-items: center; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">2027-04-30</span>
+          <span style="display: flex; margin-left: 4px;"><span style="height: 28px; padding: 0 18px; display: inline-flex; align-items: center; background: #FFFFFF; border: 2px solid #222222; font-size: 11px;">전체</span><span style="height: 28px; padding: 0 18px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">1주일</span><span style="height: 28px; padding: 0 18px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">1개월</span><span style="height: 28px; padding: 0 18px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">6개월</span><span style="height: 28px; padding: 0 18px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">직접입력</span></span>
+        </div>
+        <label for="ldl-cust" style="font-weight: 700;">고객명</label>
+        <input id="ldl-cust" placeholder="농장주명 입력" style="width: 760px; max-width: 100%; height: 28px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CCCCCC; font: 400 12px var(--font-primary);">
+        <label for="ldl-farm" style="font-weight: 700;">농장명</label>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <input id="ldl-farm" value="GJ-S1" style="width: 760px; max-width: 100%; height: 28px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CCCCCC; font: 400 12px var(--font-primary);">
+          <div style="flex-grow: 1;"></div>
+          <button type="button" aria-label="초기화" style="width: 30px; height: 30px; border: 1px solid #CCCCCC; border-radius: 3px; background: #FFFFFF; display: flex; align-items: center; justify-content: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"></path></svg></button>
+          <button type="button" style="width: 80px; height: 30px; border: 0; border-radius: 3px; background: #CE2315; color: #FFFFFF; font: 700 12px var(--font-primary);">검색</button>
+        </div>
+      </form>
+
+      <div style="display: flex; align-items: center; font-size: 12px;">
+        <span>조회결과 총 {{count}}건</span>
+        <div style="flex-grow: 1;"></div>
+        <a href="LandData.html" style="height: 30px; padding: 0 14px; display: inline-flex; align-items: center; border-radius: 3px; background: #CE2315; color: #FFFFFF; font-weight: 700;">데이터 등록</a>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; min-width: 1060px; border-collapse: collapse; font-size: 13px;">
+          <thead><tr style="background: #4D4D4D; color: #FFFFFF;">
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">No</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">데이터 분류</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">세부 항목</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">고객명</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">작물</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">농장명</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">농장 주소</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">파일명</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">분석일시</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">등록일시</th>
+          </tr></thead>
+          <tbody>
+            <sc-for list="{{rows}}" as="r" hint-placeholder-count="8">
+              <tr style="background: {{r.bg}}; border-bottom: 1px solid #E5E5E5;">
+                <td style="padding: 10px 8px; text-align: center;">{{r.no}}</td>
+                <td style="padding: 10px 8px;"><span style="display: inline-flex; align-items: center; gap: 5px;">{{r.cat}}<sc-if value="{{r.isNew}}" hint-placeholder-val="{{false}}"><span style="font-size: 10px; font-weight: 700; color: #FFFFFF; background: #025996; padding: 0 5px; border-radius: 999px;">신규</span></sc-if></span></td>
+                <td style="padding: 10px 8px;">{{r.sub}}</td>
+                <td style="padding: 10px 8px;">신OO</td>
+                <td style="padding: 10px 8px;">IRG</td>
+                <td style="padding: 10px 8px;">GJ-S1</td>
+                <td style="padding: 10px 8px;">전북특별자치도 김제시 부량면 신용리 439</td>
+                <td style="padding: 10px 8px; color: #555555;">{{r.file}}</td>
+                <td style="padding: 10px 8px; text-align: center;">{{r.analyzed}}</td>
+                <td style="padding: 10px 8px; text-align: center;">{{r.registered}}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+</script>
+<script type="text/x-dc-logic" id="dc-src">
+var CATS = [
+  { id: 'all', label: '전체' },
+  { id: 'growth', label: '생육진단' },
+  { id: 'growthRx', label: '생육 처방' },
+  { id: 'soil', label: '토양 분석' },
+  { id: 'yield', label: '수확량 예측' },
+  { id: 'seed', label: '파종 처방', isNew: true }
+];
+var DRONE = ['전체', 'NDVI', 'GNDVI', 'NDRE', 'OSAVI', 'LCI', '항공', '열화상', '수분 스트레스', '작물 온도', '전체 표면온도'];
+var ROWS = [
+  { cat: 'seed', catLabel: '파종 처방', isNew: true, sub: 'v4 · 경상국립대 · 검토 대기', file: 'GJ-S1_seed_rx_v4.zip', analyzed: '2027-04-10', registered: '2027-04-11' },
+  { cat: 'seed', catLabel: '파종 처방', isNew: true, sub: 'v3 · 수동 보정 · 승인', file: 'GJ-S1_seed_rx_v3.geojson', analyzed: '2027-04-06', registered: '2027-04-06' },
+  { cat: 'growth', catLabel: '생육진단', sub: '드론 · DEM', subNew: true, file: 'GJ-S1_DEM_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06' },
+  { cat: 'growth', catLabel: '생육진단', sub: '드론 · 토양수분', subNew: true, file: 'GJ-S1_SM_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06' },
+  { cat: 'growth', catLabel: '생육진단', sub: '드론 · NDVI', file: 'GJ-S1_NDVI_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06' },
+  { cat: 'growth', catLabel: '생육진단', sub: '드론 · 항공', file: 'GJ-S1_RGB_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06' },
+  { cat: 'seed', catLabel: '파종 처방', isNew: true, sub: 'v2 · 경상국립대 · 반려', file: 'GJ-S1_seed_rx_v2.zip', analyzed: '2027-04-03', registered: '2027-04-04' },
+  { cat: 'soil', catLabel: '토양 분석', sub: '-', file: '-', analyzed: '2027-03-28', registered: '2027-03-29' }
+];
+class Component extends DCLogic {
+  renderVals() {
+    var self = this;
+    var s = this.state || {};
+    var cur = s.cat || 'seed';
+    var list = ROWS.filter(function (r) { return cur === 'all' || r.cat === cur; });
+    return {
+      showGrowthSub: cur === 'growth',
+      showSeedSub: cur === 'seed',
+      cats: CATS.map(function (c) {
+        var on = c.id === cur;
+        return {
+          label: c.label, isNew: !!c.isNew, pressed: on ? 'true' : 'false',
+          border: on ? '2px solid #222222' : '1px solid #CCCCCC', font: on ? '700' : '400', z: on ? 2 : 1,
+          pick: function () { self.setState({ cat: c.id }); }
+        };
+      }),
+      droneLayers: DRONE.map(function (n) { return { name: n, isNew: false }; }).concat([{ name: 'DEM', isNew: true }, { name: '토양수분', isNew: true }]),
+      count: String(list.length),
+      rows: list.map(function (r, i) {
+        return {
+          no: String(list.length - i), cat: r.catLabel, isNew: !!r.isNew,
+          sub: r.sub + (r.subNew ? ' (신규 레이어)' : ''), file: r.file,
+          analyzed: r.analyzed, registered: r.registered,
+          bg: i % 2 ? '#FAFAFA' : '#FFFFFF'
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

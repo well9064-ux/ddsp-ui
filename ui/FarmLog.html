@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>영농일지 상세 · 드론 파종 컨셉 UI</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<link rel="stylesheet" href="../lib/bundle.css">
+<style>body{margin:0;background:#FFFFFF} a{text-decoration:none}</style>
+<script src="../lib/morphdom.js"></script>
+<script src="../lib/runtime.js"></script>
+<script src="../lib/components.js"></script>
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/x-dc-template" id="dc-tpl">
+<helmet>
+<style>
+body{margin:0}
+a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
+</style>
+</helmet>
+<div style="min-height: 1640px; display: flex; background: #FFFFFF; font-family: var(--font-primary); color: #222222; font-variant-numeric: tabular-nums;">
+
+  <div style="flex: 0 0 230px; display: flex;">
+    <dc-import name="Nav" active="diary" min-height="1640px" hint-size="230px,1640px"></dc-import>
+  </div>
+
+  <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column;">
+    <header style="height: 50px; flex-shrink: 0; display: flex; align-items: center; gap: 16px; padding: 0 20px; background: #231F20; color: #FFFFFF;">
+      <span style="font-size: 13px; font-weight: 600;">2027년 4월 12일</span>
+      <div style="flex-grow: 1;"></div>
+      <span style="font-size: 13px; font-weight: 600;">안녕하세요, 관리자 님</span>
+    </header>
+    <div role="tablist" aria-label="열린 화면" style="height: 34px; flex-shrink: 0; display: flex; align-items: flex-end; gap: 2px; padding: 0 10px; background: #EEEEEE;">
+      <a href="#" role="tab" aria-selected="false" style="height: 30px; padding: 0 22px; display: flex; align-items: center; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">영농일지</a>
+      <a href="#" role="tab" aria-selected="true" style="height: 30px; padding: 0 22px; display: flex; align-items: center; gap: 10px; background: #FFFFFF; color: #222222; font-size: 12px; font-weight: 600;">GJ-S1 · 드론 파종 <span aria-hidden="true" style="color: #666666;">×</span></a>
+    </div>
+
+    <main style="flex: 1 1 auto; box-sizing: border-box; padding: 18px 16px 40px; display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #DDDDDD;">
+        <h1 style="margin: 0; font-size: 18px; font-weight: 800;">영농일지 상세</h1>
+        <div style="flex-grow: 1;"></div>
+        <span style="font-size: 12px; color: #888888;">정밀농업 › 영농일지 › <b style="color: #333333;">영농일지 상세</b></span>
+      </div>
+
+      <section aria-label="농장 정보" style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center;"><h2 style="margin: 0; font-size: 13px; font-weight: 700;">농장 정보</h2><div style="flex-grow: 1;"></div><button type="button" style="height: 26px; padding: 0 10px; border: 1px solid #CCCCCC; border-radius: 3px; background: #FFFFFF; font: 600 11px var(--font-primary); color: #333333;">+ 농장 변경</button></div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: center;">
+          <thead><tr style="background: #505050; color: #FFFFFF;"><th scope="col" style="padding: 9px; font-weight: 600;">농장이름</th><th scope="col" style="padding: 9px; font-weight: 600;">재배식물</th><th scope="col" style="padding: 9px; font-weight: 600;">주소지</th><th scope="col" style="padding: 9px; font-weight: 600;">농장 규모</th><th scope="col" style="padding: 9px; font-weight: 600;">농장 유형</th></tr></thead>
+          <tbody><tr style="border-bottom: 1px solid #DDDDDD;"><td style="padding: 10px;">GJ-S1</td><td style="padding: 10px;">IRG (이탈리안 라이그라스)</td><td style="padding: 10px;">전북특별자치도 김제시 부량면 신용리 439</td><td style="padding: 10px;">3,943㎡ (1,192.76평)</td><td style="padding: 10px;">노지</td></tr></tbody>
+        </table>
+      </section>
+
+      <section aria-label="작업 장비 정보" style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 6px;"><h2 style="margin: 0; font-size: 13px; font-weight: 700;">차량 · 드론 정보</h2><span style="font-size: 10px; font-weight: 600; color: #C25E00; background: #FFF3E6; padding: 1px 6px; border-radius: 999px;">고도화</span><div style="flex-grow: 1;"></div><button type="button" style="height: 26px; padding: 0 10px; border: 1px solid #CCCCCC; border-radius: 3px; background: #FFFFFF; font: 600 11px var(--font-primary); color: #333333;">+ 장비 변경</button></div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: center;">
+          <thead><tr style="background: #505050; color: #FFFFFF;"><th scope="col" style="padding: 9px; font-weight: 600;">구분</th><th scope="col" style="padding: 9px; font-weight: 600;">모델명</th><th scope="col" style="padding: 9px; font-weight: 600;">닉네임 · 기체 ID</th><th scope="col" style="padding: 9px; font-weight: 600;">조종사</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid #DDDDDD;"><td style="padding: 10px;"><span style="font-size: 11px; font-weight: 700; color: #025996; background: #E8F0FB; padding: 2px 8px; border-radius: 999px;">드론</span></td><td style="padding: 10px;">국산 파종드론 [모델명]</td><td style="padding: 10px;">DR-01 · RR-GCS-7731</td><td style="padding: 10px;">박OO</td></tr>
+            <tr style="border-bottom: 1px solid #DDDDDD;"><td style="padding: 10px;"><span style="font-size: 11px; font-weight: 700; color: #025996; background: #E8F0FB; padding: 2px 8px; border-radius: 999px;">드론</span></td><td style="padding: 10px;">DJI Agras T50</td><td style="padding: 10px;">DR-03 · RR-GCS-7735</td><td style="padding: 10px;">최OO</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section aria-label="드론 작업 기록" style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <h2 style="margin: 0; font-size: 13px; font-weight: 700;">드론 작업 기록</h2>
+          <span style="font-size: 10px; font-weight: 700; color: #025996; background: #E8F0FB; padding: 1px 6px; border-radius: 999px;">신규</span>
+          <span style="font-size: 12px; color: #888888;">임무 종료 시 GCS 데이터로 자동 작성 · 수정 불가 (원본 보존)</span>
+          <div style="flex-grow: 1;"></div>
+          <a href="History.html" style="font-size: 12px; font-weight: 600;">작업 이력 · 완료맵 보기 ›</a>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; padding: 14px; border: 1px solid #DDDDDD; border-radius: 4px;">
+          <div style="flex: 0 0 360px; height: 230px; position: relative; overflow: hidden; border-radius: 3px; background: #1A1A1A;">
+            <div style="position: absolute; left: 50%; top: 50%; width: 2415px; height: 1354px; margin-left: -1243px; margin-top: -643px; transform: scale(0.62); transform-origin: 1243px 643px;">
+              <img src="../assets/satellite_gimje_wide.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+              <svg role="img" aria-label="GJ-S1 작업 완료맵: 처방 대비 편차" viewBox="-795 -285 2415 1354" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+                <defs><clipPath id="fFL"><path d="M308 245 L630 357 L589 472 L267 360 Z"></path></clipPath></defs>
+                <g clip-path="url(#fFL)" opacity="0.85">
+                  <rect x="200" y="200" width="500" height="320" fill="#9CC4E8"></rect>
+                  <path d="M308 245 L420.7 284.2 L398.2 347.4 L285.5 308.3 Z" fill="#EAEDF0"></path>
+                  <path d="M549.5 329 L630 357 L617.7 391.5 L537.2 363.5 Z" fill="#EAEDF0"></path>
+                  <path d="M458.6 358.3 L611.6 408.8 L589 472 L444.1 421.6 Z" fill="#FFC98A"></path>
+                  <path d="M279.3 325.5 L375.9 359.1 L363.6 393.6 L267 360 Z" fill="#E76F00"></path>
+                </g>
+                <path d="M308 245 L630 357 L589 472 L267 360 Z" fill="none" stroke="#B4E319" stroke-width="5"></path>
+              </svg>
+            </div>
+            <div style="position: absolute; left: 8px; bottom: 8px; padding: 4px 8px; background: rgba(14,28,49,0.86); color: #FFFFFF; font-size: 11px; font-weight: 600;">완료맵 · 처방 대비 편차</div>
+          </div>
+          <div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px;">
+              <span style="font-weight: 700;">MSN-0412-01</span>
+              <span style="color: #555555;">2027.04.12 09:00 – 09:23 · 처방 v3</span>
+              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="success">GCS 수신 완료</x-import>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px;">
+              <div style="padding: 10px; background: #F7F7F7; border-radius: 4px; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 12px; color: #777777;">작업 면적</span><span style="font-size: 18px; font-weight: 700;">1,192.8<span style="font-size: 12px; font-weight: 400;"> 평</span></span></div>
+              <div style="padding: 10px; background: #F7F7F7; border-radius: 4px; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 12px; color: #777777;">작업 시간</span><span style="font-size: 18px; font-weight: 700;">23<span style="font-size: 12px; font-weight: 400;"> 분</span></span></div>
+              <div style="padding: 10px; background: #F7F7F7; border-radius: 4px; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 12px; color: #777777;">종자 투입량</span><span style="font-size: 18px; font-weight: 700;">14.0<span style="font-size: 12px; font-weight: 400;"> kg</span></span><span style="font-size: 11px; color: #777777;">처방 14.2kg 대비 98.6%</span></div>
+              <div style="padding: 10px; background: #F7F7F7; border-radius: 4px; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 12px; color: #777777;">경로 이탈률</span><span style="font-size: 18px; font-weight: 700;">1.2<span style="font-size: 12px; font-weight: 400;"> %</span></span></div>
+              <div style="padding: 10px; background: #F7F7F7; border-radius: 4px; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 12px; color: #777777;">투입 기체</span><span style="font-size: 18px; font-weight: 700;">2<span style="font-size: 12px; font-weight: 400;"> 대</span></span></div>
+            </div>
+            <div style="font-size: 12px; color: #555555; line-height: 18px;">이벤트 · 09:06 DR-01 경로 이탈 1.8m(자동 복귀) · 09:13 DR-03 통신 지연 2분 46초(복구) · 09:23 임무 완료</div>
+            <div style="display: flex; gap: 8px;">
+              <button type="button" style="height: 30px; padding: 0 14px; border: 1px solid #CCCCCC; border-radius: 3px; background: #FFFFFF; font: 600 12px var(--font-primary); color: #333333;">작업 리포트 PDF</button>
+              <button type="button" style="height: 30px; padding: 0 14px; border: 1px solid #CCCCCC; border-radius: 3px; background: #FFFFFF; font: 600 12px var(--font-primary); color: #333333;">로그 CSV 내려받기</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="재배노트" style="display: flex; flex-direction: column; gap: 8px;">
+        <h2 style="margin: 0; font-size: 13px; font-weight: 700;">재배노트</h2>
+        <div style="display: grid; grid-template-columns: 106px 1fr; border-top: 1px solid #DDDDDD; font-size: 13px;">
+          <div style="background: #505050; color: #FFFFFF; font-weight: 600; display: flex; align-items: center; justify-content: center; padding: 10px;">작성일자 <span style="color: #FF6B5A;">*</span></div>
+          <div style="padding: 8px 10px; border-bottom: 1px solid #EEEEEE;"><label><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">작성일자</span><input type="text" value="2027-04-12" readonly style="width: 150px; height: 28px; box-sizing: border-box; padding: 0 8px; border: 1px solid #333333; border-radius: 4px; font: 400 13px var(--font-primary);"></label></div>
+          <div style="background: #505050; color: #FFFFFF; font-weight: 600; display: flex; align-items: center; justify-content: center; padding: 10px; text-align: center;">대표 이미지<br>(2/5)</div>
+          <div style="padding: 10px; border-bottom: 1px solid #EEEEEE; display: flex; gap: 10px; align-items: center;">
+            <div style="width: 160px; height: 90px; border-radius: 3px; background: #DDE6DE; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #555555;">[작업 전 사진]</div>
+            <div style="width: 160px; height: 90px; border-radius: 3px; background: #DDE6DE; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #555555;">[작업 후 사진]</div>
+            <span style="font-size: 11px; color: #888888;">* 최대 5장 · jpg, gif, png</span>
+          </div>
+          <div style="background: #505050; color: #FFFFFF; font-weight: 600; display: flex; align-items: center; justify-content: center; padding: 10px;">작업내용 <span style="color: #FF6B5A;">*</span></div>
+          <div style="padding: 10px; border-bottom: 1px solid #EEEEEE;">
+            <label style="display: block;"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">작업내용</span>
+            <textarea readonly style="width: 100%; height: 96px; box-sizing: border-box; padding: 10px; border: 1px solid #333333; border-radius: 4px; font: 400 13px/20px var(--font-primary); resize: none;">[드론 작업 자동 작성] IRG 변량 파종 · 처방 v3(경상국립대) · 5개 구간
+DR-01·DR-03 2대 투입, 09:00–09:23 작업. 종자 14.0kg 투입(처방 대비 98.6%).
+Z-05 구간 과다 투입(+12.5%) 확인 — 다음 작기 보정 필요.</textarea></label>
+            <span style="font-size: 11px; color: #888888;">자동 문구는 수정할 수 있으며, 위 드론 작업 기록 원본은 바뀌지 않습니다.</span>
+          </div>
+          <div style="background: #505050; color: #FFFFFF; font-weight: 600; display: flex; align-items: center; justify-content: center; padding: 10px;">농약&amp;비료</div>
+          <div style="padding: 10px; border-bottom: 1px solid #EEEEEE; display: flex; gap: 8px; align-items: center; font-size: 12px; color: #888888;"><button type="button" style="height: 26px; padding: 0 10px; border: 1px solid #CCCCCC; border-radius: 3px; background: #FFFFFF; font: 600 11px var(--font-primary); color: #333333;">농약&amp;비료 등록</button>등록된 농약 · 비료 없음</div>
+        </div>
+      </section>
+
+      <section aria-label="현장조사" style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <h2 style="margin: 0; font-size: 13px; font-weight: 700;">현장조사</h2>
+          <span style="font-size: 10px; font-weight: 700; color: #025996; background: #E8F0FB; padding: 1px 6px; border-radius: 999px;">신규</span>
+          <span style="font-size: 12px; color: #888888;">입력값은 경상국립대 처방 모델 가중치 분석에 전달됩니다</span>
+          <div style="flex-grow: 1;"></div>
+          <span style="font-size: 12px; color: #555555;">조사일 2027-04-26 · 조사자 김OO</span>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: center;">
+          <thead><tr style="background: #505050; color: #FFFFFF;"><th scope="col" style="padding: 9px; font-weight: 600; text-align: left;">조사 항목</th><th scope="col" style="padding: 9px; font-weight: 600;">Z-01 · 저</th><th scope="col" style="padding: 9px; font-weight: 600;">Z-02 · 중</th><th scope="col" style="padding: 9px; font-weight: 600;">Z-03 · 저</th><th scope="col" style="padding: 9px; font-weight: 600;">Z-04 · 고</th><th scope="col" style="padding: 9px; font-weight: 600;">Z-05 · 고</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid #DDDDDD;"><th scope="row" style="padding: 8px 10px; text-align: left; font-weight: 600;">발아율 (%)</th><td style="padding: 6px;"><input aria-label="Z-01 발아율" value="82" style="width: 70px; height: 28px; text-align: center; border: 1px solid #CCCCCC; border-radius: 4px; font: 400 13px var(--font-primary);"></td><td style="padding: 6px;"><input aria-label="Z-02 발아율" value="85" style="width: 70px; height: 28px; text-align: center; border: 1px solid #CCCCCC; border-radius: 4px; font: 400 13px var(--font-primary);"></td><td style="padding: 6px;"><input aria-label="Z-03 발아율" value="79" style="width: 70px; height: 28px; text-align: center; border: 1px solid #CCCCCC; border-radius: 4px; font: 400 13px var(--font-primary);"></td><td style="padding: 6px;"><input aria-label="Z-04 발아율" value="88" style="width: 70px; height: 28px; text-align: center; border: 1px solid #CCCCCC; border-radius: 4px; font: 400 13px var(--font-primary);"></td><td style="padding: 6px;"><input aria-label="Z-05 발아율" value="" placeholder="입력" style="width: 70px; height: 28px; text-align: center; border: 1px solid #EF4122; border-radius: 4px; font: 400 13px var(--font-primary);"></td></tr>
+            <tr style="border-bottom: 1px solid #DDDDDD;"><th scope="row" style="padding: 8px 10px; text-align: left; font-weight: 600;">입모율 (본/㎡)</th><td style="padding: 6px;"><input aria-label="Z-01 입모율" value="410" style="width: 70px; height: 28px; text-align: center; border: 1px solid #CCCCCC; border-radius: 4px; font: 400 13px var(--font-primary);"></td><td style="padding: 6px;"><input aria-label="Z-02 입모율" value="455" style="width: 70px; height: 28px; text-align: center; border: 1px solid #CCCCCC; border-radius: 4px; font: 400 13px var(--font-primary);"></td><td style="padding: 6px;"><input aria-label="Z-03 입모율" value="398" style="width: 70px; height: 28px; text-align: center; border: 1px solid #CCCCCC; border-radius: 4px; font: 400 13px var(--font-primary);"></td><td style="padding: 6px;"><input aria-label="Z-04 입모율" value="502" style="width: 70px; height: 28px; text-align: center; border: 1px solid #CCCCCC; border-radius: 4px; font: 400 13px var(--font-primary);"></td><td style="padding: 6px;"><input aria-label="Z-05 입모율" value="" placeholder="입력" style="width: 70px; height: 28px; text-align: center; border: 1px solid #EF4122; border-radius: 4px; font: 400 13px var(--font-primary);"></td></tr>
+            <tr style="border-bottom: 1px solid #DDDDDD;"><th scope="row" style="padding: 8px 10px; text-align: left; font-weight: 600;">토양함수율 (%)</th><td style="padding: 6px;"><input aria-label="Z-01 토양함수율" value="24.1" style="width: 70px; height: 28px; text-align: center; border: 1px solid #CCCCCC; border-radius: 4px; font: 400 13px var(--font-primary);"></td><td style="padding: 6px;"><input aria-label="Z-02 토양함수율" value="26.8" style="width: 70px; height: 28px; text-align: center; border: 1px solid #CCCCCC; border-radius: 4px; font: 400 13px var(--font-primary);"></td><td style="padding: 6px;"><input aria-label="Z-03 토양함수율" value="23.5" style="width: 70px; height: 28px; text-align: center; border: 1px solid #CCCCCC; border-radius: 4px; font: 400 13px var(--font-primary);"></td><td style="padding: 6px;"><input aria-label="Z-04 토양함수율" value="29.2" style="width: 70px; height: 28px; text-align: center; border: 1px solid #CCCCCC; border-radius: 4px; font: 400 13px var(--font-primary);"></td><td style="padding: 6px;"><input aria-label="Z-05 토양함수율" value="" placeholder="입력" style="width: 70px; height: 28px; text-align: center; border: 1px solid #EF4122; border-radius: 4px; font: 400 13px var(--font-primary);"></td></tr>
+            <tr><th scope="row" style="padding: 8px 10px; text-align: left; font-weight: 600;">수확량 (kg/10a)</th><td colspan="5" style="padding: 10px; color: #888888; font-size: 12px;">수확 후 입력 · 수확량 모니터링 데이터가 있으면 자동으로 불러옵니다</td></tr>
+          </tbody>
+        </table>
+        <span style="font-size: 12px; color: #C0392B;">Z-05 구간 값이 비어 있습니다. 저장 전에 입력하거나 '조사 불가'로 표시해 주십시오.</span>
+      </section>
+
+      <div style="display: flex; justify-content: center; gap: 8px; padding-top: 10px;">
+        <button type="button" style="width: 90px; height: 34px; border: 1px solid #CCCCCC; border-radius: 3px; background: #FFFFFF; font: 700 12px var(--font-primary); color: #333333;">취소</button>
+        <button type="button" style="width: 90px; height: 34px; border: 1px solid #CCCCCC; border-radius: 3px; background: #FFFFFF; font: 700 12px var(--font-primary); color: #333333;">삭제</button>
+        <button type="button" style="width: 90px; height: 34px; border: 0; border-radius: 3px; background: #CE2315; font: 700 12px var(--font-primary); color: #FFFFFF;">수정</button>
+      </div>
+    </main>
+  </div>
+</div>
+</script>
+<script type="text/x-dc-logic" id="dc-src">
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

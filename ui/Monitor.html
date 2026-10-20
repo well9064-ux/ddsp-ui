@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>드론 실시간 관제 · 드론 파종 컨셉 UI</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<link rel="stylesheet" href="../lib/bundle.css">
+<style>body{margin:0;background:#FFFFFF} a{text-decoration:none}</style>
+<script src="../lib/morphdom.js"></script>
+<script src="../lib/runtime.js"></script>
+<script src="../lib/components.js"></script>
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/x-dc-template" id="dc-tpl">
+<helmet>
+<style>
+body{margin:0}
+a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
+</style>
+</helmet>
+<div style="min-height: 1000px; display: flex; flex-direction: column; background: #F4F6F9; font-family: var(--font-primary); color: #0E1C31; font-variant-numeric: tabular-nums;">
+
+  <div style="flex-grow: 1; display: flex; flex-wrap: wrap; align-items: stretch;">
+
+    <div style="flex: 0 0 230px; display: flex;">
+      <dc-import name="Nav" active="missions" hint-size="230px,1000px"></dc-import>
+    </div>
+
+    <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <header style="height: 50px; flex-shrink: 0; display: flex; align-items: center; gap: 16px; padding: 0 20px; background: #231F20; color: #FFFFFF;">
+      <span style="font-size: 13px; font-weight: 600;">2027년 4월 12일</span>
+      <div style="flex-grow: 1;"></div>
+      <span style="font-size: 13px; font-weight: 600;">안녕하세요, 관리자 님</span>
+    </header>
+    <div role="tablist" aria-label="열린 화면" style="height: 34px; flex-shrink: 0; display: flex; align-items: flex-end; gap: 2px; padding: 0 10px; background: #EEEEEE;">
+      <a href="Missions.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 22px; display: flex; align-items: center; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">임무 관리</a>
+      <a href="#" role="tab" aria-selected="true" style="height: 30px; padding: 0 22px; display: flex; align-items: center; gap: 10px; background: #F4F6F9; color: #222222; font-size: 12px; font-weight: 600;">MSN-0412-01 실시간 관제 <span aria-hidden="true" style="color: #666666;">×</span></a>
+    </div>
+
+    <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 20px 24px 32px; display: flex; flex-direction: column; gap: 16px;">
+
+      <div style="font-size: 12px; color: #667085;">드론 관리 › <a href="Missions.html">임무 관리</a> › MSN-0412-01 · 실시간 관제</div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+        <h1 style="margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.6px;">김제 실증 A-03 · IRG 파종</h1>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{missionBadge}}">{{missionLabel}}</x-import>
+        <span style="font-size: 14px; color: #667085;">mission_id MSN-0412-01 · 처방 v3 · 기체 2대 투입</span>
+        <div style="flex-grow: 1;"></div>
+        <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: {{linkColor}};"><span style="width: 8px; height: 8px; border-radius: 999px; background: {{linkColor}};"></span>{{linkText}}</span>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="secondary">임무 일시정지</x-import>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="진행률" value="{{kProg}}" unit="%" sub="{{kArea}}"></x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="누적 파종량" value="{{kSeed}}" unit="kg" sub="처방 대비 101%"></x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="경과 시간" value="{{kElapsed}}" sub="{{kRemain}}"></x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="미확인 알림" value="{{kAlerts}}" unit="건" accent="#EC4023"></x-import>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch;">
+
+        <section aria-label="관제 지도" style="flex: 999 1 520px; min-width: 0; position: relative; height: 620px; border-radius: 6px; overflow: hidden; background: #1E2A22; border: 1px solid #DFE7EB;">
+          <div style="position: absolute; left: 50%; top: 50%; width: 2415px; height: 1354px; margin-left: -1243px; margin-top: -643px;">
+          <img src="../assets/satellite_gimje_wide.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+          <svg role="img" aria-label="김제 A-03 필지 위성지도 위 계획 경로, 실제 비행 궤적, 드론 위치" viewBox="-795 -285 2415 1354" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+            <path d="M308 245 L630 357 L669 248 L347 136 Z" fill="none" stroke="#B4E319" stroke-width="2" opacity="0.7"></path>
+            <path d="M267 360 L589 472 L550 581 L228 469 Z" fill="none" stroke="#B4E319" stroke-width="2" opacity="0.7"></path>
+            <path d="M308 245 L630 357 L589 472 L267 360 Z" fill="rgba(14,28,49,0.25)" stroke="#B4E319" stroke-width="3.5"></path>
+            <path d="M420.7 284.2 L398.2 347.4 L285.5 308.3 M549.5 329 L537.2 363.5 L617.7 391.5 M458.6 358.3 L611.6 408.8 M458.6 358.3 L444.1 421.6 M279.3 325.5 L375.9 359.1 L363.6 393.6" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.7"></path>
+            <polyline points="{{d1.done}}" fill="none" stroke="#5FD18F" stroke-width="11" stroke-linejoin="round" opacity="0.4"></polyline>
+            <polyline points="{{d3.done}}" fill="none" stroke="#5FD18F" stroke-width="11" stroke-linejoin="round" opacity="0.4"></polyline>
+            <polyline points="{{d1.rest}}" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="5 4"></polyline>
+            <polyline points="{{d3.rest}}" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="5 4"></polyline>
+            <polyline points="{{d1.done}}" fill="none" stroke="#5FD18F" stroke-width="2.5" stroke-linejoin="round"></polyline>
+            <polyline points="{{d3.done}}" fill="none" stroke="#5FD18F" stroke-width="2.5" stroke-linejoin="round"></polyline>
+            <g opacity="0.9">
+              <rect x="327" y="288" width="40" height="15" rx="7.5" fill="rgba(14,28,49,0.85)"></rect>
+              <text x="347" y="299" font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">Z-01</text>
+              <rect x="469" y="333" width="40" height="15" rx="7.5" fill="rgba(14,28,49,0.85)"></rect>
+              <text x="489" y="344" font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">Z-02</text>
+              <rect x="563" y="354" width="40" height="15" rx="7.5" fill="rgba(14,28,49,0.85)"></rect>
+              <text x="583" y="365" font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">Z-03</text>
+              <rect x="508" y="408" width="40" height="15" rx="7.5" fill="rgba(14,28,49,0.85)"></rect>
+              <text x="528" y="419" font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">Z-04</text>
+              <rect x="301" y="353" width="40" height="15" rx="7.5" fill="rgba(14,28,49,0.85)"></rect>
+              <text x="321" y="364" font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">Z-05</text>
+            </g>
+            <sc-if value="{{showDeviation}}" hint-placeholder-val="{{true}}">
+              <polyline points="420,305 445,308 466,322" fill="none" stroke="#FFAB43" stroke-width="3"></polyline>
+            </sc-if>
+            <rect x="646" y="232" width="40" height="40" rx="6" fill="rgba(14,28,49,0.6)" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="4 3"></rect>
+            <g transform="translate(666 252) scale(0.8)">
+              <circle r="16" fill="#FFFFFF" stroke="#667085" stroke-width="3"></circle>
+              <path d="M-6.5 -6.5 L6.5 6.5 M6.5 -6.5 L-6.5 6.5" stroke="#0E1C31" stroke-width="2.2" stroke-linecap="round"></path>
+              <circle cx="-7" cy="-7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
+              <circle cx="7" cy="-7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
+              <circle cx="-7" cy="7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
+              <circle cx="7" cy="7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
+              <rect x="-3.2" y="-3.2" width="6.4" height="6.4" rx="1.6" fill="#667085"></rect>
+            </g>
+            <g transform="translate({{d1.x}} {{d1.y}})">
+              <circle r="16" fill="#FFFFFF" stroke="#EC4023" stroke-width="3.5"></circle>
+              <path d="M-6.5 -6.5 L6.5 6.5 M6.5 -6.5 L-6.5 6.5" stroke="#0E1C31" stroke-width="2.2" stroke-linecap="round"></path>
+              <circle cx="-7" cy="-7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
+              <circle cx="7" cy="-7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
+              <circle cx="-7" cy="7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
+              <circle cx="7" cy="7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
+              <rect x="-3.2" y="-3.2" width="6.4" height="6.4" rx="1.6" fill="#EC4023"></rect>
+            </g>
+            <g transform="translate({{d3.x}} {{d3.y}})">
+              <circle r="16" fill="#FFFFFF" stroke="{{d3Ring}}" stroke-width="3.5"></circle>
+              <path d="M-6.5 -6.5 L6.5 6.5 M6.5 -6.5 L-6.5 6.5" stroke="#0E1C31" stroke-width="2.2" stroke-linecap="round"></path>
+              <circle cx="-7" cy="-7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
+              <circle cx="7" cy="-7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
+              <circle cx="-7" cy="7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
+              <circle cx="7" cy="7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
+              <rect x="-3.2" y="-3.2" width="6.4" height="6.4" rx="1.6" fill="{{d3Ring}}"></rect>
+            </g>
+            <rect x="{{d1.lx}}" y="{{d1.ly}}" width="50" height="22" rx="4" fill="#FFFFFF"></rect>
+            <text x="{{d1.tx}}" y="{{d1.ty}}" font-size="12" font-weight="600" fill="#0E1C31">DR-01</text>
+            <sc-if value="{{d3Lost}}" hint-placeholder-val="{{true}}">
+              <rect x="{{d3.lx}}" y="{{d3.ly}}" width="104" height="22" rx="4" fill="#FFFFFF"></rect>
+              <text x="{{d3.tx}}" y="{{d3.ty}}" font-size="12" font-weight="600" fill="#C0392B">DR-03 · 통신 지연</text>
+            </sc-if>
+            <sc-if value="{{d3Ok}}" hint-placeholder-val="{{false}}">
+              <rect x="{{d3.lx}}" y="{{d3.ly}}" width="50" height="22" rx="4" fill="#FFFFFF"></rect>
+              <text x="{{d3.tx}}" y="{{d3.ty}}" font-size="12" font-weight="600" fill="#0E1C31">DR-03</text>
+            </sc-if>
+            <rect x="694" y="241" width="104" height="22" rx="4" fill="#FFFFFF"></rect>
+            <text x="702" y="257" font-size="12" font-weight="600" fill="#0E1C31">이착륙장 · DR-02</text>
+          </svg>
+          </div>
+
+          <div style="position: absolute; top: 12px; left: 12px; padding: 10px 12px; background: rgba(14,28,49,0.86); border-radius: 6px; font-size: 12px; display: flex; flex-direction: column; gap: 6px; color: #FFFFFF;">
+            <div style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#5FD18F" stroke-width="4"></path></svg>실제 궤적 (완료)</div>
+            <div style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="4 3"></path></svg>계획 경로 (잔여)</div>
+            <div style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#FFAB43" stroke-width="3"></path></svg>경로 이탈 구간</div>
+          </div>
+
+          <div role="group" aria-label="지도 레이어" style="position: absolute; top: 12px; right: 12px; display: flex; gap: 6px;">
+            <button type="button" aria-pressed="true" style="width: 76px; padding: 4px; border: 2px solid #EC4023; border-radius: 6px; background: rgba(14,28,49,0.86); display: flex; flex-direction: column; gap: 4px; align-items: stretch; color: #FFFFFF; font: 600 11px var(--font-primary);"><span style="height: 34px; border-radius: 3px; background: #3B4A3A;"></span>위성</button>
+            <button type="button" aria-pressed="false" style="width: 76px; padding: 4px; border: 2px solid transparent; border-radius: 6px; background: rgba(14,28,49,0.86); display: flex; flex-direction: column; gap: 4px; align-items: stretch; color: #FFFFFF; font: 400 11px var(--font-primary);"><span style="height: 34px; border-radius: 3px; background: #5FBF86; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));"><span style="background: #CDEBD7;"></span><span></span><span style="background: #107C41;"></span></span>처방맵 겹침</button>
+          </div>
+
+          <div style="position: absolute; right: 12px; top: 92px; display: flex; flex-direction: column; gap: 4px;">
+            <button type="button" aria-label="선택 기체 따라가기" style="width: 36px; height: 36px; border: 0; border-radius: 6px; background: rgba(14,28,49,0.86); display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><circle cx="12" cy="12" r="8"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path></svg></button>
+            <button type="button" aria-label="확대" style="width: 36px; height: 36px; border: 0; border-radius: 6px; background: rgba(14,28,49,0.86); display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+            <button type="button" aria-label="축소" style="width: 36px; height: 36px; border: 0; border-radius: 6px; background: rgba(14,28,49,0.86); display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+          </div>
+
+          <div style="position: absolute; left: 12px; right: 12px; bottom: 28px; padding: 8px 12px; background: rgba(14,28,49,0.86); border-radius: 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px; color: #FFFFFF;">
+            <button type="button" onClick="{{togglePlay}}" aria-label="{{playLabel}}" style="width: 32px; height: 32px; flex-shrink: 0; border: 0; border-radius: 999px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+              <sc-if value="{{playing}}" hint-placeholder-val="{{false}}">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#0E1C31" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1"></rect><rect x="14" y="4" width="5" height="16" rx="1"></rect></svg>
+              </sc-if>
+              <sc-if value="{{paused}}" hint-placeholder-val="{{true}}">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#0E1C31" aria-hidden="true"><path d="M7 4l13 8-13 8z"></path></svg>
+              </sc-if>
+            </button>
+            <label style="flex: 1 1 200px; display: flex; align-items: center; min-width: 0;">
+              <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">재생 위치</span>
+              <input type="range" min="0" max="1000" step="1" value="{{tInt}}" onChange="{{scrub}}" style="width: 100%; accent-color: #5AB0F0; cursor: pointer;">
+            </label>
+            <span style="min-width: 128px; text-align: right;">{{clockText}}</span>
+            <button type="button" onClick="{{toggleSpeed}}" style="height: 28px; padding: 0 10px; border: 1px solid rgba(255,255,255,0.4); border-radius: 999px; background: transparent; color: #FFFFFF; font: 600 12px var(--font-primary); cursor: pointer;">{{speedLabel}}</button>
+            <button type="button" onClick="{{goLive}}" style="height: 28px; padding: 0 10px; border: 0; border-radius: 999px; background: {{liveBg}}; color: #FFFFFF; font: 600 12px var(--font-primary); cursor: pointer;">실시간</button>
+          </div>
+          <div style="position: absolute; right: 12px; bottom: 8px; font-size: 10px; font-weight: 600; color: #FFFFFF;">NAVER · 국토지리정보원</div>
+        </section>
+
+        <aside aria-label="기체와 알림" style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 12px;">
+
+          <div style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+            <h2 style="margin: 0; font-size: 16px; font-weight: 600;">투입 기체</h2>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #EC4023; border-radius: 6px; background: #FDECEA;">
+              <span style="font-weight: 600; width: 52px; white-space: nowrap;">DR-01</span>
+              <span style="flex-grow: 1; font-size: 12px; color: #475467;">박OO · 배터리 {{bat}}%</span>
+              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{d1Badge}}">{{d1Label}}</x-import>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #DFE7EB; border-radius: 6px;">
+              <span style="font-weight: 600; width: 52px; white-space: nowrap;">DR-02</span>
+              <span style="flex-grow: 1; font-size: 12px; color: #475467;">이OO · 배터리 교체</span>
+              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="wait">대기</x-import>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #DFE7EB; border-radius: 6px;">
+              <span style="font-weight: 600; width: 52px; white-space: nowrap;">DR-03</span>
+              <span style="flex-grow: 1; font-size: 12px; color: #475467;">{{d3Sub}}</span>
+              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{d3Badge}}">{{d3Label}}</x-import>
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <h2 style="margin: 0; font-size: 16px; font-weight: 600;">DR-01 텔레메트리</h2>
+              <div style="flex-grow: 1;"></div>
+              <span style="font-size: 12px; color: #667085;">1Hz · RTK Fix</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;">
+              <div style="display: flex; flex-direction: column; gap: 4px; padding: 10px; background: #F9FAFB; border-radius: 6px;"><span style="font-size: 12px; color: #667085;">배터리</span><span style="font-size: 20px; font-weight: 600;">{{bat}}<span style="font-size: 12px; font-weight: 400; color: #475467;"> %</span></span><div style="height: 4px; background: #EAEDF0; border-radius: 999px;"><div style="width: {{bat}}%; height: 4px; background: {{batColor}}; border-radius: 999px;"></div></div></div>
+              <div style="display: flex; flex-direction: column; gap: 4px; padding: 10px; background: #F9FAFB; border-radius: 6px;"><span style="font-size: 12px; color: #667085;">고도</span><span style="font-size: 20px; font-weight: 600;">{{alt}}<span style="font-size: 12px; font-weight: 400; color: #475467;"> m</span></span><span style="font-size: 12px; color: #667085;">계획 3.0</span></div>
+              <div style="display: flex; flex-direction: column; gap: 4px; padding: 10px; background: #F9FAFB; border-radius: 6px;"><span style="font-size: 12px; color: #667085;">속도</span><span style="font-size: 20px; font-weight: 600;">{{spd}}<span style="font-size: 12px; font-weight: 400; color: #475467;"> m/s</span></span><span style="font-size: 12px; color: #667085;">계획 5.0</span></div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; background: #F9FAFB; border-radius: 6px;">
+              <div style="display: flex; align-items: center; font-size: 12px; color: #475467;"><span style="flex-grow: 1;">파종량 · 현재 구간 Z-02 (중)</span><span style="font-weight: 600; color: #0E1C31;">{{rate}} / 3.5 kg/10a</span></div>
+              <div style="position: relative; height: 8px; background: #EAEDF0; border-radius: 999px;"><div style="width: {{rateW}}%; height: 8px; background: #107C41; border-radius: 999px;"></div><div style="position: absolute; left: 70%; top: -3px; width: 2px; height: 14px; background: #0E1C31;"></div></div>
+              <div style="font-size: 12px; color: #667085;">처방 대비 {{rateDev}} · 허용 범위 ±10%</div>
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <h2 style="margin: 0; font-size: 16px; font-weight: 600;">알림</h2>
+              <div style="flex-grow: 1;"></div>
+              <a href="#" style="font-size: 12px;">전체 보기</a>
+            </div>
+            <sc-if value="{{showLost}}" hint-placeholder-val="{{true}}">
+              <div style="display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid #EEEEEE;">
+                <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="error">통신두절</x-import>
+                <div style="flex-grow: 1; font-size: 14px; line-height: 18px;"><div>DR-03 텔레메트리 미수신</div><div style="font-size: 12px; color: #667085;">{{lostSub}}</div></div>
+                <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="primary" size="s">확인</x-import>
+              </div>
+            </sc-if>
+            <sc-if value="{{showDeviation}}" hint-placeholder-val="{{true}}">
+              <div style="display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid #EEEEEE;">
+                <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="wait">경로 이탈</x-import>
+                <div style="flex-grow: 1; font-size: 14px; line-height: 18px;"><div>DR-01 계획 경로에서 1.8m 이탈</div><div style="font-size: 12px; color: #667085;">{{devTime}} · 자동 복귀</div></div>
+                <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="tertiary" size="s">확인</x-import>
+              </div>
+            </sc-if>
+            <div style="display: flex; align-items: flex-start; gap: 10px; padding: 10px 0;">
+              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="neutral">저전압</x-import>
+              <div style="flex-grow: 1; font-size: 14px; line-height: 18px;"><div>DR-02 배터리 25% · 귀환 완료</div><div style="font-size: 12px; color: #667085;">08:56:15 · 확인됨</div></div>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+    </main>
+    </div>
+  </div>
+</div>
+</script>
+<script type="text/x-dc-logic" id="dc-src">
+function fieldPt(u, v) { return [308 + 322 * u - 41 * v, 245 + 112 * u + 115 * v]; }
+function buildRoute(vs) {
+  var pts = [];
+  vs.forEach(function (v, i) {
+    var a = fieldPt(i % 2 ? 0.97 : 0.03, v), b = fieldPt(i % 2 ? 0.03 : 0.97, v);
+    pts.push(a, b);
+  });
+  return pts;
+}
+var ROUTE1 = buildRoute([0.05, 0.15, 0.25, 0.35, 0.45]);
+var ROUTE3 = buildRoute([0.95, 0.85, 0.75, 0.65, 0.55]);
+function fmtPts(arr) { return arr.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' '); }
+function splitRoute(pts, f) {
+  var segs = [], total = 0, i;
+  for (i = 1; i < pts.length; i++) {
+    var d = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
+    segs.push(d); total += d;
+  }
+  var target = Math.max(0, Math.min(1, f)) * total, acc = 0, pos = pts[pts.length - 1], cut = pts.length - 1;
+  for (i = 0; i < segs.length; i++) {
+    if (acc + segs[i] >= target) {
+      var k = segs[i] ? (target - acc) / segs[i] : 0;
+      pos = [pts[i][0] + (pts[i + 1][0] - pts[i][0]) * k, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * k];
+      cut = i + 1; break;
+    }
+    acc += segs[i];
+  }
+  var done = pts.slice(0, cut).concat([pos]);
+  var rest = [pos].concat(pts.slice(cut));
+  return {
+    done: fmtPts(done), rest: fmtPts(rest),
+    x: pos[0].toFixed(1), y: pos[1].toFixed(1),
+    lx: (pos[0] + 16).toFixed(1), ly: (pos[1] - 40).toFixed(1),
+    tx: (pos[0] + 24).toFixed(1), ty: (pos[1] - 24).toFixed(1)
+  };
+}
+function pad2(n) { return (n < 10 ? '0' : '') + n; }
+function clockAt(sec) {
+  var s = Math.round(sec), h = 9 + Math.floor(s / 3600), m = Math.floor(s / 60) % 60;
+  return pad2(h) + ':' + pad2(m) + ':' + pad2(s % 60);
+}
+var TOTAL_SEC = 23 * 60, LIVE_T = 0.62;
+
+class Component extends DCLogic {
+  componentDidMount() {
+    var self = this;
+    this.timer = setInterval(function () {
+      var s = self.state || {};
+      if (!s.playing) return;
+      var t = (s.t == null ? LIVE_T : s.t) + 0.1 / (s.fast ? 10 : 30);
+      if (t >= 1) { self.setState({ t: 1, playing: false }); return; }
+      self.setState({ t: t });
+    }, 100);
+  }
+  componentWillUnmount() { clearInterval(this.timer); }
+  renderVals() {
+    var self = this;
+    var s = this.state || {};
+    var t = s.t == null ? LIVE_T : s.t;
+    var live = s.live == null ? true : s.live;
+    var playing = !!s.playing;
+    var lost = t >= 0.58 && t < 0.70;
+    var eff = t < 0.58 ? t : (t < 0.70 ? 0.58 : t - 0.12);
+    var f1 = t, f3 = Math.min(1, eff / 0.88);
+    var d1 = splitRoute(ROUTE1, f1), d3 = splitRoute(ROUTE3, f3);
+    var prog = (f1 + f3) / 2;
+    var el = t * TOTAL_SEC, remain = Math.max(0, TOTAL_SEC - el);
+    var bat = Math.round(100 - 58 * t);
+    var wob = Math.sin(t * 90);
+    var rate = 3.5 + 0.1 * wob;
+    var finished = t >= 1;
+    var alerts = (t >= 0.3 ? 1 : 0) + (t >= 0.58 ? 1 : 0);
+    return {
+      d1: d1, d3: d3,
+      playing: playing, paused: !playing,
+      playLabel: playing ? '일시정지' : '재생',
+      tInt: Math.round(t * 1000),
+      clockText: (live ? '실시간 · ' : '재생 · ') + clockAt(el),
+      speedLabel: s.fast ? '빠르게' : '보통 속도',
+      liveBg: live ? '#EC4023' : 'rgba(255,255,255,0.2)',
+      missionBadge: finished ? 'success' : 'progress',
+      missionLabel: finished ? '완료' : '작업중',
+      linkColor: live ? '#066B36' : '#475467',
+      linkText: live ? 'GCS 연결 · 1초 전 수신' : '기록 재생 중',
+      kProg: String(Math.round(prog * 100)),
+      kArea: Math.round(prog * 3025).toLocaleString('ko-KR') + ' / 3,025평',
+      kSeed: (35.8 * prog * 1.01).toFixed(1),
+      kElapsed: pad2(Math.floor(el / 60)) + ':' + pad2(Math.floor(el % 60)),
+      kRemain: finished ? '작업 완료' : '예상 잔여 ' + Math.ceil(remain / 60) + '분',
+      kAlerts: String(alerts),
+      bat: bat,
+      batColor: bat < 30 ? '#EC4023' : (bat < 50 ? '#FD9009' : '#107C41'),
+      alt: (3.0 + 0.1 * Math.sin(t * 70)).toFixed(1),
+      spd: (4.9 + 0.15 * Math.cos(t * 55)).toFixed(1),
+      rate: rate.toFixed(1),
+      rateW: (rate / 5 * 100).toFixed(0),
+      rateDev: (rate >= 3.5 ? '+' : '') + ((rate / 3.5 - 1) * 100).toFixed(1) + '%',
+      d1Badge: f1 >= 1 ? 'success' : 'progress',
+      d1Label: f1 >= 1 ? '완료' : '작업중',
+      d3Badge: lost ? 'error' : (f3 >= 1 ? 'success' : 'progress'),
+      d3Label: lost ? '통신 지연' : (f3 >= 1 ? '완료' : '작업중'),
+      d3Sub: lost ? '최OO · 마지막 수신 ' + Math.round((t - 0.58) * TOTAL_SEC) + '초 전' : '최OO · 배터리 ' + Math.round(100 - 52 * f3) + '%',
+      d3Ring: lost ? '#E76F00' : '#0070C0',
+      d3Lost: lost, d3Ok: !lost,
+      d3LabelW: lost ? 104 : 50,
+      d3LabelText: lost ? 'DR-03 · 통신 지연' : 'DR-03',
+      d3LabelColor: lost ? '#C0392B' : '#0E1C31',
+      showDeviation: t >= 0.3,
+      devTime: clockAt(0.3 * TOTAL_SEC),
+      showLost: t >= 0.58,
+      lostSub: lost ? clockAt(0.58 * TOTAL_SEC) + ' · 위치 고정 표시 중' : clockAt(0.70 * TOTAL_SEC) + ' 통신 복구',
+      togglePlay: function () {
+        var cur = (self.state && self.state.t != null) ? self.state.t : LIVE_T;
+        var on = !(self.state && self.state.playing);
+        self.setState({ playing: on, live: false, t: on && cur >= 1 ? 0 : cur });
+      },
+      scrub: function (e) { self.setState({ t: Number(e.target.value) / 1000, live: false, playing: false }); },
+      toggleSpeed: function () { self.setState({ fast: !(self.state && self.state.fast) }); },
+      goLive: function () { self.setState({ t: LIVE_T, live: true, playing: false }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

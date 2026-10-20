@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>작업 이력 목록 · 드론 파종 컨셉 UI</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<link rel="stylesheet" href="../lib/bundle.css">
+<style>body{margin:0;background:#FFFFFF} a{text-decoration:none}</style>
+<script src="../lib/morphdom.js"></script>
+<script src="../lib/runtime.js"></script>
+<script src="../lib/components.js"></script>
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/x-dc-template" id="dc-tpl">
+<helmet>
+<style>
+body{margin:0}
+a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
+</style>
+</helmet>
+<div style="min-height: 1000px; display: flex; background: #FFFFFF; font-family: var(--font-primary); color: #222222; font-variant-numeric: tabular-nums;">
+
+  <div style="flex: 0 0 230px; display: flex;">
+    <dc-import name="Nav" active="history" hint-size="230px,1000px"></dc-import>
+  </div>
+
+  <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column;">
+    <header style="height: 50px; flex-shrink: 0; display: flex; align-items: center; gap: 16px; padding: 0 20px; background: #231F20; color: #FFFFFF;">
+      <span style="font-size: 13px; font-weight: 600;">2027년 4월 12일</span>
+      <div style="flex-grow: 1;"></div>
+      <span style="font-size: 13px; font-weight: 600;">안녕하세요, 관리자 님</span>
+    </header>
+    <div role="tablist" aria-label="열린 화면" style="height: 34px; flex-shrink: 0; display: flex; align-items: flex-end; gap: 2px; padding: 0 10px; background: #EEEEEE;">
+      <a href="#" role="tab" aria-selected="true" style="height: 30px; padding: 0 22px; display: flex; align-items: center; background: #FFFFFF; color: #222222; font-size: 12px; font-weight: 600;">작업 이력</a>
+    </div>
+
+    <main style="flex: 1 1 auto; box-sizing: border-box; padding: 18px 16px 32px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #DDDDDD;">
+        <h1 style="margin: 0; font-size: 18px; font-weight: 800;">작업 이력</h1>
+        <div style="flex-grow: 1;"></div>
+        <span style="font-size: 12px; color: #888888;">드론 관리 › <b style="color: #333333;">작업 이력</b></span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="완료 임무 (4월)" value="6" unit="건"></x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="누적 작업면적" value="13,280" unit="평" sub="4.39 ha"></x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="평균 처방 대비 투입량" value="99.1" unit="%"></x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="평균 경로 이탈률" value="1.4" unit="%" sub="목표 5% 이내"></x-import>
+      </div>
+
+      <form role="search" aria-label="작업 이력 검색" style="padding: 14px 16px; background: #F5F5F5; border: 1px solid #E2E2E2; display: grid; grid-template-columns: 90px 1fr; gap: 9px 10px; align-items: center; font-size: 12px;">
+        <span style="font-weight: 700;">농장 주소</span>
+        <div style="display: flex; align-items: center; gap: 40px;">
+          <span style="width: 360px; height: 28px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">전체 <span aria-hidden="true">⌄</span></span>
+          <span style="display: flex; align-items: center; gap: 40px;"><span style="font-weight: 700;">작물</span><span style="width: 360px; height: 28px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">전체 <span aria-hidden="true">⌄</span></span></span>
+        </div>
+        <span style="font-weight: 700;">작업 상태</span>
+        <div role="group" aria-label="작업 상태" style="display: flex;">
+          <sc-for list="{{states}}" as="st" hint-placeholder-count="4">
+            <button type="button" aria-pressed="{{st.pressed}}" onClick="{{st.pick}}" style="height: 28px; padding: 0 14px; margin-left: -1px; background: #FFFFFF; border: {{st.border}}; color: #222222; font: {{st.font}} 12px var(--font-primary); cursor: pointer; position: relative; z-index: {{st.z}};">{{st.label}}</button>
+          </sc-for>
+        </div>
+        <span style="font-weight: 700;">기체</span>
+        <div style="display: flex;">
+          <span style="height: 28px; padding: 0 14px; display: inline-flex; align-items: center; background: #FFFFFF; border: 2px solid #222222; font-weight: 700;">전체</span>
+          <span style="height: 28px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC;">DR-01</span>
+          <span style="height: 28px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC;">DR-02</span>
+          <span style="height: 28px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC;">DR-03</span>
+        </div>
+        <span style="font-weight: 700;">작업일</span>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="width: 140px; height: 28px; box-sizing: border-box; display: flex; align-items: center; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">2027-04-01</span>~<span style="width: 140px; height: 28px; box-sizing: border-box; display: flex; align-items: center; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">2027-04-30</span>
+          <span style="display: flex; margin-left: 4px;"><span style="height: 28px; padding: 0 18px; display: inline-flex; align-items: center; background: #FFFFFF; border: 2px solid #222222; font-size: 11px;">전체</span><span style="height: 28px; padding: 0 18px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">1주일</span><span style="height: 28px; padding: 0 18px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">1개월</span><span style="height: 28px; padding: 0 18px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">직접입력</span></span>
+        </div>
+        <label for="hl-farm" style="font-weight: 700;">농장명</label>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <input id="hl-farm" placeholder="농장명 · mission_id 입력" style="width: 760px; max-width: 100%; height: 28px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CCCCCC; font: 400 12px var(--font-primary);">
+          <div style="flex-grow: 1;"></div>
+          <button type="button" aria-label="초기화" style="width: 30px; height: 30px; border: 1px solid #CCCCCC; border-radius: 3px; background: #FFFFFF; display: flex; align-items: center; justify-content: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"></path></svg></button>
+          <button type="button" style="width: 80px; height: 30px; border: 0; border-radius: 3px; background: #CE2315; color: #FFFFFF; font: 700 12px var(--font-primary);">검색</button>
+        </div>
+      </form>
+
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 12px;">
+        <span>조회결과 총 {{count}}건</span>
+        <div style="flex-grow: 1;"></div>
+        <button type="button" style="height: 30px; padding: 0 14px; border: 1px solid #CCCCCC; border-radius: 3px; background: #FFFFFF; font: 600 12px var(--font-primary); color: #333333;">선택 CSV 내보내기</button>
+        <button type="button" style="height: 30px; padding: 0 14px; border: 1px solid #CCCCCC; border-radius: 3px; background: #FFFFFF; font: 600 12px var(--font-primary); color: #333333;">경제성 평가 양식</button>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; min-width: 1060px; border-collapse: collapse; font-size: 13px;">
+          <thead><tr style="background: #4D4D4D; color: #FFFFFF;">
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">No</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">mission_id</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">농장명 · 주소</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">작업일</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">기체</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: right;">면적(평)</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: right;">투입량(kg)</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: right;">처방 대비</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: right;">이탈률</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">상태</th>
+          </tr></thead>
+          <tbody>
+            <sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
+              <tr style="background: {{r.bg}}; border-bottom: 1px solid #E5E5E5;">
+                <td style="padding: 10px 8px; text-align: center;">{{r.no}}</td>
+                <td style="padding: 10px 8px;"><a href="{{r.href}}" style="font-weight: 600;">{{r.id}}</a></td>
+                <td style="padding: 10px 8px;"><div>{{r.farm}}</div><div style="font-size: 12px; color: #777777;">{{r.addr}}</div></td>
+                <td style="padding: 10px 8px; text-align: center;">{{r.date}}</td>
+                <td style="padding: 10px 8px; text-align: center;">{{r.drones}}</td>
+                <td style="padding: 10px 8px; text-align: right;">{{r.area}}</td>
+                <td style="padding: 10px 8px; text-align: right;">{{r.seed}}</td>
+                <td style="padding: 10px 8px; text-align: right; color: {{r.ratioColor}}; font-weight: 600;">{{r.ratio}}</td>
+                <td style="padding: 10px 8px; text-align: right;">{{r.dev}}</td>
+                <td style="padding: 10px 8px; text-align: center;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{r.badge}}">{{r.state}}</x-import></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+      <div style="font-size: 12px; color: #777777;">mission_id를 누르면 상세(완료맵 · 처방 대비 투입량 · 실증 지표)로 이동합니다.</div>
+    </main>
+  </div>
+</div>
+</script>
+<script type="text/x-dc-logic" id="dc-src">
+var STATES = [
+  { id: 'all', label: '전체' },
+  { id: 'done', label: '완료' },
+  { id: 'survey', label: '현장조사 대기' },
+  { id: 'stopped', label: '중단' }
+];
+var HIST = [
+  { id: 'MSN-0412-01', farm: 'GJ-S1', addr: '김제시 부량면 신용리 439', date: '2027-04-12', drones: 'DR-01, DR-03', area: '1,192.8', seed: '14.0', ratio: '98.6%', dev: '1.2%', st: 'survey', state: '현장조사 대기', badge: 'wait', href: 'History.html' },
+  { id: 'MSN-0410-01', farm: 'GJ-S10', addr: '김제시 부량면 신용리 441', date: '2027-04-10', drones: 'DR-01', area: '1,170.1', seed: '13.6', ratio: '99.4%', dev: '0.9%', st: 'done', state: '완료', badge: 'success', href: 'History.html' },
+  { id: 'MSN-0409-01', farm: 'GJ-S14', addr: '김제시 부량면 월승리', date: '2027-04-09', drones: 'DR-02', area: '1,198.2', seed: '14.6', ratio: '102.1%', dev: '1.6%', st: 'done', state: '완료', badge: 'success', href: 'History.html' },
+  { id: 'MSN-0408-02', farm: 'GJ-S17', addr: '김제시 부량면 대평리', date: '2027-04-08', drones: 'DR-03', area: '1,011.3', seed: '6.1', ratio: '52.0%', dev: '-', st: 'stopped', state: '중단 · 강풍', badge: 'error', href: 'History.html' },
+  { id: 'MSN-0407-01', farm: 'GJ-S18', addr: '김제시 부량면 월승리', date: '2027-04-07', drones: 'DR-01, DR-02', area: '1,128.6', seed: '13.0', ratio: '97.2%', dev: '1.8%', st: 'done', state: '완료', badge: 'success', href: 'History.html' },
+  { id: 'MSN-0405-01', farm: 'GJ-S19', addr: '김제시 부량면 월승리', date: '2027-04-05', drones: 'DR-02', area: '1,212.4', seed: '14.4', ratio: '99.6%', dev: '1.1%', st: 'done', state: '완료', badge: 'success', href: 'History.html' }
+];
+class Component extends DCLogic {
+  renderVals() {
+    var self = this;
+    var s = this.state || {};
+    var cur = s.st || 'all';
+    var list = HIST.filter(function (h) { return cur === 'all' || h.st === cur; });
+    return {
+      states: STATES.map(function (x) {
+        var on = x.id === cur;
+        return { label: x.label, pressed: on ? 'true' : 'false', border: on ? '2px solid #222222' : '1px solid #CCCCCC', font: on ? '700' : '400', z: on ? 2 : 1, pick: function () { self.setState({ st: x.id }); } };
+      }),
+      count: String(list.length),
+      rows: list.map(function (h, i) {
+        var r = Object.assign({}, h);
+        r.no = String(list.length - i);
+        r.bg = i % 2 ? '#FAFAFA' : '#FFFFFF';
+        var pct = parseFloat(h.ratio);
+        r.ratioColor = pct < 90 ? '#C0392B' : (pct > 105 ? '#C25E00' : '#222222');
+        return r;
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

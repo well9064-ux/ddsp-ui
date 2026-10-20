@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap");
+
+/* ── styles.css ── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   Daedong AgTech Design System — global entry point.
+   Consumers link this one file. Import-only; no rules declared here.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── tokens/fonts.css ── */
+/* Pretendard — Daedong AgTech primary typeface (open source, orioncactus/pretendard).
+   No Daedong-proprietary webfont exists; Pretendard is the company Default and is used as-is.
+   Fallback: Noto Sans KR (Google Fonts), then system-ui. */
+
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Pretendard-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Pretendard-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Pretendard-SemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Pretendard-Bold.woff2") format("woff2");
+}
+
+/* Noto Sans KR fallback */
+
+
+/* ── styles.css ── */
+
+/* ── tokens/colors.css ── */
+/* ── Daedong AgTech · Color tokens ──────────────────────────────────────────
+   Base palette (design-tokens.json) + Daedong project override
+   (theme.daedong.tokens.json): Orange→Daedong Red brand, blue/green tuned,
+   4-color work-type set. Each color group: lighter / light / main / dark / darker.
+   Semantic aliases follow base_design.md slot map. Light theme only (dark = open item). */
+
+:root {
+}
+
+/* ── styles.css ── */
+
+/* ── tokens/typography.css ── */
+/* ── Daedong AgTech · Typography tokens ──────────────────────────────────────
+   Type scale from design-tokens.json / typography.json.
+   H1–H6 headings, S1–S3 subtitles, B1–B3 body, C1–C2 caption.
+   Korean readability: body line-height >= 1.4, tabular-nums for numbers. */
+
+:root {  /* @kind other */
+
+  /* ─ Headings ─ */
+  --type-h1-size: 40px; --type-h1-line: 56px; --type-h1-weight: 700;
+  --type-h2-size: 32px; --type-h2-line: 48px; --type-h2-weight: 700;
+  --type-h3-size: 24px; --type-h3-line: 32px; --type-h3-weight: 600;
+  --type-h4-size: 20px; --type-h4-line: 30px; --type-h4-weight: 600;
+  --type-h5-size: 18px; --type-h5-line: 24px; --type-h5-weight: 600;
+  --type-h6-size: 16px; --type-h6-line: 24px; --type-h6-weight: 600;
+
+  /* ─ Subtitles ─ */
+  --type-s1-size: 20px; --type-s1-line: 20px; --type-s1-weight: 400;
+  --type-s2-size: 14px; --type-s2-line: 20px; --type-s2-weight: 600;
+  --type-s3-size: 12px; --type-s3-line: 18px; --type-s3-weight: 600;
+
+  /* ─ Body ─ */
+  --type-b1-size: 18px; --type-b1-line: 24px; --type-b1-weight: 400;
+  --type-b2-size: 16px; --type-b2-line: 22px; --type-b2-weight: 400;
+  --type-b3-size: 14px; --type-b3-line: 20px; --type-b3-weight: 400;
+
+  /* ─ Caption ─ */
+  --type-c1-size: 12px; --type-c1-line: 16px; --type-c1-weight: 400;
+  --type-c2-size: 10px; --type-c2-line: 14px; --type-c2-weight: 400;
+}
+
+/* Optional utility classes — components may use tokens directly instead. */
+.type-h1 { font: var(--type-h1-weight) var(--type-h1-size)/var(--type-h1-line) var(--font-primary); letter-spacing: var(--type-h1-spacing); }
+.type-h2 { font: var(--type-h2-weight) var(--type-h2-size)/var(--type-h2-line) var(--font-primary); letter-spacing: var(--type-h2-spacing); }
+.type-h3 { font: var(--type-h3-weight) var(--type-h3-size)/var(--type-h3-line) var(--font-primary); letter-spacing: var(--type-h3-spacing); }
+.type-h4 { font: var(--type-h4-weight) var(--type-h4-size)/var(--type-h4-line) var(--font-primary); letter-spacing: var(--type-h4-spacing); }
+.type-h5 { font: var(--type-h5-weight) var(--type-h5-size)/var(--type-h5-line) var(--font-primary); letter-spacing: var(--type-h5-spacing); }
+.type-h6 { font: var(--type-h6-weight) var(--type-h6-size)/var(--type-h6-line) var(--font-primary); letter-spacing: var(--type-h6-spacing); }
+.type-b2 { font: var(--type-b2-weight) var(--type-b2-size)/var(--type-b2-line) var(--font-primary); letter-spacing: var(--type-b2-spacing); }
+.type-b3 { font: var(--type-b3-weight) var(--type-b3-size)/var(--type-b3-line) var(--font-primary); letter-spacing: var(--type-b3-spacing); }
+.type-c1 { font: var(--type-c1-weight) var(--type-c1-size)/var(--type-c1-line) var(--font-primary); letter-spacing: var(--type-c1-spacing); }
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* ── styles.css ── */
+
+/* ── tokens/spacing.css ── */
+/* ── Daedong AgTech · Spacing tokens (4px grid) ──────────────────────────────
+   base_design.md §3. No values outside this scale. --space-4 = default page
+   gutter / card padding; --space-6 = section gap. */
+
+:root {
+}
+
+/* ── styles.css ── */
+
+/* ── tokens/radius.css ── */
+/* ── Daedong AgTech · Radius tokens (base_design.md §4) ─────────────────────── */
+
+:root { /* pills, avatars */
+}
+
+/* ── styles.css ── */
+
+/* ── tokens/effects.css ── */
+/* ── Daedong AgTech · Effects: elevation, shadow, motion ─────────────────────
+   Surfaces are flat (1px hairline border). Shadows only on overlays/tooltip/toast
+   (base_design.md §5). No gradients / glassmorphism. */
+
+:root {
+}
+
+/* ── styles.css ── */
+
+
+/* ── tokens/fonts.css ── */
+
+/* ── tokens/colors.css ── */
+
+/* ── tokens/typography.css ── */
+
+/* ── tokens/spacing.css ── */
+
+/* ── tokens/radius.css ── */
+
+/* ── tokens/effects.css ── */
+

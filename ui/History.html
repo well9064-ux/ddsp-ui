@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>작업 이력 상세 · 드론 파종 컨셉 UI</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<link rel="stylesheet" href="../lib/bundle.css">
+<style>body{margin:0;background:#FFFFFF} a{text-decoration:none}</style>
+<script src="../lib/morphdom.js"></script>
+<script src="../lib/runtime.js"></script>
+<script src="../lib/components.js"></script>
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/x-dc-template" id="dc-tpl">
+<helmet>
+<style>
+body{margin:0}
+a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
+</style>
+</helmet>
+<div style="min-height: 1000px; display: flex; flex-direction: column; background: #F4F6F9; font-family: var(--font-primary); color: #0E1C31; font-variant-numeric: tabular-nums;">
+  <div style="flex-grow: 1; display: flex; flex-wrap: wrap; align-items: stretch;">
+
+    <div style="flex: 0 0 230px; display: flex;">
+      <dc-import name="Nav" active="history" hint-size="230px,1000px"></dc-import>
+    </div>
+
+    <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <header style="height: 50px; flex-shrink: 0; display: flex; align-items: center; gap: 16px; padding: 0 20px; background: #231F20; color: #FFFFFF;">
+      <span style="font-size: 13px; font-weight: 600;">2027년 4월 12일</span>
+      <div style="flex-grow: 1;"></div>
+      <span style="font-size: 13px; font-weight: 600;">안녕하세요, 관리자 님</span>
+    </header>
+    <div role="tablist" aria-label="열린 화면" style="height: 34px; flex-shrink: 0; display: flex; align-items: flex-end; gap: 2px; padding: 0 10px; background: #EEEEEE;">
+      <a href="HistoryList.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 22px; display: flex; align-items: center; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">작업 이력</a>
+      <a href="#" role="tab" aria-selected="true" style="height: 30px; padding: 0 22px; display: flex; align-items: center; gap: 10px; background: #F4F6F9; color: #222222; font-size: 12px; font-weight: 600;">MSN-0412-01 상세 <span aria-hidden="true" style="color: #666666;">×</span></a>
+    </div>
+
+    <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 20px 24px 32px; display: flex; flex-direction: column; gap: 16px;">
+
+      <div style="font-size: 12px; color: #667085;">드론 관리 › <a href="HistoryList.html">작업 이력</a> › MSN-0412-01</div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+        <h1 style="margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.6px;">GJ-S1 · IRG 파종</h1>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="wait">현장조사 대기</x-import>
+        <span style="font-size: 14px; color: #667085;">2027.04.12 09:00 – 09:23 · DR-01, DR-03 · 박OO · 처방 v3</span>
+        <div style="flex-grow: 1;"></div>
+        <a href="FarmLog.html" style="font-size: 14px; font-weight: 600;">영농일지 보기 ›</a>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Select" value="csv" options="{{exports}}" style="width: 200px;"></x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="secondary">내보내기</x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="primary">작업 리포트 PDF</x-import>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="작업면적" value="1,192.8" unit="평" sub="0.39 ha"></x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="작업시간" value="23" unit="분" sub="통신 지연 2분 46초 포함"></x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="종자 투입량" value="14.0" unit="kg" sub="처방 14.2kg 대비 98.6%"></x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="작업 성능" value="1.0" unit="ha/h" sub="기체 2대 동시 작업"></x-import>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch;">
+
+        <section aria-label="작업 완료맵" style="flex: 999 1 520px; min-width: 0; position: relative; height: 600px; border-radius: 6px; overflow: hidden; background: #1E2A22; border: 1px solid #DFE7EB;">
+          <div style="position: absolute; left: 50%; top: 50%; width: 2415px; height: 1354px; margin-left: -1243px; margin-top: -643px; transform: scale(1.15); transform-origin: 1243px 643px;">
+            <img src="../assets/satellite_gimje_wide.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+            <svg role="img" aria-label="GJ-S1 작업 완료맵: 선택한 레이어(처방 대비 편차, 실제 파종량, 비행 궤적)" viewBox="-795 -285 2415 1354" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+              <defs><clipPath id="fHS"><path d="M308 245 L630 357 L589 472 L267 360 Z"></path></clipPath></defs>
+              <path d="M308 245 L630 357 L669 248 L347 136 Z" fill="none" stroke="#B4E319" stroke-width="2" opacity="0.6"></path>
+              <path d="M267 360 L589 472 L550 581 L228 469 Z" fill="none" stroke="#B4E319" stroke-width="2" opacity="0.6"></path>
+
+              <sc-if value="{{lDev}}" hint-placeholder-val="{{true}}">
+                <g clip-path="url(#fHS)" opacity="0.85">
+                  <rect x="200" y="200" width="500" height="320" fill="#9CC4E8"></rect>
+                  <path d="M308 245 L420.7 284.2 L398.2 347.4 L285.5 308.3 Z" fill="#EAEDF0"></path>
+                  <path d="M549.5 329 L630 357 L617.7 391.5 L537.2 363.5 Z" fill="#EAEDF0"></path>
+                  <path d="M458.6 358.3 L611.6 408.8 L589 472 L444.1 421.6 Z" fill="#FFC98A"></path>
+                  <path d="M279.3 325.5 L375.9 359.1 L363.6 393.6 L267 360 Z" fill="#E76F00"></path>
+                </g>
+              </sc-if>
+              <sc-if value="{{lRate}}" hint-placeholder-val="{{false}}">
+                <g clip-path="url(#fHS)" opacity="0.85">
+                  <rect x="200" y="200" width="500" height="320" fill="#5FBF86"></rect>
+                  <path d="M308 245 L420.7 284.2 L398.2 347.4 L285.5 308.3 Z" fill="#CDEBD7"></path>
+                  <path d="M549.5 329 L630 357 L617.7 391.5 L537.2 363.5 Z" fill="#CDEBD7"></path>
+                  <path d="M458.6 358.3 L611.6 408.8 L589 472 L444.1 421.6 Z" fill="#0B5C30"></path>
+                  <path d="M279.3 325.5 L375.9 359.1 L363.6 393.6 L267 360 Z" fill="#0B5C30"></path>
+                </g>
+              </sc-if>
+              <sc-if value="{{lTrack}}" hint-placeholder-val="{{false}}">
+                <g>
+                  <polyline points="315.6,254.1 618.3,359.4 614.2,370.9 311.5,265.6 307.4,277.1 610.1,382.4 606.0,393.9 303.3,288.6 299.2,300.1 601.9,405.4" fill="none" stroke="#5FD18F" stroke-width="11" stroke-linejoin="round" opacity="0.4"></polyline>
+                  <polyline points="278.7,357.6 581.4,462.9 585.5,451.4 282.8,346.1 286.9,334.6 589.6,439.9 593.7,428.4 291.0,323.1 295.1,311.6 597.8,416.9" fill="none" stroke="#8FC3FF" stroke-width="11" stroke-linejoin="round" opacity="0.4"></polyline>
+                  <polyline points="315.6,254.1 618.3,359.4 614.2,370.9 311.5,265.6 307.4,277.1 610.1,382.4 606.0,393.9 303.3,288.6 299.2,300.1 601.9,405.4" fill="none" stroke="#5FD18F" stroke-width="2.5" stroke-linejoin="round"></polyline>
+                  <polyline points="278.7,357.6 581.4,462.9 585.5,451.4 282.8,346.1 286.9,334.6 589.6,439.9 593.7,428.4 291.0,323.1 295.1,311.6 597.8,416.9" fill="none" stroke="#8FC3FF" stroke-width="2.5" stroke-linejoin="round"></polyline>
+                  <polyline points="420,305 445,308 466,322" fill="none" stroke="#FFAB43" stroke-width="3"></polyline>
+                  <circle cx="406" cy="376" r="7" fill="#FFFFFF" stroke="#E76F00" stroke-width="3"></circle>
+                  <rect x="416" y="384" width="86" height="17" rx="3" fill="#FFFFFF"></rect>
+                  <text x="422" y="396" font-size="10" font-weight="600" fill="#C0392B">DR-03 통신 지연</text>
+                </g>
+              </sc-if>
+
+              <path d="M420.7 284.2 L398.2 347.4 L285.5 308.3 M549.5 329 L537.2 363.5 L617.7 391.5 M458.6 358.3 L611.6 408.8 M458.6 358.3 L444.1 421.6 M279.3 325.5 L375.9 359.1 L363.6 393.6" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.8"></path>
+              <path d="M308 245 L630 357 L589 472 L267 360 Z" fill="none" stroke="#B4E319" stroke-width="3.5"></path>
+              <g>
+                <rect x="324" y="288" width="58" height="17" rx="8.5" fill="rgba(14,28,49,0.85)"></rect>
+                <rect x="460" y="332" width="58" height="17" rx="8.5" fill="rgba(14,28,49,0.85)"></rect>
+                <rect x="554" y="353" width="58" height="17" rx="8.5" fill="rgba(14,28,49,0.85)"></rect>
+                <rect x="499" y="407" width="58" height="17" rx="8.5" fill="rgba(14,28,49,0.85)"></rect>
+                <rect x="292" y="352" width="58" height="17" rx="8.5" fill="#C0392B"></rect>
+              </g>
+              <sc-if value="{{lDev}}" hint-placeholder-val="{{true}}">
+                <g font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+                  <text x="353" y="300">Z-01 −3%</text><text x="489" y="344">Z-02 −9%</text><text x="583" y="365">Z-03 +3%</text><text x="528" y="419">Z-04 +7%</text><text x="321" y="364">Z-05 +13%</text>
+                </g>
+              </sc-if>
+              <sc-if value="{{lRate}}" hint-placeholder-val="{{false}}">
+                <g font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+                  <text x="353" y="300">Z-01 2.9</text><text x="489" y="344">Z-02 3.2</text><text x="583" y="365">Z-03 3.1</text><text x="528" y="419">Z-04 4.5</text><text x="321" y="364">Z-05 4.5</text>
+                </g>
+              </sc-if>
+              <sc-if value="{{lTrack}}" hint-placeholder-val="{{false}}">
+                <g font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+                  <text x="353" y="300">Z-01</text><text x="489" y="344">Z-02</text><text x="583" y="365">Z-03</text><text x="528" y="419">Z-04</text><text x="321" y="364">Z-05</text>
+                </g>
+              </sc-if>
+            </svg>
+          </div>
+
+          <div role="group" aria-label="지도 레이어" style="position: absolute; top: 12px; left: 12px; display: flex; gap: 4px; padding: 4px; background: rgba(14,28,49,0.86); border-radius: 6px;">
+            <sc-for list="{{layers}}" as="ly" hint-placeholder-count="3">
+              <button type="button" aria-pressed="{{ly.pressed}}" onClick="{{ly.pick}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 4px; background: {{ly.bg}}; color: {{ly.fg}}; font: 600 13px var(--font-primary); cursor: pointer;">{{ly.label}}</button>
+            </sc-for>
+          </div>
+
+          <div style="position: absolute; left: 12px; bottom: 12px; padding: 10px 12px; background: rgba(14,28,49,0.86); border-radius: 6px; font-size: 12px; display: flex; flex-direction: column; gap: 6px; color: #FFFFFF;">
+            <sc-if value="{{lDev}}" hint-placeholder-val="{{true}}">
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-weight: 600;">처방 대비 편차</span>
+                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 14px; height: 14px; border-radius: 3px; background: #9CC4E8;"></span>부족 −5~−10%</span>
+                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 14px; height: 14px; border-radius: 3px; background: #EAEDF0;"></span>적정 ±5%</span>
+                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 14px; height: 14px; border-radius: 3px; background: #FFC98A;"></span>과다 +5~+10%</span>
+                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 14px; height: 14px; border-radius: 3px; background: #E76F00;"></span>과다 +10% 초과</span>
+              </div>
+            </sc-if>
+            <sc-if value="{{lRate}}" hint-placeholder-val="{{false}}">
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-weight: 600;">실제 파종량 (kg/10a)</span>
+                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 14px; height: 14px; border-radius: 3px; background: #CDEBD7;"></span>2.9 – 3.1</span>
+                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 14px; height: 14px; border-radius: 3px; background: #5FBF86;"></span>3.2 – 3.5</span>
+                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 14px; height: 14px; border-radius: 3px; background: #0B5C30; border: 1px solid #FFFFFF;"></span>4.5</span>
+              </div>
+            </sc-if>
+            <sc-if value="{{lTrack}}" hint-placeholder-val="{{false}}">
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-weight: 600;">비행 궤적</span>
+                <span style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#5FD18F" stroke-width="4"></path></svg>DR-01</span>
+                <span style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#8FC3FF" stroke-width="4"></path></svg>DR-03</span>
+                <span style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#FFAB43" stroke-width="3"></path></svg>경로 이탈</span>
+              </div>
+            </sc-if>
+          </div>
+          <div style="position: absolute; right: 12px; bottom: 8px; font-size: 10px; font-weight: 600; color: #FFFFFF;">NAVER · 국토지리정보원</div>
+        </section>
+
+        <aside aria-label="비교와 실증 지표" style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 12px;">
+
+          <div style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <h2 style="margin: 0; font-size: 16px; font-weight: 600;">처방 대비 실제 투입량</h2>
+              <div style="flex-grow: 1;"></div>
+              <a href="#" style="font-size: 12px;">경상대 피드백 전송</a>
+            </div>
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+              <thead>
+                <tr style="background: #EEEEEE; color: #475467;">
+                  <th scope="col" style="text-align: left; padding: 8px; font-weight: 600;">구간</th>
+                  <th scope="col" style="text-align: right; padding: 8px; font-weight: 600;">처방</th>
+                  <th scope="col" style="text-align: right; padding: 8px; font-weight: 600;">실제</th>
+                  <th scope="col" style="text-align: right; padding: 8px; font-weight: 600;">편차</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid #EEEEEE;"><td style="padding: 8px;">Z-01 저</td><td style="padding: 8px; text-align: right;">3.0</td><td style="padding: 8px; text-align: right;">2.9</td><td style="padding: 8px; text-align: right;">−3.3%</td></tr>
+                <tr style="border-bottom: 1px solid #EEEEEE;"><td style="padding: 8px;">Z-02 중</td><td style="padding: 8px; text-align: right;">3.5</td><td style="padding: 8px; text-align: right;">3.2</td><td style="padding: 8px; text-align: right; color: #025996; font-weight: 600;">−8.6%</td></tr>
+                <tr style="border-bottom: 1px solid #EEEEEE;"><td style="padding: 8px;">Z-03 저</td><td style="padding: 8px; text-align: right;">3.0</td><td style="padding: 8px; text-align: right;">3.1</td><td style="padding: 8px; text-align: right;">+3.3%</td></tr>
+                <tr style="border-bottom: 1px solid #EEEEEE;"><td style="padding: 8px;">Z-04 고</td><td style="padding: 8px; text-align: right;">4.2</td><td style="padding: 8px; text-align: right;">4.5</td><td style="padding: 8px; text-align: right; color: #C25E00; font-weight: 600;">+7.1%</td></tr>
+                <tr><td style="padding: 8px;">Z-05 고</td><td style="padding: 8px; text-align: right;">4.0</td><td style="padding: 8px; text-align: right;">4.5</td><td style="padding: 8px; text-align: right; color: #C0392B; font-weight: 600;">+12.5%</td></tr>
+              </tbody>
+            </table>
+            <div style="font-size: 12px; color: #667085;">단위 kg/10a · 처방 v3 기준 · 실제값은 파종 모듈 배출량</div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+            <h2 style="margin: 0; font-size: 16px; font-weight: 600;">실증 지표</h2>
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;">
+              <div style="display: flex; flex-direction: column; gap: 4px; padding: 10px; background: #F9FAFB; border-radius: 6px;"><span style="font-size: 12px; color: #667085;">자율비행 경로 이탈률</span><span style="font-size: 18px; font-weight: 600;">1.2%</span><span style="font-size: 12px; color: #066B36;">목표 5% 이내 충족</span></div>
+              <div style="display: flex; flex-direction: column; gap: 4px; padding: 10px; background: #F9FAFB; border-radius: 6px;"><span style="font-size: 12px; color: #667085;">파종 균일도 (CV)</span><span style="font-size: 18px; font-weight: 600;">8.4%</span><span style="font-size: 12px; color: #667085;">목표 [목표값]</span></div>
+              <div style="display: flex; flex-direction: column; gap: 4px; padding: 10px; background: #F9FAFB; border-radius: 6px;"><span style="font-size: 12px; color: #667085;">작업 성능</span><span style="font-size: 18px; font-weight: 600;">1.0 ha/h</span><span style="font-size: 12px; color: #667085;">목표 [목표값]</span></div>
+              <div style="display: flex; flex-direction: column; gap: 4px; padding: 10px; background: #F9FAFB; border-radius: 6px;"><span style="font-size: 12px; color: #667085;">동시 작업 드론</span><span style="font-size: 18px; font-weight: 600;">2대</span><span style="font-size: 12px; color: #667085;">목표 [목표값]</span></div>
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
+            <h2 style="margin: 0; font-size: 16px; font-weight: 600;">이벤트</h2>
+            <div style="display: flex; gap: 10px; font-size: 14px;"><span style="width: 64px; color: #667085;">09:00:12</span><span>이륙 (DR-01, DR-03)</span></div>
+            <div style="display: flex; gap: 10px; font-size: 14px;"><span style="width: 64px; color: #667085;">09:06:54</span><span>DR-01 경로 이탈 1.8m · 자동 복귀</span></div>
+            <div style="display: flex; gap: 10px; font-size: 14px;"><span style="width: 64px; color: #667085;">09:13:20</span><span>DR-03 통신 지연 2분 46초 · 복구</span></div>
+            <div style="display: flex; gap: 10px; font-size: 14px;"><span style="width: 64px; color: #667085;">09:23:05</span><span>착륙 · 임무 완료</span></div>
+          </div>
+
+        </aside>
+      </div>
+    </main>
+    </div>
+  </div>
+</div>
+</script>
+<script type="text/x-dc-logic" id="dc-src">
+var LAYERS = [
+  { id: 'dev', label: '처방 대비 편차' },
+  { id: 'rate', label: '실제 파종량' },
+  { id: 'track', label: '비행 궤적' }
+];
+var LABELS = {
+  dev: ['Z-01 −3%', 'Z-02 −9%', 'Z-03 +3%', 'Z-04 +7%', 'Z-05 +13%'],
+  rate: ['Z-01 2.9', 'Z-02 3.2', 'Z-03 3.1', 'Z-04 4.5', 'Z-05 4.5'],
+  track: ['Z-01', 'Z-02', 'Z-03', 'Z-04', 'Z-05']
+};
+class Component extends DCLogic {
+  renderVals() {
+    var self = this;
+    var s = this.state || {};
+    var cur = s.layer || 'dev';
+    var lab = LABELS[cur];
+    return {
+      lDev: cur === 'dev', lRate: cur === 'rate', lTrack: cur === 'track',
+      lab1: lab[0], lab2: lab[1], lab3: lab[2], lab4: lab[3], lab5: lab[4],
+      layers: LAYERS.map(function (l) {
+        var on = l.id === cur;
+        return { label: l.label, pressed: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#0E1C31' : '#FFFFFF', pick: function () { self.setState({ layer: l.id }); } };
+      }),
+      exports: [
+        { value: 'csv', label: '작업 · 로그 CSV' },
+        { value: 'tif', label: '완료맵 GeoTIFF' },
+        { value: 'shp', label: '완료맵 SHP' },
+        { value: 'eco', label: '경제성 평가 양식' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

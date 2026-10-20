@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>드론 파종 플랫폼 데이터 흐름도</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+/* Layout: 엔지니어링 문서. 요점 → 구성도 → 임무 시퀀스 → 인터페이스 목록 → 공통 키 → 1차년도 범위 → 결정 필요 사항 */
+:root{
+  --bg:#f5f7f4; --surface:#ffffff; --fg:#1b2420; --muted:#5b6862; --line:#c7d0ca;
+  --rt:#0a7552; --rt-soft:#e3f2eb; --warn:#a8680a; --warn-soft:#fbf0dc; --tbd:#c0267a; --tbd-soft:#fbe6f1; --band:#edf1ee;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111614; --surface:#19201d; --fg:#e2e9e5; --muted:#98a69f; --line:#34403a;
+  --rt:#43c793; --rt-soft:#163428; --warn:#e3a646; --warn-soft:#3a2d15; --tbd:#f28cc0; --tbd-soft:#3d1a2c; --band:#161d1a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111614; --surface:#19201d; --fg:#e2e9e5; --muted:#98a69f; --line:#34403a;
+  --rt:#43c793; --rt-soft:#163428; --warn:#e3a646; --warn-soft:#3a2d15; --tbd:#f28cc0; --tbd-soft:#3d1a2c; --band:#161d1a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.65}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:40px 64px;display:flex;flex-direction:column;gap:48px}
+header{display:flex;flex-direction:column;gap:10px;max-width:72ch}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+h1{font-size:30px;line-height:1.25;margin:0;font-weight:700;text-wrap:balance}
+h2{font-size:20px;margin:0;font-weight:700;text-wrap:balance}
+p{margin:0}
+.lead{color:var(--muted)}
+section{display:flex;flex-direction:column;gap:16px;min-width:0}
+.sec-head{display:flex;flex-direction:column;gap:6px;max-width:75ch}
+.points{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.point{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.point b{font-size:15px}
+.point span{color:var(--muted);font-size:14px}
+figure{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px}
+svg.dia{display:block;width:100%;min-width:900px;height:auto;color:var(--fg);font-family:var(--f-body)}
+figcaption{color:var(--muted);font-size:14px;max-width:80ch}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:34px;height:0;border-top:2px solid;vertical-align:middle;margin-right:8px}
+.legend s{display:inline-block;width:22px;height:14px;vertical-align:middle;margin-right:8px;border-radius:3px;text-decoration:none}
+.lg-rt{border-color:var(--rt)}.lg-bt{border-color:var(--muted);border-top-style:dashed!important}.lg-tbd{border-color:var(--tbd);border-top-style:dashed!important;border-top-width:3px!important}.lg-int{border-color:var(--line)}.lg-later{border-color:var(--muted);border-top-style:dotted!important;opacity:.7}
+.lg-new{border:1.5px solid var(--rt);background:var(--surface)}.lg-old{border:1.5px dashed var(--muted);background:var(--band)}
+/* svg parts */
+.box{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.box-new{fill:var(--surface);stroke:var(--rt);stroke-width:1.5}
+.box-old{fill:var(--band);stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 3}
+.box-gw{fill:var(--rt-soft);stroke:var(--rt);stroke-width:1.2}
+.box-in{fill:var(--surface);stroke:var(--line);stroke-width:1}
+.t-title{font-size:13.5px;font-weight:700;fill:currentColor}
+.t-b{font-size:12px;font-weight:600;fill:currentColor}
+.t{font-size:11.5px;fill:currentColor}
+.t-m{font-size:11px;fill:var(--muted)}
+.t-mono{font-family:var(--f-mono);font-size:10.5px;fill:var(--muted)}
+.t-rt{fill:var(--rt)} .t-warn{fill:var(--warn)} .t-tbd{fill:var(--tbd)}
+.t-col{font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;fill:var(--muted)}
+.a-rt{stroke:var(--rt);stroke-width:2;fill:none}
+.a-bt{stroke:var(--muted);stroke-width:1.6;stroke-dasharray:6 4;fill:none}
+.a-tbd{stroke:var(--tbd);stroke-width:2.2;stroke-dasharray:6 4;stroke-linecap:round;fill:none}
+.a-int{stroke:var(--muted);stroke-width:1.3;fill:none}
+.a-later{stroke:var(--muted);stroke-width:1.2;stroke-dasharray:2 5;fill:none;opacity:.7}
+.mk-rt{fill:var(--rt)}.mk-bt{fill:var(--muted)}.mk-tbd{fill:var(--tbd)}
+.life{stroke:var(--line);stroke-width:1.2;stroke-dasharray:3 4}
+.phase{fill:var(--band)}
+.self{stroke:var(--muted);stroke-width:1.4;fill:none}
+/* table */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:1080px;font-size:13.5px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-size:12px;color:var(--muted);font-weight:600;background:var(--band);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tr.dim td{color:var(--muted)}
+td.id{font-family:var(--f-mono);font-weight:500;white-space:nowrap}
+.pill{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:99px;white-space:nowrap;font-weight:500}
+.p-rt{background:var(--rt-soft);color:var(--rt)}
+.p-bt{background:var(--band);color:var(--muted);border:1px solid var(--line)}
+.p-tbd{background:var(--tbd-soft);color:var(--tbd)}
+.p-deep{background:var(--fg);color:var(--bg)}
+.dir{font-family:var(--f-mono);font-size:12.5px;white-space:nowrap}
+.keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.key{border-top:2px solid var(--fg);padding-top:10px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.key.open{border-top-color:var(--warn)}
+.key code{font-family:var(--f-mono);font-size:13px;font-weight:500}
+.key span{color:var(--muted);font-size:14px}
+.scope{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.scope div{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.scope b{font-size:14px}
+.scope span{font-size:13.5px;color:var(--muted)}
+.scope .num{font-family:var(--f-mono);font-size:22px;font-weight:500;color:var(--fg);font-variant-numeric:tabular-nums}
+ol.decide{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:10px;max-width:85ch}
+ol.decide b{font-weight:600}
+.src{font-size:13px;color:var(--muted)}
+@media (max-width:600px){h1{font-size:24px}.wrap{padding-block:28px 48px;gap:40px}}
+</style>
+</head><body>
+
+<div class="wrap">
+<p style="margin:0 0 8px"><a href="index.html" style="font-size:13px;font-weight:500;text-decoration:none;color:inherit">← 설계 산출물 목차</a></p>
+<header>
+  <div class="eyebrow">드론 파종 플랫폼 · 인터페이스 설계 v0.5 · 2027 Pilot 범위 · 2026.10.20</div>
+  <h1>드론 파종 플랫폼 데이터 흐름도 <span style="display:inline-block;vertical-align:middle;font-size:13px;font-weight:700;padding:3px 12px;border-radius:999px;color:#8A4B00;background:#FFF1DC;border:1px solid #F2C98B">논의 필요 · 협의 후 확정</span></h1>
+  <p class="lead">락로보틱스·KETI·경상국립대 데이터가 기존 대동 커넥트(정밀농업)와 신규 드론 모듈 사이를 어떻게 흐르는지 정리했습니다. 근거는 과제 계획서, 9/17 미팅자료, 개발계 관리자·농민 사이트 조회 결과입니다. 주기·포맷·프로토콜은 1차년도 API 명세에서 확정할 제안값입니다.</p>
+</header>
+
+<section>
+  <div class="sec-head"><h2>이 흐름도의 요점</h2></div>
+  <div class="points">
+    <div class="point"><b>새로 만드는 자동 연동은 GCS 한 곳</b><span>실시간 텔레메트리·이벤트(IF-01~04)만 Pilot('27)부터 자동입니다. KETI 맵레이어와 경상대 처방맵은 Pilot 동안 기존 '데이터 등록' 화면으로 수동 등록하고, 자동 수신(IF-05·06)은 '28년 이후로 전환합니다.</span></div>
+    <div class="point"><b>기존 대동 커넥트 위에 얹는 구조</b><span>필지·필지 ID, 고객·보유 차량, 진단 레이어, 영농일지, 이벤트 코드·App Push, 조직·이력은 이미 있습니다. 신규는 드론 모듈(수집·임무·관제·이력·자산) 하나로 모입니다.</span></div>
+    <div class="point"><b>작업 결과는 자동 영농일지로 기록</b><span>드론 작업이 끝나면 텔레메트리로 영농일지의 '드론 작업 기록'을 자동 작성하고, 현장조사 값을 이어서 입력합니다. '27 실증은 연구원·조종사가 운용하므로 기존 대행 흐름(공고·매칭·승인·정산)에 연결하지 않습니다(v0.2).</span></div>
+    <div class="point"><b>플랫폼이 허브</b><span>필지 경계·ID(IF-10)를 세 기관에 같은 기준으로 내주고, 처방 버전과 실제 투입량을 플랫폼에서 연결합니다. 기관끼리 직접 주고받으면 이 추적이 끊깁니다.</span></div>
+    <div class="point"><b>드론은 별도 '드론 관리' 메뉴</b><span>차량관리·차량유지관리는 농기계 전용이라 드론을 넣지 않습니다. 신규 '드론 관리' 메뉴에서 기체(GCS 기체 식별자)·파종 모듈·배터리·정비 이력을 관리하고, 고객·조직 마스터만 참조합니다. 소유 주체(법인·농민·실증 운영자)는 아직 미정입니다.</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>1. 시스템 구성과 데이터 흐름</h2>
+    <p class="lead">초록 테두리는 이번 사업에서 새로 만드는 부분, 점선 테두리는 개발계에 이미 있는 기능입니다.</p>
+  </div>
+  <figure>
+    <div class="scroll">
+<svg class="dia" viewBox="0 0 1200 590" role="img" aria-label="협력기관 3곳의 데이터가 신규 게이트웨이 또는 기존 데이터 등록 화면을 거쳐 신규 드론 모듈과 기존 대동 커넥트로 들어가고, 관리자 웹·농민 웹·조종사·평가기관으로 나가는 구성도">
+  <defs>
+    <marker id="m-rt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk-rt" d="M0 0L10 5L0 10z"/></marker>
+    <marker id="m-bt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk-bt" d="M0 0L10 5L0 10z"/></marker>
+    <marker id="m-tbd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk-tbd" d="M0 0L10 5L0 10z"/></marker>
+  </defs>
+
+  <text class="t-col" x="120" y="24" text-anchor="middle">협력기관</text>
+  <text class="t-col" x="480" y="24" text-anchor="middle">수신 경로</text>
+  <text class="t-col" x="750" y="24" text-anchor="middle">대동 플랫폼</text>
+  <text class="t-col" x="1080" y="24" text-anchor="middle">사용자 채널</text>
+
+  <!-- 락로보틱스 -->
+  <rect class="box" x="20" y="40" width="200" height="160" rx="6"/>
+  <text class="t-title" x="36" y="66">락로보틱스</text>
+  <text class="t" x="36" y="92">파종 드론 · FC</text>
+  <text class="t" x="36" y="112">변량 파종 제어기</text>
+  <text class="t" x="36" y="132">파종용 GCS</text>
+  <text class="t" x="36" y="152">풍향·풍속 센서</text>
+  <text class="t-mono" x="36" y="182">RTK · MAVLink</text>
+
+  <text class="t t-rt" x="320" y="72" text-anchor="middle">텔레메트리·이벤트·완료</text>
+  <text class="t-mono" x="320" y="86" text-anchor="middle">IF-02·03 · 실시간 1~5초</text>
+  <line class="a-rt" x1="222" y1="96" x2="416" y2="96" marker-end="url(#m-rt)"/>
+  <line class="a-bt" x1="418" y1="156" x2="224" y2="156" marker-end="url(#m-bt)"/>
+  <text class="t" x="320" y="174" text-anchor="middle">임무 파일</text>
+  <text class="t-mono" x="320" y="188" text-anchor="middle">IF-01 · 요청 시</text>
+
+  <!-- KETI -->
+  <rect class="box" x="20" y="230" width="200" height="140" rx="6"/>
+  <text class="t-title" x="36" y="256">KETI</text>
+  <text class="t" x="36" y="282">다중센서 모듈</text>
+  <text class="t" x="36" y="302">맵레이어(NDVI 등)</text>
+  <text class="t" x="36" y="322">DEM · 작업 이력 패킷</text>
+
+  <text class="t-mono" x="320" y="252" text-anchor="middle">'28~ 자동 수신 · IF-05</text>
+  <line class="a-later" x1="222" y1="262" x2="416" y2="262" marker-end="url(#m-bt)"/>
+  <text class="t t-tbd" x="320" y="290" text-anchor="middle">필지 정보 · 촬영 요청</text>
+  <text class="t-mono t-tbd" x="320" y="302" text-anchor="middle">IF-10 · IF-12(협의)</text>
+  <line class="a-tbd" x1="418" y1="312" x2="224" y2="312" marker-end="url(#m-tbd)"/>
+  <text class="t" x="320" y="342" text-anchor="middle">맵레이어 GeoTIFF</text>
+  <text class="t-mono" x="320" y="354" text-anchor="middle">Pilot 수동 등록</text>
+  <line class="a-bt" x1="222" y1="362" x2="416" y2="362" marker-end="url(#m-bt)"/>
+
+  <!-- 경상국립대 -->
+  <rect class="box" x="20" y="400" width="200" height="130" rx="6"/>
+  <text class="t-title" x="36" y="426">경상국립대</text>
+  <text class="t" x="36" y="452">AI 변량 처방맵</text>
+  <text class="t" x="36" y="472">구역별 파종량 · 3단계</text>
+  <text class="t" x="36" y="492">레이어 가중치 모델</text>
+
+  <text class="t" x="320" y="418" text-anchor="middle">처방맵 SHP · GeoJSON</text>
+  <text class="t-mono" x="320" y="430" text-anchor="middle">Pilot 수동 등록 → '28~ IF-06</text>
+  <line class="a-bt" x1="222" y1="440" x2="416" y2="440" marker-end="url(#m-bt)"/>
+  <line class="a-bt" x1="418" y1="500" x2="224" y2="500" marker-end="url(#m-bt)"/>
+  <text class="t" x="320" y="518" text-anchor="middle">실제 투입량·현장조사</text>
+  <text class="t-mono" x="320" y="532" text-anchor="middle">Pilot CSV 내보내기</text>
+
+  <!-- 수신 경로 -->
+  <rect class="box-gw" x="420" y="40" width="120" height="290" rx="6"/>
+  <text class="t-mono t-rt" x="480" y="62" text-anchor="middle">신규</text>
+  <text class="t-title" x="480" y="96" text-anchor="middle">데이터</text>
+  <text class="t-title" x="480" y="114" text-anchor="middle">게이트웨이</text>
+  <text class="t-title" x="480" y="132" text-anchor="middle">/ API</text>
+  <text class="t-m" x="480" y="168" text-anchor="middle">GCS IF-01~04</text>
+  <text class="t-m" x="480" y="186" text-anchor="middle">IF-10 · IF-12</text>
+  <text class="t-m" x="480" y="204" text-anchor="middle">'28~ IF-05·06</text>
+  <text class="t-m" x="480" y="234" text-anchor="middle">기체 인증 · TLS</text>
+  <text class="t-m" x="480" y="252" text-anchor="middle">필지 ID 매핑</text>
+  <text class="t-m" x="480" y="270" text-anchor="middle">시각 동기화</text>
+  <text class="t-m" x="480" y="288" text-anchor="middle">재전송·중복 제거</text>
+
+  <rect class="box-old" x="420" y="344" width="120" height="190" rx="6"/>
+  <text class="t-mono" x="480" y="366" text-anchor="middle">기존 · 확장</text>
+  <text class="t-title" x="480" y="396" text-anchor="middle">파일 등록·</text>
+  <text class="t-title" x="480" y="414" text-anchor="middle">내보내기</text>
+  <text class="t-m" x="480" y="444" text-anchor="middle">'데이터 등록' 화면</text>
+  <text class="t-m" x="480" y="462" text-anchor="middle">+ 파종 처방 유형</text>
+  <text class="t-m" x="480" y="480" text-anchor="middle">+ DEM·토양수분</text>
+  <text class="t-mono" x="480" y="512" text-anchor="middle">GeoTIFF·SHP·CSV</text>
+
+  <!-- 수신 경로 → 플랫폼 -->
+  <text class="t-m" x="570" y="88" text-anchor="middle">수신</text>
+  <line class="a-int" x1="542" y1="96" x2="616" y2="96" marker-end="url(#m-bt)"/>
+  <text class="t-m" x="570" y="148" text-anchor="middle">송신</text>
+  <line class="a-int" x1="618" y1="156" x2="544" y2="156" marker-end="url(#m-bt)"/>
+  <text class="t-m" x="570" y="432" text-anchor="middle">레이어</text>
+  <line class="a-int" x1="542" y1="440" x2="616" y2="440" marker-end="url(#m-bt)"/>
+  <text class="t-m" x="570" y="492" text-anchor="middle">내보내기</text>
+  <line class="a-int" x1="618" y1="500" x2="544" y2="500" marker-end="url(#m-bt)"/>
+
+  <!-- 신규 드론 모듈 -->
+  <rect class="box-new" x="600" y="40" width="300" height="290" rx="6"/>
+  <text class="t-title" x="616" y="62">신규 드론 모듈</text>
+  <text class="t-mono t-rt" x="884" y="62" text-anchor="end">드론 작업 관리 · 관제</text>
+  <rect class="box-in" x="614" y="74" width="134" height="54" rx="4"/>
+  <text class="t-b" x="626" y="96">수집·적재</text>
+  <text class="t-m" x="626" y="114">실시간 스트림·시계열</text>
+  <rect class="box-in" x="752" y="74" width="134" height="54" rx="4"/>
+  <text class="t-b" x="764" y="96">처방 검토·임무</text>
+  <text class="t-m" x="764" y="114">버전·승인·GCS 전달</text>
+  <rect class="box-in" x="614" y="136" width="134" height="54" rx="4"/>
+  <text class="t-b" x="626" y="158">임무 실시간 관제</text>
+  <text class="t-m" x="626" y="176">위치·게이지·이벤트</text>
+  <rect class="box-in" x="752" y="136" width="134" height="54" rx="4"/>
+  <text class="t-b" x="764" y="158">작업 이력·KPI</text>
+  <text class="t-m" x="764" y="176">완료맵·처방 대비 투입량</text>
+  <rect class="box-in" x="614" y="198" width="134" height="54" rx="4"/>
+  <text class="t-b" x="626" y="220">드론 관리</text>
+  <text class="t-m" x="626" y="238">GCS ID·배터리·모듈</text>
+  <rect class="box-in" x="752" y="198" width="134" height="54" rx="4"/>
+  <text class="t-b" x="764" y="220">자동 영농일지</text>
+  <text class="t-m" x="764" y="238">면적·시간·투입량</text>
+  <text class="t-mono" x="616" y="282">데이터 모델</text>
+  <text class="t-mono" x="616" y="300">필지–작기–작업–임무–로그–결과</text>
+  <text class="t-mono" x="616" y="318">+ 처방 버전 · 기체 ID 연결</text>
+
+  <!-- 신규 ↔ 기존 -->
+  <line class="a-int" x1="680" y1="332" x2="680" y2="346" marker-start="url(#m-bt)" marker-end="url(#m-bt)"/>
+  <text class="t-mono" x="690" y="343">필지 ID · 레이어</text>
+  <line class="a-int" x1="830" y1="332" x2="830" y2="346" marker-end="url(#m-bt)"/>
+  <text class="t-mono" x="838" y="343">영농일지</text>
+
+  <!-- 기존 대동 커넥트 -->
+  <rect class="box-old" x="600" y="350" width="300" height="214" rx="6"/>
+  <text class="t-title" x="616" y="372">기존 대동 커넥트 · 정밀농업</text>
+  <rect class="box-in" x="614" y="384" width="134" height="50" rx="4"/>
+  <text class="t-b" x="626" y="404">필지 · 필지 ID</text>
+  <text class="t-m" x="626" y="422">필지 관리</text>
+  <rect class="box-in" x="752" y="384" width="134" height="50" rx="4"/>
+  <text class="t-b" x="764" y="404">고객 · 보유 차량</text>
+  <text class="t-m" x="764" y="422">농기계 전용(드론 제외)</text>
+  <rect class="box-in" x="614" y="440" width="134" height="50" rx="4"/>
+  <text class="t-b" x="626" y="460">진단 레이어</text>
+  <text class="t-m" x="626" y="478">필지 데이터 관리</text>
+  <rect class="box-in" x="752" y="440" width="134" height="50" rx="4"/>
+  <text class="t-b" x="764" y="460">영농일지</text>
+  <text class="t-m" x="764" y="478">재배노트 · 현장조사</text>
+  <rect class="box-in" x="614" y="496" width="134" height="50" rx="4"/>
+  <text class="t-b" x="626" y="516">이벤트 코드·Push</text>
+  <text class="t-m" x="626" y="534">이상 감지 이벤트 관리</text>
+  <rect class="box-in" x="752" y="496" width="134" height="50" rx="4"/>
+  <text class="t-b" x="764" y="516">조직·권한·이력</text>
+  <text class="t-m" x="764" y="534">사용자관리</text>
+
+  <!-- 사용자 채널 -->
+  <rect class="box" x="980" y="40" width="200" height="110" rx="6"/>
+  <text class="t-title" x="996" y="64">법인·대동 관리자 웹</text>
+  <text class="t t-rt" x="996" y="88">[신규] 임무(수행 중 관제)·드론 관리</text>
+  <text class="t" x="996" y="108">[기존] 데이터 등록 · 필지 모니터링</text>
+  <text class="t" x="996" y="128">[기존] 영농일지 · 조직 관리</text>
+  <text class="t-mono" x="940" y="88" text-anchor="middle">WS</text>
+  <line class="a-rt" x1="902" y1="96" x2="976" y2="96" marker-end="url(#m-rt)"/>
+
+  <rect class="box" x="980" y="166" width="200" height="104" rx="6"/>
+  <text class="t-title" x="996" y="190">농민 웹</text>
+  <text class="t" x="996" y="214">[기존] 필지 모니터링·드론 정밀</text>
+  <text class="t" x="996" y="234">[기존] 영농일지 확인</text>
+  <text class="t-m" x="996" y="254">분석 신청 · 작업 결과 조회</text>
+  <text class="t-m" x="940" y="210" text-anchor="middle">진행·결과</text>
+  <line class="a-bt" x1="902" y1="218" x2="976" y2="218" marker-end="url(#m-bt)"/>
+
+  <rect class="box" x="980" y="286" width="200" height="104" rx="6"/>
+  <text class="t-title" x="996" y="310">실증 조종사 · 연구원</text>
+  <text class="t" x="996" y="334">[신규] 임무 확인 · 현장조사 입력</text>
+  <text class="t-m" x="996" y="354">[2차년도] 드론 임무·체크리스트</text>
+  <text class="t-m" x="940" y="320" text-anchor="middle">임무</text>
+  <line class="a-bt" x1="902" y1="328" x2="976" y2="328" marker-end="url(#m-bt)"/>
+  <line class="a-int" x1="976" y1="352" x2="904" y2="352" marker-end="url(#m-bt)"/>
+  <text class="t-m" x="940" y="370" text-anchor="middle">현장조사</text>
+
+  <rect class="box" x="980" y="406" width="200" height="90" rx="6"/>
+  <text class="t-title" x="996" y="430">평가기관 · 연구원</text>
+  <text class="t" x="996" y="454">KPI · 경제성 데이터</text>
+  <text class="t-mono" x="996" y="474">CSV · GeoTIFF · SHP</text>
+  <text class="t-m" x="940" y="446" text-anchor="middle">IF-11</text>
+  <line class="a-bt" x1="902" y1="454" x2="976" y2="454" marker-end="url(#m-bt)"/>
+</svg>
+    </div>
+    <div class="legend">
+      <span><s class="lg-new"></s>신규 개발</span>
+      <span><s class="lg-old"></s>기존 기능 재사용·확장</span>
+      <span><i class="lg-rt"></i>실시간 스트림</span>
+      <span><i class="lg-bt"></i>배치 · 파일</span>
+      <span><i class="lg-tbd"></i>협의 필요</span>
+      <span><i class="lg-later"></i>'28년 이후</span>
+      <span><i class="lg-int"></i>플랫폼 내부</span>
+    </div>
+    <figcaption>Pilot 기간에 자동으로 들어오는 데이터는 GCS뿐이고, KETI·경상대 파일은 기존 데이터 등록 화면을 거쳐 진단 레이어로 들어갑니다. 신규 드론 모듈은 기존 필지 ID와 레이어를 읽어 임무를 만들고, 작업 결과는 자동 영농일지(드론 작업 기록)로 남깁니다.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>2. 임무 1건의 데이터 시퀀스</h2>
+    <p class="lead">분석 신청부터 리포트까지 19단계입니다. 단계 번호 옆의 ID는 아래 인터페이스 목록과 연결됩니다.</p>
+  </div>
+  <figure>
+    <div class="scroll"><svg class="dia" id="seq" role="img" aria-label="준비, 비행 중, 작업 후 세 구간에 걸친 20단계 데이터 교환 순서"></svg></div>
+    <figcaption>준비 단계는 대부분 파일과 기존 화면으로 처리하고, 비행 중에는 GCS → 플랫폼 → 관제 화면 방향의 실시간 데이터만 흐릅니다. 작업 후에는 자동 영농일지와 현장조사 입력이 이어지고, 투입량 피드백과 파종 후 촬영으로 처방 루프가 닫힙니다.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>3. 인터페이스 목록</h2>
+    <p class="lead">ID는 기능 목록 엑셀의 IF 항목과 같습니다. 기능 목록 v0.5는 '27 Pilot 요구사항만 남겨 IF-01~04·10·12만 포함하고, 회색 행은 '28년 이후 항목입니다.</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>ID</th><th>방향</th><th>데이터</th><th>포맷</th><th>Pilot('27) 방식</th><th>이후</th><th>1차년도 명세</th><th>확정할 사항</th></tr></thead>
+    <tbody>
+      <tr><td class="id">IF-01</td><td class="dir">플랫폼 → GCS</td><td>임무 파일: 필지 폴리곤, 처방 구역·파종량, 파종 조건(속도·작업폭·고도), 배정 기체</td><td>JSON / KML / SHP</td><td><span class="pill p-bt">요청 시 Pull</span><br>HTTPS REST</td><td>동일</td><td><span class="pill p-deep">상세</span></td><td>경로 생성 주체, 파종 조건 최종 입력 위치</td></tr>
+      <tr><td class="id">IF-02</td><td class="dir">GCS → 플랫폼</td><td>텔레메트리: RTK 위치·고도, 속도, Roll/Pitch/Yaw, 배터리, 링크 품질, 파종량·작업폭·배출 오차, 풍향·풍속</td><td>JSON (MAVLink 변환)</td><td><span class="pill p-rt">1~5초 · 파종량 1초</span><br>MQTT 또는 WebSocket</td><td>동일</td><td><span class="pill p-deep">상세</span></td><td>필드·단위, 주기, 타임스탬프 기준, MQTT 브로커를 대동 커넥트 인프라에 둘 수 있는지</td></tr>
+      <tr><td class="id">IF-03</td><td class="dir">GCS → 플랫폼</td><td>이벤트(이륙·착륙·일시정지·이탈·저전압·두절·비상정지), 완료 요약, 생성 경로</td><td>JSON</td><td><span class="pill p-rt">발생 즉시</span> <span class="pill p-bt">임무 종료</span></td><td>동일</td><td><span class="pill p-deep">상세</span></td><td>이벤트 코드표(기존 '이상 감지 이벤트 관리' 코드 체계에 추가), 완료 요약 항목</td></tr>
+      <tr><td class="id">IF-04</td><td class="dir">GCS ↔ 플랫폼</td><td>기체 인증, 전송 암호화, 재전송·중복 제거</td><td>토큰</td><td>연결 시 · TLS</td><td>동일</td><td><span class="pill p-deep">상세</span></td><td>기체 식별자(차량 등록의 단말기 EoL 대체), 토큰 발급·갱신</td></tr>
+      <tr><td class="id">IF-05</td><td class="dir">KETI → 플랫폼</td><td>맵레이어(NDVI 등), DEM, 작업 이력 패킷, 필지 ID·촬영 시각 메타데이터</td><td>GeoTIFF + JSON 메타</td><td><span class="pill p-bt">수동 등록</span><br>기존 데이터 등록 화면</td><td>'28~ 게이트웨이 자동</td><td><span class="pill p-bt">파일 포맷만</span><br><span class="t-m">MAP-01·10에서 정의</span></td><td>레이어 종류·해상도·좌표계, 파종 후 촬영 시점</td></tr>
+      <tr><td class="id">IF-06</td><td class="dir">경상대 ↔ 플랫폼</td><td>수신: 처방맵(구역별 파종량, 3단계, 버전) / 송신: 실제 투입량, 현장조사(발아율·토양함수율·수확량)</td><td>SHP / GeoJSON, CSV</td><td><span class="pill p-bt">수동 등록 · CSV 내보내기</span></td><td>'28~ REST</td><td><span class="pill p-bt">파일 포맷만</span><br><span class="t-m">MAP-03·10, HIS-08에서 정의</span></td><td>구역 단위, 단계 값 표기, 버전 규칙</td></tr>
+      <tr class="dim"><td class="id">IF-07</td><td class="dir">플랫폼 ↔ 대동 커넥트</td><td>계정·조직, 필지, 장비(차량·모델·단말기), 이벤트 코드·App Push, 사용자 이력</td><td>기존 API</td><td>내부 호출</td><td>—</td><td><span class="pill p-bt">기존 · 제외</span></td><td>드론은 별도 '드론 관리' 메뉴로 분리(10/19 결정). 고객·조직 마스터 참조 범위만 확인</td></tr>
+      <tr class="dim"><td class="id">IF-08</td><td class="dir">플랫폼 ↔ 타 기종</td><td>DJI 등 다기종 기체 어댑터</td><td>—</td><td>없음</td><td>'28~</td><td><span class="pill p-bt">'28~ 이후</span></td><td>DJI Cloud API 연동 범위</td></tr>
+      <tr class="dim"><td class="id">IF-09</td><td class="dir">외부 → 플랫폼</td><td>기상 데이터(작업 가능 여부 판단)</td><td>—</td><td>검토</td><td>검토</td><td><span class="pill p-bt">'28~ 이후</span></td><td>외부 API 사용 가능 여부</td></tr>
+      <tr><td class="id">IF-10</td><td class="dir">플랫폼 → KETI·경상대·GCS</td><td>필지 경계·필지 ID(대동 커넥트에 구현된 기존 데이터)</td><td>GeoJSON</td><td><span class="pill p-bt">요청 시 Pull</span></td><td>동일</td><td><span class="pill p-bt">포맷 정의</span></td><td>기존 필지 데이터의 외부 제공 API 유무, 좌표계</td></tr>
+      <tr class="dim"><td class="id">IF-11</td><td class="dir">플랫폼 → 평가기관</td><td>KPI(이탈률·ha/h·동시작업 수), 작업시간·투입량 등 경제성 항목</td><td>CSV / GeoTIFF / SHP</td><td>화면 내보내기</td><td>향후 API</td><td><span class="pill p-bt">'28~ 이후</span></td><td>제공 양식, 산식</td></tr>
+      <tr><td class="id">IF-12</td><td class="dir">플랫폼 → 촬영 기관</td><td>드론 정밀 분석 신청 건(필지 ID·경계·희망 시기), 촬영 일정·완료 회신. 신청은 기존 생육 진단 화면에서 발생</td><td>JSON</td><td><span class="pill p-tbd">협의 필요</span><br>관리자 수동 처리 가능</td><td>API</td><td><span class="pill p-bt">포맷 정의</span></td><td>촬영 수행 주체(KETI·락로보틱스), 유료 과금과 실증 필지 처리</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>4. 모든 인터페이스가 공유할 키</h2>
+    <p class="lead">세 기관의 데이터와 드론 작업 기록을 한 필지 위에서 연결하려면 아래 키를 처음부터 맞춰야 합니다. 주황색은 아직 정해지지 않은 키입니다.</p>
+  </div>
+  <div class="keys">
+    <div class="key"><code>field_id</code><span>필지 ID. 대동 커넥트에 이미 구현된 ID를 그대로 사용. 맵레이어·처방맵·임무·영농일지 모두에 필수</span></div>
+    <div class="key"><code>mission_id</code><span>임무 ID. 플랫폼이 발급해 IF-01로 전달하고, 로그·이벤트·완료 보고가 이 키로 돌아옴</span></div>
+    <div class="key"><code>prescription_version</code><span>처방맵 버전. 어떤 처방으로 파종했는지 추적하고 IF-06 피드백과 연결</span></div>
+    <div class="key open"><code>aircraft_id</code><span>드론 기체 ID. 신규 '드론 관리' 메뉴에서 GCS 기체 식별자로 발급·관리(차량관리의 기대번호·단말기 EoL 체계와 분리)</span></div>
+    <div class="key open"><code>owner_id</code><span>드론 소유 주체(법인·농민·실증 운영자). 기존 작업차량은 고객 보유 차량 기준이라 드론 소유 구조를 정해야 함</span></div>
+    <div class="key"><code>timestamp</code><span>UTC, 밀리초. GCS·센서·플랫폼의 시각 기준을 하나로 정함(GPS 시각 사용 여부 협의)</span></div>
+    <div class="key"><code>CRS</code><span>좌표계. 전송은 WGS84(EPSG:4326), 면적 계산·저장은 EPSG:5186 제안. 기존 필지 데이터 좌표계 확인 필요</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>5. 1차년도에 확정하는 범위</h2>
+    <p class="lead">예산 3,000만 원(3 M/M) 조정안 기준이고, 요구사항은 '27 Pilot에 필요한 77건만 다룹니다. 세부 공수는 기능 목록 엑셀의 '1차년도 공수(안)' 시트에 있습니다.</p>
+  </div>
+  <div class="scope">
+    <div><span class="num">4건</span><b>상세 명세</b><span>GCS 연동 IF-01~04. 필드·단위·주기·오류 코드까지 확정</span></div>
+    <div><span class="num">4건</span><b>포맷 정의</b><span>IF-10·12와 KETI·경상대 수동 등록 파일(MAP-01·03·10)의 포맷·메타데이터</span></div>
+    <div><span class="num">77건</span><b>'27 Pilot 요구사항</b><span>신규 63 · 고도화 14. '28년 이후·검토 26건 제외, 드론 대행 연계는 v0.2에서 삭제</span></div>
+    <div><span class="num">3.00</span><b>M/M (조정안)</b><span>요구사항 77건 상세, 신규 화면 15장(작업 이력 목록 추가)(드론 관리 포함), 실증 설계·운영 계획 포함</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><h2>6. 다음 협의에서 결정할 것</h2></div>
+  <ol class="decide">
+    <li><b>드론 소유 주체.</b> 드론은 신규 '드론 관리' 메뉴에서 GCS 기체 식별자로 관리하기로 했습니다(10/19). 남은 것은 기체를 법인(농협)·농민·실증 운영자 중 누구 소유로 연결할지와, 영농일지 작업차량 선택에 드론을 어떻게 보여줄지입니다.</li>
+    <li><b>허브 구조 합의.</b> KETI 맵레이어가 경상대로 직접 가지 않고 플랫폼(IF-10)을 거치도록 3개 기관과 합의합니다.</li>
+    <li><b>경로 생성 주체.</b> GCS가 경로를 만들면 IF-03에 Waypoint 업로드가 필요하고, 플랫폼이 만들면 IF-01 임무 파일에 경로가 들어갑니다.</li>
+    <li><b>파종량의 위치 태깅과 실시간 프로토콜.</b> IF-02 파종량을 1초 주기로 RTK 위치와 함께 받을 수 있는지, MQTT 브로커를 대동 커넥트 인프라에 둘 수 있는지 확인합니다.</li>
+    <li><b>실증 작업 결과 확정 절차.</b> 대행 흐름을 쓰지 않으므로, 자동 영농일지와 현장조사 값을 누가(연구원·대동 담당자) 확인·확정할지 정합니다.</li>
+    <li><b>촬영 수행 주체와 파종 후 촬영 일정.</b> 드론 정밀 분석 신청(IF-12)의 촬영을 누가 맡는지, 파종 후 촬영을 실증 프로토콜에 넣을지 정합니다.</li>
+    <li><b>위성 데이터 범위.</b> 계획서에 위성 데이터가 없습니다. 기존 위성 기본·정밀 결과를 드론 결과와 비교만 할지 정합니다.</li>
+  </ol>
+  <p class="src">근거: 연구개발계획서 v2(1·2차년도 수행 내용), 드론/파종 플랫폼 구축 관련 미팅자료('26.09.17) 7·11·12장, 개발계 관리자·농민 사이트 조회('26.10.12·10.20)</p>
+</section>
+</div>
+
+<script>
+(function(){
+  var svg=document.getElementById('seq'); if(!svg) return;
+  var lanes=[{k:'K',n:'KETI',x:110},{k:'G',n:'경상국립대',x:330},{k:'P',n:'대동 플랫폼',x:550},{k:'R',n:'락로보틱스 GCS·기체',x:770},{k:'U',n:'관리자 · 농민 · 조종사',x:990}];
+  var X={}; lanes.forEach(function(l){X[l.k]=l.x;});
+  var rows=[
+    {ph:'준비 (임무 전)'},
+    {f:'P',t:'K',m:'bt',l:'필지 경계·필지 ID (기존 데이터)',id:'IF-10'},
+    {f:'U',t:'P',m:'int',l:'농민: 드론 정밀 분석 신청 (기존 생육 진단 화면)',id:'기존 화면'},
+    {f:'P',t:'K',m:'tbd',l:'촬영 요청',id:'IF-12'},
+    {f:'K',t:'P',m:'bt',l:'사전 촬영 맵레이어·DEM (Pilot 수동 등록)',id:'IF-05'},
+    {f:'P',t:'G',m:'tbd',l:'필지·맵레이어 제공',id:'IF-10 외'},
+    {f:'G',t:'P',m:'bt',l:'처방맵·버전 (Pilot 수동 등록)',id:'IF-06'},
+    {f:'U',t:'P',m:'int',l:'처방 검토·승인, 임무 생성·기체·조종사 배정',id:'신규 화면'},
+    {f:'R',t:'P',m:'bt',l:'임무 조회 요청',id:'IF-01'},
+    {f:'P',t:'R',m:'bt',l:'임무 파일 전달',id:'IF-01'},
+    {f:'R',t:'P',m:'tbd',l:'생성 경로 업로드',id:'IF-03'},
+    {ph:'비행 중'},
+    {f:'R',t:'P',m:'rt',l:'텔레메트리 1~5초 · 파종량 1초',id:'IF-02'},
+    {f:'R',t:'P',m:'rt',l:'이벤트 즉시',id:'IF-03'},
+    {f:'P',t:'U',m:'rt',l:'드론 현황(운항 중 기체)·임무 목록 → 실시간 관제 · 이상 알림(App Push)',id:'WS'},
+    {ph:'작업 후'},
+    {f:'R',t:'P',m:'bt',l:'완료 보고 · 오프라인 로그 재전송',id:'IF-03'},
+    {self:'P',l:'완료맵·투입량·KPI 집계 + 자동 영농일지'},
+    {f:'P',t:'U',m:'int',l:'자동 영농일지 확인 · 현장조사 입력(발아율·입모율)',id:'영농일지 확장'},
+    {f:'P',t:'G',m:'bt',l:'실제 투입량·현장조사 (Pilot CSV)',id:'IF-06'},
+    {f:'K',t:'P',m:'bt',l:'파종 후 생육 맵레이어 → 드론 정밀 탭',id:'IF-05'},
+    {f:'P',t:'U',m:'bt',l:'작업 이력 목록 → 상세(완료맵) · 리포트 · KPI',id:'IF-11'}
+  ];
+  var W=1100, top=70, RH=44, PH=34, y=top, n=0, out=[], body=[];
+  var cls={rt:'a-rt',bt:'a-bt',tbd:'a-tbd',int:'a-int'}, mk={rt:'s-rt',bt:'s-bt',tbd:'s-tbd',int:'s-bt'};
+  rows.forEach(function(r){
+    if(r.ph){
+      body.push('<rect class="phase" x="0" y="'+y+'" width="'+W+'" height="'+(PH-8)+'" rx="3"/>');
+      body.push('<text class="t-col" x="12" y="'+(y+17)+'">'+r.ph+'</text>');
+      y+=PH; return;
+    }
+    n++; var ay=y+28;
+    if(r.self){
+      var sx=X[r.self];
+      body.push('<path class="self" d="M'+sx+' '+(ay-10)+' h46 v20 h-42" marker-end="url(#s-bt)"/>');
+      body.push('<text class="t" x="'+(sx+56)+'" y="'+(ay+4)+'"><tspan font-weight="600">'+n+'.</tspan> '+r.l+'</text>');
+    } else {
+      var x1=X[r.f], x2=X[r.t], dir=x2>x1?1:-1;
+      body.push('<line class="'+cls[r.m]+'" x1="'+(x1+dir*4)+'" y1="'+ay+'" x2="'+(x2-dir*6)+'" y2="'+ay+'" marker-end="url(#'+mk[r.m]+')"/>');
+      var mx=(x1+x2)/2, tc=r.m==='rt'?' t-rt':(r.m==='tbd'?' t-tbd':'');
+      body.push('<text class="t'+tc+'" x="'+mx+'" y="'+(ay-8)+'" text-anchor="middle"><tspan font-weight="600">'+n+'.</tspan> '+r.l+' <tspan class="t-mono">'+r.id+'</tspan></text>');
+    }
+    y+=RH;
+  });
+  var H=y+10;
+  out.push('<defs>'+
+   '<marker id="s-rt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="mk-rt" d="M0 0L10 5L0 10z"/></marker>'+
+   '<marker id="s-bt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="mk-bt" d="M0 0L10 5L0 10z"/></marker>'+
+   '<marker id="s-tbd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="mk-tbd" d="M0 0L10 5L0 10z"/></marker></defs>');
+  lanes.forEach(function(l){
+    out.push('<line class="life" x1="'+l.x+'" y1="46" x2="'+l.x+'" y2="'+(H-6)+'"/>');
+    out.push('<rect class="'+(l.k==='P'?'box-gw':'box')+'" x="'+(l.x-95)+'" y="8" width="190" height="38" rx="5"/>');
+    out.push('<text class="t-title" x="'+l.x+'" y="32" text-anchor="middle">'+l.n+'</text>');
+  });
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  svg.innerHTML=out.join('')+body.join('');
+})();
+</script>
+
+</body></html>

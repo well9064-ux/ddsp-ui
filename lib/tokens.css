@@ -1,0 +1,330 @@
+/* [AX2]Daedong AgTech Design System — generated from tokens.json */
+:root, [data-theme="default"] {
+  --color-red-lighter: #fdecea;
+  --color-red-light: #f2857a;
+  --color-red-main: #ec4023;
+  --color-red-dark: #c0392b;
+  --color-red-darker: #9a2e22;
+  --color-blue-lighter: #e8f0fb;
+  --color-blue-light: #2d6bc4;
+  --color-blue-main: #0070c0;
+  --color-blue-dark: #025996;
+  --color-blue-darker: #003e6a;
+  --color-green-lighter: #e6f4ec;
+  --color-green-light: #00aa52;
+  --color-green-main: #107c41;
+  --color-green-dark: #066b36;
+  --color-green-darker: #054522;
+  --color-orange-lighter: #f3eae1;
+  --color-orange-light: #ffab43;
+  --color-orange-main: #fd9009;
+  --color-orange-dark: #e76f00;
+  --color-orange-darker: #db6900;
+  --color-black-lighter: #667085;
+  --color-black-light: #475467;
+  --color-black-main: #44505c;
+  --color-black-dark: #242e40;
+  --color-black-darker: #0e1c31;
+  --color-gray-lighter: #dfe7eb;
+  --color-gray-light: #d9e1e5;
+  --color-gray-main: #d0d5dd;
+  --color-gray-dark: #c4d2e0;
+  --color-gray-darker: #bac7d5;
+  --color-white-lighter: #f4f6f9;
+  --color-white-light: #f9fafb;
+  --color-white-main: #ffffff;
+  --color-white-dark: #eeeeee;
+  --color-white-darker: #eeeeee;
+  --brand-primary: var(--color-red-main);
+  --brand-hover: var(--color-red-dark);
+  --brand-pressed: var(--color-red-darker);
+  --brand-on: var(--color-white-main);
+  --brand-tint: var(--color-red-lighter);
+  --background-primary: var(--color-white-main);
+  --background-secondary: var(--color-white-light);
+  --surface-primary: var(--color-white-main);
+  --surface-secondary: var(--color-white-lighter);
+  --surface-disabled: var(--color-white-dark);
+  --surface-table-header: var(--color-white-dark);
+  --sidebar-bg: var(--color-white-main);
+  --sidebar-bg-hover: var(--color-white-dark);
+  --sidebar-text: #667085;
+  --sidebar-text-active: var(--brand-primary);
+  --text-primary: var(--color-black-darker);
+  --text-secondary: var(--color-black-light);
+  --text-tertiary: var(--color-black-lighter);
+  --text-placeholder: var(--color-gray-main);
+  --text-inverse: var(--color-white-main);
+  --text-link: var(--color-blue-main);
+  --border-subtle: var(--color-gray-lighter);
+  --border-default: var(--color-gray-lighter);
+  --border-strong: var(--color-gray-main);
+  --border-input: var(--color-gray-main);
+  --border-focus: var(--color-red-main);
+  --border-error: var(--color-red-main);
+  --border-table-row: var(--color-white-darker);
+  --border-table-col: var(--color-white-lighter);
+  --status-error: var(--color-red-main);
+  --status-success: var(--color-green-main);
+  --status-info: var(--color-blue-main);
+  --status-warning: var(--color-orange-main);
+  --status-neutral-text: #7b8595;
+  --status-neutral-bg: #eaedf0;
+  --status-wait-text: var(--color-orange-dark);
+  --status-wait-bg: #fff3e6;
+  --status-progress-text: var(--color-blue-dark);
+  --status-progress-bg: #e8f0fb;
+  --status-success-text: var(--color-green-dark);
+  --status-success-bg: #e6f4ec;
+  --status-error-text: var(--color-red-dark);
+  --status-error-bg: #fdecea;
+  --work-till: #9a5a52;
+  --work-seeding: #107c41;
+  --work-harvest: #e76f00;
+  --work-control: #0070c0;
+  --overlay-dim: rgba(0, 0, 0, 0.6);
+  --shadow-tooltip: 0 2px 8px rgba(54, 59, 64, 0.25);
+  --shadow-toast: 0 2px 8px rgba(54, 59, 64, 0.25);
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --radius-input: 4px;
+  --radius-btn: 6px;
+  --radius-md: 12px;
+  --radius-sheet: 20px;
+  --radius-full: 999px;
+  --motion-fast: 180ms;
+  --motion-base: 240ms;
+  --motion-slow: 320ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --type-h1-spacing: -0.6px;
+  --type-h2-spacing: -0.6px;
+  --type-h3-spacing: -0.6px;
+  --type-h4-spacing: -0.2px;
+  --type-h5-spacing: -0.2px;
+  --type-h6-spacing: -0.2px;
+  --type-s1-spacing: -0.2px;
+  --type-s2-spacing: 0;
+  --type-s3-spacing: 0;
+  --type-b1-spacing: -0.2px;
+  --type-b2-spacing: -0.2px;
+  --type-b3-spacing: 0;
+  --type-c1-spacing: 0;
+  --type-c2-spacing: 0;
+  --z-base: 0;
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-drawer: 1200;
+  --z-modal: 1300;
+  --z-toast: 1400;
+  --z-tooltip: 1500;
+  --focus-ring: 0 0 0 2px #FFFFFF, 0 0 0 4px #EC4023;
+  --font-primary: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  --font-fallback: "Noto Sans KR", system-ui, sans-serif;
+  --text-type-h1: 700 40px/1.4 inherit;
+  --text-type-h1-line: 400 56px/1.4 inherit;
+  --text-type-h2: 700 32px/1.4 inherit;
+  --text-type-h2-line: 400 48px/1.4 inherit;
+  --text-type-h3: 600 24px/1.4 inherit;
+  --text-type-h3-line: 400 32px/1.4 inherit;
+  --text-type-h4: 600 20px/1.4 inherit;
+  --text-type-h4-line: 400 30px/1.4 inherit;
+  --text-type-h5: 600 18px/1.4 inherit;
+  --text-type-h5-line: 400 24px/1.4 inherit;
+  --text-type-h6: 600 16px/1.4 inherit;
+  --text-type-h6-line: 400 24px/1.4 inherit;
+  --text-type-s1: 400 20px/1.4 inherit;
+  --text-type-s1-line: 400 20px/1.4 inherit;
+  --text-type-s2: 600 14px/1.4 inherit;
+  --text-type-s2-line: 400 20px/1.4 inherit;
+  --text-type-s3: 600 12px/1.4 inherit;
+  --text-type-s3-line: 400 18px/1.4 inherit;
+  --text-type-b1: 400 18px/1.4 inherit;
+  --text-type-b1-line: 400 24px/1.4 inherit;
+  --text-type-b2: 400 16px/1.4 inherit;
+  --text-type-b2-line: 400 22px/1.4 inherit;
+  --text-type-b3: 400 14px/1.4 inherit;
+  --text-type-b3-line: 400 20px/1.4 inherit;
+  --text-type-c1: 400 12px/1.4 inherit;
+  --text-type-c1-line: 400 16px/1.4 inherit;
+  --text-type-c2: 400 10px/1.4 inherit;
+  --text-type-c2-line: 400 14px/1.4 inherit;
+}
+.type-h1 {
+  font-size: 40px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.type-h1-line {
+  font-size: 56px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-h2 {
+  font-size: 32px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.type-h2-line {
+  font-size: 48px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-h3 {
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.type-h3-line {
+  font-size: 32px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-h4 {
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.type-h4-line {
+  font-size: 30px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-h5 {
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.type-h5-line {
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-h6 {
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.type-h6-line {
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-s1 {
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-s1-line {
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-s2 {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.type-s2-line {
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-s3 {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.type-s3-line {
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-b1 {
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-b1-line {
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-b2 {
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-b2-line {
+  font-size: 22px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-b3 {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-b3-line {
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-c1 {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-c1-line {
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-c2 {
+  font-size: 10px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.type-c2-line {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
