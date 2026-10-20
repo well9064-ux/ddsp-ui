@@ -88,6 +88,12 @@ td.id{font-family:var(--f-mono);font-weight:500;white-space:nowrap}
 .scope b{font-size:14px}
 .scope span{font-size:13.5px;color:var(--muted)}
 .scope .num{font-family:var(--f-mono);font-size:22px;font-weight:500;color:var(--fg);font-variant-numeric:tabular-nums}
+h3.sub6{margin:18px 0 10px;font-size:15px;font-weight:600}
+.agency{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px;margin-bottom:6px}
+.agency>div{border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:14px 16px}
+.agency h4{margin:0 0 8px;font-size:15px;font-weight:600;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.agency h4 .t-mono{font-size:12px;font-weight:500;opacity:.7}
+.agency ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:13.5px;line-height:1.6}
 ol.decide{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:10px;max-width:85ch}
 ol.decide b{font-weight:600}
 .src{font-size:13px;color:var(--muted)}
@@ -378,17 +384,43 @@ ol.decide b{font-weight:600}
 </section>
 
 <section>
-  <div class="sec-head"><h2>6. 다음 협의에서 결정할 것</h2></div>
+  <div class="sec-head">
+    <h2>6. 다음 협의에서 결정할 것</h2>
+    <p class="lead">기관별 협의 사항과 대동 내부에서 정할 것을 나눴습니다. 락로보틱스 항목을 먼저 정해야 GCS 연동(IF-01~04) API 명세를 쓸 수 있습니다.</p>
+  </div>
+  <h3 class="sub6">6-1. 기관별 협의 사항</h3>
+  <div class="agency">
+    <div><h4>락로보틱스 <span class="t-mono">IF-01~04</span></h4><ul>
+      <li>비행 경로 생성 주체(GCS vs 플랫폼)와 파종 조건의 최종 입력 위치 — GCS가 만들면 IF-03에 Waypoint 업로드, 플랫폼이 만들면 IF-01 임무 파일에 경로 포함</li>
+      <li>텔레메트리 필드·단위·주기, 전송 방식(MQTT/WebSocket)과 브로커 위치(대동 커넥트 인프라 가능 여부)</li>
+      <li>이벤트 코드표, 파종량 위치 태깅 방식(1초 주기 RTK 위치 동반 여부)</li>
+      <li>기체 식별자·인증 토큰 발급·갱신, 통신 단절 시 재전송·중복 제거</li>
+      <li>플랫폼에서 기체로의 명령(일시정지 등) 허용 여부 — 현재 IF에 명령 경로 없음</li>
+    </ul></div>
+    <div><h4>KETI <span class="t-mono">IF-05 · IF-12</span></h4><ul>
+      <li>드론 정밀 촬영 수행 주체(KETI vs 락로보틱스)와 파종 후 촬영을 실증 프로토콜에 넣을지</li>
+      <li>맵레이어·DEM 파일 포맷, 촬영 메타데이터 항목, 좌표계</li>
+      <li>촬영 요청(IF-12) 수신·회신 방식</li>
+    </ul></div>
+    <div><h4>경상국립대 <span class="t-mono">IF-06 · IF-11</span></h4><ul>
+      <li>처방맵 규격: 구역 단위·최소 구간 면적, 3단계 값 표현, SHP/GeoJSON, 버전 규칙</li>
+      <li>현장조사 항목·조사 시점과 결과 회신 양식(CSV)</li>
+      <li>처방 반려 시 재산출 요청 경로</li>
+      <li>경제성 평가 양식·산식과 평가 수행 기관</li>
+    </ul></div>
+    <div><h4>공통 <span class="t-mono">IF-10</span></h4><ul>
+      <li>필지 정보 제공(IF-10) 방식·좌표계, 촬영·처방·임무 결과에 같은 필지 ID 부여</li>
+      <li>허브 구조: KETI 맵레이어가 경상대로 직접 가지 않고 플랫폼을 거치도록 3개 기관과 합의</li>
+      <li>일정 불일치 정리(계획서 28/24주 vs 미팅자료 20/16주)</li>
+    </ul></div>
+  </div>
+  <h3 class="sub6">6-2. 대동 내부에서 정할 것</h3>
   <ol class="decide">
-    <li><b>드론 소유 주체.</b> 드론은 신규 '드론 관리' 메뉴에서 GCS 기체 식별자로 관리하기로 했습니다(10/19). 남은 것은 기체를 법인(농협)·농민·실증 운영자 중 누구 소유로 연결할지와, 영농일지 작업차량 선택에 드론을 어떻게 보여줄지입니다.</li>
-    <li><b>허브 구조 합의.</b> KETI 맵레이어가 경상대로 직접 가지 않고 플랫폼(IF-10)을 거치도록 3개 기관과 합의합니다.</li>
-    <li><b>경로 생성 주체.</b> GCS가 경로를 만들면 IF-03에 Waypoint 업로드가 필요하고, 플랫폼이 만들면 IF-01 임무 파일에 경로가 들어갑니다.</li>
-    <li><b>파종량의 위치 태깅과 실시간 프로토콜.</b> IF-02 파종량을 1초 주기로 RTK 위치와 함께 받을 수 있는지, MQTT 브로커를 대동 커넥트 인프라에 둘 수 있는지 확인합니다.</li>
+    <li><b>드론 소유 주체.</b> 드론은 정밀농업 › 드론 관리 메뉴에서 GCS 기체 식별자로 관리합니다(v0.6). 남은 것은 기체를 법인(농협)·농민·실증 운영자 중 누구 소유로 연결할지와, 영농일지 작업차량 선택에 드론을 어떻게 보여줄지입니다.</li>
     <li><b>실증 작업 결과 확정 절차.</b> 대행 흐름을 쓰지 않으므로, 자동 영농일지와 현장조사 값을 누가(연구원·대동 담당자) 확인·확정할지 정합니다.</li>
-    <li><b>촬영 수행 주체와 파종 후 촬영 일정.</b> 드론 정밀 분석 신청(IF-12)의 촬영을 누가 맡는지, 파종 후 촬영을 실증 프로토콜에 넣을지 정합니다.</li>
     <li><b>위성 데이터 범위.</b> 계획서에 위성 데이터가 없습니다. 기존 위성 기본·정밀 결과를 드론 결과와 비교만 할지 정합니다.</li>
   </ol>
-  <p class="src">근거: 연구개발계획서 v2(1·2차년도 수행 내용), 드론/파종 플랫폼 구축 관련 미팅자료('26.09.17) 7·11·12장, 개발계 관리자·농민 사이트 조회('26.10.12·10.20)</p>
+  <p class="src">근거: 연구개발계획서 v2(기관별 연차 연구 내용), 드론/파종 플랫폼 구축 관련 미팅자료('26.09.17) 7·11·12장, 개발계 관리자·농민 사이트 조회('26.10.12·10.20), 협력기관 역할 정리(10/20)</p>
 </section>
 </div>
 
