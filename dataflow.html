@@ -104,7 +104,7 @@ ol.decide b{font-weight:600}
 <div class="wrap">
 <p style="margin:0 0 8px"><a href="index.html" style="font-size:13px;font-weight:500;text-decoration:none;color:inherit">← 설계 산출물 목차</a></p>
 <header>
-  <div class="eyebrow">드론 파종 플랫폼 · 인터페이스 설계 v0.6 · 2027 Pilot 범위 · 2026.10.20</div>
+  <div class="eyebrow">드론 파종 플랫폼 · 인터페이스 설계 v0.7 · 2027 Pilot 범위 · 2026.10.20</div>
   <h1>드론 파종 플랫폼 데이터 흐름도 <span style="display:inline-block;vertical-align:middle;font-size:13px;font-weight:700;padding:3px 12px;border-radius:999px;color:#8A4B00;background:#FFF1DC;border:1px solid #F2C98B">논의 필요 · 협의 후 확정</span></h1>
   <p class="lead">락로보틱스·KETI·경상국립대 데이터가 기존 대동 커넥트(정밀농업)와 신규 드론 모듈 사이를 어떻게 흐르는지 정리했습니다. 근거는 과제 계획서, 9/17 미팅자료, 개발계 관리자·농민 사이트 조회 결과입니다. 주기·포맷·프로토콜은 1차년도 API 명세에서 확정할 제안값입니다.</p>
 </header>
@@ -400,7 +400,7 @@ ol.decide b{font-weight:600}
   </div>
   <h3 class="sub6">5-2. 대동 내부에서 정할 것</h3>
   <ol class="decide">
-    <li><b>드론 소유 주체.</b> 드론은 정밀농업 › 드론 관리 메뉴에서 GCS 기체 식별자로 관리합니다(v0.6). 남은 것은 기체를 법인(농협)·농민·실증 운영자 중 누구 소유로 연결할지와, 영농일지 작업차량 선택에 드론을 어떻게 보여줄지입니다.</li>
+    <li><b>드론 소유 주체.</b> 드론은 정밀농업 › 드론 관리 메뉴에서 GCS 기체 식별자로 관리합니다(v0.7). 남은 것은 기체를 법인(농협)·농민·실증 운영자 중 누구 소유로 연결할지와, 영농일지 작업차량 선택에 드론을 어떻게 보여줄지입니다.</li>
     <li><b>실증 작업 결과 확정 절차.</b> 대행 흐름을 쓰지 않으므로, 자동 영농일지와 현장조사 값을 누가(연구원·대동 담당자) 확인·확정할지 정합니다.</li>
     <li><b>위성 데이터 범위.</b> 계획서에 위성 데이터가 없습니다. 기존 위성 기본·정밀 결과를 드론 결과와 비교만 할지 정합니다.</li>
   </ol>
@@ -438,11 +438,11 @@ ol.decide b{font-weight:600}
     {ph:'작업 후'},
     {f:'R',t:'P',m:'bt',l:'완료 보고 · 오프라인 로그 재전송',id:'IF-03'},
     {self:'P',l:'완료맵·투입량·KPI 집계 + 자동 영농일지'},
-    {f:'P',t:'A',m:'int',l:'자동 영농일지 확인 · 현장조사 입력(발아율·입모율)',id:'영농일지 확장'},
+    {f:'P',t:'A',m:'int',l:'자동 영농일지 확인 · 작업 전·후 사진 · 현장조사 입력(발아율·입모율)',id:'영농일지 확장'},
     {f:'P',t:'G',m:'bt',l:'실제 투입량·현장조사 (Pilot CSV)',id:'IF-06'},
     {f:'K',t:'P',m:'bt',l:'파종 후 생육 맵레이어 (촬영 비행 후 수동 등록) → 드론 정밀 탭',id:'IF-05'},
     {f:'P',t:'A',m:'bt',l:'작업 이력 목록 → 상세(완료맵) · 리포트 · KPI',id:'내보내기'},
-    {f:'P',t:'F',m:'int',l:'내 필지 작업 결과(완료맵·투입량) 확인',id:'기존 화면'}
+    {f:'P',t:'F',m:'int',l:'내 필지 작업 결과(완료맵·투입량·작업 전·후 사진) 확인',id:'기존 화면'}
   ];
   var W=1100, top=70, RH=44, PH=34, y=top, n=0, out=[], body=[];
   var cls={rt:'a-rt',bt:'a-bt',tbd:'a-tbd',int:'a-int'}, mk={rt:'s-rt',bt:'s-bt',tbd:'s-tbd',int:'s-bt'};
