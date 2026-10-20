@@ -158,8 +158,6 @@ ol.decide b{font-weight:600}
   <text class="t" x="320" y="174" text-anchor="middle">임무 파일</text>
   <text class="t-mono" x="320" y="188" text-anchor="middle">IF-01 · 요청 시</text>
 
-  <line class="a-tbd" x1="120" y1="201" x2="120" y2="228" marker-end="url(#m-tbd)"/>
-  <text class="t-mono t-tbd" x="128" y="219">센서 원본 전달(협의)</text>
   <!-- KETI -->
   <rect class="box" x="20" y="230" width="200" height="140" rx="6"/>
   <text class="t-title" x="36" y="256">KETI</text>
@@ -327,7 +325,7 @@ ol.decide b{font-weight:600}
 <section>
   <div class="sec-head">
     <h2>2. 임무 1건의 데이터 시퀀스</h2>
-    <p class="lead">사전 촬영부터 리포트까지 25단계입니다. 사람은 대동 관리자·연구원과 농가·법인(분석 신청 주체)으로 나눴고, 조종사는 락로보틱스 GCS 쪽에 둡니다. 드론은 두 번 납니다: 처방을 만들기 위한 촬영 비행(①)과, 승인된 처방대로 씨를 뿌리는 파종 비행입니다. 단계 번호 옆의 ID는 아래 인터페이스 목록과 연결됩니다.</p>
+    <p class="lead">사전 촬영부터 리포트까지 24단계입니다. 사람은 대동 관리자·연구원과 농가·법인(분석 신청 주체)으로 나눴고, 조종사는 락로보틱스 GCS 쪽에 둡니다. 드론은 두 번 납니다: 처방을 만들기 위한 촬영 비행(①)과, 승인된 처방대로 씨를 뿌리는 파종 비행입니다. 단계 번호 옆의 ID는 아래 인터페이스 목록과 연결됩니다.</p>
   </div>
   <figure>
     <div class="scroll"><svg class="dia" id="seq" role="img" aria-label="준비, 비행 중, 작업 후 세 구간에 걸친 20단계 데이터 교환 순서"></svg></div>
@@ -424,7 +422,6 @@ ol.decide b{font-weight:600}
     {f:'P',t:'K',m:'bt',l:'신청 필지의 경계·필지 ID 제공 (기존 데이터, 세 기관 공통)',id:'IF-10'},
     {f:'P',t:'R',m:'tbd',l:'촬영 요청 (촬영 수행 주체 협의)',id:'IF-12'},
     {self:'R',l:'촬영 비행 (KETI 다중센서 탑재)'},
-    {f:'R',t:'K',m:'tbd',l:'센서 원본 데이터 전달 (기관 간)',id:'협의'},
     {self:'K',l:'원본 가공 → 맵레이어(NDVI·토양수분) · DEM'},
     {f:'K',t:'P',m:'bt',l:'맵레이어·DEM 파일 → 데이터 등록 화면 수동 등록',id:'IF-05'},
     {f:'P',t:'F',m:'int',l:'드론 정밀·토양 정밀진단 탭에서 레이어 확인 (원본 파일 제외)',id:'기존 화면'},
