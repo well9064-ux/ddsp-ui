@@ -104,7 +104,7 @@ ol.decide b{font-weight:600}
 <div class="wrap">
 <p style="margin:0 0 8px"><a href="index.html" style="font-size:13px;font-weight:500;text-decoration:none;color:inherit">← 설계 산출물 목차</a></p>
 <header>
-  <div class="eyebrow">드론 파종 플랫폼 · 인터페이스 설계 v0.8 · 2027 Pilot 범위 · 2026.10.20</div>
+  <div class="eyebrow">드론 파종 플랫폼 · 인터페이스 설계 v0.9 · 2027 Pilot 범위 · 2026.10.20</div>
   <h1>드론 파종 플랫폼 데이터 흐름도 <span style="display:inline-block;vertical-align:middle;font-size:13px;font-weight:700;padding:3px 12px;border-radius:999px;color:#8A4B00;background:#FFF1DC;border:1px solid #F2C98B">논의 필요 · 협의 후 확정</span></h1>
   <p class="lead">락로보틱스·KETI·경상국립대 데이터가 기존 대동 커넥트(정밀농업)와 신규 드론 모듈 사이를 어떻게 흐르는지 정리했습니다. 근거는 과제 계획서, 9/17 미팅자료, 개발계 관리자·농민 사이트 조회 결과입니다. 주기·포맷·프로토콜은 1차년도 API 명세에서 확정할 제안값입니다.</p>
 </header>
@@ -292,7 +292,7 @@ ol.decide b{font-weight:600}
   <text class="t" x="996" y="214">[기존] 드론 정밀 분석 신청</text>
   <text class="t" x="996" y="234">레이어 보기(원본 파일 제외)</text>
   <text class="t-m" x="996" y="254">작업 결과 · 작업 전·후 사진</text>
-  <text class="t-m" x="940" y="210" text-anchor="middle">진행·결과</text>
+  <text class="t-m" x="940" y="210" text-anchor="middle">결과 SMS</text>
   <line class="a-bt" x1="902" y1="218" x2="976" y2="218" marker-end="url(#m-bt)"/>
 
   <rect class="box" x="980" y="286" width="200" height="104" rx="6"/>
@@ -328,7 +328,7 @@ ol.decide b{font-weight:600}
 <section>
   <div class="sec-head">
     <h2>2. 임무 1건의 데이터 시퀀스</h2>
-    <p class="lead">사전 촬영부터 리포트까지 24단계입니다. 사람은 대동 관리자·연구원과 농가·법인(분석 신청 주체)으로 나눴고, 조종사는 락로보틱스 GCS 쪽에 둡니다. 드론은 두 번 납니다: 처방을 만들기 위한 촬영 비행(①)과, 승인된 처방대로 씨를 뿌리는 파종 비행입니다. 단계 번호 옆의 ID는 아래 인터페이스 목록과 연결됩니다.</p>
+    <p class="lead">사전 촬영부터 리포트까지 25단계입니다. 사람은 대동 관리자·연구원과 농가·법인(분석 신청 주체)으로 나눴고, 조종사는 락로보틱스 GCS 쪽에 둡니다. 드론은 두 번 납니다: 처방을 만들기 위한 촬영 비행(①)과, 승인된 처방대로 씨를 뿌리는 파종 비행입니다. 단계 번호 옆의 ID는 아래 인터페이스 목록과 연결됩니다.</p>
   </div>
   <figure>
     <div class="scroll"><svg class="dia" id="seq" role="img" aria-label="준비, 비행 중, 작업 후 세 구간에 걸친 20단계 데이터 교환 순서"></svg></div>
@@ -406,7 +406,7 @@ ol.decide b{font-weight:600}
   </div>
   <h3 class="sub6">5-2. 대동 내부에서 정할 것</h3>
   <ol class="decide">
-    <li><b>드론 소유 주체.</b> 드론은 정밀농업 › 드론 관리 메뉴에서 GCS 기체 식별자로 관리합니다(v0.8). 남은 것은 기체를 법인(농협)·농민·실증 운영자 중 누구 소유로 연결할지와, 영농일지 작업차량 선택에 드론을 어떻게 보여줄지입니다.</li>
+    <li><b>드론 소유 주체.</b> 드론은 정밀농업 › 드론 관리 메뉴에서 GCS 기체 식별자로 관리합니다(v0.9). 남은 것은 기체를 법인(농협)·농민·실증 운영자 중 누구 소유로 연결할지와, 영농일지 작업차량 선택에 드론을 어떻게 보여줄지입니다.</li>
     <li><b>실증 작업 결과 확정 절차.</b> 대행 흐름을 쓰지 않으므로, 자동 영농일지와 현장조사 값을 누가(연구원·대동 담당자) 확인·확정할지 정합니다.</li>
     <li><b>위성 데이터 범위.</b> 계획서에 위성 데이터가 없습니다. 기존 위성 기본·정밀 결과를 드론 결과와 비교만 할지 정합니다.</li>
   </ol>
@@ -427,6 +427,7 @@ ol.decide b{font-weight:600}
     {self:'R',l:'촬영 비행 (KETI 다중센서 탑재)'},
     {self:'K',l:'원본 가공 → 맵레이어(NDVI·토양수분) · DEM'},
     {f:'K',t:'P',m:'bt',l:'맵레이어·DEM 파일 → 데이터 등록 화면 수동 등록',id:'IF-05'},
+    {f:'P',t:'F',m:'bt',l:'분석 완료 SMS 발송 (신청한 농가·법인에게 결과 등록 알림)',id:'SMS'},
     {f:'P',t:'F',m:'int',l:'드론 정밀·토양 정밀진단 탭에서 레이어 확인 (원본 파일 제외)',id:'기존 화면'},
     {ph:'준비 ② 처방 · 임무'},
     {f:'P',t:'G',m:'tbd',l:'필지·맵레이어 제공',id:'IF-10 외'},
