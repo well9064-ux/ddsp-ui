@@ -302,7 +302,7 @@ ol.decide b{font-weight:600}
   <text class="t-title" x="996" y="430">평가기관 · 연구원</text>
   <text class="t" x="996" y="454">KPI · 경제성 데이터</text>
   <text class="t-mono" x="996" y="474">CSV · GeoTIFF · SHP</text>
-  <text class="t-m" x="940" y="446" text-anchor="middle">IF-11</text>
+  <text class="t-m" x="940" y="446" text-anchor="middle">내보내기</text>
   <line class="a-bt" x1="902" y1="454" x2="976" y2="454" marker-end="url(#m-bt)"/>
 </svg>
     </div>
@@ -333,7 +333,7 @@ ol.decide b{font-weight:600}
 <section>
   <div class="sec-head">
     <h2>3. 인터페이스 목록</h2>
-    <p class="lead">ID는 기능 목록 엑셀의 IF 항목과 같습니다. 기능 목록 v0.6는 '27 Pilot 요구사항만 남겨 IF-01~04·10·12만 포함하고, 회색 행은 '28년 이후 항목입니다.</p>
+    <p class="lead">ID는 기능 목록 엑셀의 IF 항목과 같습니다. '27 Pilot에서 쓰는 인터페이스만 정리했습니다. IF-05·06은 Pilot 동안 수동 등록이고, 회색 행 IF-07은 기존 API 재사용입니다.</p>
   </div>
   <div class="tbl"><table>
     <thead><tr><th>ID</th><th>방향</th><th>데이터</th><th>포맷</th><th>Pilot('27) 방식</th><th>이후</th><th>1차년도 명세</th><th>확정할 사항</th></tr></thead>
@@ -345,10 +345,7 @@ ol.decide b{font-weight:600}
       <tr><td class="id">IF-05</td><td class="dir">KETI → 플랫폼</td><td>맵레이어(NDVI 등), DEM, 작업 이력 패킷, 필지 ID·촬영 시각 메타데이터</td><td>GeoTIFF + JSON 메타</td><td><span class="pill p-bt">수동 등록</span><br>기존 데이터 등록 화면</td><td>'28~ 게이트웨이 자동</td><td><span class="pill p-bt">파일 포맷만</span><br><span class="t-m">MAP-01·10에서 정의</span></td><td>레이어 종류·해상도·좌표계, 파종 후 촬영 시점</td></tr>
       <tr><td class="id">IF-06</td><td class="dir">경상대 ↔ 플랫폼</td><td>수신: 처방맵(구역별 파종량, 3단계, 버전) / 송신: 실제 투입량, 현장조사(발아율·토양함수율·수확량)</td><td>SHP / GeoJSON, CSV</td><td><span class="pill p-bt">수동 등록 · CSV 내보내기</span></td><td>'28~ REST</td><td><span class="pill p-bt">파일 포맷만</span><br><span class="t-m">MAP-03·10, HIS-08에서 정의</span></td><td>구역 단위, 단계 값 표기, 버전 규칙</td></tr>
       <tr class="dim"><td class="id">IF-07</td><td class="dir">플랫폼 ↔ 대동 커넥트</td><td>계정·조직, 필지, 장비(차량·모델·단말기), 이벤트 코드·App Push, 사용자 이력</td><td>기존 API</td><td>내부 호출</td><td>—</td><td><span class="pill p-bt">기존 · 제외</span></td><td>드론은 별도 '드론 관리' 메뉴로 분리(10/19 결정). 고객·조직 마스터 참조 범위만 확인</td></tr>
-      <tr class="dim"><td class="id">IF-08</td><td class="dir">플랫폼 ↔ 타 기종</td><td>DJI 등 다기종 기체 어댑터</td><td>—</td><td>없음</td><td>'28~</td><td><span class="pill p-bt">'28~ 이후</span></td><td>DJI Cloud API 연동 범위</td></tr>
-      <tr class="dim"><td class="id">IF-09</td><td class="dir">외부 → 플랫폼</td><td>기상 데이터(작업 가능 여부 판단)</td><td>—</td><td>검토</td><td>검토</td><td><span class="pill p-bt">'28~ 이후</span></td><td>외부 API 사용 가능 여부</td></tr>
       <tr><td class="id">IF-10</td><td class="dir">플랫폼 → KETI·경상대·GCS</td><td>필지 경계·필지 ID(대동 커넥트에 구현된 기존 데이터)</td><td>GeoJSON</td><td><span class="pill p-bt">요청 시 Pull</span></td><td>동일</td><td><span class="pill p-bt">포맷 정의</span></td><td>기존 필지 데이터의 외부 제공 API 유무, 좌표계</td></tr>
-      <tr class="dim"><td class="id">IF-11</td><td class="dir">플랫폼 → 평가기관</td><td>KPI(이탈률·ha/h·동시작업 수), 작업시간·투입량 등 경제성 항목</td><td>CSV / GeoTIFF / SHP</td><td>화면 내보내기</td><td>향후 API</td><td><span class="pill p-bt">'28~ 이후</span></td><td>제공 양식, 산식</td></tr>
       <tr><td class="id">IF-12</td><td class="dir">플랫폼 → 촬영 기관</td><td>드론 정밀 분석 신청 건(필지 ID·경계·희망 시기), 촬영 일정·완료 회신. 신청은 기존 생육 진단 화면에서 발생</td><td>JSON</td><td><span class="pill p-tbd">협의 필요</span><br>관리자 수동 처리 가능</td><td>API</td><td><span class="pill p-bt">포맷 정의</span></td><td>촬영 수행 주체(KETI·락로보틱스), 유료 과금과 실증 필지 처리</td></tr>
     </tbody>
   </table></div>
@@ -370,25 +367,12 @@ ol.decide b{font-weight:600}
   </div>
 </section>
 
-<section>
+ <section>
   <div class="sec-head">
-    <h2>5. 1차년도에 확정하는 범위</h2>
-    <p class="lead">예산 3,000만 원(3 M/M) 조정안 기준이고, 요구사항은 '27 Pilot에 필요한 77건만 다룹니다. 세부 공수는 기능 목록 엑셀의 '1차년도 공수(안)' 시트에 있습니다.</p>
-  </div>
-  <div class="scope">
-    <div><span class="num">4건</span><b>상세 명세</b><span>GCS 연동 IF-01~04. 필드·단위·주기·오류 코드까지 확정</span></div>
-    <div><span class="num">4건</span><b>포맷 정의</b><span>IF-10·12와 KETI·경상대 수동 등록 파일(MAP-01·03·10)의 포맷·메타데이터</span></div>
-    <div><span class="num">77건</span><b>'27 Pilot 요구사항</b><span>신규 63 · 고도화 14. '28년 이후·검토 26건 제외, 드론 대행 연계는 v0.2에서 삭제</span></div>
-    <div><span class="num">3.00</span><b>M/M (조정안)</b><span>요구사항 77건 상세, 신규 화면 15장(작업 이력 목록 추가)(드론 관리 포함), 실증 설계·운영 계획 포함</span></div>
-  </div>
-</section>
-
-<section>
-  <div class="sec-head">
-    <h2>6. 다음 협의에서 결정할 것</h2>
+    <h2>5. 다음 협의에서 결정할 것</h2>
     <p class="lead">기관별 협의 사항과 대동 내부에서 정할 것을 나눴습니다. 락로보틱스 항목을 먼저 정해야 GCS 연동(IF-01~04) API 명세를 쓸 수 있습니다.</p>
   </div>
-  <h3 class="sub6">6-1. 기관별 협의 사항</h3>
+  <h3 class="sub6">5-1. 기관별 협의 사항</h3>
   <div class="agency">
     <div><h4>락로보틱스 <span class="t-mono">IF-01~04</span></h4><ul>
       <li>비행 경로 생성 주체(GCS vs 플랫폼)와 파종 조건의 최종 입력 위치 — GCS가 만들면 IF-03에 Waypoint 업로드, 플랫폼이 만들면 IF-01 임무 파일에 경로 포함</li>
@@ -402,7 +386,7 @@ ol.decide b{font-weight:600}
       <li>맵레이어·DEM 파일 포맷, 촬영 메타데이터 항목, 좌표계</li>
       <li>촬영 요청(IF-12) 수신·회신 방식</li>
     </ul></div>
-    <div><h4>경상국립대 <span class="t-mono">IF-06 · IF-11</span></h4><ul>
+    <div><h4>경상국립대 <span class="t-mono">IF-06</span></h4><ul>
       <li>처방맵 규격: 구역 단위·최소 구간 면적, 3단계 값 표현, SHP/GeoJSON, 버전 규칙</li>
       <li>현장조사 항목·조사 시점과 결과 회신 양식(CSV)</li>
       <li>처방 반려 시 재산출 요청 경로</li>
@@ -414,7 +398,7 @@ ol.decide b{font-weight:600}
       <li>일정 불일치 정리(계획서 28/24주 vs 미팅자료 20/16주)</li>
     </ul></div>
   </div>
-  <h3 class="sub6">6-2. 대동 내부에서 정할 것</h3>
+  <h3 class="sub6">5-2. 대동 내부에서 정할 것</h3>
   <ol class="decide">
     <li><b>드론 소유 주체.</b> 드론은 정밀농업 › 드론 관리 메뉴에서 GCS 기체 식별자로 관리합니다(v0.6). 남은 것은 기체를 법인(농협)·농민·실증 운영자 중 누구 소유로 연결할지와, 영농일지 작업차량 선택에 드론을 어떻게 보여줄지입니다.</li>
     <li><b>실증 작업 결과 확정 절차.</b> 대행 흐름을 쓰지 않으므로, 자동 영농일지와 현장조사 값을 누가(연구원·대동 담당자) 확인·확정할지 정합니다.</li>
@@ -451,7 +435,7 @@ ol.decide b{font-weight:600}
     {f:'P',t:'U',m:'int',l:'자동 영농일지 확인 · 현장조사 입력(발아율·입모율)',id:'영농일지 확장'},
     {f:'P',t:'G',m:'bt',l:'실제 투입량·현장조사 (Pilot CSV)',id:'IF-06'},
     {f:'K',t:'P',m:'bt',l:'파종 후 생육 맵레이어 → 드론 정밀 탭',id:'IF-05'},
-    {f:'P',t:'U',m:'bt',l:'작업 이력 목록 → 상세(완료맵) · 리포트 · KPI',id:'IF-11'}
+    {f:'P',t:'U',m:'bt',l:'작업 이력 목록 → 상세(완료맵) · 리포트 · KPI',id:'내보내기'}
   ];
   var W=1100, top=70, RH=44, PH=34, y=top, n=0, out=[], body=[];
   var cls={rt:'a-rt',bt:'a-bt',tbd:'a-tbd',int:'a-int'}, mk={rt:'s-rt',bt:'s-bt',tbd:'s-tbd',int:'s-bt'};
