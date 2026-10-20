@@ -98,7 +98,7 @@ ol.decide b{font-weight:600}
 <div class="wrap">
 <p style="margin:0 0 8px"><a href="index.html" style="font-size:13px;font-weight:500;text-decoration:none;color:inherit">← 설계 산출물 목차</a></p>
 <header>
-  <div class="eyebrow">드론 파종 플랫폼 · 인터페이스 설계 v0.5 · 2027 Pilot 범위 · 2026.10.20</div>
+  <div class="eyebrow">드론 파종 플랫폼 · 인터페이스 설계 v0.6 · 2027 Pilot 범위 · 2026.10.20</div>
   <h1>드론 파종 플랫폼 데이터 흐름도 <span style="display:inline-block;vertical-align:middle;font-size:13px;font-weight:700;padding:3px 12px;border-radius:999px;color:#8A4B00;background:#FFF1DC;border:1px solid #F2C98B">논의 필요 · 협의 후 확정</span></h1>
   <p class="lead">락로보틱스·KETI·경상국립대 데이터가 기존 대동 커넥트(정밀농업)와 신규 드론 모듈 사이를 어떻게 흐르는지 정리했습니다. 근거는 과제 계획서, 9/17 미팅자료, 개발계 관리자·농민 사이트 조회 결과입니다. 주기·포맷·프로토콜은 1차년도 API 명세에서 확정할 제안값입니다.</p>
 </header>
@@ -110,7 +110,7 @@ ol.decide b{font-weight:600}
     <div class="point"><b>기존 대동 커넥트 위에 얹는 구조</b><span>필지·필지 ID, 고객·보유 차량, 진단 레이어, 영농일지, 이벤트 코드·App Push, 조직·이력은 이미 있습니다. 신규는 드론 모듈(수집·임무·관제·이력·자산) 하나로 모입니다.</span></div>
     <div class="point"><b>작업 결과는 자동 영농일지로 기록</b><span>드론 작업이 끝나면 텔레메트리로 영농일지의 '드론 작업 기록'을 자동 작성하고, 현장조사 값을 이어서 입력합니다. '27 실증은 연구원·조종사가 운용하므로 기존 대행 흐름(공고·매칭·승인·정산)에 연결하지 않습니다(v0.2).</span></div>
     <div class="point"><b>플랫폼이 허브</b><span>필지 경계·ID(IF-10)를 세 기관에 같은 기준으로 내주고, 처방 버전과 실제 투입량을 플랫폼에서 연결합니다. 기관끼리 직접 주고받으면 이 추적이 끊깁니다.</span></div>
-    <div class="point"><b>드론은 별도 '드론 관리' 메뉴</b><span>차량관리·차량유지관리는 농기계 전용이라 드론을 넣지 않습니다. 신규 '드론 관리' 메뉴에서 기체(GCS 기체 식별자)·파종 모듈·배터리·정비 이력을 관리하고, 고객·조직 마스터만 참조합니다. 소유 주체(법인·농민·실증 운영자)는 아직 미정입니다.</span></div>
+    <div class="point"><b>드론은 정밀농업 › '드론 관리' 메뉴</b><span>차량관리·차량유지관리는 농기계 전용이라 드론을 넣지 않습니다. 정밀농업 아래 신규 '드론 관리' 메뉴(상단 탭: 드론 현황·기체 관리·임무 관리·작업 이력)에서 기체(GCS 기체 식별자)·파종 모듈·배터리·정비 이력을 관리하고, 고객·조직 마스터만 참조합니다. 소유 주체(법인·농민·실증 운영자)는 아직 미정입니다.</span></div>
   </div>
 </section>
 
@@ -215,7 +215,7 @@ ol.decide b{font-weight:600}
   <!-- 신규 드론 모듈 -->
   <rect class="box-new" x="600" y="40" width="300" height="290" rx="6"/>
   <text class="t-title" x="616" y="62">신규 드론 모듈</text>
-  <text class="t-mono t-rt" x="884" y="62" text-anchor="end">드론 작업 관리 · 관제</text>
+  <text class="t-mono t-rt" x="884" y="62" text-anchor="end">드론 관리 · 임무 · 관제</text>
   <rect class="box-in" x="614" y="74" width="134" height="54" rx="4"/>
   <text class="t-b" x="626" y="96">수집·적재</text>
   <text class="t-m" x="626" y="114">실시간 스트림·시계열</text>
@@ -269,7 +269,7 @@ ol.decide b{font-weight:600}
   <!-- 사용자 채널 -->
   <rect class="box" x="980" y="40" width="200" height="110" rx="6"/>
   <text class="t-title" x="996" y="64">법인·대동 관리자 웹</text>
-  <text class="t t-rt" x="996" y="88">[신규] 임무(수행 중 관제)·드론 관리</text>
+  <text class="t t-rt" x="996" y="88">[신규] 드론 관리(임무·관제·이력)</text>
   <text class="t" x="996" y="108">[기존] 데이터 등록 · 필지 모니터링</text>
   <text class="t" x="996" y="128">[기존] 영농일지 · 조직 관리</text>
   <text class="t-mono" x="940" y="88" text-anchor="middle">WS</text>
@@ -327,7 +327,7 @@ ol.decide b{font-weight:600}
 <section>
   <div class="sec-head">
     <h2>3. 인터페이스 목록</h2>
-    <p class="lead">ID는 기능 목록 엑셀의 IF 항목과 같습니다. 기능 목록 v0.5는 '27 Pilot 요구사항만 남겨 IF-01~04·10·12만 포함하고, 회색 행은 '28년 이후 항목입니다.</p>
+    <p class="lead">ID는 기능 목록 엑셀의 IF 항목과 같습니다. 기능 목록 v0.6는 '27 Pilot 요구사항만 남겨 IF-01~04·10·12만 포함하고, 회색 행은 '28년 이후 항목입니다.</p>
   </div>
   <div class="tbl"><table>
     <thead><tr><th>ID</th><th>방향</th><th>데이터</th><th>포맷</th><th>Pilot('27) 방식</th><th>이후</th><th>1차년도 명세</th><th>확정할 사항</th></tr></thead>

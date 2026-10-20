@@ -29,19 +29,21 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
     </div>
 
     <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
-    <header style="height: 50px; flex-shrink: 0; display: flex; align-items: center; gap: 16px; padding: 0 20px; background: #231F20; color: #FFFFFF;">
-      <span style="font-size: 13px; font-weight: 600;">2027년 4월 12일</span>
+    <header style="height: 50px; flex-shrink: 0; display: flex; align-items: center; gap: 32px; padding: 0 24px; background: #231F20; color: #FFFFFF;">
+      <div role="tablist" aria-label="드론 관리 메뉴" style="display: flex; align-items: center; gap: 30px; font-size: 16px; font-weight: 600;">
+        <a href="Fleet.html" role="tab" aria-selected="false" style="color: #FFFFFF;">드론 현황</a>
+        <a href="Aircraft.html" role="tab" aria-selected="false" style="color: #FFFFFF;">기체 관리</a>
+        <a href="Missions.html" role="tab" aria-selected="true" style="color: #EF4122; font-weight: 700; text-decoration: underline; text-underline-offset: 6px;">임무 관리</a>
+        <a href="HistoryList.html" role="tab" aria-selected="false" style="color: #FFFFFF;">작업 이력</a>
+      </div>
       <div style="flex-grow: 1;"></div>
+      <span style="font-size: 13px; font-weight: 600;">2027년 4월 12일</span>
       <span style="font-size: 13px; font-weight: 600;">안녕하세요, 관리자 님</span>
     </header>
-    <div role="tablist" aria-label="열린 화면" style="height: 34px; flex-shrink: 0; display: flex; align-items: flex-end; gap: 2px; padding: 0 10px; background: #EEEEEE;">
-      <a href="Missions.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 22px; display: flex; align-items: center; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">임무 관리</a>
-      <a href="#" role="tab" aria-selected="true" style="height: 30px; padding: 0 22px; display: flex; align-items: center; gap: 10px; background: #F4F6F9; color: #222222; font-size: 12px; font-weight: 600;">MSN-0412-01 실시간 관제 <span aria-hidden="true" style="color: #666666;">×</span></a>
-    </div>
 
     <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 20px 24px 32px; display: flex; flex-direction: column; gap: 16px;">
 
-      <div style="font-size: 12px; color: #667085;">드론 관리 › <a href="Missions.html">임무 관리</a> › MSN-0412-01 · 실시간 관제</div>
+      <div style="font-size: 12px; color: #667085;">정밀농업 › 드론 관리 › <a href="Missions.html">임무 관리</a> › MSN-0412-01 · 실시간 관제</div>
 
       <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
         <h1 style="margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.6px;">김제 실증 A-03 · IRG 파종</h1>
