@@ -127,7 +127,7 @@ ol.decide b{font-weight:600}
   </div>
   <figure>
     <div class="scroll">
-<svg class="dia" viewBox="0 0 1200 590" role="img" aria-label="협력기관 3곳의 데이터가 신규 게이트웨이 또는 기존 데이터 등록 화면을 거쳐 신규 드론 모듈과 기존 대동 커넥트로 들어가고, 관리자 웹·농민 웹·조종사·평가기관으로 나가는 구성도">
+<svg class="dia" viewBox="0 0 1200 590" role="img" aria-label="협력기관 3곳의 데이터가 신규 게이트웨이 또는 기존 데이터 등록 화면을 거쳐 신규 드론 모듈과 기존 대동 커넥트로 들어가고, 관리자·연구원 웹, 농가·법인 웹, 조종사, 평가기관으로 나가는 구성도">
   <defs>
     <marker id="m-rt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk-rt" d="M0 0L10 5L0 10z"/></marker>
     <marker id="m-bt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk-bt" d="M0 0L10 5L0 10z"/></marker>
@@ -146,28 +146,33 @@ ol.decide b{font-weight:600}
   <text class="t" x="36" y="112">변량 파종 제어기</text>
   <text class="t" x="36" y="132">파종용 GCS</text>
   <text class="t" x="36" y="152">풍향·풍속 센서</text>
-  <text class="t-mono" x="36" y="182">RTK · MAVLink</text>
+  <text class="t t-tbd" x="36" y="172">촬영 비행(KETI 센서 탑재)</text>
+  <text class="t-mono" x="36" y="190">RTK · MAVLink</text>
 
   <text class="t t-rt" x="320" y="72" text-anchor="middle">텔레메트리·이벤트·완료</text>
   <text class="t-mono" x="320" y="86" text-anchor="middle">IF-02·03 · 실시간 1~5초</text>
   <line class="a-rt" x1="222" y1="96" x2="416" y2="96" marker-end="url(#m-rt)"/>
+  <text class="t-mono t-tbd" x="320" y="120" text-anchor="middle">촬영 요청 · IF-12(협의)</text>
+  <line class="a-tbd" x1="418" y1="128" x2="224" y2="128" marker-end="url(#m-tbd)"/>
   <line class="a-bt" x1="418" y1="156" x2="224" y2="156" marker-end="url(#m-bt)"/>
   <text class="t" x="320" y="174" text-anchor="middle">임무 파일</text>
   <text class="t-mono" x="320" y="188" text-anchor="middle">IF-01 · 요청 시</text>
 
+  <line class="a-tbd" x1="120" y1="201" x2="120" y2="228" marker-end="url(#m-tbd)"/>
+  <text class="t-mono t-tbd" x="128" y="219">센서 원본 전달(협의)</text>
   <!-- KETI -->
   <rect class="box" x="20" y="230" width="200" height="140" rx="6"/>
   <text class="t-title" x="36" y="256">KETI</text>
-  <text class="t" x="36" y="282">다중센서 모듈</text>
-  <text class="t" x="36" y="302">맵레이어(NDVI 등)</text>
-  <text class="t" x="36" y="322">DEM · 작업 이력 패킷</text>
+  <text class="t" x="36" y="282">다중센서 임무장비</text>
+  <text class="t" x="36" y="302">원본 가공 → 맵레이어</text>
+  <text class="t" x="36" y="322">(NDVI·토양수분) · DEM</text>
 
   <text class="t-mono" x="320" y="252" text-anchor="middle">'28~ 자동 수신 · IF-05</text>
   <line class="a-later" x1="222" y1="262" x2="416" y2="262" marker-end="url(#m-bt)"/>
-  <text class="t t-tbd" x="320" y="290" text-anchor="middle">필지 정보 · 촬영 요청</text>
-  <text class="t-mono t-tbd" x="320" y="302" text-anchor="middle">IF-10 · IF-12(협의)</text>
-  <line class="a-tbd" x1="418" y1="312" x2="224" y2="312" marker-end="url(#m-tbd)"/>
-  <text class="t" x="320" y="342" text-anchor="middle">맵레이어 GeoTIFF</text>
+  <text class="t" x="320" y="290" text-anchor="middle">신청 필지 경계·ID</text>
+  <text class="t-mono" x="320" y="302" text-anchor="middle">IF-10 · 요청 시</text>
+  <line class="a-bt" x1="418" y1="312" x2="224" y2="312" marker-end="url(#m-bt)"/>
+  <text class="t" x="320" y="342" text-anchor="middle">맵레이어·DEM GeoTIFF</text>
   <text class="t-mono" x="320" y="354" text-anchor="middle">Pilot 수동 등록</text>
   <line class="a-bt" x1="222" y1="362" x2="416" y2="362" marker-end="url(#m-bt)"/>
 
@@ -182,7 +187,7 @@ ol.decide b{font-weight:600}
   <text class="t-mono" x="320" y="430" text-anchor="middle">Pilot 수동 등록 → '28~ IF-06</text>
   <line class="a-bt" x1="222" y1="440" x2="416" y2="440" marker-end="url(#m-bt)"/>
   <line class="a-bt" x1="418" y1="500" x2="224" y2="500" marker-end="url(#m-bt)"/>
-  <text class="t" x="320" y="518" text-anchor="middle">실제 투입량·현장조사</text>
+  <text class="t" x="320" y="518" text-anchor="middle">필지·맵레이어 / 투입량·현장조사</text>
   <text class="t-mono" x="320" y="532" text-anchor="middle">Pilot CSV 내보내기</text>
 
   <!-- 수신 경로 -->
@@ -274,32 +279,32 @@ ol.decide b{font-weight:600}
 
   <!-- 사용자 채널 -->
   <rect class="box" x="980" y="40" width="200" height="110" rx="6"/>
-  <text class="t-title" x="996" y="64">법인·대동 관리자 웹</text>
-  <text class="t t-rt" x="996" y="88">[신규] 드론 관리(임무·관제·이력)</text>
-  <text class="t" x="996" y="108">[기존] 데이터 등록 · 필지 모니터링</text>
-  <text class="t" x="996" y="128">[기존] 영농일지 · 조직 관리</text>
+  <text class="t-title" x="996" y="64">대동 관리자·연구원 웹</text>
+  <text class="t t-rt" x="996" y="88">[신규] 정밀농업 › 드론 관리</text>
+  <text class="t" x="996" y="108">[고도화] 드론 파종 탭 · 처방 승인</text>
+  <text class="t" x="996" y="128">[고도화] 데이터 등록 · 영농일지</text>
   <text class="t-mono" x="940" y="88" text-anchor="middle">WS</text>
   <line class="a-rt" x1="902" y1="96" x2="976" y2="96" marker-end="url(#m-rt)"/>
 
   <rect class="box" x="980" y="166" width="200" height="104" rx="6"/>
-  <text class="t-title" x="996" y="190">농민 웹</text>
-  <text class="t" x="996" y="214">[기존] 필지 모니터링·드론 정밀</text>
-  <text class="t" x="996" y="234">[기존] 영농일지 확인</text>
-  <text class="t-m" x="996" y="254">분석 신청(법인도 가능) · 결과 조회</text>
+  <text class="t-title" x="996" y="190">농가 · 법인 웹</text>
+  <text class="t" x="996" y="214">[기존] 드론 정밀 분석 신청</text>
+  <text class="t" x="996" y="234">레이어 보기(원본 파일 제외)</text>
+  <text class="t-m" x="996" y="254">작업 결과 · 작업 전·후 사진</text>
   <text class="t-m" x="940" y="210" text-anchor="middle">진행·결과</text>
   <line class="a-bt" x1="902" y1="218" x2="976" y2="218" marker-end="url(#m-bt)"/>
 
   <rect class="box" x="980" y="286" width="200" height="104" rx="6"/>
-  <text class="t-title" x="996" y="310">실증 조종사 · 연구원</text>
-  <text class="t" x="996" y="334">[신규] 임무 확인 · 현장조사 입력</text>
-  <text class="t-m" x="996" y="354">[2차년도] 드론 임무·체크리스트</text>
+  <text class="t-title" x="996" y="310">현장 조종사(락로보틱스)</text>
+  <text class="t" x="996" y="334">GCS로 임무 수행</text>
+  <text class="t-m" x="996" y="354">[2차년도] 앱 드론 탭·체크리스트</text>
   <text class="t-m" x="940" y="320" text-anchor="middle">임무</text>
   <line class="a-bt" x1="902" y1="328" x2="976" y2="328" marker-end="url(#m-bt)"/>
   <line class="a-int" x1="976" y1="352" x2="904" y2="352" marker-end="url(#m-bt)"/>
-  <text class="t-m" x="940" y="370" text-anchor="middle">현장조사</text>
+  <text class="t-m" x="940" y="370" text-anchor="middle">전·후 사진</text>
 
   <rect class="box" x="980" y="406" width="200" height="90" rx="6"/>
-  <text class="t-title" x="996" y="430">평가기관 · 연구원</text>
+  <text class="t-title" x="996" y="430">평가기관(경제성)</text>
   <text class="t" x="996" y="454">KPI · 경제성 데이터</text>
   <text class="t-mono" x="996" y="474">CSV · GeoTIFF · SHP</text>
   <text class="t-m" x="940" y="446" text-anchor="middle">내보내기</text>
