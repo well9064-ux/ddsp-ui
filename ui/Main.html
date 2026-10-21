@@ -53,6 +53,8 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
         <div style="flex-grow: 1;"></div>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="tertiary">처방 원본 내려받기</x-import>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="secondary">수동 보정</x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="secondary">반려</x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="primary">처방 승인하기</x-import>
       </div>
 
       <ol aria-label="진행 단계" style="margin: 0; padding: 12px 16px; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; font-size: 14px;">
@@ -153,7 +155,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             <div style="display: flex; align-items: center; gap: 8px;">
               <h2 style="margin: 0; font-size: 16px; font-weight: 600;">구간별 처방</h2>
               <div style="flex-grow: 1;"></div>
-              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="success">v3 승인</x-import>
+              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="wait">v3 검토 대기</x-import>
             </div>
             <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
               <thead>
@@ -172,14 +174,14 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
                 <tr><td style="padding: 8px;">Z-05</td><td style="padding: 8px;">고</td><td style="padding: 8px; text-align: right;">400</td><td style="padding: 8px; text-align: right;">4.0</td></tr>
               </tbody>
             </table>
-            <div style="font-size: 12px; color: #667085;">출처 경상국립대 AI 처방 · SHP 업로드 10.14 · 수동 보정 1건</div>
+            <div style="font-size: 12px; color: #667085;">출처 경상국립대 AI 처방 · v3 등록 04.11 · 수동 보정 1건</div>
           </div>
 
           <div style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
             <h2 style="margin: 0; font-size: 16px; font-weight: 600;">처방 버전</h2>
-            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;"><span style="font-weight: 600; width: 28px;">v3</span><span style="flex-grow: 1; color: #475467;">Z-04 파종량 +0.2 보정 · 김OO</span><span style="color: #667085;">10.16</span></div>
-            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;"><span style="font-weight: 600; width: 28px;">v2</span><span style="flex-grow: 1; color: #475467;">AI 재산출 (드론 NDVI 10.12)</span><span style="color: #667085;">10.14</span></div>
-            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;"><span style="font-weight: 600; width: 28px;">v1</span><span style="flex-grow: 1; color: #475467;">최초 처방 수신</span><span style="color: #667085;">10.08</span></div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;"><span style="font-weight: 600; width: 28px;">v3</span><span style="flex-grow: 1; color: #475467;">검토 대기 · Z-04 파종량 +0.2 보정 중 · 김OO</span><span style="color: #667085;">04.11</span></div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;"><span style="font-weight: 600; width: 28px;">v2</span><span style="flex-grow: 1; color: #475467;">반려 · Z-03 최소 구간 미만</span><span style="color: #667085;">04.08</span></div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;"><span style="font-weight: 600; width: 28px;">v1</span><span style="flex-grow: 1; color: #475467;">반려 · 저지대 미반영</span><span style="color: #667085;">04.06</span></div>
           </div>
 
           <div style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
