@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>드론 정밀진단 관리 · 신청 목록 · 드론 파종 컨셉 UI</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<link rel="stylesheet" href="../lib/bundle.css">
+<style>body{margin:0;background:#FFFFFF} a{text-decoration:none}
+.dc-back{position:fixed;left:24px;bottom:24px;z-index:9999;display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 16px;border-radius:999px;background:#231F20;color:#FFFFFF;font:600 14px Pretendard,system-ui,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.22)}
+.dc-back:hover{background:#EF4122} .dc-back:focus-visible{outline:2px solid #EF4122;outline-offset:3px}</style>
+<script src="../lib/morphdom.js"></script>
+<script src="../lib/runtime.js"></script>
+<script src="../lib/components.js"></script>
+</head>
+<body>
+<div id="dc-root"></div>
+<a class="dc-back" href="../index.html" aria-label="설계 산출물 목차로 돌아가기">← 목차로</a>
+<script type="text/x-dc-template" id="dc-tpl">
+<helmet>
+<style>
+body{margin:0}
+a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
+</style>
+</helmet>
+<div style="min-height: 1000px; display: flex; background: #FFFFFF; font-family: var(--font-primary); color: #222222; font-variant-numeric: tabular-nums;">
+
+  <div style="flex: 0 0 230px; display: flex;">
+    <dc-import name="Nav" active="dronedx" hint-size="230px,1000px"></dc-import>
+  </div>
+
+  <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column;">
+    <header style="height: 50px; flex-shrink: 0; display: flex; align-items: center; gap: 16px; padding: 0 20px; background: #231F20; color: #FFFFFF;">
+      <span style="font-size: 13px; font-weight: 600;">2027년 4월 12일</span>
+      <div style="flex-grow: 1;"></div>
+      <div role="group" aria-label="보기 전환 (컨셉 확인용)" style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #A2A2A2;">
+        <span>보기</span>
+        <div style="display: flex; padding: 3px; background: #3A3A3A; border: 1px solid #575757; border-radius: 999px;">
+          <button type="button" aria-pressed="{{adminOn}}" onClick="{{pickAdmin}}" style="height: 26px; padding: 0 14px; border: 0; border-radius: 999px; background: {{adminBg}}; color: #FFFFFF; font: 700 12px var(--font-primary); cursor: pointer;">관리자</button>
+          <button type="button" aria-pressed="{{partnerOn}}" onClick="{{pickPartner}}" style="height: 26px; padding: 0 14px; border: 0; border-radius: 999px; background: {{partnerBg}}; color: #FFFFFF; font: 700 12px var(--font-primary); cursor: pointer;">협력기관</button>
+        </div>
+      </div>
+      <span style="font-size: 13px; font-weight: 600;">{{greeting}}</span>
+    </header>
+
+    <main style="flex: 1 1 auto; box-sizing: border-box; padding: 18px 16px 32px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #DDDDDD;">
+        <h1 style="margin: 0; font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px;">드론 정밀진단 관리 <span style="font-size: 10px; font-weight: 700; color: #FFFFFF; background: #025996; padding: 1px 6px; border-radius: 999px;">신규</span></h1>
+        <div style="flex-grow: 1;"></div>
+        <span style="font-size: 12px; color: #888888;">정밀농업 › 드론 정밀진단 관리 › <b style="color: #333333;">신청 목록</b></span>
+      </div>
+
+      <div role="tablist" aria-label="드론 정밀진단 관리" style="display: flex; gap: 2px; border-bottom: 2px solid #222222;">
+        <a href="#" role="tab" aria-selected="true" style="height: 34px; padding: 0 22px; display: flex; align-items: center; background: #222222; color: #FFFFFF; font-size: 13px; font-weight: 700;">신청 목록</a>
+        <a href="DroneDxData.html" role="tab" aria-selected="false" style="height: 34px; padding: 0 22px; display: flex; align-items: center; background: #EEEEEE; color: #555555; font-size: 13px; font-weight: 600;">결과 등록 · 이력</a>
+      </div>
+
+      <form role="search" aria-label="신청 검색" style="padding: 14px 16px; background: #F5F5F5; border: 1px solid #E2E2E2; display: grid; grid-template-columns: 90px 1fr; gap: 9px 10px; align-items: center; font-size: 12px;">
+        <span style="font-weight: 700;">진행 상태</span>
+        <div role="group" aria-label="진행 상태" style="display: flex;">
+          <sc-for list="{{stats}}" as="o" hint-placeholder-count="7">
+            <button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="height: 28px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; gap: 5px; background: #FFFFFF; border: {{o.border}}; color: #222222; font: {{o.font}} 12px var(--font-primary); cursor: pointer; position: relative; z-index: {{o.z}};">{{o.label}}<span style="color: #888888;">{{o.n}}</span></button>
+          </sc-for>
+        </div>
+        <span style="font-weight: 700;">신청 구분</span>
+        <div style="display: flex;"><span style="height: 28px; padding: 0 14px; display: inline-flex; align-items: center; background: #FFFFFF; border: 2px solid #222222; font-weight: 700;">전체</span><span style="height: 28px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC;">농가</span><span style="height: 28px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC;">법인</span></div>
+        <span style="font-weight: 700;">신청일</span>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="width: 140px; height: 28px; box-sizing: border-box; display: flex; align-items: center; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">2027-04-01</span>~<span style="width: 140px; height: 28px; box-sizing: border-box; display: flex; align-items: center; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">2027-04-30</span>
+          <div style="flex-grow: 1;"></div>
+          <button type="button" style="width: 80px; height: 30px; border: 0; border-radius: 3px; background: #CE2315; color: #FFFFFF; font: 700 12px var(--font-primary);">검색</button>
+        </div>
+      </form>
+
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 12px;">
+        <span>조회결과 총 {{count}}건</span>
+        <span style="color: #888888;">{{scopeNote}}</span>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+          <thead><tr style="background: #4D4D4D; color: #FFFFFF;">
+            <th scope="col" style="padding: 10px 6px; font-weight: 600;">No</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: left;">신청 번호</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600;">신청일</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600;">구분</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: left;">고객명</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: left;">농장명</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: left;">필지 주소</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: right;">면적(평)</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600;">작물</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600;">희망 시기</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600;">진행 상태</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600;">처리</th>
+          </tr></thead>
+          <tbody>
+            <sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+              <tr onClick="{{r.select}}" style="background: {{r.bg}}; border-bottom: 1px solid #E5E5E5; cursor: pointer; outline: {{r.outline}}; outline-offset: -2px;">
+                <td style="padding: 9px 6px; text-align: center;">{{r.no}}</td>
+                <td style="padding: 9px 6px; font-weight: 600; white-space: nowrap;">{{r.id}}</td>
+                <td style="padding: 9px 6px; text-align: center; white-space: nowrap;">{{r.date}}</td>
+                <td style="padding: 9px 6px; text-align: center;">{{r.kind}}</td>
+                <td style="padding: 9px 6px; white-space: nowrap;">{{r.cust}}</td>
+                <td style="padding: 9px 6px;">{{r.farm}}</td>
+                <td style="padding: 9px 6px; white-space: nowrap;">{{r.addr}}</td>
+                <td style="padding: 9px 6px; text-align: right;">{{r.area}}</td>
+                <td style="padding: 9px 6px; text-align: center;">IRG</td>
+                <td style="padding: 9px 6px; text-align: center; white-space: nowrap;">{{r.want}}</td>
+                <td style="padding: 9px 6px; text-align: center;"><span style="display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; color: {{r.stFg}}; background: {{r.stBg}};">{{r.st}}</span></td>
+                <td style="padding: 6px; text-align: center; white-space: nowrap;">
+                  <sc-for list="{{r.acts}}" as="a" hint-placeholder-count="1">
+                    <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; margin: 0 2px; border-radius: 3px; font-size: 11px; font-weight: 700; color: {{a.fg}}; background: {{a.bg}}; border: 1px solid {{a.bd}};">{{a.label}}</span>
+                  </sc-for>
+                </td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+
+      <section aria-label="선택한 신청 상세" style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px;">
+        <div style="padding: 14px 16px; border: 1px solid #E2E2E2; border-radius: 4px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; align-items: baseline; gap: 8px;"><span style="font-size: 14px; font-weight: 800;">{{sel.id}} 진행 이력</span><span style="font-size: 12px; color: #888888;">{{sel.farm}} · {{sel.cust}}</span></div>
+          <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 12px;">
+            <sc-for list="{{sel.log}}" as="l" hint-placeholder-count="6">
+              <li style="display: grid; grid-template-columns: 82px 12px 1fr auto; align-items: center; gap: 8px; color: {{l.fg}};"><span style="white-space: nowrap;">{{l.d}}</span><span style="width: 8px; height: 8px; border-radius: 999px; background: {{l.dot}};"></span><span>{{l.t}}</span><span style="color: #888888;">{{l.who}}</span></li>
+            </sc-for>
+          </ol>
+        </div>
+        <div style="padding: 14px 16px; border: 1px solid #E2E2E2; border-radius: 4px; display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
+          <span style="font-size: 14px; font-weight: 800;">필지 · 결과</span>
+          <div style="display: grid; grid-template-columns: 90px 1fr; gap: 6px 8px;">
+            <span style="color: #888888;">필지 ID</span><span>{{sel.farm}} · {{sel.area}}평</span>
+            <span style="color: #888888;">필지 경계</span><span style="display: flex; align-items: center; gap: 6px;">GeoJSON · EPSG:5186 <span style="height: 22px; padding: 0 9px; display: inline-flex; align-items: center; border: 1px solid #0070C0; border-radius: 3px; color: #0070C0; font-weight: 700;">내려받기</span></span>
+            <span style="color: #888888;">등록 결과</span><span>{{sel.result}}</span>
+          </div>
+          <sc-if value="{{isAdmin}}" hint-placeholder-val="{{true}}">
+            <div style="display: flex; gap: 6px;">
+              <a href="DroneDxData.html" style="flex: 1; height: 32px; display: flex; align-items: center; justify-content: center; border: 1px solid #CCCCCC; border-radius: 3px; color: #222222; font-weight: 700;">결과 이력 보기</a>
+              <a href="DroneDxReg.html" style="flex: 1; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 3px; background: #CE2315; color: #FFFFFF; font-weight: 700;">결과 등록</a>
+            </div>
+          </sc-if>
+          <sc-if value="{{isPartner}}" hint-placeholder-val="{{false}}">
+            <span style="color: #888888; line-height: 18px;">협력기관 계정은 '요청됨' 이후 건만 보이고, 필지 경계·맵레이어 내려받기와 비행 일정 입력만 할 수 있습니다. 1차 확인·반려는 대동 관리자가 합니다.</span>
+          </sc-if>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</script>
+<script type="text/x-dc-logic" id="dc-src">
+var ST = { '신청됨': ['#8A4B00', '#FFF1DC'], '요청됨': ['#1D4E89', '#E3EEFA'], '비행 예정': ['#5B3FA8', '#EEE8FB'], '분석 중': ['#0E6D6D', '#DDF3F3'], '완료': ['#13633A', '#DFF3E7'], '반려': ['#9B1C1C', '#FCE4E4'] };
+var STATS = ['전체', '신청됨', '요청됨', '비행 예정', '분석 중', '완료', '반려'];
+var ROWS = [
+  { id: 'DX-0412-01', date: '04-12', kind: '법인', cust: 'OO영농조합', farm: 'BR-03', addr: '보령시 천북면 신죽리 211', area: '1,480.0', want: '4월 하순', st: '신청됨',
+    log: [['04-12 08:40', '분석 신청 접수', '신청자'], ['04-12 08:40', '관리자 SMS 발송', '시스템']], result: '-' },
+  { id: 'DX-0411-02', date: '04-11', kind: '농가', cust: '박OO', farm: 'GJ-S21', addr: '김제시 부량면 옥정리 87', area: '1,205.4', want: '4월 하순', st: '요청됨',
+    log: [['04-11 13:10', '분석 신청 접수', '신청자'], ['04-11 13:10', '관리자 SMS 발송', '시스템'], ['04-11 15:02', '1차 확인 · 분석 요청', '관리자 김OO']], result: '-' },
+  { id: 'DX-0409-01', date: '04-09', kind: '법인', cust: 'OO영농조합', farm: 'GJ-S14', addr: '김제시 부량면 신용리 451', area: '1,198.2', want: '4월 중순', st: '비행 예정',
+    log: [['04-09 10:20', '분석 신청 접수', '신청자'], ['04-09 10:21', '관리자 SMS 발송', '시스템'], ['04-09 14:05', '1차 확인 · 분석 요청', '관리자 김OO'], ['04-10 09:30', '필지 경계 내려받기', '락로보틱스'], ['04-10 09:40', '비행 일정 입력 · 04-14', '락로보틱스']], result: '-' },
+  { id: 'DX-0407-01', date: '04-07', kind: '농가', cust: '신OO', farm: 'GJ-S10', addr: '김제시 부량면 신용리 447', area: '1,170.1', want: '4월 중순', st: '분석 중',
+    log: [['04-07 11:00', '분석 신청 접수', '신청자'], ['04-07 11:00', '관리자 SMS 발송', '시스템'], ['04-07 16:30', '1차 확인 · 분석 요청', '관리자 김OO'], ['04-08 09:10', '필지 경계 내려받기', '락로보틱스'], ['04-10 10:00', '센서 비행 완료', '락로보틱스'], ['04-10 10:05', '원본 가공 중', 'KETI']], result: '-' },
+  { id: 'DX-0402-01', date: '04-02', kind: '농가', cust: '신OO', farm: 'GJ-S1', addr: '김제시 부량면 신용리 439', area: '1,192.8', want: '4월 초', st: '완료',
+    log: [['04-02 09:15', '분석 신청 접수', '신청자'], ['04-02 09:15', '관리자 SMS 발송', '시스템'], ['04-02 14:20', '1차 확인 · 분석 요청', '관리자 김OO'], ['04-05 10:20', '센서 비행 완료', '락로보틱스'], ['04-06 15:00', '맵레이어 · DEM 등록', '관리자 김OO'], ['04-06 15:01', '분석 완료 SMS 발송', '시스템'], ['04-11 10:30', '파종 처방 v3 등록 (검토 대기)', '관리자 김OO']], result: '맵레이어 4건 · 처방 v3 (검토 대기)' },
+  { id: 'DX-0401-02', date: '04-01', kind: '농가', cust: '이OO', farm: 'GJ-S33', addr: '김제시 진봉면 고사리 12', area: '820.5', want: '4월 초', st: '반려',
+    log: [['04-01 17:40', '분석 신청 접수', '신청자'], ['04-01 17:40', '관리자 SMS 발송', '시스템'], ['04-02 09:30', '반려 · 실증 대상 필지 아님', '관리자 김OO']], result: '-' }
+];
+function act(label, kind) {
+  var k = { primary: ['#FFFFFF', '#CE2315', '#CE2315'], line: ['#0070C0', '#FFFFFF', '#0070C0'], plain: ['#555555', '#FFFFFF', '#CCCCCC'] }[kind];
+  return { label: label, fg: k[0], bg: k[1], bd: k[2] };
+}
+class Component extends DCLogic {
+  renderVals() {
+    var self = this;
+    var s = this.state || {};
+    var partner = s.role === 'partner';
+    var stt = s.stt || '전체';
+    var base = ROWS.filter(function (r) { return !partner || (r.st !== '신청됨' && r.st !== '반려'); });
+    var list = base.filter(function (r) { return stt === '전체' || r.st === stt; });
+    var selId = s.sel || 'DX-0402-01';
+    var sel = ROWS.filter(function (r) { return r.id === selId; })[0] || ROWS[4];
+    return {
+      isAdmin: !partner, isPartner: partner,
+      adminOn: partner ? 'false' : 'true', partnerOn: partner ? 'true' : 'false',
+      adminBg: partner ? 'transparent' : '#EF4122', partnerBg: partner ? '#EF4122' : 'transparent',
+      pickAdmin: function () { self.setState({ role: 'admin', stt: null }); },
+      pickPartner: function () { self.setState({ role: 'partner', stt: null, sel: 'DX-0402-01' }); },
+      greeting: partner ? '안녕하세요, 락로보틱스 님' : '안녕하세요, 관리자 님',
+      scopeNote: partner ? '· 협력기관 계정: 분석 요청된 건만 표시' : '· 신청이 들어오면 관리자에게 SMS가 발송됩니다',
+      stats: (partner ? STATS.filter(function (n) { return n !== '신청됨' && n !== '반려'; }) : STATS).map(function (n) {
+        var on = n === stt;
+        var cnt = n === '전체' ? base.length : base.filter(function (r) { return r.st === n; }).length;
+        return { label: n, n: String(cnt), pressed: on ? 'true' : 'false', border: on ? '2px solid #222222' : '1px solid #CCCCCC', font: on ? '700' : '400', z: on ? 2 : 1,
+          pick: function () { self.setState({ stt: n }); } };
+      }),
+      count: String(list.length),
+      rows: list.map(function (r, i) {
+        var acts;
+        if (partner) acts = r.st === '완료' ? [act('경계·맵레이어', 'line')] : (r.st === '요청됨' ? [act('경계 내려받기', 'line'), act('비행 일정', 'plain')] : [act('경계 내려받기', 'line')]);
+        else acts = r.st === '신청됨' ? [act('분석 요청', 'primary'), act('반려', 'plain')] : (r.st === '완료' || r.st === '분석 중' ? [act('결과 등록', 'line')] : [act('상세', 'plain')]);
+        return {
+          no: String(list.length - i), id: r.id, date: r.date, kind: r.kind, cust: r.cust, farm: r.farm, addr: r.addr, area: r.area, want: r.want,
+          st: r.st, stFg: ST[r.st][0], stBg: ST[r.st][1], acts: acts,
+          bg: r.id === sel.id ? '#FFF6F4' : (i % 2 ? '#FAFAFA' : '#FFFFFF'), outline: r.id === sel.id ? '2px solid #EF4122' : 'none',
+          select: function () { self.setState({ sel: r.id }); }
+        };
+      }),
+      sel: {
+        id: sel.id, farm: sel.farm, cust: sel.cust, area: sel.area, result: sel.result,
+        log: sel.log.map(function (l, i) { var last = i === sel.log.length - 1; return { d: l[0], t: l[1], who: l[2], dot: last ? '#EF4122' : '#9AA4B2', fg: last ? '#222222' : '#555555' }; })
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
