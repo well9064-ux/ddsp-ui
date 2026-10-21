@@ -6,13 +6,16 @@
 <title>필지 데이터 관리 · 목록 · 드론 파종 컨셉 UI</title>
 <link rel="stylesheet" href="../lib/tokens.css">
 <link rel="stylesheet" href="../lib/bundle.css">
-<style>body{margin:0;background:#FFFFFF} a{text-decoration:none}</style>
+<style>body{margin:0;background:#FFFFFF} a{text-decoration:none}
+.dc-back{position:fixed;left:24px;bottom:24px;z-index:9999;display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 16px;border-radius:999px;background:#231F20;color:#FFFFFF;font:600 14px Pretendard,system-ui,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.22)}
+.dc-back:hover{background:#EF4122} .dc-back:focus-visible{outline:2px solid #EF4122;outline-offset:3px}</style>
 <script src="../lib/morphdom.js"></script>
 <script src="../lib/runtime.js"></script>
 <script src="../lib/components.js"></script>
 </head>
 <body>
 <div id="dc-root"></div>
+<a class="dc-back" href="../index.html" aria-label="설계 산출물 목차로 돌아가기">← 목차로</a>
 <script type="text/x-dc-template" id="dc-tpl">
 <helmet>
 <style>
