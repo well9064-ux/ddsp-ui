@@ -43,14 +43,14 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
       <div style="display: flex; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #DDDDDD;">
         <h1 style="margin: 0; font-size: 18px; font-weight: 800;">필지 데이터 관리</h1>
         <div style="flex-grow: 1;"></div>
-        <span style="font-size: 12px; color: #888888;">정밀 농업 › <b style="color: #333333;">필지 데이터 관리</b></span>
+        <span style="font-size: 12px; color: #888888;">정밀농업 › <b style="color: #333333;">필지 데이터 관리</b></span>
       </div>
 
       <form role="search" aria-label="필지 데이터 검색" style="padding: 14px 16px; background: #F5F5F5; border: 1px solid #E2E2E2; display: grid; grid-template-columns: 90px 1fr; gap: 9px 10px; align-items: center; font-size: 12px;">
         <span style="font-weight: 700;">농장 주소</span>
         <div style="display: flex; align-items: center; gap: 40px;">
           <span style="width: 360px; height: 28px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">전북특별자치도 <span aria-hidden="true">⌄</span></span>
-          <span style="display: flex; align-items: center; gap: 40px;"><span style="font-weight: 700;">작물</span><span style="width: 360px; height: 28px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;"><span>IRG <span style="font-size: 10px; font-weight: 700; color: #FFFFFF; background: #025996; padding: 1px 6px; border-radius: 999px;">추가: IRG · 청보리</span></span><span aria-hidden="true">⌄</span></span></span>
+          <span style="display: flex; align-items: center; gap: 40px;"><span style="font-weight: 700;">작물</span><span style="width: 360px; height: 28px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;"><span>IRG</span><span aria-hidden="true">⌄</span></span></span>
         </div>
 
         <span style="font-weight: 700;">데이터 분류</span>
@@ -71,21 +71,20 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
           <div style="display: flex; flex-wrap: wrap; color: #555555; font-size: 11px;">NDVI · GNDVI · NDRE · OSAVI · LCI · 항공 (기존 유지)</div>
         </sc-if>
 
-        <sc-if value="{{showSeedSub}}" hint-placeholder-val="{{true}}">
-          <span style="font-weight: 600; color: #555555; padding-left: 8px;">┗ 처방 기관</span>
-          <div style="display: flex;">
-            <span style="height: 26px; padding: 0 12px; display: inline-flex; align-items: center; background: #FFFFFF; border: 2px solid #222222; font-size: 11px; font-weight: 700;">전체</span>
-            <span style="height: 26px; padding: 0 12px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">경상국립대학교</span>
-            <span style="height: 26px; padding: 0 12px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">수동 보정본</span>
-          </div>
-          <span style="font-weight: 600; color: #555555; padding-left: 8px;">┗ 처방 상태</span>
-          <div style="display: flex;">
-            <span style="height: 26px; padding: 0 12px; display: inline-flex; align-items: center; background: #FFFFFF; border: 2px solid #222222; font-size: 11px; font-weight: 700;">전체</span>
-            <span style="height: 26px; padding: 0 12px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">검토 대기</span>
-            <span style="height: 26px; padding: 0 12px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">승인</span>
-            <span style="height: 26px; padding: 0 12px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">반려</span>
-          </div>
-        </sc-if>
+        <span style="font-weight: 700;">제공 기관</span>
+        <div role="group" aria-label="제공 기관" style="display: flex;">
+          <sc-for list="{{orgs}}" as="o" hint-placeholder-count="4">
+            <button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="height: 28px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; gap: 5px; background: #FFFFFF; border: {{o.border}}; color: #222222; font: {{o.font}} 12px var(--font-primary); cursor: pointer; position: relative; z-index: {{o.z}};">{{o.label}}</button>
+          </sc-for>
+          <span style="margin-left: 8px; align-self: center; font-size: 10px; font-weight: 700; color: #FFFFFF; background: #025996; padding: 1px 6px; border-radius: 999px;">신규</span>
+        </div>
+        <span style="font-weight: 700;">상태</span>
+        <div role="group" aria-label="상태" style="display: flex;">
+          <sc-for list="{{stats}}" as="o" hint-placeholder-count="5">
+            <button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="height: 28px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; gap: 5px; background: #FFFFFF; border: {{o.border}}; color: #222222; font: {{o.font}} 12px var(--font-primary); cursor: pointer; position: relative; z-index: {{o.z}};">{{o.label}}</button>
+          </sc-for>
+          <span style="margin-left: 8px; align-self: center; font-size: 10px; font-weight: 700; color: #FFFFFF; background: #025996; padding: 1px 6px; border-radius: 999px;">신규</span>
+        </div>
 
         <span style="font-weight: 700;">분석일</span>
         <div style="display: flex; align-items: center; gap: 6px;">
@@ -115,32 +114,40 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
       </div>
 
       <div style="overflow-x: auto;">
-        <table style="width: 100%; min-width: 1060px; border-collapse: collapse; font-size: 13px;">
+        <table style="width: 100%; min-width: 1060px; border-collapse: collapse; font-size: 12px;">
           <thead><tr style="background: #4D4D4D; color: #FFFFFF;">
-            <th scope="col" style="padding: 10px 8px; font-weight: 600;">No</th>
-            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">데이터 분류</th>
-            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">세부 항목</th>
-            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">고객명</th>
-            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">작물</th>
-            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">농장명</th>
-            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">농장 주소</th>
-            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">파일명</th>
-            <th scope="col" style="padding: 10px 8px; font-weight: 600;">분석일시</th>
-            <th scope="col" style="padding: 10px 8px; font-weight: 600;">등록일시</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: center; white-space: nowrap;">No</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: left; white-space: nowrap;">데이터 분류</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: left; white-space: nowrap;">세부 항목</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: left; white-space: nowrap;">제공 기관 <span style="font-size: 10px; font-weight: 700; color: #FFFFFF; background: #025996; padding: 0 5px; border-radius: 999px;">신규</span></th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: center; white-space: nowrap;">버전 <span style="font-size: 10px; font-weight: 700; color: #FFFFFF; background: #025996; padding: 0 5px; border-radius: 999px;">신규</span></th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: center; white-space: nowrap;">상태 <span style="font-size: 10px; font-weight: 700; color: #FFFFFF; background: #025996; padding: 0 5px; border-radius: 999px;">신규</span></th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: left; white-space: nowrap;">고객명</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: left; white-space: nowrap;">작물</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: left; white-space: nowrap;">농장명</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: left; white-space: nowrap;">농장 주소</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: left; white-space: nowrap;">파일명</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: center; white-space: nowrap;">분석일</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: center; white-space: nowrap;">등록일</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: left; white-space: nowrap;">등록자 <span style="font-size: 10px; font-weight: 700; color: #FFFFFF; background: #025996; padding: 0 5px; border-radius: 999px;">신규</span></th>
           </tr></thead>
           <tbody>
             <sc-for list="{{rows}}" as="r" hint-placeholder-count="8">
               <tr style="background: {{r.bg}}; border-bottom: 1px solid #E5E5E5;">
-                <td style="padding: 10px 8px; text-align: center;">{{r.no}}</td>
-                <td style="padding: 10px 8px;"><span style="display: inline-flex; align-items: center; gap: 5px;">{{r.cat}}<sc-if value="{{r.isNew}}" hint-placeholder-val="{{false}}"><span style="font-size: 10px; font-weight: 700; color: #FFFFFF; background: #025996; padding: 0 5px; border-radius: 999px;">신규</span></sc-if></span></td>
-                <td style="padding: 10px 8px;">{{r.sub}}</td>
-                <td style="padding: 10px 8px;">신OO</td>
-                <td style="padding: 10px 8px;">IRG</td>
-                <td style="padding: 10px 8px;">GJ-S1</td>
-                <td style="padding: 10px 8px;">전북특별자치도 김제시 부량면 신용리 439</td>
-                <td style="padding: 10px 8px; color: #555555;">{{r.file}}</td>
-                <td style="padding: 10px 8px; text-align: center;">{{r.analyzed}}</td>
-                <td style="padding: 10px 8px; text-align: center;">{{r.registered}}</td>
+                <td style="padding: 9px 6px; text-align: center;">{{r.no}}</td>
+                <td style="padding: 9px 6px; text-align: left;"><span style="display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;">{{r.cat}}<sc-if value="{{r.isNew}}" hint-placeholder-val="{{false}}"><span style="font-size: 10px; font-weight: 700; color: #FFFFFF; background: #025996; padding: 0 5px; border-radius: 999px;">신규</span></sc-if></span></td>
+                <td style="padding: 9px 6px; text-align: left; white-space: nowrap;">{{r.sub}}</td>
+                <td style="padding: 9px 6px; text-align: left; white-space: nowrap; font-weight: 600;">{{r.org}}</td>
+                <td style="padding: 9px 6px; text-align: center;">{{r.ver}}</td>
+                <td style="padding: 9px 6px; text-align: center;"><span style="display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; color: {{r.stFg}}; background: {{r.stBg}};">{{r.st}}</span></td>
+                <td style="padding: 9px 6px; text-align: left;">신OO</td>
+                <td style="padding: 9px 6px; text-align: left;">IRG</td>
+                <td style="padding: 9px 6px; text-align: left;">GJ-S1</td>
+                <td style="padding: 9px 6px; text-align: left; white-space: nowrap;">김제시 부량면 신용리 439</td>
+                <td style="padding: 9px 6px; text-align: left; color: #555555;">{{r.file}}</td>
+                <td style="padding: 9px 6px; text-align: center; white-space: nowrap;">{{r.analyzed}}</td>
+                <td style="padding: 9px 6px; text-align: center; white-space: nowrap;">{{r.registered}}</td>
+                <td style="padding: 9px 6px; text-align: left; white-space: nowrap;">{{r.by}}</td>
               </tr>
             </sc-for>
           </tbody>
@@ -156,29 +163,43 @@ var CATS = [
   { id: 'growth', label: '생육진단' },
   { id: 'growthRx', label: '생육 처방' },
   { id: 'soil', label: '토양 분석' },
+  { id: 'soilPrecise', label: '토양 정밀진단' },
   { id: 'yield', label: '수확량 예측' },
   { id: 'seed', label: '파종 처방', isNew: true }
 ];
-var DRONE = ['전체', 'NDVI', 'GNDVI', 'NDRE', 'OSAVI', 'LCI', '항공', '열화상', '수분 스트레스', '작물 온도', '전체 표면온도'];
+var ORGS = ['전체', 'KETI', '경상국립대', '대동'];
+var STATS = ['전체', '등록 완료', '검토 대기', '승인', '반려'];
+var DRONE = ['전체', 'NDVI', 'GNDVI', 'NDRE', 'OSAVI', 'LCI', '열화상', '수분 스트레스', '작물 온도', '전체 표면온도'];
+var ST = { '등록 완료': ['#1D4E89', '#E3EEFA'], '검토 대기': ['#8A4B00', '#FFF1DC'], '승인': ['#13633A', '#DFF3E7'], '반려': ['#9B1C1C', '#FCE4E4'] };
 var ROWS = [
-  { cat: 'seed', catLabel: '파종 처방', isNew: true, sub: 'v4 · 경상국립대 · 검토 대기', file: 'GJ-S1_seed_rx_v4.zip', analyzed: '2027-04-10', registered: '2027-04-11' },
-  { cat: 'seed', catLabel: '파종 처방', isNew: true, sub: 'v3 · 수동 보정 · 승인', file: 'GJ-S1_seed_rx_v3.geojson', analyzed: '2027-04-06', registered: '2027-04-06' },
-  { cat: 'growth', catLabel: '생육진단', sub: '드론 · DEM', subNew: true, file: 'GJ-S1_DEM_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06' },
-  { cat: 'growth', catLabel: '생육진단', sub: '드론 · 토양수분', subNew: true, file: 'GJ-S1_SM_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06' },
-  { cat: 'growth', catLabel: '생육진단', sub: '드론 · NDVI', file: 'GJ-S1_NDVI_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06' },
-  { cat: 'growth', catLabel: '생육진단', sub: '드론 · 항공', file: 'GJ-S1_RGB_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06' },
-  { cat: 'seed', catLabel: '파종 처방', isNew: true, sub: 'v2 · 경상국립대 · 반려', file: 'GJ-S1_seed_rx_v2.zip', analyzed: '2027-04-03', registered: '2027-04-04' },
-  { cat: 'soil', catLabel: '토양 분석', sub: '-', file: '-', analyzed: '2027-03-28', registered: '2027-03-29' }
+  { cat: 'seed', catLabel: '파종 처방', isNew: true, sub: '구역별 파종량 (3단계)', org: '경상국립대', ver: 'v3', st: '검토 대기', file: 'GJ-S1_seed_rx_v3.zip', analyzed: '2027-04-10', registered: '2027-04-11', by: '관리자 김OO' },
+  { cat: 'soilPrecise', catLabel: '토양 정밀진단', sub: '드론 · DEM', subNew: true, org: 'KETI', ver: '-', st: '등록 완료', file: 'GJ-S1_DEM_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06', by: '관리자 김OO' },
+  { cat: 'soilPrecise', catLabel: '토양 정밀진단', sub: '드론 · 토양수분', subNew: true, org: 'KETI', ver: '-', st: '등록 완료', file: 'GJ-S1_SM_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06', by: '관리자 김OO' },
+  { cat: 'growth', catLabel: '생육진단', sub: '드론 · NDVI', org: 'KETI', ver: '-', st: '등록 완료', file: 'GJ-S1_NDVI_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06', by: '관리자 김OO' },
+  { cat: 'growth', catLabel: '생육진단', sub: '드론 · GNDVI', org: 'KETI', ver: '-', st: '등록 완료', file: 'GJ-S1_GNDVI_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06', by: '관리자 김OO' },
+  { cat: 'seed', catLabel: '파종 처방', isNew: true, sub: '구역별 파종량 (3단계)', org: '경상국립대', ver: 'v2', st: '반려', file: 'GJ-S1_seed_rx_v2.zip', analyzed: '2027-04-07', registered: '2027-04-08', by: '관리자 김OO' },
+  { cat: 'seed', catLabel: '파종 처방', isNew: true, sub: '구역별 파종량 (3단계)', org: '경상국립대', ver: 'v1', st: '반려', file: 'GJ-S1_seed_rx_v1.zip', analyzed: '2027-04-06', registered: '2027-04-06', by: '관리자 김OO' },
+  { cat: 'soil', catLabel: '토양 분석', sub: '토양 검정 (기존)', org: '대동', ver: '-', st: '등록 완료', file: 'GJ-S1_soil_20270328.xlsx', analyzed: '2027-03-28', registered: '2027-03-29', by: '관리자 김OO' }
 ];
+function chipList(self, key, list) {
+  var cur = (self.state || {})[key] || '전체';
+  return list.map(function (n) {
+    var on = n === cur;
+    return { label: n, pressed: on ? 'true' : 'false', border: on ? '2px solid #222222' : '1px solid #CCCCCC', font: on ? '700' : '400', z: on ? 2 : 1,
+      pick: function () { var o = {}; o[key] = n; self.setState(o); } };
+  });
+}
 class Component extends DCLogic {
   renderVals() {
     var self = this;
     var s = this.state || {};
-    var cur = s.cat || 'seed';
-    var list = ROWS.filter(function (r) { return cur === 'all' || r.cat === cur; });
+    var cur = s.cat || 'all';
+    var org = s.org || '전체', stt = s.stt || '전체';
+    var list = ROWS.filter(function (r) { return (cur === 'all' || r.cat === cur) && (org === '전체' || r.org === org) && (stt === '전체' || r.st === stt); });
     return {
       showGrowthSub: cur === 'growth',
-      showSeedSub: cur === 'seed',
+      orgs: chipList(self, 'org', ORGS),
+      stats: chipList(self, 'stt', STATS),
       cats: CATS.map(function (c) {
         var on = c.id === cur;
         return {
@@ -187,12 +208,13 @@ class Component extends DCLogic {
           pick: function () { self.setState({ cat: c.id }); }
         };
       }),
-      droneLayers: DRONE.map(function (n) { return { name: n, isNew: false }; }).concat([{ name: 'DEM', isNew: true }, { name: '토양수분', isNew: true }]),
+      droneLayers: DRONE.map(function (n) { return { name: n, isNew: false }; }),
       count: String(list.length),
       rows: list.map(function (r, i) {
         return {
           no: String(list.length - i), cat: r.catLabel, isNew: !!r.isNew,
           sub: r.sub + (r.subNew ? ' (신규 레이어)' : ''), file: r.file,
+          org: r.org, ver: r.ver, st: r.st, stFg: ST[r.st][0], stBg: ST[r.st][1], by: r.by,
           analyzed: r.analyzed, registered: r.registered,
           bg: i % 2 ? '#FAFAFA' : '#FFFFFF'
         };
