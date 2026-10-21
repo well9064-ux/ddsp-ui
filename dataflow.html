@@ -104,7 +104,7 @@ ol.decide b{font-weight:600}
 <div class="wrap">
 <p style="margin:0 0 8px"><a href="index.html" style="font-size:13px;font-weight:500;text-decoration:none;color:inherit">← 설계 산출물 목차</a></p>
 <header>
-  <div class="eyebrow">드론 파종 플랫폼 · 인터페이스 설계 v0.20 · 2027 Pilot 범위 · 2026.10.20</div>
+  <div class="eyebrow">드론 파종 플랫폼 · 인터페이스 설계 v0.21 · 2027 Pilot 범위 · 2026.10.20</div>
   <h1>드론 파종 플랫폼 데이터 흐름도 <span style="display:inline-block;vertical-align:middle;font-size:13px;font-weight:700;padding:3px 12px;border-radius:999px;color:#8A4B00;background:#FFF1DC;border:1px solid #F2C98B">논의 필요 · 협의 후 확정</span></h1>
   <p class="lead">락로보틱스·KETI·경상국립대 데이터가 기존 대동 커넥트(정밀농업)와 신규 드론 모듈 사이를 어떻게 흐르는지 정리했습니다. 근거는 과제 계획서, 9/17 미팅자료, 개발계 관리자·농민 사이트 조회 결과입니다. 주기·포맷·프로토콜은 1차년도 API 명세에서 확정할 제안값입니다.</p>
 </header>
@@ -112,7 +112,7 @@ ol.decide b{font-weight:600}
 <section>
   <div class="sec-head"><h2>이 흐름도의 요점</h2></div>
   <div class="points">
-    <div class="point"><b>새로 만드는 자동 연동은 GCS 한 곳</b><span>실시간 텔레메트리·이벤트(IF-01~04)만 Pilot('27)부터 자동입니다. KETI 맵레이어와 경상대 처방맵은 Pilot 동안 기존 '데이터 등록' 화면으로 수동 등록하고, 자동 수신(IF-07·08)은 '28년 이후로 전환합니다.</span></div>
+    <div class="point"><b>새로 만드는 자동 연동은 GCS 한 곳</b><span>실시간 텔레메트리·이벤트(IF-01~04)만 자동 연동입니다. KETI 맵레이어·DEM과 경상대 처방맵은 파일로 받아 기존 '데이터 등록' 화면으로 등록합니다.</span></div>
     <div class="point"><b>기존 대동 커넥트 위에 얹는 구조</b><span>필지·필지 ID, 고객·법인 정보, 진단 레이어, 영농일지, 이벤트 코드·App Push, 조직·이력은 이미 있습니다. 신규는 드론 모듈(수집·임무·관제·이력·자산) 하나로 모입니다.</span></div>
     <div class="point"><b>작업 결과는 자동 영농일지로 기록</b><span>드론 작업이 끝나면 텔레메트리로 영농일지의 '드론 작업 기록'을 자동 작성하고, 현장조사 값을 이어서 입력합니다. '27 실증은 연구원·조종사가 운용하므로 기존 대행 흐름(공고·매칭·승인·정산)에 연결하지 않습니다(v0.2).</span></div>
     <div class="point"><b>플랫폼이 허브</b><span>필지 경계·ID(IF-05)를 세 기관에 같은 기준으로 내주고, 처방 버전과 실제 투입량을 플랫폼에서 연결합니다. 기관끼리 직접 주고받으면 이 추적이 끊깁니다.</span></div>
@@ -168,13 +168,11 @@ ol.decide b{font-weight:600}
   <text class="t" x="36" y="302">원본 가공 → 맵레이어</text>
   <text class="t" x="36" y="322">(NDVI·토양수분) · DEM</text>
 
-  <text class="t-mono" x="320" y="252" text-anchor="middle">'28~ 자동 수신 · IF-07</text>
-  <line class="a-later" x1="222" y1="262" x2="416" y2="262" marker-end="url(#m-bt)"/>
   <text class="t" x="320" y="290" text-anchor="middle">신청 목록 · 필지 경계</text>
   <text class="t-mono" x="320" y="302" text-anchor="middle">기관 계정 화면 · 내려받기</text>
   <line class="a-bt" x1="418" y1="312" x2="224" y2="312" marker-end="url(#m-bt)"/>
   <text class="t" x="320" y="342" text-anchor="middle">맵레이어·DEM GeoTIFF</text>
-  <text class="t-mono" x="320" y="354" text-anchor="middle">Pilot 수동 등록</text>
+  <text class="t-mono" x="320" y="354" text-anchor="middle">파일 등록 · IF-07</text>
   <line class="a-bt" x1="222" y1="362" x2="416" y2="362" marker-end="url(#m-bt)"/>
 
   <!-- 경상국립대 -->
@@ -185,7 +183,7 @@ ol.decide b{font-weight:600}
   <text class="t" x="36" y="492">레이어 가중치 모델</text>
 
   <text class="t" x="320" y="418" text-anchor="middle">처방맵 SHP · GeoJSON</text>
-  <text class="t-mono" x="320" y="430" text-anchor="middle">Pilot 수동 등록 → '28~ IF-08</text>
+  <text class="t-mono" x="320" y="430" text-anchor="middle">파일 등록 · IF-08</text>
   <line class="a-bt" x1="222" y1="440" x2="416" y2="440" marker-end="url(#m-bt)"/>
   <line class="a-bt" x1="418" y1="500" x2="224" y2="500" marker-end="url(#m-bt)"/>
   <text class="t" x="320" y="518" text-anchor="middle">필지·맵레이어 / 투입량·현장조사</text>
@@ -199,7 +197,6 @@ ol.decide b{font-weight:600}
   <text class="t-title" x="480" y="132" text-anchor="middle">/ API</text>
   <text class="t-m" x="480" y="168" text-anchor="middle">GCS IF-01~04</text>
   <text class="t-m" x="480" y="186" text-anchor="middle">IF-05 필지 경계</text>
-  <text class="t-m" x="480" y="204" text-anchor="middle">'28~ IF-07·08</text>
   <text class="t-m" x="480" y="234" text-anchor="middle">기체 인증 · TLS</text>
   <text class="t-m" x="480" y="252" text-anchor="middle">필지 ID 매핑</text>
   <text class="t-m" x="480" y="270" text-anchor="middle">시각 동기화</text>
@@ -322,7 +319,6 @@ ol.decide b{font-weight:600}
       <span><i class="lg-rt"></i>실시간 스트림</span>
       <span><i class="lg-bt"></i>배치 · 파일</span>
       <span><i class="lg-tbd"></i>협의 필요</span>
-      <span><i class="lg-later"></i>'28년 이후</span>
       <span><i class="lg-int"></i>플랫폼 내부</span>
     </div>
     <figcaption>Pilot 기간에 자동으로 들어오는 데이터는 GCS뿐이고, KETI·경상대 파일은 기존 데이터 등록 화면을 거쳐 진단 레이어로 들어갑니다. 신규 드론 모듈은 기존 필지 ID와 레이어를 읽어 임무를 만들고, 작업 결과는 자동 영농일지(드론 작업 기록)로 남깁니다.</figcaption>
@@ -343,20 +339,20 @@ ol.decide b{font-weight:600}
 <section>
   <div class="sec-head">
     <h2>3. 인터페이스 목록</h2>
-    <p class="lead">ID는 기능 목록 엑셀의 IF 항목과 같습니다. '27 Pilot에서 쓰는 인터페이스만 정리했습니다. IF-07·08은 Pilot 동안 수동 등록이고, 회색 행 IF-09는 기존 API 재사용입니다.</p>
+    <p class="lead">ID는 기능 목록 엑셀의 IF 항목과 같습니다. '27 Pilot에서 쓰는 인터페이스만 정리했습니다. IF-07·08은 파일 등록이고, 회색 행 IF-09는 기존 API 재사용입니다.</p>
   </div>
   <div class="tbl"><table>
-    <thead><tr><th>ID</th><th>방향</th><th>데이터</th><th>포맷</th><th>Pilot('27) 방식</th><th>이후</th><th>1차년도 명세</th><th>확정할 사항</th></tr></thead>
+    <thead><tr><th>ID</th><th>방향</th><th>데이터</th><th>포맷</th><th>Pilot('27) 방식</th><th>1차년도 명세</th><th>확정할 사항</th></tr></thead>
     <tbody>
-      <tr><td class="id">IF-01</td><td class="dir">플랫폼 → GCS</td><td>임무 파일: 필지 폴리곤, 처방 구역·파종량, 파종 조건(속도·작업폭·고도), 배정 기체</td><td>JSON / KML / SHP</td><td><span class="pill p-bt">요청 시 Pull</span><br>HTTPS REST</td><td>동일</td><td><span class="pill p-deep">상세</span></td><td>경로 생성 주체, 파종 조건 최종 입력 위치</td></tr>
-      <tr><td class="id">IF-02</td><td class="dir">GCS → 플랫폼</td><td>텔레메트리: RTK 위치·고도, 속도, Roll/Pitch/Yaw, 배터리, 링크 품질, 파종량·작업폭·배출 오차, 풍향·풍속</td><td>JSON (MAVLink 변환)</td><td><span class="pill p-rt">1~5초 · 파종량 1초</span><br>MQTT 또는 WebSocket</td><td>동일</td><td><span class="pill p-deep">상세</span></td><td>필드·단위, 주기, 타임스탬프 기준, MQTT 브로커를 대동 커넥트 인프라에 둘 수 있는지</td></tr>
-      <tr><td class="id">IF-03</td><td class="dir">GCS → 플랫폼</td><td>이벤트(이륙·착륙·일시정지·이탈·저전압·두절·비상정지), 완료 요약, 생성 경로</td><td>JSON</td><td><span class="pill p-rt">발생 즉시</span> <span class="pill p-bt">임무 종료</span></td><td>동일</td><td><span class="pill p-deep">상세</span></td><td>이벤트 코드표(기존 '이상 감지 이벤트 관리' 코드 체계에 추가), 완료 요약 항목</td></tr>
-      <tr><td class="id">IF-04</td><td class="dir">GCS ↔ 플랫폼</td><td>기체 인증, 전송 암호화, 재전송·중복 제거</td><td>토큰</td><td>연결 시 · TLS</td><td>동일</td><td><span class="pill p-deep">상세</span></td><td>기체 식별자(차량 등록의 단말기 EoL 대체), 토큰 발급·갱신</td></tr>
-      <tr><td class="id">IF-05</td><td class="dir">플랫폼 → KETI·경상대·GCS</td><td>필지 경계·필지 ID(대동 커넥트에 구현된 기존 데이터)</td><td>GeoJSON</td><td><span class="pill p-bt">화면 내려받기</span><br>협력기관 계정 · GCS는 임무 파일에 포함</td><td>동일</td><td><span class="pill p-bt">포맷 정의</span></td><td>기존 필지 데이터의 외부 제공 API 유무, 좌표계</td></tr>
-      <tr><td class="id">IF-06</td><td class="dir">플랫폼 ↔ 협력기관</td><td>드론 정밀 분석 신청 건(필지 ID·경계·희망 시기), 비행 일정·완료 처리. 신청은 기존 생육 진단 화면에서 발생</td><td>화면</td><td><span class="pill p-bt">화면 처리</span><br>필지 데이터 관리 신청 목록 · 기관 계정</td><td>필요 시 API</td><td><span class="pill p-bt">화면·권한 정의</span></td><td>협력기관 계정 권한 범위, 유료 과금과 실증 필지 처리</td></tr>
-      <tr><td class="id">IF-07</td><td class="dir">KETI → 플랫폼</td><td>맵레이어(NDVI 등), DEM, 작업 이력 패킷, 필지 ID·수집 시각 메타데이터</td><td>GeoTIFF + JSON 메타</td><td><span class="pill p-bt">수동 등록</span><br>기존 데이터 등록 화면</td><td>'28~ 게이트웨이 자동</td><td><span class="pill p-bt">파일 포맷만</span><br><span class="t-m">MAP-01·10에서 정의</span></td><td>레이어 종류·해상도·좌표계, 파종 후 센서 비행 시점</td></tr>
-      <tr><td class="id">IF-08</td><td class="dir">경상대 ↔ 플랫폼</td><td>수신: 처방맵(구역별 파종량, 3단계, 버전) / 송신: 실제 투입량, 현장조사(발아율·토양함수율·수확량)</td><td>SHP / GeoJSON, CSV</td><td><span class="pill p-bt">수동 등록 · CSV 내보내기</span></td><td>'28~ REST</td><td><span class="pill p-bt">파일 포맷만</span><br><span class="t-m">MAP-03·10, HIS-08에서 정의</span></td><td>구역 단위, 단계 값 표기, 버전 규칙</td></tr>
-      <tr class="dim"><td class="id">IF-09</td><td class="dir">플랫폼 ↔ 대동 커넥트</td><td>계정·조직, 필지, 장비(차량·모델·단말기), 이벤트 코드·App Push, 사용자 이력</td><td>기존 API</td><td>내부 호출</td><td>—</td><td><span class="pill p-bt">기존 · 제외</span></td><td>드론은 별도 '드론 관리' 메뉴로 분리(10/19 결정). 고객·조직 마스터 참조 범위만 확인</td></tr>
+      <tr><td class="id">IF-01</td><td class="dir">플랫폼 → GCS</td><td>임무 파일: 필지 폴리곤, 처방 구역·파종량, 파종 조건(속도·작업폭·고도), 배정 기체</td><td>JSON / KML / SHP</td><td><span class="pill p-bt">요청 시 Pull</span><br>HTTPS REST</td><td><span class="pill p-deep">상세</span></td><td>경로 생성 주체, 파종 조건 최종 입력 위치</td></tr>
+      <tr><td class="id">IF-02</td><td class="dir">GCS → 플랫폼</td><td>텔레메트리: RTK 위치·고도, 속도, Roll/Pitch/Yaw, 배터리, 링크 품질, 파종량·작업폭·배출 오차, 풍향·풍속</td><td>JSON (MAVLink 변환)</td><td><span class="pill p-rt">1~5초 · 파종량 1초</span><br>MQTT 또는 WebSocket</td><td><span class="pill p-deep">상세</span></td><td>필드·단위, 주기, 타임스탬프 기준, MQTT 브로커를 대동 커넥트 인프라에 둘 수 있는지</td></tr>
+      <tr><td class="id">IF-03</td><td class="dir">GCS → 플랫폼</td><td>이벤트(이륙·착륙·일시정지·이탈·저전압·두절·비상정지), 완료 요약, 생성 경로</td><td>JSON</td><td><span class="pill p-rt">발생 즉시</span> <span class="pill p-bt">임무 종료</span></td><td><span class="pill p-deep">상세</span></td><td>이벤트 코드표(기존 '이상 감지 이벤트 관리' 코드 체계에 추가), 완료 요약 항목</td></tr>
+      <tr><td class="id">IF-04</td><td class="dir">GCS ↔ 플랫폼</td><td>기체 인증, 전송 암호화, 재전송·중복 제거</td><td>토큰</td><td>연결 시 · TLS</td><td><span class="pill p-deep">상세</span></td><td>기체 식별자(차량 등록의 단말기 EoL 대체), 토큰 발급·갱신</td></tr>
+      <tr><td class="id">IF-05</td><td class="dir">플랫폼 → KETI·경상대·GCS</td><td>필지 경계·필지 ID(대동 커넥트에 구현된 기존 데이터)</td><td>GeoJSON</td><td><span class="pill p-bt">화면 내려받기</span><br>협력기관 계정 · GCS는 임무 파일에 포함</td><td><span class="pill p-bt">포맷 정의</span></td><td>좌표계·파일 포맷</td></tr>
+      <tr><td class="id">IF-06</td><td class="dir">플랫폼 ↔ 협력기관</td><td>드론 정밀 분석 신청 건(필지 ID·경계·희망 시기), 비행 일정·완료 처리. 신청은 기존 생육 진단 화면에서 발생</td><td>화면</td><td><span class="pill p-bt">화면 처리</span><br>필지 데이터 관리 신청 목록 · 기관 계정</td><td><span class="pill p-bt">화면·권한 정의</span></td><td>협력기관 계정 권한 범위, 유료 과금과 실증 필지 처리</td></tr>
+      <tr><td class="id">IF-07</td><td class="dir">KETI → 플랫폼</td><td>맵레이어(NDVI 등), DEM, 작업 이력 패킷, 필지 ID·수집 시각 메타데이터</td><td>GeoTIFF + JSON 메타</td><td><span class="pill p-bt">수동 등록</span><br>기존 데이터 등록 화면</td><td><span class="pill p-bt">파일 포맷만</span><br><span class="t-m">MAP-01·07에서 정의</span></td><td>레이어 종류·해상도·좌표계, 파종 후 센서 비행 시점</td></tr>
+      <tr><td class="id">IF-08</td><td class="dir">경상대 ↔ 플랫폼</td><td>수신: 처방맵(구역별 파종량, 3단계, 버전) / 송신: 실제 투입량, 현장조사(발아율·토양함수율·수확량)</td><td>SHP / GeoJSON, CSV</td><td><span class="pill p-bt">수동 등록 · CSV 내보내기</span></td><td><span class="pill p-bt">파일 포맷만</span><br><span class="t-m">MAP-03·07, HIS-08에서 정의</span></td><td>구역 단위, 단계 값 표기, 버전 규칙</td></tr>
+      <tr class="dim"><td class="id">IF-09</td><td class="dir">플랫폼 ↔ 대동 커넥트</td><td>계정·조직, 필지, 장비(차량·모델·단말기), 이벤트 코드·App Push, 사용자 이력</td><td>기존 API</td><td>내부 호출</td><td><span class="pill p-bt">기존 · 제외</span></td><td>드론은 별도 '드론 관리' 메뉴로 분리(10/19 결정). 고객·조직 마스터 참조 범위만 확인</td></tr>
     </tbody>
   </table></div>
 </section>
@@ -409,7 +405,7 @@ ol.decide b{font-weight:600}
   </div>
   <h3 class="sub6">5-2. 대동 내부에서 정할 것</h3>
   <ol class="decide">
-    <li><b>드론 소유 주체.</b> 드론은 정밀농업 › 드론 관리 메뉴에서 GCS 기체 식별자로 관리합니다(v0.20). 남은 것은 기체를 법인(농협)·농민·실증 운영자 중 누구 소유로 연결할지와, 영농일지 작업차량 선택에 드론을 어떻게 보여줄지입니다.</li>
+    <li><b>드론 소유 주체.</b> 드론은 정밀농업 › 드론 관리 메뉴에서 GCS 기체 식별자로 관리합니다(v0.21). 남은 것은 기체를 법인(농협)·농민·실증 운영자 중 누구 소유로 연결할지와, 영농일지 작업차량 선택에 드론을 어떻게 보여줄지입니다.</li>
     <li><b>실증 작업 결과 확정 절차.</b> 대행 흐름을 쓰지 않으므로, 자동 영농일지와 현장조사 값을 누가(연구원·대동 담당자) 확인·확정할지 정합니다.</li>
     <li><b>협력기관 데이터 수령 방식과 등록 주체.</b> KETI 맵레이어·DEM과 경상국립대 처방맵을 대동이 어떻게 받을지(메일·공유 폴더 전달, 또는 분석 요청 건에 결과 제출 첨부)와, 필지 데이터 관리에 올리는 주체를 협력기관으로 할지 대동 관리자·연구원으로 할지 정합니다. 결과 등록이 신청자 SMS 발송 시점이라, 검증 후 게시하는 책임자도 함께 정합니다.</li>
     <li><b>위성 데이터 범위.</b> 계획서에 위성 데이터가 없습니다. 기존 위성 기본·정밀 결과를 드론 결과와 비교만 할지 정합니다.</li>
