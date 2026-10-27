@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=1440">
-<title>드론 정밀진단 관리 · 결과 등록 · 드론 파종 컨셉 UI</title>
+<title>정밀진단 관리 · 결과 등록 · 드론 파종 컨셉 UI</title>
 <link rel="stylesheet" href="../lib/tokens.css">
 <link rel="stylesheet" href="../lib/bundle.css">
 <style>body{margin:0;background:#FFFFFF} a{text-decoration:none}
@@ -36,7 +36,7 @@ a{color:#FFFFFF;text-decoration:none}a:hover{color:#FFD2C8}
       <span style="font-size: 13px; font-weight: 600;">안녕하세요, 관리자 님</span>
     </header>
     <div role="tablist" aria-label="열린 화면" style="height: 34px; flex-shrink: 0; display: flex; align-items: flex-end; gap: 2px; padding: 0 10px; background: #EEEEEE;">
-      <a href="DroneDxData.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 22px; display: flex; align-items: center; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">드론 정밀진단 관리</a>
+      <a href="DroneDxData.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 22px; display: flex; align-items: center; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">정밀진단 관리</a>
       <a href="#" role="tab" aria-selected="true" style="height: 30px; padding: 0 22px; display: flex; align-items: center; gap: 10px; background: #FFFFFF; color: #222222; font-size: 12px; font-weight: 600;">결과 등록 <span aria-hidden="true" style="color: #666666;">×</span></a>
     </div>
 
@@ -151,10 +151,10 @@ a{color:#FFFFFF;text-decoration:none}a:hover{color:#FFD2C8}
           <button type="button" style="flex: 1; height: 34px; border: 0; border-radius: 4px; background: #EF4122; color: #FFFFFF; font: 700 12px var(--font-primary);">등록하기</button>
         </div>
         <sc-if value="{{isSeed}}" hint-placeholder-val="{{true}}">
-          <a href="Field.html" style="font-size: 12px; color: #FF8A73; text-align: right;">등록 후 필지 모니터링 › 드론 파종에서 처방 검토 ›</a>
+          <a href="Field.html" style="font-size: 12px; color: #FF8A73; text-align: right;">등록 후 드론 파종에서 처방 검토 ›</a>
         </sc-if>
         <sc-if value="{{isDrone}}" hint-placeholder-val="{{false}}">
-          <span style="font-size: 11px; color: #A2A2A2; text-align: right;">등록하면 신청자에게 분석 완료 SMS가 발송되고, 필지 모니터링 드론 정밀 · 토양 정밀진단 탭에 표시됩니다</span>
+          <span style="font-size: 11px; color: #A2A2A2; text-align: right;">등록하면 신청자에게 분석 완료 SMS가 발송되고, 필지 모니터링(드론 정밀 · 토양 정밀진단)과 드론 파종에 표시됩니다</span>
         </sc-if>
       </form>
       <div style="position: absolute; left: 10px; bottom: 6px; font-size: 10px; font-weight: 600; color: #FFFFFF;">© NAVER Corp. · 국토지리정보원</div>

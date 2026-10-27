@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=1440">
-<title>필지 모니터링 · 드론 파종 · 드론 파종 컨셉 UI</title>
+<title>드론 정밀진단 · 드론 파종 · 드론 파종 컨셉 UI</title>
 <link rel="stylesheet" href="../lib/tokens.css">
 <link rel="stylesheet" href="../lib/bundle.css">
 <style>body{margin:0;background:#FFFFFF} a{text-decoration:none}
@@ -26,20 +26,15 @@ a{color:#FFFFFF;text-decoration:none}a:hover{color:#FFD2C8}
 <div style="height: 920px; display: flex; background: #000000; font-family: var(--font-primary); color: #FFFFFF; font-variant-numeric: tabular-nums; overflow: hidden;">
 
   <div style="flex: 0 0 230px; display: flex;">
-    <dc-import name="Nav" active="field" min-height="920px" hint-size="230px,920px"></dc-import>
+    <dc-import name="Nav" active="seeding" min-height="920px" hint-size="230px,920px"></dc-import>
   </div>
 
   <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column;">
 
     <header style="height: 50px; flex-shrink: 0; display: flex; align-items: center; gap: 32px; padding: 0 24px; background: #000000;">
-      <div role="tablist" aria-label="필지 모니터링 메뉴" style="display: flex; align-items: center; gap: 30px; font-size: 16px; font-weight: 600;">
-        <a href="#" role="tab" aria-selected="false" style="color: #FFFFFF;">대시보드</a>
-        <a href="#" role="tab" aria-selected="false" style="color: #FFFFFF;">토양 진단</a>
-        <a href="#" role="tab" aria-selected="false" style="color: #FFFFFF;">토양 정밀진단</a>
-        <a href="#" role="tab" aria-selected="false" style="color: #FFFFFF;">생육 진단</a>
-        <a href="#" role="tab" aria-selected="false" style="color: #FFFFFF;">수확량 모니터링</a>
-        <a href="#" role="tab" aria-selected="false" style="color: #FFFFFF;">수확량 예측</a>
-        <a href="#" role="tab" aria-selected="true" style="display: inline-flex; align-items: center; gap: 6px; color: #EF4122; font-weight: 700; text-decoration: underline; text-underline-offset: 6px;">드론 파종 <span style="font-size: 10px; font-weight: 700; color: #FFFFFF; background: #EF4122; padding: 1px 6px; border-radius: 999px; text-decoration: none;">NEW</span></a>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 700;">드론 파종 <span style="font-size: 10px; font-weight: 700; color: #FFFFFF; background: #EF4122; padding: 1px 6px; border-radius: 999px;">NEW</span></span>
+        <span style="font-size: 12px; color: #A2A2A2;">드론 정밀진단 › 드론 파종</span>
       </div>
       <div style="flex-grow: 1;"></div>
       <div role="group" aria-label="보기 전환 (컨셉 확인용)" style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #A2A2A2;">
@@ -288,11 +283,10 @@ a{color:#FFFFFF;text-decoration:none}a:hover{color:#FFD2C8}
         <div style="padding: 12px 0 0; background: rgba(19,19,19,0.8); border: 1px solid #A2A2A2; border-radius: 4px; display: flex; flex-direction: column; gap: 10px;">
           <div style="margin: 0 12px; height: 30px; display: flex; align-items: center; padding: 0 10px; background: #3A3A3A; border: 1px solid #575757; font-size: 13px;">GJ-S1</div>
           <div style="display: flex; flex-wrap: wrap; gap: 4px; padding: 0 12px;">
-            <span style="height: 24px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 999px; background: #333333; font-size: 11px;">전체</span>
-            <span style="height: 24px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 999px; background: #333333; font-size: 11px;">토양</span>
-            <span style="height: 24px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 999px; background: #333333; font-size: 11px;">생육</span>
-            <span style="height: 24px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 999px; background: #333333; font-size: 11px;">수확</span>
-            <span style="height: 24px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 999px; background: #FFFFFF; color: #0E1C31; font-size: 11px; font-weight: 600;">드론 파종</span>
+            <span style="height: 24px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 999px; background: #FFFFFF; color: #0E1C31; font-size: 11px; font-weight: 600;">전체</span>
+            <span style="height: 24px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 999px; background: #333333; font-size: 11px;">처방 대기</span>
+            <span style="height: 24px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 999px; background: #333333; font-size: 11px;">파종 예정</span>
+            <span style="height: 24px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 999px; background: #333333; font-size: 11px;">파종 완료</span>
           </div>
           <button type="button" onClick="{{openCard}}" aria-label="GJ-S1 필지 정보 열기" style="width: 100%; border: 0; text-align: left; color: #FFFFFF; font-family: inherit; cursor: pointer; padding: 12px 22px; background: rgba(77,77,77,0.8); display: flex; flex-direction: column; gap: 4px;">
             <div style="display: flex; gap: 4px;"><span style="padding: 1px 8px; border-radius: 22px; background: #1F5138; color: #7EE2AD; font-size: 11px;">활성</span><span style="padding: 1px 8px; border-radius: 3px; background: #4A1E16; color: #FF8A73; font-size: 11px;">{{s1Badge}}</span></div>
