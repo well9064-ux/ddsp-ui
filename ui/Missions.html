@@ -23,126 +23,167 @@ body{margin:0}
 a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 </style>
 </helmet>
-<div style="min-height: 1000px; display: flex; flex-direction: column; background: #F4F6F9; font-family: var(--font-primary); color: #0E1C31; font-variant-numeric: tabular-nums;">
+<div style="min-height: 1000px; display: flex; background: #FFFFFF; font-family: var(--font-primary); color: #222222; font-variant-numeric: tabular-nums;">
 
-  <div style="flex-grow: 1; display: flex; flex-wrap: wrap; align-items: stretch;">
+  <div style="flex: 0 0 230px; display: flex;">
+    <dc-import name="Nav" active="missions" hint-size="230px,1000px"></dc-import>
+  </div>
 
-    <div style="flex: 0 0 230px; display: flex;">
-      <dc-import name="Nav" active="missions" hint-size="230px,1000px"></dc-import>
-    </div>
-
-    <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
-    <header style="height: 50px; flex-shrink: 0; display: flex; align-items: center; gap: 32px; padding: 0 24px; background: #231F20; color: #FFFFFF;">
-      <div style="flex-grow: 1;"></div>
+  <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column;">
+    <header style="height: 50px; flex-shrink: 0; display: flex; align-items: center; gap: 16px; padding: 0 20px; background: #231F20; color: #FFFFFF;">
       <span style="font-size: 13px; font-weight: 600;">2027년 4월 12일</span>
+      <div style="flex-grow: 1;"></div>
       <span style="font-size: 13px; font-weight: 600;">안녕하세요, 관리자 님</span>
     </header>
 
-    <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 20px 24px 32px; display: flex; flex-direction: column; gap: 16px;">
-
-      <div style="font-size: 12px; color: #667085;">드론 정밀진단 › 임무 관리</div>
-
-      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
-        <h1 style="margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.6px;">임무 관리</h1>
-        <span style="font-size: 14px; color: #667085;">2027.04.12 – 04.18</span>
+    <main style="flex: 1 1 auto; box-sizing: border-box; padding: 18px 16px 32px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: center; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid #DDDDDD;">
+        <h1 style="margin: 0; font-size: 18px; font-weight: 800;">임무 관리</h1>
         <div style="flex-grow: 1;"></div>
-        <div role="group" aria-label="보기 전환" style="display: flex; gap: 4px; padding: 4px; background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px;">
-          <button type="button" aria-pressed="true" style="height: 28px; padding: 0 12px; border: 0; border-radius: 4px; background: #0E1C31; color: #FFFFFF; font: 600 13px var(--font-primary);">주간</button>
-          <button type="button" aria-pressed="false" style="height: 28px; padding: 0 12px; border: 0; border-radius: 4px; background: transparent; color: #475467; font: 400 13px var(--font-primary);">월간</button>
-          <button type="button" aria-pressed="false" style="height: 28px; padding: 0 12px; border: 0; border-radius: 4px; background: transparent; color: #475467; font: 400 13px var(--font-primary);">목록</button>
-        </div>
-        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="primary">작업 생성</x-import>
+        <span style="font-size: 12px; color: #888888;">드론 정밀진단 › <b style="color: #333333;">임무 관리</b></span>
       </div>
 
-      <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-        <span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; background: #0E1C31; color: #FFFFFF; font-size: 14px; font-weight: 600;">전체 9</span>
-        <span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DFE7EB; font-size: 14px; color: #475467;">작성 · 검토 2</span>
-        <span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DFE7EB; font-size: 14px; color: #475467;">승인 · 배정 2</span>
-        <span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DFE7EB; font-size: 14px; color: #475467;">GCS 전송 1</span>
-        <span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DFE7EB; font-size: 14px; color: #475467;">수행 중 1</span>
-        <span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DFE7EB; font-size: 14px; color: #475467;">완료 2</span>
-        <span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DFE7EB; font-size: 14px; color: #475467;">반려 · 취소 1</span>
-      </div>
-
-      <section aria-label="주간 일정" style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; overflow-x: auto;">
-        <div style="min-width: 900px; display: grid; grid-template-columns: 96px repeat(7, minmax(0, 1fr)); font-size: 12px;">
-          <div style="padding: 10px; background: #EEEEEE; font-weight: 600; color: #475467;">기체</div>
-          <div style="padding: 10px; background: #FDECEA; font-weight: 600; color: #C0392B;">04.12 월 · 오늘</div>
-          <div style="padding: 10px; background: #EEEEEE; font-weight: 600; color: #475467;">04.13 화</div>
-          <div style="padding: 10px; background: #EEEEEE; font-weight: 600; color: #475467;">04.14 수</div>
-          <div style="padding: 10px; background: #EEEEEE; font-weight: 600; color: #475467;">04.15 목</div>
-          <div style="padding: 10px; background: #EEEEEE; font-weight: 600; color: #475467;">04.16 금</div>
-          <div style="padding: 10px; background: #EEEEEE; font-weight: 600; color: #475467;">04.17 토</div>
-          <div style="padding: 10px; background: #EEEEEE; font-weight: 600; color: #475467;">04.18 일</div>
-
-          <div style="padding: 10px; font-weight: 600; border-top: 1px solid #EEEEEE;">DR-01</div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"><a href="Monitor.html" style="display: block; padding: 6px 8px; border-radius: 4px; background: #E8F0FB; color: #025996;">김제 A-03<br>09:00 수행 중</a></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"><a href="Main.html" style="display: block; padding: 6px 8px; border-radius: 4px; background: #FFF3E6; color: #E76F00;">김제 A-05<br>10:00 검토</a></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"><a href="#" style="display: block; padding: 6px 8px; border-radius: 4px; background: #EAEDF0; color: #44505C;">김제 A-07<br>09:00 승인</a></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"></div>
-
-          <div style="padding: 10px; font-weight: 600; border-top: 1px solid #EEEEEE;">DR-02</div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE; color: #667085;">정비</div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE; color: #667085;">정비</div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"><a href="#" style="display: block; padding: 6px 8px; border-radius: 4px; background: #EAEDF0; color: #44505C;">새만금 S-12<br>08:30 배정</a></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"><a href="Main.html" style="display: block; padding: 6px 8px; border-radius: 4px; background: #FFF3E6; color: #E76F00;">새만금 S-14<br>09:00 작성</a></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"></div>
-
-          <div style="padding: 10px; font-weight: 600; border-top: 1px solid #EEEEEE;">DR-03</div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"><a href="Monitor.html" style="display: block; padding: 6px 8px; border-radius: 4px; background: #E8F0FB; color: #025996;">김제 A-03<br>09:00 수행 중</a></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"><a href="#" style="display: block; padding: 6px 8px; border-radius: 4px; background: #E8F0FB; color: #025996;">보령 B-04<br>13:00 GCS 전송</a></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"></div>
-          <div style="padding: 6px; border-top: 1px solid #EEEEEE;"></div>
+      <form role="search" aria-label="임무 검색" style="padding: 14px 16px; background: #F5F5F5; border: 1px solid #E2E2E2; display: grid; grid-template-columns: 90px 1fr; gap: 9px 10px; align-items: center; font-size: 12px;">
+        <span style="font-weight: 700;">진행 상태</span>
+        <div role="group" aria-label="진행 상태" style="display: flex;">
+          <sc-for list="{{stats}}" as="o" hint-placeholder-count="7">
+            <button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="height: 28px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; gap: 5px; background: #FFFFFF; border: {{o.border}}; color: #222222; font: {{o.font}} 12px var(--font-primary); cursor: pointer; position: relative; z-index: {{o.z}};">{{o.label}}<span style="color: #888888;">{{o.n}}</span></button>
+          </sc-for>
         </div>
-      </section>
-
-      <section aria-label="임무 목록" style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-weight: 700;">기체</span>
+        <div style="display: flex;">
+          <span style="height: 28px; padding: 0 14px; display: inline-flex; align-items: center; background: #FFFFFF; border: 2px solid #222222; font-weight: 700;">전체</span>
+          <span style="height: 28px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC;">DR-01</span>
+          <span style="height: 28px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC;">DR-02</span>
+          <span style="height: 28px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC;">DR-03</span>
+        </div>
+        <span style="font-weight: 700;">일정</span>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="width: 140px; height: 28px; box-sizing: border-box; display: flex; align-items: center; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">2027-04-12</span>~<span style="width: 140px; height: 28px; box-sizing: border-box; display: flex; align-items: center; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">2027-04-18</span>
+          <span style="display: flex; margin-left: 4px;"><span style="height: 28px; padding: 0 18px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">오늘</span><span style="height: 28px; padding: 0 18px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 2px solid #222222; font-size: 11px;">1주일</span><span style="height: 28px; padding: 0 18px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">1개월</span><span style="height: 28px; padding: 0 18px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 11px;">직접입력</span></span>
+        </div>
+        <label for="ms-q" style="font-weight: 700;">검색어</label>
         <div style="display: flex; align-items: center; gap: 8px;">
-          <h2 style="margin: 0; font-size: 16px; font-weight: 600;">임무 목록</h2>
+          <input id="ms-q" placeholder="농장명 · mission_id 입력" style="width: 760px; max-width: 100%; height: 28px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CCCCCC; font: 400 12px var(--font-primary);">
           <div style="flex-grow: 1;"></div>
-          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Input" placeholder="필지 · mission_id 검색" style="width: 220px;"></x-import>
+          <button type="button" aria-label="초기화" style="width: 30px; height: 30px; border: 1px solid #CCCCCC; border-radius: 3px; background: #FFFFFF; display: flex; align-items: center; justify-content: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"></path></svg></button>
+          <button type="button" style="width: 80px; height: 30px; border: 0; border-radius: 3px; background: #CE2315; color: #FFFFFF; font: 700 12px var(--font-primary);">검색</button>
         </div>
-        <div style="overflow-x: auto;">
-          <table style="width: 100%; min-width: 880px; border-collapse: collapse; font-size: 14px;">
-            <thead>
-              <tr style="background: #EEEEEE; color: #475467;">
-                <th scope="col" style="text-align: left; padding: 10px 8px; font-weight: 600;">mission_id</th>
-                <th scope="col" style="text-align: left; padding: 10px 8px; font-weight: 600;">필지</th>
-                <th scope="col" style="text-align: left; padding: 10px 8px; font-weight: 600;">작업</th>
-                <th scope="col" style="text-align: left; padding: 10px 8px; font-weight: 600;">처방</th>
-                <th scope="col" style="text-align: left; padding: 10px 8px; font-weight: 600;">기체 · 조종사</th>
-                <th scope="col" style="text-align: left; padding: 10px 8px; font-weight: 600;">일정</th>
-                <th scope="col" style="text-align: left; padding: 10px 8px; font-weight: 600;">상태</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom: 1px solid #EEEEEE;"><td style="padding: 10px 8px;"><a href="Monitor.html">MSN-0412-01</a></td><td style="padding: 10px 8px;">김제 A-03 · 3,025평</td><td style="padding: 10px 8px;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.WorkTag" type="seeding">파종</x-import></td><td style="padding: 10px 8px;">v3 승인</td><td style="padding: 10px 8px;">DR-01, DR-03 · 박OO</td><td style="padding: 10px 8px;">04.12 09:00</td><td style="padding: 10px 8px;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="progress">수행 중</x-import></td></tr>
-              <tr style="border-bottom: 1px solid #EEEEEE;"><td style="padding: 10px 8px;"><a href="#">MSN-0412-02</a></td><td style="padding: 10px 8px;">보령 B-04 · 2,420평</td><td style="padding: 10px 8px;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.WorkTag" type="seeding">파종</x-import></td><td style="padding: 10px 8px;">v1 승인</td><td style="padding: 10px 8px;">DR-03 · 최OO</td><td style="padding: 10px 8px;">04.13 13:00</td><td style="padding: 10px 8px;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="progress">GCS 전송</x-import></td></tr>
-              <tr style="border-bottom: 1px solid #EEEEEE;"><td style="padding: 10px 8px;"><a href="Main.html">MSN-0413-01</a></td><td style="padding: 10px 8px;">김제 A-05 · 2,870평</td><td style="padding: 10px 8px;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.WorkTag" type="seeding">파종</x-import></td><td style="padding: 10px 8px;">v2 검토</td><td style="padding: 10px 8px;">DR-01 · 박OO</td><td style="padding: 10px 8px;">04.13 10:00</td><td style="padding: 10px 8px;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="wait">검토</x-import></td></tr>
-              <tr style="border-bottom: 1px solid #EEEEEE;"><td style="padding: 10px 8px;"><a href="#">MSN-0414-01</a></td><td style="padding: 10px 8px;">새만금 S-12 · 4,100평</td><td style="padding: 10px 8px;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.WorkTag" type="seeding">파종</x-import></td><td style="padding: 10px 8px;">v1 승인</td><td style="padding: 10px 8px;">DR-02 · 이OO</td><td style="padding: 10px 8px;">04.14 08:30</td><td style="padding: 10px 8px;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="neutral">배정</x-import></td></tr>
-              <tr style="border-bottom: 1px solid #EEEEEE;"><td style="padding: 10px 8px;"><a href="History.html">MSN-0409-01</a></td><td style="padding: 10px 8px;">새만금 S-11 · 3,300평</td><td style="padding: 10px 8px;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.WorkTag" type="seeding">파종</x-import></td><td style="padding: 10px 8px;">v2 승인</td><td style="padding: 10px 8px;">DR-02 · 이OO</td><td style="padding: 10px 8px;">04.09 09:00</td><td style="padding: 10px 8px;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="success">완료</x-import></td></tr>
-              <tr><td style="padding: 10px 8px;"><a href="#">MSN-0410-02</a></td><td style="padding: 10px 8px;">보령 B-03 · 1,950평</td><td style="padding: 10px 8px;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.WorkTag" type="seeding">파종</x-import></td><td style="padding: 10px 8px;">v1</td><td style="padding: 10px 8px;">-</td><td style="padding: 10px 8px;">-</td><td style="padding: 10px 8px;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="error">반려 · 처방 재요청</x-import></td></tr>
-            </tbody>
-          </table>
+      </form>
+
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 12px;">
+        <span>주간 일정</span>
+        <div style="flex-grow: 1;"></div>
+        <div role="group" aria-label="보기 전환" style="display: flex;">
+          <span style="height: 30px; padding: 0 14px; display: inline-flex; align-items: center; background: #FFFFFF; border: 2px solid #222222; font-weight: 700;">주간</span>
+          <span style="height: 30px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC;">월간</span>
+        </div>
+        <a href="Field.html" style="height: 30px; padding: 0 14px; display: inline-flex; align-items: center; border-radius: 3px; background: #CE2315; color: #FFFFFF; font-weight: 700;">작업 생성</a>
+      </div>
+
+      <section aria-label="주간 일정" style="border: 1px solid #E2E2E2; overflow-x: auto;">
+        <div style="min-width: 900px; display: grid; grid-template-columns: 90px repeat(7, minmax(0, 1fr)); font-size: 12px;">
+          <div style="padding: 9px 8px; background: #4D4D4D; color: #FFFFFF; font-weight: 600;">기체</div>
+          <sc-for list="{{days}}" as="d" hint-placeholder-count="7">
+            <div style="padding: 9px 8px; background: {{d.bg}}; color: #FFFFFF; font-weight: 600;">{{d.label}}</div>
+          </sc-for>
+          <sc-for list="{{cal}}" as="c" hint-placeholder-count="24">
+            <div style="padding: 6px; border-top: 1px solid #E5E5E5; font-weight: {{c.fw}}; color: {{c.fg}}; min-height: 44px; box-sizing: border-box;">
+              <sc-if value="{{c.has}}" hint-placeholder-val="{{false}}">
+                <a href="{{c.href}}" style="display: block; padding: 5px 7px; border-left: 3px solid {{c.bar}}; background: {{c.bg}}; color: #222222; line-height: 16px;"><b style="font-weight: 600;">{{c.farm}}</b><br><span style="color: #555555;">{{c.text}}</span></a>
+              </sc-if>
+              <sc-if value="{{c.plain}}" hint-placeholder-val="{{false}}">{{c.text}}</sc-if>
+            </div>
+          </sc-for>
         </div>
       </section>
+
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-top: 4px;">
+        <span>조회결과 총 {{count}}건</span>
+        <span style="color: #888888;">· 수행 중 임무를 누르면 실시간 관제로 이동합니다</span>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; min-width: 1060px; border-collapse: collapse; font-size: 12px;">
+          <thead><tr style="background: #4D4D4D; color: #FFFFFF;">
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">No</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">mission_id</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">농장명 · 주소</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: right;">면적(평)</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">작업</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">처방</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">기체</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">조종사</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">일정</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">상태</th>
+          </tr></thead>
+          <tbody>
+            <sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
+              <tr style="background: {{r.bg}}; border-bottom: 1px solid #E5E5E5;">
+                <td style="padding: 10px 8px; text-align: center;">{{r.no}}</td>
+                <td style="padding: 10px 8px;"><a href="{{r.href}}" style="font-weight: 600;">{{r.id}}</a></td>
+                <td style="padding: 10px 8px;"><div>{{r.farm}}</div><div style="font-size: 11px; color: #777777;">{{r.addr}}</div></td>
+                <td style="padding: 10px 8px; text-align: right;">{{r.area}}</td>
+                <td style="padding: 10px 8px; text-align: center;">파종</td>
+                <td style="padding: 10px 8px; text-align: center;">{{r.rx}}</td>
+                <td style="padding: 10px 8px; text-align: center;">{{r.drones}}</td>
+                <td style="padding: 10px 8px; text-align: center;">{{r.pilot}}</td>
+                <td style="padding: 10px 8px; text-align: center; white-space: nowrap;">{{r.when}}</td>
+                <td style="padding: 10px 8px; text-align: center;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{r.badge}}">{{r.st}}</x-import></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
     </main>
-    </div>
   </div>
 </div>
 </script>
 <script type="text/x-dc-logic" id="dc-src">
+var ROWS = [
+  { id: 'MSN-0412-01', farm: 'GJ-S1', addr: '김제시 부량면 신용리 439', area: '1,192.8', rx: 'v3', drones: 'DR-01, DR-03', pilot: '박OO', when: '04.12 09:00', st: '수행 중', badge: 'progress', href: 'Monitor.html' },
+  { id: 'MSN-0413-02', farm: 'BR-04', addr: '보령시 천북면 신죽리 230', area: '2,420.0', rx: 'v1 승인', drones: 'DR-03', pilot: '최OO', when: '04.13 13:00', st: 'GCS 전송', badge: 'progress', href: '#' },
+  { id: 'MSN-0413-01', farm: 'GJ-S21', addr: '김제시 부량면 옥정리 87', area: '1,205.4', rx: 'v2 검토', drones: 'DR-01', pilot: '박OO', when: '04.13 10:00', st: '검토', badge: 'wait', href: 'Main.html' },
+  { id: 'MSN-0414-01', farm: 'GJ-S14', addr: '김제시 부량면 신용리 451', area: '1,198.2', rx: 'v1 승인', drones: 'DR-02', pilot: '이OO', when: '04.14 08:30', st: '배정', badge: 'neutral', href: '#' },
+  { id: 'MSN-0410-01', farm: 'GJ-S10', addr: '김제시 부량면 신용리 447', area: '1,170.1', rx: 'v2 승인', drones: 'DR-01', pilot: '박OO', when: '04.10 09:00', st: '완료', badge: 'success', href: 'History.html' },
+  { id: 'MSN-0410-02', farm: 'BR-03', addr: '보령시 천북면 신죽리 211', area: '1,950.0', rx: 'v1 반려', drones: '-', pilot: '-', when: '-', st: '반려 · 처방 재요청', badge: 'error', href: '#' }
+];
+var STATS = ['전체', '작성 · 검토', '승인 · 배정', 'GCS 전송', '수행 중', '완료', '반려 · 취소'];
+var GROUP = { '검토': '작성 · 검토', '배정': '승인 · 배정', 'GCS 전송': 'GCS 전송', '수행 중': '수행 중', '완료': '완료', '반려 · 처방 재요청': '반려 · 취소' };
+var DAYS = ['04.12 월 · 오늘', '04.13 화', '04.14 수', '04.15 목', '04.16 금', '04.17 토', '04.18 일'];
+var KIND = { run: ['#0070C0', '#E8F0FB'], wait: ['#E76F00', '#FFF3E6'], ok: ['#667085', '#F2F4F7'] };
+var CAL = {
+  'DR-01': [['GJ-S1', '09:00 수행 중', 'run', 'Monitor.html'], ['GJ-S21', '10:00 검토', 'wait', 'Main.html'], null, ['GJ-S25', '09:00 승인', 'ok', '#'], null, null, null],
+  'DR-02': ['정비', '정비', ['GJ-S14', '08:30 배정', 'ok', '#'], null, ['GJ-S27', '09:00 작성', 'wait', 'Main.html'], null, null],
+  'DR-03': [['GJ-S1', '09:00 수행 중', 'run', 'Monitor.html'], ['BR-04', '13:00 GCS 전송', 'run', '#'], null, null, null, null, null]
+};
 class Component extends DCLogic {
   renderVals() {
-    return {};
+    var self = this;
+    var s = this.state || {};
+    var stt = s.stt || '전체';
+    var list = ROWS.filter(function (r) { return stt === '전체' || GROUP[r.st] === stt; });
+    var cal = [];
+    Object.keys(CAL).forEach(function (k) {
+      cal.push({ has: false, plain: true, text: k, fw: 700, fg: '#222222' });
+      CAL[k].forEach(function (c) {
+        if (!c) cal.push({ has: false, plain: false, fw: 400, fg: '#222222' });
+        else if (typeof c === 'string') cal.push({ has: false, plain: true, text: c, fw: 400, fg: '#888888' });
+        else cal.push({ has: true, plain: false, farm: c[0], text: c[1], bar: KIND[c[2]][0], bg: KIND[c[2]][1], href: c[3], fw: 400, fg: '#222222' });
+      });
+    });
+    return {
+      stats: STATS.map(function (n) {
+        var on = n === stt;
+        var cnt = n === '전체' ? 9 : { '작성 · 검토': 2, '승인 · 배정': 2, 'GCS 전송': 1, '수행 중': 1, '완료': 2, '반려 · 취소': 1 }[n];
+        return { label: n, n: String(cnt), pressed: on ? 'true' : 'false', border: on ? '2px solid #222222' : '1px solid #CCCCCC', font: on ? '700' : '400', z: on ? 2 : 1,
+          pick: function () { self.setState({ stt: n }); } };
+      }),
+      days: DAYS.map(function (d, i) { return { label: d, bg: i === 0 ? '#CE2315' : '#4D4D4D' }; }),
+      cal: cal,
+      count: String(list.length),
+      rows: list.map(function (r, i) { var o = Object.assign({}, r); o.no = String(list.length - i); o.bg = i % 2 ? '#FAFAFA' : '#FFFFFF'; return o; })
+    };
   }
 }
 </script>
