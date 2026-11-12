@@ -46,9 +46,9 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
       <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch;">
         <div style="flex: 1 1 480px; min-width: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;">
           <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="보유 기체" value="3" unit="대"></x-import>
-          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="작업중" value="2" unit="대" accent="#0070C0"></x-import>
-          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="가용 · 대기" value="0" unit="대" accent="#107C41"></x-import>
-          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="정비 중" value="1" unit="대" accent="#E76F00"></x-import>
+          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="작업 중" value="1" unit="대" accent="#0070C0"></x-import>
+          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="미작업" value="2" unit="대"></x-import>
+          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="이번 달 작업 필지" value="6" unit="필지"></x-import>
           <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="누적 작업면적" value="18,150" unit="평"></x-import>
           <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="누적 비행시간" value="6.2" unit="시간"></x-import>
         </div>
@@ -68,24 +68,18 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 
       <section aria-label="지금 운항 중인 기체" style="display: flex; flex-direction: column; gap: 8px;">
         <div style="display: flex; align-items: center; gap: 8px;">
-          <h2 style="margin: 0; font-size: 15px; font-weight: 700;">지금 운항 중</h2>
-          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #066B36;"><span style="width: 8px; height: 8px; border-radius: 999px; background: #107C41;"></span>GCS 실시간 수신 중</span>
+          <h2 style="margin: 0; font-size: 15px; font-weight: 700;">지금 작업 중</h2>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #066B36;"><span style="width: 8px; height: 8px; border-radius: 999px; background: #107C41;"></span>GCS 서버 로그 수신 중 · 3~5초 지연</span>
         </div>
         <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
           <a href="Monitor.html" style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; background: #FFFFFF; border: 1px solid #EF4122; border-radius: 6px; color: #0E1C31;">
-            <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 15px; font-weight: 700;">DR-01</span><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="progress">작업중</x-import><div style="flex-grow: 1;"></div><span style="font-size: 12px; font-weight: 600; color: #EF4122;">실시간 관제 ›</span></div>
-            <div style="font-size: 13px; color: #475467;">MSN-0412-01 · 김제 GJ-S1 · 조종사 박OO</div>
-            <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #475467;"><div style="flex-grow: 1; height: 6px; background: #EAEDF0; border-radius: 999px;"><div style="width: 62%; height: 6px; background: #0070C0; border-radius: 999px;"></div></div><span style="font-weight: 600; color: #0E1C31;">62%</span><span>배터리 64%</span></div>
+            <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 15px; font-weight: 700;">DR-01</span><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="progress">작업중</x-import><div style="flex-grow: 1;"></div><span style="font-size: 12px; font-weight: 600; color: #EF4122;">실시간 리플레이 ›</span></div>
+            <div style="font-size: 13px; color: #475467;">MSN-0412-01 · 김제 GJ-S1 · 1/1회차 · 운용 신OO</div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #475467;"><div style="flex-grow: 1; height: 6px; background: #EAEDF0; border-radius: 999px;"><div style="width: 62%; height: 6px; background: #0070C0; border-radius: 999px;"></div></div><span style="font-weight: 600; color: #0E1C31;">62%</span><span>살포 중</span></div>
           </a>
-          <a href="Monitor.html" style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; color: #0E1C31;">
-            <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 15px; font-weight: 700;">DR-03</span><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="error">통신 지연</x-import><div style="flex-grow: 1;"></div><span style="font-size: 12px; font-weight: 600; color: #EF4122;">실시간 관제 ›</span></div>
-            <div style="font-size: 13px; color: #475467;">MSN-0412-01 · 김제 GJ-S1 · 조종사 최OO</div>
-            <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #475467;"><div style="flex-grow: 1; height: 6px; background: #EAEDF0; border-radius: 999px;"><div style="width: 55%; height: 6px; background: #E76F00; border-radius: 999px;"></div></div><span style="font-weight: 600; color: #0E1C31;">55%</span><span>마지막 수신 12초 전</span></div>
-          </a>
-          <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; background: #F9FAFB; border: 1px solid #DFE7EB; border-radius: 6px;">
-            <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 15px; font-weight: 700;">DR-02</span><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="wait">정비 중</x-import></div>
-            <div style="font-size: 13px; color: #475467;">배터리 교체 · 다음 임무 MSN-0414-01 (04.14 08:30)</div>
-            <div style="font-size: 12px; color: #667085;">운항하지 않는 기체는 다음 배정 임무를 보여줍니다</div>
+          <div style="display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 12px 14px; background: #F9FAFB; border: 1px dashed #D0D5DD; border-radius: 6px; grid-column: span 2;">
+            <div style="font-size: 13px; font-weight: 600; color: #475467;">미작업 2대 · DR-02, DR-03</div>
+            <div style="font-size: 12px; color: #667085; line-height: 18px;">작업 중 여부는 GCS 서버 로그 수신으로 판단합니다. 1필지 1드론이며, 기체 배정과 정비·대기 상태는 관리하지 않습니다.</div>
           </div>
         </div>
       </section>
@@ -130,7 +124,6 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
                 <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">소유</th>
                 <th scope="col" style="padding: 10px 8px; font-weight: 600;">상태</th>
                 <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">파종 모듈 · FW</th>
-                <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: right;">배터리</th>
                 <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: right;">누적 면적(평)</th>
                 <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: left;">최근 작업</th>
               </tr></thead>
@@ -142,7 +135,6 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
                     <td style="padding: 10px 8px;">{{r.owner}}</td>
                     <td style="padding: 10px 8px; text-align: center;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{r.badge}}">{{r.state}}</x-import></td>
                     <td style="padding: 10px 8px;">{{r.fw}}<sc-if value="{{r.fwWarn}}" hint-placeholder-val="{{false}}"> <span style="color: #C25E00;">업데이트 필요</span></sc-if></td>
-                    <td style="padding: 10px 8px; text-align: right;">{{r.bat}}</td>
                     <td style="padding: 10px 8px; text-align: right;">{{r.area}}</td>
                     <td style="padding: 10px 8px;">{{r.last}}</td>
                   </tr>
@@ -160,7 +152,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             <h2 style="margin: 0; font-size: 15px; font-weight: 700;">확인 필요</h2>
             <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #EEEEEE;">
               <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="wait">펌웨어</x-import>
-              <div style="font-size: 13px; line-height: 18px;"><div>DR-02 파종 모듈 v1.4.2 배포 대상</div><div style="font-size: 12px; color: #777777;">현재 v1.4.0 · 정비 완료 후 적용</div></div>
+              <div style="font-size: 13px; line-height: 18px;"><div>DR-02 파종 모듈 v1.4.2 배포 대상</div><div style="font-size: 12px; color: #777777;">현재 v1.4.0 · 다음 작업 전 적용</div></div>
             </div>
             <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #EEEEEE;">
               <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="error">배터리</x-import>
@@ -179,11 +171,11 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 </script>
 <script type="text/x-dc-logic" id="dc-src">
 var OWNERS = [{ id: 'all', label: '전체' }, { id: 'corp', label: '법인' }, { id: 'farmer', label: '농민' }, { id: 'research', label: '실증 운영자' }];
-var STATES = [{ id: 'all', label: '전체' }, { id: 'work', label: '작업중' }, { id: 'ready', label: '가용 · 대기' }, { id: 'repair', label: '정비 중' }];
+var STATES = [{ id: 'all', label: '전체' }, { id: 'work', label: '작업 중' }, { id: 'idle', label: '미작업' }];
 var DRONES = [
-  { id: 'DR-01', sn: 'DSD-24-0001', model: '국산 파종드론 [모델명]', owner: '대동 실증 법인', ownerT: 'corp', st: 'work', state: '작업중', badge: 'progress', fw: 'SM-0107 · v1.4.2', bat: '4개', area: '8,470', last: '04.12 김제 GJ-S1' },
-  { id: 'DR-02', sn: 'DSD-24-0002', model: '국산 파종드론 [모델명]', owner: '락로보틱스(실증)', ownerT: 'research', st: 'repair', state: '정비 중', badge: 'wait', fw: 'SM-0108 · v1.4.0', fwWarn: true, bat: '4개', area: '6,050', last: '04.09 김제 GJ-S14' },
-  { id: 'DR-03', sn: 'AGR-T50-1183', model: 'DJI Agras T50', owner: '대동 실증 법인', ownerT: 'corp', st: 'work', state: '작업중', badge: 'progress', fw: '파종 키트 · v05.01', bat: '3개', area: '3,630', last: '04.12 김제 GJ-S1' }
+  { id: 'DR-01', sn: 'DSD-24-0001', model: '국산 파종드론 [모델명]', owner: '대동 실증 법인', ownerT: 'corp', st: 'work', state: '작업 중', badge: 'progress', fw: 'SM-0107 · v1.4.2', bat: '4개', area: '8,470', last: '04.12 김제 GJ-S1' },
+  { id: 'DR-02', sn: 'DSD-24-0002', model: '국산 파종드론 [모델명]', owner: '락로보틱스(실증)', ownerT: 'research', st: 'idle', state: '미작업', badge: 'neutral', fw: 'SM-0108 · v1.4.0', fwWarn: true, bat: '4개', area: '6,050', last: '04.09 김제 GJ-S14' },
+  { id: 'DR-03', sn: 'AGR-T50-1183', model: 'DJI Agras T50', owner: '대동 실증 법인', ownerT: 'corp', st: 'idle', state: '미작업', badge: 'neutral', fw: '파종 키트 · v05.01', bat: '3개', area: '3,630', last: '04.10 김제 GJ-S10' }
 ];
 function seg(list, cur, onPick) {
   return list.map(function (x) {

@@ -46,7 +46,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
       <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="완료 임무 (4월)" value="6" unit="건"></x-import>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="누적 작업면적" value="13,280" unit="평" sub="4.39 ha"></x-import>
-        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="평균 처방 대비 투입량" value="99.1" unit="%"></x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="평균 살포 범위율" value="97.8" unit="%" sub="6m 격자 기준"></x-import>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="평균 경로 이탈률" value="1.4" unit="%" sub="목표 5% 이내"></x-import>
       </div>
 
@@ -99,8 +99,8 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             <th scope="col" style="padding: 10px 8px; font-weight: 600;">작업일</th>
             <th scope="col" style="padding: 10px 8px; font-weight: 600;">기체</th>
             <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: right;">면적(평)</th>
-            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: right;">투입량(kg)</th>
-            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: right;">처방 대비</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: right;">추정 투입량(kg) · 관리자</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: right;">살포 범위율</th>
             <th scope="col" style="padding: 10px 8px; font-weight: 600; text-align: right;">이탈률</th>
             <th scope="col" style="padding: 10px 8px; font-weight: 600;">상태</th>
           </tr></thead>
@@ -114,7 +114,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
                 <td style="padding: 10px 8px; text-align: center;">{{r.drones}}</td>
                 <td style="padding: 10px 8px; text-align: right;">{{r.area}}</td>
                 <td style="padding: 10px 8px; text-align: right;">{{r.seed}}</td>
-                <td style="padding: 10px 8px; text-align: right; color: {{r.ratioColor}}; font-weight: 600;">{{r.ratio}}</td>
+                <td style="padding: 10px 8px; text-align: right; color: {{r.ratioColor}}; font-weight: 600;">{{r.cov}}</td>
                 <td style="padding: 10px 8px; text-align: right;">{{r.dev}}</td>
                 <td style="padding: 10px 8px; text-align: center;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{r.badge}}">{{r.state}}</x-import></td>
               </tr>
@@ -122,7 +122,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
           </tbody>
         </table>
       </div>
-      <div style="font-size: 12px; color: #777777;">mission_id를 누르면 상세(완료맵 · 처방 대비 투입량 · 실증 지표)로 이동합니다.</div>
+      <div style="font-size: 12px; color: #777777;">mission_id를 누르면 상세(살포 범위 완료맵 · 관리자용 추정 투입량 · 실증 지표)로 이동합니다. 추정 투입량은 개폐장치 분사량으로 연산한 값입니다.</div>
     </main>
   </div>
 </div>
@@ -135,12 +135,12 @@ var STATES = [
   { id: 'stopped', label: '중단' }
 ];
 var HIST = [
-  { id: 'MSN-0412-01', farm: 'GJ-S1', addr: '김제시 부량면 신용리 439', date: '2027-04-12', drones: 'DR-01, DR-03', area: '1,192.8', seed: '14.0', ratio: '98.6%', dev: '1.2%', st: 'survey', state: '현장조사 대기', badge: 'wait', href: 'History.html' },
-  { id: 'MSN-0410-01', farm: 'GJ-S10', addr: '김제시 부량면 신용리 441', date: '2027-04-10', drones: 'DR-01', area: '1,170.1', seed: '13.6', ratio: '99.4%', dev: '0.9%', st: 'done', state: '완료', badge: 'success', href: 'History.html' },
-  { id: 'MSN-0409-01', farm: 'GJ-S14', addr: '김제시 부량면 월승리', date: '2027-04-09', drones: 'DR-02', area: '1,198.2', seed: '14.6', ratio: '102.1%', dev: '1.6%', st: 'done', state: '완료', badge: 'success', href: 'History.html' },
-  { id: 'MSN-0408-02', farm: 'GJ-S17', addr: '김제시 부량면 대평리', date: '2027-04-08', drones: 'DR-03', area: '1,011.3', seed: '6.1', ratio: '52.0%', dev: '-', st: 'stopped', state: '중단 · 강풍', badge: 'error', href: 'History.html' },
-  { id: 'MSN-0407-01', farm: 'GJ-S18', addr: '김제시 부량면 월승리', date: '2027-04-07', drones: 'DR-01, DR-02', area: '1,128.6', seed: '13.0', ratio: '97.2%', dev: '1.8%', st: 'done', state: '완료', badge: 'success', href: 'History.html' },
-  { id: 'MSN-0405-01', farm: 'GJ-S19', addr: '김제시 부량면 월승리', date: '2027-04-05', drones: 'DR-02', area: '1,212.4', seed: '14.4', ratio: '99.6%', dev: '1.1%', st: 'done', state: '완료', badge: 'success', href: 'History.html' }
+  { id: 'MSN-0412-01', farm: 'GJ-S1', addr: '김제시 부량면 신용리 439', date: '2027-04-12', drones: 'DR-01', area: '1,192.8', seed: '14.0', ratio: '98.6%', cov: '97.1%', dev: '1.2%', st: 'survey', state: '현장조사 대기', badge: 'wait', href: 'History.html' },
+  { id: 'MSN-0410-01', farm: 'GJ-S10', addr: '김제시 부량면 신용리 441', date: '2027-04-10', drones: 'DR-01', area: '1,170.1', seed: '13.6', ratio: '99.4%', cov: '98.4%', dev: '0.9%', st: 'done', state: '완료', badge: 'success', href: 'History.html' },
+  { id: 'MSN-0409-01', farm: 'GJ-S14', addr: '김제시 부량면 월승리', date: '2027-04-09', drones: 'DR-02', area: '1,198.2', seed: '14.6', ratio: '102.1%', cov: '99.0%', dev: '1.6%', st: 'done', state: '완료', badge: 'success', href: 'History.html' },
+  { id: 'MSN-0408-02', farm: 'GJ-S17', addr: '김제시 부량면 대평리', date: '2027-04-08', drones: 'DR-03', area: '1,011.3', seed: '6.1', ratio: '52.0%', cov: '52.0%', dev: '-', st: 'stopped', state: '중단 · 강풍', badge: 'error', href: 'History.html' },
+  { id: 'MSN-0407-01', farm: 'GJ-S18', addr: '김제시 부량면 월승리', date: '2027-04-07', drones: 'DR-02', area: '1,128.6', seed: '13.0', ratio: '97.2%', cov: '96.9%', dev: '1.8%', st: 'done', state: '완료', badge: 'success', href: 'History.html' },
+  { id: 'MSN-0405-01', farm: 'GJ-S19', addr: '김제시 부량면 월승리', date: '2027-04-05', drones: 'DR-02', area: '1,212.4', seed: '14.4', ratio: '99.6%', cov: '98.6%', dev: '1.1%', st: 'done', state: '완료', badge: 'success', href: 'History.html' }
 ];
 class Component extends DCLogic {
   renderVals() {
@@ -158,8 +158,7 @@ class Component extends DCLogic {
         var r = Object.assign({}, h);
         r.no = String(list.length - i);
         r.bg = i % 2 ? '#FAFAFA' : '#FFFFFF';
-        var pct = parseFloat(h.ratio);
-        r.ratioColor = pct < 90 ? '#C0392B' : (pct > 105 ? '#C25E00' : '#222222');
+                var cp = parseFloat(h.cov); r.ratioColor = cp < 90 ? '#C0392B' : '#222222';
         return r;
       })
     };
