@@ -44,7 +44,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
       <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
         <h1 style="margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.6px;">GJ-S1 · IRG 파종</h1>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="wait">현장조사 대기</x-import>
-        <span style="font-size: 14px; color: #667085;">2027.04.12 09:00 – 09:23 · DR-01 · 운용 신OO · 처방 v3 · 1/1회차</span>
+        <span style="font-size: 14px; color: #667085;">2027.04.11 – 04.12 (2일) · DR-01 · 운용 신OO · 처방 v3 · 1/1회차</span>
         <div style="flex-grow: 1;"></div>
         <a href="FarmLog.html" style="font-size: 14px; font-weight: 600;">영농일지 보기 ›</a>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Select" value="csv" options="{{exports}}" style="width: 200px;"></x-import>
@@ -54,7 +54,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 
       <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="작업면적" value="1,192.8" unit="평" sub="0.39 ha"></x-import>
-        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="작업시간" value="23" unit="분" sub="통신 지연 2분 46초 포함"></x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="작업시간" value="23" unit="분" sub="2일 합계 · 1일차 9분 + 2일차 14분"></x-import>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="살포 범위율" value="97.1" unit="%" sub="미살포 격자 8개"></x-import>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="작업 성능" value="1.0" unit="ha/h" sub="드론 1대 · 1필지"></x-import>
       </div>
@@ -641,6 +641,8 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
                 <g>
                   <polyline points="315.6,254.1 618.3,359.4 614.2,370.9 311.5,265.6 307.4,277.1 610.1,382.4 606.0,393.9 303.3,288.6 299.2,300.1 601.9,405.4 597.8,416.9 295.1,311.6 291.0,323.1 593.7,428.4 589.6,439.9 286.9,334.6 282.8,346.1 585.5,451.4 581.4,462.9 278.7,357.6" fill="none" stroke="#5FD18F" stroke-width="12" stroke-linejoin="round" opacity="0.4"></polyline>
                   <polyline points="315.6,254.1 618.3,359.4 614.2,370.9 311.5,265.6 307.4,277.1 610.1,382.4 606.0,393.9 303.3,288.6 299.2,300.1 601.9,405.4 597.8,416.9 295.1,311.6 291.0,323.1 593.7,428.4 589.6,439.9 286.9,334.6 282.8,346.1 585.5,451.4 581.4,462.9 278.7,357.6" fill="none" stroke="#5FD18F" stroke-width="2.5" stroke-linejoin="round"></polyline>
+                  <polyline points="315.6,254.1 618.3,359.4 614.2,370.9 311.5,265.6 307.4,277.1 610.1,382.4 606.0,393.9 303.3,288.6" fill="none" stroke="#8FC3FF" stroke-width="12" stroke-linejoin="round" opacity="0.6"></polyline>
+                  <polyline points="315.6,254.1 618.3,359.4 614.2,370.9 311.5,265.6 307.4,277.1 610.1,382.4 606.0,393.9 303.3,288.6" fill="none" stroke="#8FC3FF" stroke-width="2.5" stroke-linejoin="round"></polyline>
                   <polyline points="420,305 445,308 466,322" fill="none" stroke="#FFAB43" stroke-width="3"></polyline>
                   <circle cx="451" cy="369" r="7" fill="#FFFFFF" stroke="#E76F00" stroke-width="3"></circle>
                   <rect x="461" y="377" width="86" height="17" rx="3" fill="#FFFFFF"></rect>
@@ -676,8 +678,9 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             </sc-if>
             <sc-if value="{{lTrack}}" hint-placeholder-val="{{false}}">
               <div style="display: flex; flex-direction: column; gap: 6px;">
-                <span style="font-weight: 600;">비행 궤적 (드론 로그)</span>
-                <span style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#5FD18F" stroke-width="4"></path></svg>DR-01</span>
+                <span style="font-weight: 600;">비행 궤적 (드론 로그 · 2일)</span>
+                <span style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#8FC3FF" stroke-width="4"></path></svg>1일차 (04.11)</span>
+                <span style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#5FD18F" stroke-width="4"></path></svg>2일차 (04.12)</span>
                 <span style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#FFAB43" stroke-width="3"></path></svg>경로 이탈</span>
               </div>
             </sc-if>
@@ -716,12 +719,23 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             </div>
           </div>
 
+          <div style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 8px;"><h2 style="margin: 0; font-size: 16px; font-weight: 600;">작업 일차</h2><span style="font-size: 12px; color: #667085;">중단 후 다음 날 이어하기</span></div>
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+              <thead><tr style="background: #EEEEEE; color: #475467;"><th scope="col" style="text-align: left; padding: 7px 8px; font-weight: 600;">일차</th><th scope="col" style="text-align: left; padding: 7px 8px; font-weight: 600;">작업 시간</th><th scope="col" style="text-align: right; padding: 7px 8px; font-weight: 600; white-space: nowrap;">살포(평)</th><th scope="col" style="text-align: left; padding: 7px 8px; font-weight: 600;">종료</th></tr></thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid #EEEEEE;"><td style="padding: 7px 8px; white-space: nowrap;"><span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #8FC3FF;"></span>1일차</span></td><td style="padding: 7px 8px; white-space: nowrap;">04.11 17:56–18:05</td><td style="padding: 7px 8px; text-align: right;">477</td><td style="padding: 7px 8px; color: #C0392B;">일몰로 중단 (40%)</td></tr>
+                <tr><td style="padding: 7px 8px; white-space: nowrap;"><span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #5FD18F;"></span>2일차</span></td><td style="padding: 7px 8px; white-space: nowrap;">04.12 09:00–09:14</td><td style="padding: 7px 8px; text-align: right;">681</td><td style="padding: 7px 8px; color: #066B36;">완료 · 남은 격자 이어하기</td></tr>
+              </tbody>
+            </table>
+          </div>
+
           <div style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
             <h2 style="margin: 0; font-size: 16px; font-weight: 600;">이벤트</h2>
-            <div style="display: flex; gap: 10px; font-size: 14px;"><span style="width: 64px; color: #667085;">09:00:12</span><span>이륙 (DR-01) · 1회차 시작</span></div>
+            <div style="display: flex; gap: 10px; font-size: 14px;"><span style="width: 64px; color: #667085;">04.11</span><span>04.11 17:56 이륙 · 1일차 시작 → 18:05 일몰로 중단</span></div>
             <div style="display: flex; gap: 10px; font-size: 14px;"><span style="width: 64px; color: #667085;">09:06:54</span><span>DR-01 경로 이탈 1.8m · 자동 복귀</span></div>
             <div style="display: flex; gap: 10px; font-size: 14px;"><span style="width: 64px; color: #667085;">09:13:20</span><span>DR-01 로그 미수신 2분 46초 · 재전송으로 복구</span></div>
-            <div style="display: flex; gap: 10px; font-size: 14px;"><span style="width: 64px; color: #667085;">09:23:05</span><span>착륙 · 임무 완료</span></div>
+            <div style="display: flex; gap: 10px; font-size: 14px;"><span style="width: 64px; color: #667085;">09:23:05</span><span>착륙 · 2일차 완료 (09:00 이어하기 시작)</span></div>
           </div>
 
         </aside>

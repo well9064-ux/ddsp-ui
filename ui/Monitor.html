@@ -40,18 +40,27 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 
     <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 20px 24px 32px; display: flex; flex-direction: column; gap: 16px;">
 
-      <div style="font-size: 12px; color: #667085;">드론 정밀진단 › <a href="Missions.html">임무 관리</a> › MSN-0412-01 · 실시간 리플레이</div>
+      <div style="font-size: 12px; color: #667085;">드론 정밀진단 › <a href="Missions.html">임무 관리</a> › MSN-0411-03 · 실시간 리플레이</div>
 
       <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
         <h1 style="margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.6px;">김제 실증 A-03 · IRG 파종</h1>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{missionBadge}}">{{missionLabel}}</x-import>
-        <span style="font-size: 14px; color: #667085;">mission_id MSN-0412-01 · 처방 v3 · DR-01 (1필지 1드론) · 1/1회차</span>
+        <span style="font-size: 14px; color: #667085;">mission_id MSN-0411-03 · 처방 v3 · DR-01 (1필지 1드론) · 2일차 이어하기</span>
         <div style="flex-grow: 1;"></div>
         <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: {{linkColor}};"><span style="width: 8px; height: 8px; border-radius: 999px; background: {{linkColor}};"></span>{{linkText}}</span>
       </div>
 
+      <div role="group" aria-label="작업 일차" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px; background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; font-size: 13px;">
+        <span style="font-weight: 600; color: #475467; margin-right: 4px;">작업 일차</span>
+        <button type="button" aria-pressed="{{d1On}}" onClick="{{pickDay1}}" style="height: 32px; padding: 0 12px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid {{d1Bd}}; border-radius: 6px; background: {{d1Bg}}; font: 600 13px var(--font-primary); color: #0E1C31; cursor: pointer;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #8FC3FF;"></span>1일차 · 04.11 · 45% <span style="font-weight: 400; color: #C0392B;">일몰로 중단</span></button>
+        <span aria-hidden="true" style="color: #98A2B3;">→</span>
+        <button type="button" aria-pressed="{{d2On}}" onClick="{{pickDay2}}" style="height: 32px; padding: 0 12px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid {{d2Bd}}; border-radius: 6px; background: {{d2Bg}}; font: 600 13px var(--font-primary); color: #0E1C31; cursor: pointer;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #5FD18F;"></span>2일차 · 04.12 · 남은 범위 이어하기 <span style="font-weight: 400; color: #066B36;">{{d2State}}</span></button>
+        <div style="flex-grow: 1;"></div>
+        <span style="font-size: 12px; color: #667085;">하루에 못 끝내면 중단하고, 다음 날 조종기에서 같은 임무를 이어서 시작합니다(남은 격자 기준)</span>
+      </div>
+
       <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
-        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="진행률" value="{{kProg}}" unit="%" sub="{{kArea}}"></x-import>
+        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="누적 진행률" value="{{kProg}}" unit="%" sub="{{kArea}}"></x-import>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="추정 투입량 (관리자)" value="{{kSeed}}" unit="kg" sub="개폐장치 분사량 연산"></x-import>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="경과 시간" value="{{kElapsed}}" sub="{{kRemain}}"></x-import>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="미확인 알림" value="{{kAlerts}}" unit="건" accent="#EF4122"></x-import>
@@ -353,6 +362,13 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             </sc-if>
             <polyline points="{{d1.done}}" fill="none" stroke="#5FD18F" stroke-width="12" stroke-linejoin="round" opacity="0.45"></polyline>
             <polyline points="{{d1.rest}}" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="5 4"></polyline>
+            <polyline points="{{prevPts}}" fill="none" stroke="#8FC3FF" stroke-width="12" stroke-linejoin="round" opacity="0.55"></polyline>
+            <polyline points="{{prevPts}}" fill="none" stroke="#8FC3FF" stroke-width="2.5" stroke-linejoin="round"></polyline>
+            <sc-if value="{{showStop}}" hint-placeholder-val="{{true}}">
+              <circle cx="{{stopX}}" cy="{{stopY}}" r="7" fill="#FFFFFF" stroke="#C0392B" stroke-width="3"></circle>
+              <rect x="{{stopLX}}" y="{{stopLY}}" width="118" height="20" rx="4" fill="#FFFFFF"></rect>
+              <text x="{{stopTX}}" y="{{stopTY}}" font-size="11" font-weight="600" fill="#C0392B">1일차 중단 · 이어하기 지점</text>
+            </sc-if>
             <polyline points="{{d1.done}}" fill="none" stroke="#5FD18F" stroke-width="2.5" stroke-linejoin="round"></polyline>
             <sc-if value="{{showDeviation}}" hint-placeholder-val="{{true}}">
               <polyline points="420,305 445,308 466,322" fill="none" stroke="#FFAB43" stroke-width="3"></polyline>
@@ -367,6 +383,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
               <circle cx="7" cy="7" r="3.8" fill="#FFFFFF" stroke="#0E1C31" stroke-width="1.6"></circle>
               <rect x="-3.2" y="-3.2" width="6.4" height="6.4" rx="1.6" fill="#667085"></rect>
             </g>
+            <sc-if value="{{isDay2}}" hint-placeholder-val="{{true}}">
             <g transform="translate({{d1.x}} {{d1.y}})">
               <circle r="16" fill="#FFFFFF" stroke="{{d1Ring}}" stroke-width="3.5"></circle>
               <path d="M-6.5 -6.5 L6.5 6.5 M6.5 -6.5 L-6.5 6.5" stroke="#0E1C31" stroke-width="2.2" stroke-linecap="round"></path>
@@ -378,13 +395,15 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             </g>
             <rect x="{{d1.lx}}" y="{{d1.ly}}" width="{{d1LabelW}}" height="22" rx="4" fill="#FFFFFF"></rect>
             <text x="{{d1.tx}}" y="{{d1.ty}}" font-size="12" font-weight="600" fill="{{d1LabelColor}}">{{d1LabelText}}</text>
+            </sc-if>
             <rect x="694" y="241" width="56" height="22" rx="4" fill="#FFFFFF"></rect>
             <text x="702" y="257" font-size="12" font-weight="600" fill="#0E1C31">이착륙장</text>
           </svg>
           </div>
 
           <div style="position: absolute; top: 12px; left: 12px; padding: 10px 12px; background: rgba(14,28,49,0.86); border-radius: 6px; font-size: 12px; display: flex; flex-direction: column; gap: 6px; color: #FFFFFF;">
-            <div style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#5FD18F" stroke-width="4"></path></svg>살포 범위 (드론 로그 궤적)</div>
+            <div style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#5FD18F" stroke-width="4"></path></svg>2일차 살포 범위 (04.12)</div>
+            <div style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#8FC3FF" stroke-width="4"></path></svg>1일차 살포 범위 (04.11)</div>
             <div style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="4 3"></path></svg>계획 경로 (잔여)</div>
             <div style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="6" aria-hidden="true"><path d="M0 3h24" stroke="#FFAB43" stroke-width="3"></path></svg>경로 이탈 구간</div>
           </div>
@@ -471,8 +490,8 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
               </div>
             </sc-if>
             <div style="display: flex; align-items: flex-start; gap: 10px; padding: 10px 0;">
-              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="neutral">작업 시작</x-import>
-              <div style="flex-grow: 1; font-size: 14px; line-height: 18px;"><div>DR-01 이륙 · 1회차 시작</div><div style="font-size: 12px; color: #667085;">09:00:12 · GCS 서버 이벤트</div></div>
+              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="neutral">이어하기</x-import>
+              <div style="flex-grow: 1; font-size: 14px; line-height: 18px;"><div>2일차 이어하기 시작 · 남은 격자 154개</div><div style="font-size: 12px; color: #667085;">04.12 09:00:12 · 1일차 04.11 18:12 일몰로 중단(45%)</div></div>
             </div>
           </div>
 
@@ -525,7 +544,9 @@ function clockAt(sec) {
   return pad2(h) + ':' + pad2(m) + ':' + pad2(s % 60);
 }
 var TOTAL_SEC = 23 * 60, LIVE_T = 0.5;
+var PREV_PTS = null;
 
+PREV_PTS = splitRoute(ROUTE1, 0.45);
 class Component extends DCLogic {
   componentDidMount() {
     var self = this;
@@ -546,7 +567,9 @@ class Component extends DCLogic {
     var playing = !!s.playing;
     var lost = t >= 0.58 && t < 0.70;
     var eff = t < 0.58 ? t : (t < 0.70 ? 0.58 : t - 0.12);
-    var f1 = Math.min(1, eff / 0.88);
+    var PREV = 0.45;
+    var day1 = s.day === 1;
+    var f1 = day1 ? PREV : PREV + (1 - PREV) * Math.min(1, eff / 0.88);
     var d1 = splitRoute(ROUTE1, f1);
     var prog = f1;
     var el = t * TOTAL_SEC, remain = Math.max(0, TOTAL_SEC - el);
@@ -561,10 +584,17 @@ class Component extends DCLogic {
       pickSat: function () { self.setState({ ovl: false }); },
       pickOvl: function () { self.setState({ ovl: true }); },
       d1: d1,
+      prevPts: PREV_PTS.done, isDay2: !day1, showStop: true,
+      stopX: PREV_PTS.x, stopY: PREV_PTS.y, stopLX: (Number(PREV_PTS.x) + 12).toFixed(1), stopLY: (Number(PREV_PTS.y) + 8).toFixed(1), stopTX: (Number(PREV_PTS.x) + 18).toFixed(1), stopTY: (Number(PREV_PTS.y) + 22).toFixed(1),
+      d1On: day1 ? 'true' : 'false', d2On: day1 ? 'false' : 'true',
+      d1Bd: day1 ? '#EF4122' : '#DFE7EB', d2Bd: day1 ? '#DFE7EB' : '#EF4122', d1Bg: day1 ? '#FDECEA' : '#FFFFFF', d2Bg: day1 ? '#FFFFFF' : '#FDECEA',
+      d2State: f1 >= 1 ? '완료' : '진행 중',
+      pickDay1: function () { self.setState({ day: 1, playing: false, live: false }); },
+      pickDay2: function () { self.setState({ day: 2, live: true, t: LIVE_T, playing: false }); },
       playing: playing, paused: !playing,
       playLabel: playing ? '일시정지' : '재생',
       tInt: Math.round(t * 1000),
-      clockText: (live ? '실시간 · ' : '재생 · ') + clockAt(el),
+      clockText: day1 ? '1일차 기록 · 04.11 18:12 중단' : (live ? '실시간 · ' : '재생 · ') + clockAt(el),
       speedLabel: s.fast ? '빠르게' : '보통 속도',
       liveBg: live ? '#EF4122' : 'rgba(255,255,255,0.2)',
       missionBadge: finished ? 'success' : 'progress',
@@ -572,7 +602,7 @@ class Component extends DCLogic {
       linkColor: live ? (lost ? '#C0392B' : '#066B36') : '#475467',
       linkText: live ? (lost ? 'GCS 서버 로그 미수신 · ' + Math.round((t - 0.58) * TOTAL_SEC) + '초' : 'GCS 서버 수신 · 4초 지연 (10건 묶음)') : '기록 재생 중',
       kProg: String(Math.round(prog * 100)),
-      kArea: Math.round(prog * 3025).toLocaleString('ko-KR') + ' / 3,025평',
+      kArea: Math.round(prog * 3025).toLocaleString('ko-KR') + ' / 3,025평 · 1일차 45%',
       kSeed: (36.1 * prog * 1.01).toFixed(1),
       kElapsed: pad2(Math.floor(el / 60)) + ':' + pad2(Math.floor(el % 60)),
       kRemain: finished ? '작업 완료' : '예상 잔여 ' + Math.ceil(remain / 60) + '분',

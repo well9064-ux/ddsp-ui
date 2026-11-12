@@ -66,7 +66,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 
       <div style="display: flex; align-items: center; gap: 8px; font-size: 12px;">
         <span>조회결과 총 {{count}}건</span>
-        <span style="color: #888888;">· 1필지 1처방 · 드론 1대. 처방맵을 넣은 임무 파일을 GCS 서버로 보내면 조종사가 조종기에서 확인 후 파종합니다</span>
+        <span style="color: #888888;">· 1필지 1처방 · 드론 1대. 처방맵을 넣은 임무 파일을 GCS 서버로 보내면 조종사가 조종기에서 확인 후 파종합니다. 하루에 못 끝내면 중단 후 다음 날 이어서 작업합니다</span>
         <div style="flex-grow: 1;"></div>
         <a href="Field.html" style="height: 30px; padding: 0 14px; display: inline-flex; align-items: center; border-radius: 3px; background: #CE2315; color: #FFFFFF; font-weight: 700;">작업 생성</a>
       </div>
@@ -81,6 +81,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             <th scope="col" style="padding: 10px 8px; font-weight: 600;">작업</th>
             <th scope="col" style="padding: 10px 8px; font-weight: 600;">처방</th>
             <th scope="col" style="padding: 10px 8px; font-weight: 600;">회차</th>
+            <th scope="col" style="padding: 10px 8px; font-weight: 600;">진행률</th>
             <th scope="col" style="padding: 10px 8px; font-weight: 600;">GCS 전송</th>
             <th scope="col" style="padding: 10px 8px; font-weight: 600;">작업일(로그)</th>
             <th scope="col" style="padding: 10px 8px; font-weight: 600;">상태</th>
@@ -95,6 +96,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
                 <td style="padding: 10px 8px; text-align: center;">파종</td>
                 <td style="padding: 10px 8px; text-align: center;">{{r.rx}}</td>
                 <td style="padding: 10px 8px; text-align: center;">{{r.round}}</td>
+                <td style="padding: 10px 8px; text-align: center;">{{r.prog}}</td>
                 <td style="padding: 10px 8px; text-align: center; white-space: nowrap;">{{r.sent}}</td>
                 <td style="padding: 10px 8px; text-align: center; white-space: nowrap;">{{r.when}}</td>
                 <td style="padding: 10px 8px; text-align: center;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{r.badge}}">{{r.st}}</x-import></td>
@@ -109,16 +111,16 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 </script>
 <script type="text/x-dc-logic" id="dc-src">
 var ROWS = [
-  { id: 'MSN-0412-01', farm: 'GJ-S1', addr: '김제시 부량면 신용리 439', area: '1,192.8', rx: 'v3', round: '1 / 1', sent: '04.11 17:20', when: '04.12 09:00~', st: '수행 중', badge: 'progress', href: 'Monitor.html' },
-  { id: 'MSN-0413-03', farm: 'GJ-S25', addr: '김제시 부량면 신용리 462', area: '1,184.0', rx: 'v1', round: '1 / 1', sent: '04.12 07:50', when: '-', st: '조종기 확인', badge: 'progress', href: '#' },
-  { id: 'MSN-0413-02', farm: 'BR-04', addr: '보령시 천북면 신죽리 230', area: '2,420.0', rx: 'v1', round: '1 / 2', sent: '04.12 08:10', when: '-', st: 'GCS 전송', badge: 'progress', href: '#' },
-  { id: 'MSN-0413-01', farm: 'GJ-S21', addr: '김제시 부량면 옥정리 87', area: '1,205.4', rx: 'v3', round: '1 / 1', sent: '-', when: '-', st: '작성', badge: 'wait', href: 'Main.html' },
-  { id: 'MSN-0411-01', farm: 'GJ-S14', addr: '김제시 부량면 신용리 451', area: '1,198.2', rx: 'v1', round: '1 / 1', sent: '04.10 16:00', when: '04.11 08:40', st: '중단 · 재수행 대기', badge: 'error', href: 'History.html' },
-  { id: 'MSN-0410-01', farm: 'GJ-S10', addr: '김제시 부량면 신용리 447', area: '1,170.1', rx: 'v2', round: '1 / 1', sent: '04.09 15:30', when: '04.10 09:00', st: '완료', badge: 'success', href: 'History.html' },
-  { id: 'MSN-0408-01', farm: 'BR-02', addr: '보령시 천북면 신죽리 198', area: '2,610.5', rx: 'v1', round: '2 / 2', sent: '04.07 14:00', when: '04.08 10:10', st: '완료', badge: 'success', href: 'History.html' }
+  { id: 'MSN-0411-03', farm: 'A-03', addr: '김제시 부량면 (실증 A-03)', area: '3,025.0', rx: 'v3', round: '1 / 1', prog: '71%', sent: '04.10 17:20', when: '04.11 · 04.12 (2일차)', st: '수행 중 · 2일차', badge: 'progress', href: 'Monitor.html' },
+  { id: 'MSN-0413-03', farm: 'GJ-S25', addr: '김제시 부량면 신용리 462', area: '1,184.0', rx: 'v1', round: '1 / 1', sent: '04.12 07:50', when: '-', prog: '0%', st: '조종기 확인', badge: 'progress', href: '#' },
+  { id: 'MSN-0413-02', farm: 'BR-04', addr: '보령시 천북면 신죽리 230', area: '2,420.0', rx: 'v1', round: '1 / 2', sent: '04.12 08:10', when: '-', prog: '-', st: 'GCS 전송', badge: 'progress', href: '#' },
+  { id: 'MSN-0413-01', farm: 'GJ-S21', addr: '김제시 부량면 옥정리 87', area: '1,205.4', rx: 'v3', round: '1 / 1', sent: '-', when: '-', prog: '-', st: '작성', badge: 'wait', href: 'Main.html' },
+  { id: 'MSN-0411-01', farm: 'GJ-S14', addr: '김제시 부량면 신용리 451', area: '1,198.2', rx: 'v1', round: '1 / 1', sent: '04.10 16:00', when: '04.11 08:40', prog: '64%', st: '중단 · 이어하기 대기', badge: 'error', href: 'History.html' },
+  { id: 'MSN-0410-01', farm: 'GJ-S10', addr: '김제시 부량면 신용리 447', area: '1,170.1', rx: 'v2', round: '1 / 1', sent: '04.09 15:30', when: '04.10 09:00', prog: '100%', st: '완료', badge: 'success', href: 'History.html' },
+  { id: 'MSN-0408-01', farm: 'BR-02', addr: '보령시 천북면 신죽리 198', area: '2,610.5', rx: 'v1', round: '2 / 2', sent: '04.07 14:00', when: '04.08 10:10', prog: '100%', st: '완료', badge: 'success', href: 'History.html' }
 ];
 var STATS = ['전체', '작성', 'GCS 전송', '조종기 확인', '수행 중', '중단', '완료'];
-var GROUP = { '작성': '작성', 'GCS 전송': 'GCS 전송', '조종기 확인': '조종기 확인', '수행 중': '수행 중', '중단 · 재수행 대기': '중단', '완료': '완료' };
+var GROUP = { '작성': '작성', 'GCS 전송': 'GCS 전송', '조종기 확인': '조종기 확인', '수행 중 · 2일차': '수행 중', '중단 · 이어하기 대기': '중단', '완료': '완료' };
 class Component extends DCLogic {
   renderVals() {
     var self = this;
