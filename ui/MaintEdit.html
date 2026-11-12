@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>정비 이력 수정 · 드론 파종 컨셉 UI</title>
+<link rel="stylesheet" href="../lib/tokens.css">
+<link rel="stylesheet" href="../lib/bundle.css">
+<style>body{margin:0;background:#FFFFFF} a{text-decoration:none}
+.dc-back{position:fixed;left:24px;bottom:24px;z-index:9999;display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 16px;border-radius:999px;background:#231F20;color:#FFFFFF;font:600 14px Pretendard,system-ui,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.22)}
+.dc-back:hover{background:#EF4122} .dc-back:focus-visible{outline:2px solid #EF4122;outline-offset:3px}</style>
+<script src="../lib/morphdom.js"></script>
+<script src="../lib/runtime.js"></script>
+<script src="../lib/components.js"></script>
+</head>
+<body>
+<div id="dc-root"></div>
+<a class="dc-back" href="../index.html" aria-label="설계 산출물 목차로 돌아가기">← 목차로</a>
+<script type="text/x-dc-template" id="dc-tpl">
+<helmet>
+<style>
+body{margin:0}
+a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
+</style>
+</helmet>
+<div style="position: relative; min-height: 1000px; display: flex; background: #FFFFFF; font-family: var(--font-primary); color: #222222; font-variant-numeric: tabular-nums;">
+
+  <div style="flex: 0 0 230px; display: flex;">
+    <dc-import name="Nav" active="aircraft" hint-size="230px,1000px"></dc-import>
+  </div>
+
+  <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column;">
+    <header style="height: 50px; flex-shrink: 0; display: flex; align-items: center; gap: 16px; padding: 0 20px; background: #231F20; color: #FFFFFF;">
+      <span style="font-size: 13px; font-weight: 600;">2027년 4월 12일</span>
+      <div style="flex-grow: 1;"></div>
+      <span style="font-size: 13px; font-weight: 600;">안녕하세요, 관리자 님</span>
+    </header>
+    <div role="tablist" aria-label="열린 화면" style="height: 34px; flex-shrink: 0; display: flex; align-items: flex-end; gap: 2px; padding: 0 10px; background: #EEEEEE; overflow-x: auto;">
+      <sc-for list="{{openTabs}}" as="t" hint-placeholder-count="7">
+        <div style="height: 30px; display: flex; align-items: center; flex-shrink: 0; background: {{t.bg}}; border-top: {{t.bt}}; box-sizing: border-box;">
+          <a href="{{t.href}}" role="tab" aria-selected="{{t.sel}}" style="height: 100%; display: flex; align-items: center; padding: 0 6px 0 16px; color: {{t.fg}}; font-size: 12px; font-weight: {{t.fw}}; white-space: nowrap;">{{t.label}}</a>
+          <button type="button" aria-label="{{t.closeLabel}}" onClick="{{t.close}}" style="height: 100%; padding: 0 10px 0 4px; border: 0; background: transparent; color: {{t.xc}}; font: 400 14px var(--font-primary); cursor: pointer;">×</button>
+        </div>
+      </sc-for>
+      <div style="flex-grow: 1;"></div>
+      <button type="button" onClick="{{closeAllTabs}}" style="flex-shrink: 0; align-self: center; border: 0; background: transparent; font: 400 11px var(--font-primary); color: #777777; padding: 0 6px; cursor: pointer;">모두 닫기</button>
+    </div>
+
+    <main style="flex: 1 1 auto; box-sizing: border-box; padding: 18px 16px 40px; display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #DDDDDD;">
+        <h1 style="margin: 0; font-size: 18px; font-weight: 800;">정비 이력 수정</h1>
+        <span style="margin-left: 10px; font-size: 12px; color: #888888;">등록 2027.04.02 · 관리자 김OO</span>
+        <div style="flex-grow: 1;"></div>
+        <span style="font-size: 12px; color: #888888;">드론 정밀진단 › <a href="Aircraft.html">기체 관리</a> › <b style="color: #333333;">정비 이력 수정</b></span>
+      </div>
+      <section style="display: flex; flex-direction: column; gap: 8px;">
+        <h2 style="margin: 0; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px;">정비 내용</h2>
+        <table style="width: 100%; border-collapse: collapse; border-top: 2px solid #344054;"><tbody><tr><th scope="row" style="width: 150px; padding: 11px 14px; background: #F2F4F7; border-bottom: 1px solid #E4E7EC; font-size: 13px; font-weight: 700; color: #344054; text-align: left; vertical-align: middle; white-space: nowrap;">대상 기체 <span style="color: #CE2315;">*</span></th><td style="padding: 8px 14px; border-bottom: 1px solid #E4E7EC; font-size: 13px; vertical-align: middle;"><span style="height: 32px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CCCCCC; border-radius: 3px; font: 400 13px var(--font-primary); color: #222222; background: #FFFFFF; display: inline-flex; align-items: center; width: 360px; justify-content: space-between;">DR-01 · 국산 파종드론 · 신OO (농가) <span aria-hidden="true" style="color: #888888;">⌄</span></span></td></tr><tr><th scope="row" style="width: 150px; padding: 11px 14px; background: #F2F4F7; border-bottom: 1px solid #E4E7EC; font-size: 13px; font-weight: 700; color: #344054; text-align: left; vertical-align: middle; white-space: nowrap;">정비 일자 <span style="color: #CE2315;">*</span></th><td style="padding: 8px 14px; border-bottom: 1px solid #E4E7EC; font-size: 13px; vertical-align: middle;"><span style="height: 32px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CCCCCC; border-radius: 3px; font: 400 13px var(--font-primary); color: #222222; background: #FFFFFF; display: inline-flex; align-items: center; width: 160px;">2027-04-02</span></td></tr><tr><th scope="row" style="width: 150px; padding: 11px 14px; background: #F2F4F7; border-bottom: 1px solid #E4E7EC; font-size: 13px; font-weight: 700; color: #344054; text-align: left; vertical-align: middle; white-space: nowrap;">정비 구분 <span style="color: #CE2315;">*</span></th><td style="padding: 8px 14px; border-bottom: 1px solid #E4E7EC; font-size: 13px; vertical-align: middle;"><div style="display: flex;"><span style="height: 32px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 12px; position: relative; z-index: 1;">정기 점검</span><span style="height: 32px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 12px; position: relative; z-index: 1;">수리</span><span style="height: 32px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 2px solid #222222; font-weight: 700; font-size: 12px; position: relative; z-index: 2;">부품 교체</span><span style="height: 32px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 12px; position: relative; z-index: 1;">펌웨어</span><span style="height: 32px; padding: 0 14px; margin-left: -1px; display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 12px; position: relative; z-index: 1;">기타</span></div></td></tr><tr><th scope="row" style="width: 150px; padding: 11px 14px; background: #F2F4F7; border-bottom: 1px solid #E4E7EC; font-size: 13px; font-weight: 700; color: #344054; text-align: left; vertical-align: middle; white-space: nowrap;">정비 내용 <span style="color: #CE2315;">*</span></th><td style="padding: 8px 14px; border-bottom: 1px solid #E4E7EC; font-size: 13px; vertical-align: middle;"><span style="height: 32px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CCCCCC; border-radius: 3px; font: 400 13px var(--font-primary); color: #222222; background: #FFFFFF; display: inline-flex; align-items: center; width: 100%; height: 72px; align-items: flex-start; padding-top: 8px; color: #222222;">비행 전 점검 중 프로펠러 끝 파손 확인, 2개 교체 후 시험 비행 이상 없음</span></td></tr><tr><th scope="row" style="width: 150px; padding: 11px 14px; background: #F2F4F7; border-bottom: 1px solid #E4E7EC; font-size: 13px; font-weight: 700; color: #344054; text-align: left; vertical-align: middle; white-space: nowrap;">교체 부품</th><td style="padding: 8px 14px; border-bottom: 1px solid #E4E7EC; font-size: 13px; vertical-align: middle;"><table style="border-collapse: collapse; font-size: 13px;"><thead><tr style="color: #667085;"><th style="text-align: left; padding: 0 8px 6px 0; font-weight: 600;">부품명</th><th style="text-align: left; padding: 0 8px 6px 0; font-weight: 600;">수량</th><th></th></tr></thead><tbody>
+          <tr><td style="padding: 0 8px 6px 0;"><span style="height: 32px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CCCCCC; border-radius: 3px; font: 400 13px var(--font-primary); color: #222222; background: #FFFFFF; display: inline-flex; align-items: center; width: 240px;">프로펠러 (CW)</span></td><td style="padding: 0 8px 6px 0;"><span style="height: 32px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CCCCCC; border-radius: 3px; font: 400 13px var(--font-primary); color: #222222; background: #FFFFFF; display: inline-flex; align-items: center; width: 80px;">1</span></td><td style="padding: 0 0 6px 0; font-size: 12px; color: #CE2315;">삭제</td></tr>
+          <tr><td style="padding: 0 8px 6px 0;"><span style="height: 32px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CCCCCC; border-radius: 3px; font: 400 13px var(--font-primary); color: #222222; background: #FFFFFF; display: inline-flex; align-items: center; width: 240px;">프로펠러 (CCW)</span></td><td style="padding: 0 8px 6px 0;"><span style="height: 32px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CCCCCC; border-radius: 3px; font: 400 13px var(--font-primary); color: #222222; background: #FFFFFF; display: inline-flex; align-items: center; width: 80px;">1</span></td><td style="padding: 0 0 6px 0; font-size: 12px; color: #CE2315;">삭제</td></tr>
+        </tbody></table><span style="font-size: 12px; font-weight: 700; color: #0070C0;">+ 부품 추가</span></td></tr></tbody></table>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 8px;">
+        <h2 style="margin: 0; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px;">처리 정보</h2>
+        <table style="width: 100%; border-collapse: collapse; border-top: 2px solid #344054;"><tbody><tr><th scope="row" style="width: 150px; padding: 11px 14px; background: #F2F4F7; border-bottom: 1px solid #E4E7EC; font-size: 13px; font-weight: 700; color: #344054; text-align: left; vertical-align: middle; white-space: nowrap;">수행자</th><td style="padding: 8px 14px; border-bottom: 1px solid #E4E7EC; font-size: 13px; vertical-align: middle;"><span style="height: 32px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CCCCCC; border-radius: 3px; font: 400 13px var(--font-primary); color: #222222; background: #FFFFFF; display: inline-flex; align-items: center; width: 300px;">박OO (정비)</span></td></tr><tr><th scope="row" style="width: 150px; padding: 11px 14px; background: #F2F4F7; border-bottom: 1px solid #E4E7EC; font-size: 13px; font-weight: 700; color: #344054; text-align: left; vertical-align: middle; white-space: nowrap;">비용</th><td style="padding: 8px 14px; border-bottom: 1px solid #E4E7EC; font-size: 13px; vertical-align: middle;"><span style="height: 32px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CCCCCC; border-radius: 3px; font: 400 13px var(--font-primary); color: #222222; background: #FFFFFF; display: inline-flex; align-items: center; width: 160px;">180,000</span> <span style="font-size: 12px; color: #888888;">원 (선택)</span></td></tr><tr><th scope="row" style="width: 150px; padding: 11px 14px; background: #F2F4F7; border-bottom: 1px solid #E4E7EC; font-size: 13px; font-weight: 700; color: #344054; text-align: left; vertical-align: middle; white-space: nowrap;">다음 점검 예정일</th><td style="padding: 8px 14px; border-bottom: 1px solid #E4E7EC; font-size: 13px; vertical-align: middle;"><span style="height: 32px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CCCCCC; border-radius: 3px; font: 400 13px var(--font-primary); color: #222222; background: #FFFFFF; display: inline-flex; align-items: center; width: 180px;">2027-05-02</span></td></tr><tr><th scope="row" style="width: 150px; padding: 11px 14px; background: #F2F4F7; border-bottom: 1px solid #E4E7EC; font-size: 13px; font-weight: 700; color: #344054; text-align: left; vertical-align: middle; white-space: nowrap;">첨부</th><td style="padding: 8px 14px; border-bottom: 1px solid #E4E7EC; font-size: 13px; vertical-align: middle;"><div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;"><button type="button" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #FFFFFF; color: #333333; border: 1px solid #BBBBBB; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; height: 32px;">파일 선택</button><span style="font-size: 12px; color: #888888;">사진 · 문서 최대 5개 · jpg, png, pdf</span><span style="font-size: 12px; padding: 4px 10px; background: #F2F4F7; border-radius: 999px;">propeller_0402.jpg ×</span></div></td></tr></tbody></table>
+      </section>
+      <div style="display: flex; align-items: center; gap: 8px; padding-top: 6px;">
+        <button type="button" onClick="{{openDelete}}" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #FFFFFF; color: #CE2315; border: 1px solid #CE2315; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">삭제</button>
+        <div style="flex-grow: 1;"></div>
+        <a href="Aircraft.html" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #FFFFFF; color: #333333; border: 1px solid #BBBBBB; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">목록</a>
+        <a href="Aircraft.html" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #FFFFFF; color: #333333; border: 1px solid #BBBBBB; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">취소</a>
+        <button type="button" onClick="{{save}}" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #CE2315; color: #FFFFFF; border: 1px solid #CE2315; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">저장</button>
+      </div>
+      <sc-if value="{saved}" hint-placeholder-val="{false}"><div role="status" style="padding: 10px 14px; background: #E6F4EC; border-radius: 4px; color: #066B36; font-size: 13px; font-weight: 600;">수정한 내용을 저장했습니다.</div></sc-if>
+    </main>
+  </div>
+</div>
+
+  <sc-if value="{{confirmDelete}}" hint-placeholder-val="{{false}}">
+    <div style="position: absolute; inset: 0; background: rgba(14,28,49,0.45); display: flex; justify-content: center; align-items: flex-start; padding-top: 180px; z-index: 20; font-family: var(--font-primary); color: #222222;">
+      <div role="dialog" aria-modal="true" aria-label="정비 이력 삭제" style="width: 460px; background: #FFFFFF; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.25); padding: 24px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 10px;"><span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 999px; background: #FDECEA; color: #CE2315; display: inline-flex; align-items: center; justify-content: center; font-weight: 800;">!</span><h2 style="margin: 0; font-size: 17px; font-weight: 700;">정비 이력 삭제</h2></div>
+        <div style="font-size: 13px; line-height: 20px; color: #475467;"><b>2027.04.02 부품 교체</b> 정비 이력을 삭제할까요? 삭제하면 되돌릴 수 없습니다.</div>
+        <div style="display: flex; justify-content: flex-end; gap: 8px;"><button type="button" onClick="{{closeDelete}}" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #FFFFFF; color: #333333; border: 1px solid #BBBBBB; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">취소</button><a href="Aircraft.html" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #CE2315; color: #FFFFFF; border: 1px solid #CE2315; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">삭제</a></div>
+      </div>
+    </div>
+  </sc-if>
+</script>
+<script type="text/x-dc-logic" id="dc-src">
+class Component extends DCLogic {
+  renderVals() {
+    var self = this, s = this.state || {};
+    return {
+      save: function () { self.setState({ saved: true }); }, saved: !!s.saved,
+      confirmDelete: !!s.del,
+      openDelete: function () { self.setState({ del: true }); },
+      closeDelete: function () { self.setState({ del: false }); }
+    };
+  }
+}
+
+;(function () {
+  var PAGE = 'MaintEdit', ACT_BG = '#FFFFFF';
+  var BASE = [['DroneDx', '정밀진단 관리'], ['Field', '드론 파종'], ['Main', '처방 확인 · 임무 생성'], ['Missions', '임무 관리'], ['Fleet', '드론 현황'], ['Monitor', '실시간 리플레이 · DR-01'], ['HistoryList', '작업 이력']];
+  var EXTRA = { Aircraft: '기체 관리', History: '작업 이력 상세', DroneDxData: '결과 등록 · 이력', DroneDxReg: '결과 등록', AircraftForm: '기체 등록', AircraftEdit: '기체 수정 · DR-02', MaintForm: '정비 등록', MaintEdit: '정비 이력 수정' };
+  var KEY = PAGE === 'MainSend' ? 'Main' : PAGE;
+  var LS = 'ddsp-closed-tabs';
+  function load() { try { return JSON.parse(window.localStorage.getItem(LS) || '[]'); } catch (e) { return []; } }
+  function save(x) { try { window.localStorage.setItem(LS, JSON.stringify(x)); } catch (e) {} }
+  function go(href) { try { window.location.href = href; } catch (e) {} }
+  var orig = Component.prototype.renderVals;
+  Component.prototype.renderVals = function () {
+    var v = orig.call(this) || {}, self = this;
+    var st = this.state || {};
+    var closed = (st._tabsClosed || load()).filter(function (k) { return k !== KEY; });
+    var all = BASE.slice(); if (EXTRA[KEY]) all.push([KEY, EXTRA[KEY]]);
+    var vis = all.filter(function (t) { return closed.indexOf(t[0]) < 0; });
+    function closeTab(k) {
+      var c = closed.concat([k]); save(c);
+      if (k === KEY) {
+        var i = vis.map(function (t) { return t[0]; }).indexOf(k);
+        var nb = vis[i - 1] || vis[i + 1];
+        go(nb ? nb[0] + '.html' : 'Fleet.html');
+      } else { self.setState({ _tabsClosed: c }); }
+    }
+    v.openTabs = vis.map(function (t) {
+      var on = t[0] === KEY;
+      return { label: t[1], href: on ? '#' : t[0] + '.html', sel: on ? 'true' : 'false', bg: on ? ACT_BG : '#E2E2E2', bt: on ? '2px solid #EF4122' : '2px solid transparent',
+        fg: on ? '#222222' : '#555555', fw: on ? 700 : 600, xc: on ? '#666666' : '#999999', closeLabel: t[1] + ' 탭 닫기', close: function () { closeTab(t[0]); } };
+    });
+    v.closeAllTabs = function () { var c = all.map(function (t) { return t[0]; }).filter(function (k) { return k !== KEY; }); save(c); self.setState({ _tabsClosed: c }); };
+    return v;
+  };
+})();
+</script>
+</body>
+</html>

@@ -794,7 +794,7 @@ class Component extends DCLogic {
 ;(function () {
   var PAGE = 'Field', ACT_BG = '#FFFFFF';
   var BASE = [['DroneDx', '정밀진단 관리'], ['Field', '드론 파종'], ['Main', '처방 확인 · 임무 생성'], ['Missions', '임무 관리'], ['Fleet', '드론 현황'], ['Monitor', '실시간 리플레이 · DR-01'], ['HistoryList', '작업 이력']];
-  var EXTRA = { Aircraft: '기체 관리', History: '작업 이력 상세', DroneDxData: '결과 등록 · 이력', DroneDxReg: '결과 등록', AircraftForm: '기체 등록', AircraftEdit: '기체 수정 · DR-02' };
+  var EXTRA = { Aircraft: '기체 관리', History: '작업 이력 상세', DroneDxData: '결과 등록 · 이력', DroneDxReg: '결과 등록', AircraftForm: '기체 등록', AircraftEdit: '기체 수정 · DR-02', MaintForm: '정비 등록', MaintEdit: '정비 이력 수정' };
   var KEY = PAGE === 'MainSend' ? 'Main' : PAGE;
   var LS = 'ddsp-closed-tabs';
   function load() { try { return JSON.parse(window.localStorage.getItem(LS) || '[]'); } catch (e) { return []; } }

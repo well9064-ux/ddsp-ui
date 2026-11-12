@@ -94,6 +94,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{cur.badge}}">{{cur.state}}</x-import>
             <span style="font-size: 13px; color: #667085;">aircraft_id (GCS 식별자) {{cur.gcs}}</span>
             <div style="flex-grow: 1;"></div>
+            <a href="MaintForm.html" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #FFFFFF; color: #333333; border: 1px solid #BBBBBB; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">정비 등록</a>
             <button type="button" onClick="{{openDelete}}" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #FFFFFF; color: #CE2315; border: 1px solid #CE2315; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">삭제</button>
             <a href="AircraftEdit.html" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #CE2315; color: #FFFFFF; border: 1px solid #CE2315; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">수정</a>
           </div>
@@ -101,6 +102,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
           <div role="tablist" aria-label="기체 정보" style="display: flex; gap: 4px; border-bottom: 1px solid #DFE7EB;">
             <a href="#ac-info" role="tab" aria-selected="true" style="padding: 10px 14px; font-size: 14px; font-weight: 600; color: #EF4122; border-bottom: 2px solid #EF4122; margin-bottom: -1px;">기본 정보</a>
             <a href="#ac-module" role="tab" aria-selected="false" style="padding: 10px 14px; font-size: 14px; color: #475467;">파종 모듈 · 펌웨어</a>
+            <a href="#ac-service" role="tab" aria-selected="false" style="padding: 10px 14px; font-size: 14px; color: #475467;">정비 이력</a>
             <a href="#ac-pilot" role="tab" aria-selected="false" style="padding: 10px 14px; font-size: 14px; color: #475467;">운용자</a>
           </div>
 
@@ -120,6 +122,22 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             </section>
 
           </div>
+
+          <section id="ac-service" aria-label="정비 이력" style="border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 2px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;"><h3 style="margin: 0; font-size: 15px; font-weight: 700;">정비 이력</h3><span style="font-size: 13px; color: #667085;">{{cur.svcCount}}건</span><div style="flex-grow: 1;"></div><a href="MaintForm.html" style="height: 28px; padding: 0 12px; display: inline-flex; align-items: center; border: 1px solid #344054; border-radius: 3px; color: #344054; font-size: 12px; font-weight: 700;">+ 정비 등록</a></div>
+            <sc-if value="{{cur.svcEmpty}}" hint-placeholder-val="{{false}}"><div style="padding: 14px 0; font-size: 13px; color: #98A2B3;">등록된 정비 이력이 없습니다.</div></sc-if>
+            <sc-for list="{{cur.service}}" as="v" hint-placeholder-count="3">
+              <div style="display: flex; gap: 12px; align-items: center; padding: 9px 0; border-bottom: 1px solid #EEEEEE; font-size: 14px;">
+                <span style="width: 86px; color: #667085;">{{v.date}}</span>
+                <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{v.badge}}">{{v.kind}}</x-import>
+                <span style="flex-grow: 1;">{{v.desc}}</span>
+                <span style="width: 120px; color: #475467; font-size: 13px;">{{v.by}}</span>
+                <span style="width: 80px; text-align: right; color: #475467;">{{v.cost}}</span>
+                <a href="MaintEdit.html" style="height: 24px; padding: 0 9px; display: inline-flex; align-items: center; border: 1px solid #0070C0; border-radius: 3px; font-size: 11px; font-weight: 700;">수정</a>
+                <button type="button" onClick="{{v.del}}" style="height: 24px; padding: 0 9px; border: 1px solid #CE2315; border-radius: 3px; background: #FFFFFF; color: #CE2315; font: 700 11px var(--font-primary); cursor: pointer;">삭제</button>
+              </div>
+            </sc-for>
+          </section>
 
           <section id="ac-pilot" aria-label="운용자" style="border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
             <h3 style="margin: 0; font-size: 15px; font-weight: 700;">운용자 (농가·법인)</h3>
@@ -156,39 +174,52 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
       </div>
     </div>
   </sc-if>
+
+  <sc-if value="{{svcDelOpen}}" hint-placeholder-val="{{false}}">
+    <div style="position: absolute; inset: 0; background: rgba(14,28,49,0.45); display: flex; justify-content: center; align-items: flex-start; padding-top: 180px; z-index: 20; font-family: var(--font-primary); color: #222222;">
+      <div role="dialog" aria-modal="true" aria-label="정비 이력 삭제" style="width: 460px; background: #FFFFFF; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.25); padding: 24px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 10px;"><span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 999px; background: #FDECEA; color: #CE2315; display: inline-flex; align-items: center; justify-content: center; font-weight: 800;">!</span><h2 style="margin: 0; font-size: 17px; font-weight: 700;">정비 이력 삭제</h2></div>
+        <div style="font-size: 13px; line-height: 20px; color: #475467;"><b>{{svcDelLabel}}</b> 정비 이력을 삭제할까요? 삭제하면 되돌릴 수 없습니다.</div>
+        <div style="display: flex; justify-content: flex-end; gap: 8px;"><button type="button" onClick="{{closeSvcDel}}" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #FFFFFF; color: #333333; border: 1px solid #BBBBBB; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">취소</button><button type="button" onClick="{{doSvcDel}}" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #CE2315; color: #FFFFFF; border: 1px solid #CE2315; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">삭제</button></div>
+      </div>
+    </div>
+  </sc-if>
 </script>
 <script type="text/x-dc-logic" id="dc-src">
 var AIRCRAFT = [
   {
+    service: [['2027.04.02', '부품 교체', 'neutral', '프로펠러 2개 교체', '박OO (정비)', '₩180,000'], ['2027.03.20', '펌웨어', 'neutral', '파종 모듈 v1.4.0 → v1.4.2', '관리자 김OO', '-'], ['2027.03.05', '초기 점검', 'neutral', '도입 점검 · 파종 모듈 장착 · 캘리브레이션', '락로보틱스', '-']],
     id: 'DR-01', state: '작업 중', badge: 'progress', model: '국산 파종드론', owner: '신OO (농가)', gcs: 'RR-GCS-7731',
-    info: [['기체 S/N', 'DSD-24-0001'], ['기종', '국산 파종드론 [모델명]'], ['기체 신고번호', '[신고번호]'], ['소유', '신OO (농가)'], ['관리 대리점', '김제 대리점'], ['등록', '2027.03.02 · 농가 직접 등록 · GCS 연결 확인'], ['누적 비행시간', '3.1시간'], ['누적 작업면적', '8,470평']],
+    info: [['기체 S/N', 'DSD-24-0001'], ['기종', '국산 파종드론 [모델명]'], ['기체 신고번호', '[신고번호]'], ['소유', '신OO (농가)'], ['등록', '2027.03.02 · 농가 직접 등록 · GCS 연결 확인'], ['누적 비행시간', '3.1시간'], ['누적 작업면적', '8,470평']],
     module: [['파종기 S/N', 'SM-0107'], ['변량 제어기', 'VRC-0107'], ['펌웨어', 'v1.4.2'], ['장착일', '2027.03.05']], fwState: '최신', fwBadge: 'success',
     pilot: '신OO (농가)', pilotExp: '2029.02.28', pilotHours: '2.6시간'
   },
   {
+    service: [['2027.03.21', '부품 교체', 'neutral', '파종기 배출구 노즐 교체', '락로보틱스', '₩65,000'], ['2027.03.05', '초기 점검', 'neutral', '도입 점검 · 파종 모듈 장착 · 캘리브레이션', '락로보틱스', '-']],
     id: 'DR-02', state: '미작업', badge: 'neutral', model: '국산 파종드론', owner: '락로보틱스(실증)', gcs: 'RR-GCS-7733',
-    info: [['기체 S/N', 'DSD-24-0002'], ['기종', '국산 파종드론 [모델명]'], ['기체 신고번호', '[신고번호]'], ['소유', '락로보틱스(실증)'], ['관리 대리점', '김제 대리점'], ['등록', '2027.03.02 · 관리자 등록 · GCS 연결 확인'], ['누적 비행시간', '2.4시간'], ['누적 작업면적', '6,050평']],
+    info: [['기체 S/N', 'DSD-24-0002'], ['기종', '국산 파종드론 [모델명]'], ['기체 신고번호', '[신고번호]'], ['소유', '락로보틱스(실증)'], ['등록', '2027.03.02 · 관리자 등록 · GCS 연결 확인'], ['누적 비행시간', '2.4시간'], ['누적 작업면적', '6,050평']],
     module: [['파종기 S/N', 'SM-0108'], ['변량 제어기', 'VRC-0108'], ['펌웨어', 'v1.4.0'], ['장착일', '2027.03.05']], fwState: '업데이트 필요 (v1.4.2)', fwBadge: 'wait',
     pilot: 'OO영농조합 (법인)', pilotExp: '2028.11.30', pilotHours: '2.4시간'
   },
   {
+    service: [['2027.04.20', '정기 점검', 'wait', '50시간 정기 점검 예정', '-', '예정'], ['2027.02.20', '초기 점검', 'neutral', '도입 점검 · 파종 키트 장착', '관리자 김OO', '-']],
     id: 'DR-03', state: '미작업', badge: 'neutral', model: 'DJI Agras T50', owner: '대동 실증 법인', gcs: 'RR-GCS-7735',
-    info: [['기체 S/N', 'AGR-T50-1183'], ['기종', 'DJI Agras T50'], ['기체 신고번호', '[신고번호]'], ['소유', '대동 실증 법인'], ['관리 대리점', 'DJI 공식 대리점'], ['등록', '2027.02.20 · 관리자 등록 · GCS 연결 확인'], ['누적 비행시간', '1.6시간'], ['누적 작업면적', '3,630평']],
+    info: [['기체 S/N', 'AGR-T50-1183'], ['기종', 'DJI Agras T50'], ['기체 신고번호', '[신고번호]'], ['소유', '대동 실증 법인'], ['등록', '2027.02.20 · 관리자 등록 · GCS 연결 확인'], ['누적 비행시간', '1.6시간'], ['누적 작업면적', '3,630평']],
     module: [['파종 장치', 'T50 파종 키트'], ['변량 제어', '제조사 내장'], ['펌웨어', 'v05.01'], ['장착일', '2027.02.20']], fwState: '최신', fwBadge: 'success',
     pilot: '박OO (농가)', pilotExp: '2028.06.30', pilotHours: '1.6시간'
   }
 ];
 [['DR-04', '미작업', 'neutral', '윤OO (농가)', 'RR-GCS-7741', 'DSD-24-0004'], ['DR-05', '미작업', 'neutral', '이OO (농가)', 'RR-GCS-7802', 'DSD-24-0005'], ['DR-06', '작업 중', 'progress', '박OO (농가)', 'RR-GCS-7743', 'DSD-24-0006'], ['DR-07', '작업 중', 'progress', 'OO영농조합 (법인)', 'RR-GCS-7790', 'DSD-24-0007'], ['DR-08', '작업 중', 'progress', 'OO영농조합 (법인)', 'RR-GCS-7791', 'DSD-24-0008'], ['DR-09', '작업 중', 'progress', '김OO (농가)', 'RR-GCS-7745', 'DSD-24-0009'], ['DR-10', '미작업', 'neutral', '정OO (농가)', 'RR-GCS-7746', 'DSD-24-0010'], ['DR-11', '작업 중', 'progress', '최OO (농가)', 'RR-GCS-7747', 'DSD-24-0011'], ['DR-12', '미작업', 'neutral', '한OO (농가)', 'RR-GCS-7748', 'DSD-24-0012']].forEach(function (e) {
   AIRCRAFT.push({ id: e[0], state: e[1], badge: e[2], model: '국산 파종드론', owner: e[3], gcs: e[4],
-    info: [['기체 S/N', e[5]], ['기종', '국산 파종드론 [모델명]'], ['기체 신고번호', '[신고번호]'], ['소유', e[3]], ['관리 대리점', '김제 대리점'], ['등록', '2027.03 · 농가·법인 직접 등록 · GCS 연결 확인'], ['누적 비행시간', '-'], ['누적 작업면적', '-']],
-    module: [['파종기 S/N', '-'], ['변량 제어기', '-'], ['펌웨어', 'v1.4.2'], ['장착일', '-']], fwState: '최신', fwBadge: 'success', pilot: e[3], pilotExp: '-', pilotHours: '-' });
+    info: [['기체 S/N', e[5]], ['기종', '국산 파종드론 [모델명]'], ['기체 신고번호', '[신고번호]'], ['소유', e[3]], ['등록', '2027.03 · 농가·법인 직접 등록 · GCS 연결 확인'], ['누적 비행시간', '-'], ['누적 작업면적', '-']],
+    module: [['파종기 S/N', '-'], ['변량 제어기', '-'], ['펌웨어', 'v1.4.2'], ['장착일', '-']], fwState: '최신', fwBadge: 'success', service: [], pilot: e[3], pilotExp: '-', pilotHours: '-' });
 });
 function kv(a) { return a.map(function (x) { return { k: x[0], v: x[1] }; }); }
 class Component extends DCLogic {
   renderVals() {
     var self = this;
     var s = this.state || {};
-    var removed = s.removed || [];
+    var removed = s.removed || [], svcGone = s.svcGone || [];
     var LIVE = AIRCRAFT.filter(function (x) { return removed.indexOf(x.id) < 0; });
     var sel = s.sel || 'DR-01';
     var a = LIVE.filter(function (x) { return x.id === sel; })[0] || LIVE[0];
@@ -202,6 +233,9 @@ class Component extends DCLogic {
           pick: function () { self.setState({ sel: x.id }); }
         };
       }),
+      svcDelOpen: !!s.svcDel, svcDelLabel: s.svcDelLabel || '',
+      closeSvcDel: function () { self.setState({ svcDel: null }); },
+      doSvcDel: function () { self.setState({ svcGone: svcGone.concat([s.svcDel]), svcDel: null }); },
       delOk: !!s.del && a.state !== '작업 중', delBlocked: !!s.del && a.state === '작업 중',
       openDelete: function () { self.setState({ del: true }); },
       closeDelete: function () { self.setState({ del: false }); },
@@ -209,6 +243,9 @@ class Component extends DCLogic {
       cur: {
         id: a.id, state: a.state, badge: a.badge, gcs: a.gcs,
         info: kv(a.info), module: kv(a.module), fwState: a.fwState, fwBadge: a.fwBadge,
+        svcCount: String(a.service.filter(function (v) { return svcGone.indexOf(a.id + v[0] + v[3]) < 0; }).length),
+        svcEmpty: a.service.filter(function (v) { return svcGone.indexOf(a.id + v[0] + v[3]) < 0; }).length === 0,
+        service: a.service.filter(function (v) { return svcGone.indexOf(a.id + v[0] + v[3]) < 0; }).map(function (v) { return { date: v[0], kind: v[1], badge: v[2], desc: v[3], by: v[4], cost: v[5], del: function () { self.setState({ svcDel: a.id + v[0] + v[3], svcDelLabel: v[0] + ' ' + v[1] }); } }; }),
         pilot: a.pilot, pilotExp: a.pilotExp, pilotHours: a.pilotHours
       }
     };
@@ -218,7 +255,7 @@ class Component extends DCLogic {
 ;(function () {
   var PAGE = 'Aircraft', ACT_BG = '#FFFFFF';
   var BASE = [['DroneDx', '정밀진단 관리'], ['Field', '드론 파종'], ['Main', '처방 확인 · 임무 생성'], ['Missions', '임무 관리'], ['Fleet', '드론 현황'], ['Monitor', '실시간 리플레이 · DR-01'], ['HistoryList', '작업 이력']];
-  var EXTRA = { Aircraft: '기체 관리', History: '작업 이력 상세', DroneDxData: '결과 등록 · 이력', DroneDxReg: '결과 등록', AircraftForm: '기체 등록', AircraftEdit: '기체 수정 · DR-02' };
+  var EXTRA = { Aircraft: '기체 관리', History: '작업 이력 상세', DroneDxData: '결과 등록 · 이력', DroneDxReg: '결과 등록', AircraftForm: '기체 등록', AircraftEdit: '기체 수정 · DR-02', MaintForm: '정비 등록', MaintEdit: '정비 이력 수정' };
   var KEY = PAGE === 'MainSend' ? 'Main' : PAGE;
   var LS = 'ddsp-closed-tabs';
   function load() { try { return JSON.parse(window.localStorage.getItem(LS) || '[]'); } catch (e) { return []; } }

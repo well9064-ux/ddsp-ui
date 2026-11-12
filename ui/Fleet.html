@@ -139,8 +139,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
         </div>
         <span style="font-weight: 700;">기종</span>
         <div style="display: flex; align-items: center; gap: 40px;">
-          <span style="width: 360px; height: 28px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">전체 <span aria-hidden="true">⌄</span></span>
-          <span style="display: flex; align-items: center; gap: 40px;"><span style="font-weight: 700;">관리 대리점</span><span style="width: 300px; height: 28px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">전체 <span aria-hidden="true">⌄</span></span></span>
+          <span style="width: 360px; height: 28px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC;">전체 <span aria-hidden="true">⌄</span></span></span>
         </div>
         <label for="fl-q" style="font-weight: 700;">검색어</label>
         <div style="display: flex; align-items: center; gap: 8px;">
@@ -261,7 +260,7 @@ class Component extends DCLogic {
 ;(function () {
   var PAGE = 'Fleet', ACT_BG = '#FFFFFF';
   var BASE = [['DroneDx', '정밀진단 관리'], ['Field', '드론 파종'], ['Main', '처방 확인 · 임무 생성'], ['Missions', '임무 관리'], ['Fleet', '드론 현황'], ['Monitor', '실시간 리플레이 · DR-01'], ['HistoryList', '작업 이력']];
-  var EXTRA = { Aircraft: '기체 관리', History: '작업 이력 상세', DroneDxData: '결과 등록 · 이력', DroneDxReg: '결과 등록', AircraftForm: '기체 등록', AircraftEdit: '기체 수정 · DR-02' };
+  var EXTRA = { Aircraft: '기체 관리', History: '작업 이력 상세', DroneDxData: '결과 등록 · 이력', DroneDxReg: '결과 등록', AircraftForm: '기체 등록', AircraftEdit: '기체 수정 · DR-02', MaintForm: '정비 등록', MaintEdit: '정비 이력 수정' };
   var KEY = PAGE === 'MainSend' ? 'Main' : PAGE;
   var LS = 'ddsp-closed-tabs';
   function load() { try { return JSON.parse(window.localStorage.getItem(LS) || '[]'); } catch (e) { return []; } }
