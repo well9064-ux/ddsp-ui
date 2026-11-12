@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=1440">
-<title>처방 검토 · 작업 계획 · 드론 파종 컨셉 UI</title>
+<title>처방 확인 · 임무 생성 · 드론 파종 컨셉 UI</title>
 <link rel="stylesheet" href="../lib/tokens.css">
 <link rel="stylesheet" href="../lib/bundle.css">
 <style>body{margin:0;background:#FFFFFF} a{text-decoration:none}
@@ -39,12 +39,12 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
     </header>
     <div role="tablist" aria-label="열린 화면" style="height: 34px; flex-shrink: 0; display: flex; align-items: flex-end; gap: 2px; padding: 0 10px; background: #EEEEEE;">
       <a href="Field.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 22px; display: flex; align-items: center; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">드론 파종</a>
-      <a href="#" role="tab" aria-selected="true" style="height: 30px; padding: 0 22px; display: flex; align-items: center; gap: 10px; background: #F4F6F9; color: #222222; font-size: 12px; font-weight: 600;">처방 검토 · 작업 계획 <span aria-hidden="true" style="color: #666666;">×</span></a>
+      <a href="#" role="tab" aria-selected="true" style="height: 30px; padding: 0 22px; display: flex; align-items: center; gap: 10px; background: #F4F6F9; color: #222222; font-size: 12px; font-weight: 600;">처방 확인 · 임무 생성 <span aria-hidden="true" style="color: #666666;">×</span></a>
     </div>
 
     <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 20px 24px 32px; display: flex; flex-direction: column; gap: 16px;">
 
-      <div style="font-size: 12px; color: #667085;">드론 정밀진단 › <a href="Field.html">드론 파종</a> › 처방 검토 · 작업 계획</div>
+      <div style="font-size: 12px; color: #667085;">드론 정밀진단 › <a href="Field.html">드론 파종</a> › 처방 확인 · 임무 생성</div>
 
       <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
         <h1 style="margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.6px;">김제 실증 A-03 필지</h1>
@@ -52,23 +52,19 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
         <span style="font-size: 14px; color: #667085;">IRG · field_id FLD-KJ-0003 · 3,025평</span>
         <div style="flex-grow: 1;"></div>
         <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="tertiary">처방 원본 내려받기</x-import>
-        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="secondary">수동 보정</x-import>
-        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="secondary">반려</x-import>
-        <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="primary">처방 승인하기</x-import>
+        <a href="DroneDxReg.html" style="font-size: 14px; font-weight: 600;">처방맵 다시 등록 ›</a>
       </div>
 
       <ol aria-label="진행 단계" style="margin: 0; padding: 12px 16px; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; font-size: 14px;">
-        <li style="display: flex; align-items: center; gap: 6px; color: #066B36;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #E6F4EC; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">1</span>처방 수신</li>
+        <li style="display: flex; align-items: center; gap: 6px; color: #066B36;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #E6F4EC; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">1</span>처방맵 등록</li>
         <li aria-hidden="true" style="width: 28px; height: 1px; background: #D0D5DD;"></li>
-        <li style="display: flex; align-items: center; gap: 6px; color: #066B36;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #E6F4EC; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">2</span>검토 · 보정</li>
+        <li aria-current="step" style="display: flex; align-items: center; gap: 6px; color: #0E1C31; font-weight: 600;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #EF4122; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">2</span>임무 생성</li>
         <li aria-hidden="true" style="width: 28px; height: 1px; background: #D0D5DD;"></li>
-        <li style="display: flex; align-items: center; gap: 6px; color: #066B36;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #E6F4EC; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">3</span>처방 승인</li>
+        <li style="display: flex; align-items: center; gap: 6px; color: #667085;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #EAEDF0; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">3</span>GCS 서버 전송</li>
         <li aria-hidden="true" style="width: 28px; height: 1px; background: #D0D5DD;"></li>
-        <li aria-current="step" style="display: flex; align-items: center; gap: 6px; color: #0E1C31; font-weight: 600;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #EF4122; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">4</span>작업 계획</li>
+        <li style="display: flex; align-items: center; gap: 6px; color: #667085;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #EAEDF0; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">4</span>조종기 임무 확인</li>
         <li aria-hidden="true" style="width: 28px; height: 1px; background: #D0D5DD;"></li>
-        <li style="display: flex; align-items: center; gap: 6px; color: #667085;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #EAEDF0; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">5</span>GCS 서버 전송</li>
-        <li aria-hidden="true" style="width: 28px; height: 1px; background: #D0D5DD;"></li>
-        <li style="display: flex; align-items: center; gap: 6px; color: #667085;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #EAEDF0; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">6</span>작업 수행</li>
+        <li style="display: flex; align-items: center; gap: 6px; color: #667085;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #EAEDF0; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">5</span>파종</li>
       </ol>
 
       <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch;">
@@ -238,134 +234,133 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
               <path d="M473.2 328.4 L484.8 332.4 L480.7 343.9 L469.1 339.9 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M469.1 339.9 L480.7 343.9 L476.5 355.5 L465.0 351.4 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M465.0 351.4 L476.5 355.5 L472.4 367.0 L460.9 363.0 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M460.9 363.0 L472.4 367.0 L468.3 378.5 L456.8 374.5 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M456.8 374.5 L468.3 378.5 L464.2 390.1 L452.6 386.0 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M452.6 386.0 L464.2 390.1 L460.1 401.6 L448.5 397.6 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M448.5 397.6 L460.1 401.6 L456.0 413.1 L444.4 409.1 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M444.4 409.1 L456.0 413.1 L451.9 424.6 L440.3 420.6 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M460.9 363.0 L472.4 367.0 L468.3 378.5 L456.8 374.5 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M456.8 374.5 L468.3 378.5 L464.2 390.1 L452.6 386.0 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M452.6 386.0 L464.2 390.1 L460.1 401.6 L448.5 397.6 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M448.5 397.6 L460.1 401.6 L456.0 413.1 L444.4 409.1 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M444.4 409.1 L456.0 413.1 L451.9 424.6 L440.3 420.6 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M493.0 309.3 L504.5 313.4 L500.4 324.9 L488.9 320.9 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M488.9 320.9 L500.4 324.9 L496.3 336.4 L484.8 332.4 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M484.8 332.4 L496.3 336.4 L492.2 348.0 L480.7 343.9 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M480.7 343.9 L492.2 348.0 L488.1 359.5 L476.5 355.5 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M476.5 355.5 L488.1 359.5 L484.0 371.0 L472.4 367.0 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M472.4 367.0 L484.0 371.0 L479.9 382.5 L468.3 378.5 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M468.3 378.5 L479.9 382.5 L475.8 394.1 L464.2 390.1 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M464.2 390.1 L475.8 394.1 L471.7 405.6 L460.1 401.6 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M460.1 401.6 L471.7 405.6 L467.5 417.1 L456.0 413.1 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M456.0 413.1 L467.5 417.1 L463.4 428.7 L451.9 424.6 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M472.4 367.0 L484.0 371.0 L479.9 382.5 L468.3 378.5 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M468.3 378.5 L479.9 382.5 L475.8 394.1 L464.2 390.1 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M464.2 390.1 L475.8 394.1 L471.7 405.6 L460.1 401.6 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M460.1 401.6 L471.7 405.6 L467.5 417.1 L456.0 413.1 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M456.0 413.1 L467.5 417.1 L463.4 428.7 L451.9 424.6 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M504.5 313.4 L516.1 317.4 L512.0 328.9 L500.4 324.9 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M500.4 324.9 L512.0 328.9 L507.9 340.4 L496.3 336.4 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M496.3 336.4 L507.9 340.4 L503.8 352.0 L492.2 348.0 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M492.2 348.0 L503.8 352.0 L499.7 363.5 L488.1 359.5 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M488.1 359.5 L499.7 363.5 L495.6 375.0 L484.0 371.0 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M484.0 371.0 L495.6 375.0 L491.4 386.6 L479.9 382.5 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M479.9 382.5 L491.4 386.6 L487.3 398.1 L475.8 394.1 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M475.8 394.1 L487.3 398.1 L483.2 409.6 L471.7 405.6 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M471.7 405.6 L483.2 409.6 L479.1 421.2 L467.5 417.1 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M467.5 417.1 L479.1 421.2 L475.0 432.7 L463.4 428.7 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M484.0 371.0 L495.6 375.0 L491.4 386.6 L479.9 382.5 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M479.9 382.5 L491.4 386.6 L487.3 398.1 L475.8 394.1 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M475.8 394.1 L487.3 398.1 L483.2 409.6 L471.7 405.6 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M471.7 405.6 L483.2 409.6 L479.1 421.2 L467.5 417.1 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M467.5 417.1 L479.1 421.2 L475.0 432.7 L463.4 428.7 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M516.1 317.4 L527.7 321.4 L523.6 332.9 L512.0 328.9 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M512.0 328.9 L523.6 332.9 L519.4 344.5 L507.9 340.4 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M507.9 340.4 L519.4 344.5 L515.3 356.0 L503.8 352.0 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M503.8 352.0 L515.3 356.0 L511.2 367.5 L499.7 363.5 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M499.7 363.5 L511.2 367.5 L507.1 379.1 L495.6 375.0 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M495.6 375.0 L507.1 379.1 L503.0 390.6 L491.4 386.6 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M491.4 386.6 L503.0 390.6 L498.9 402.1 L487.3 398.1 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M487.3 398.1 L498.9 402.1 L494.8 413.6 L483.2 409.6 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M483.2 409.6 L494.8 413.6 L490.7 425.2 L479.1 421.2 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M479.1 421.2 L490.7 425.2 L486.6 436.7 L475.0 432.7 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M495.6 375.0 L507.1 379.1 L503.0 390.6 L491.4 386.6 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M491.4 386.6 L503.0 390.6 L498.9 402.1 L487.3 398.1 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M487.3 398.1 L498.9 402.1 L494.8 413.6 L483.2 409.6 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M483.2 409.6 L494.8 413.6 L490.7 425.2 L479.1 421.2 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M479.1 421.2 L490.7 425.2 L486.6 436.7 L475.0 432.7 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M527.7 321.4 L539.2 325.4 L535.1 337.0 L523.6 332.9 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M523.6 332.9 L535.1 337.0 L531.0 348.5 L519.4 344.5 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M519.4 344.5 L531.0 348.5 L526.9 360.0 L515.3 356.0 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M515.3 356.0 L526.9 360.0 L522.8 371.5 L511.2 367.5 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M511.2 367.5 L522.8 371.5 L518.7 383.1 L507.1 379.1 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M507.1 379.1 L518.7 383.1 L514.6 394.6 L503.0 390.6 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M503.0 390.6 L514.6 394.6 L510.5 406.1 L498.9 402.1 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M498.9 402.1 L510.5 406.1 L506.3 417.7 L494.8 413.6 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M494.8 413.6 L506.3 417.7 L502.2 429.2 L490.7 425.2 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M490.7 425.2 L502.2 429.2 L498.1 440.7 L486.6 436.7 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M507.1 379.1 L518.7 383.1 L514.6 394.6 L503.0 390.6 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M503.0 390.6 L514.6 394.6 L510.5 406.1 L498.9 402.1 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M498.9 402.1 L510.5 406.1 L506.3 417.7 L494.8 413.6 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M494.8 413.6 L506.3 417.7 L502.2 429.2 L490.7 425.2 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M490.7 425.2 L502.2 429.2 L498.1 440.7 L486.6 436.7 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M539.2 325.4 L550.8 329.4 L546.7 341.0 L535.1 337.0 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M535.1 337.0 L546.7 341.0 L542.6 352.5 L531.0 348.5 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M531.0 348.5 L542.6 352.5 L538.5 364.0 L526.9 360.0 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M526.9 360.0 L538.5 364.0 L534.3 375.6 L522.8 371.5 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M522.8 371.5 L534.3 375.6 L530.2 387.1 L518.7 383.1 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M518.7 383.1 L530.2 387.1 L526.1 398.6 L514.6 394.6 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M514.6 394.6 L526.1 398.6 L522.0 410.2 L510.5 406.1 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M510.5 406.1 L522.0 410.2 L517.9 421.7 L506.3 417.7 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M506.3 417.7 L517.9 421.7 L513.8 433.2 L502.2 429.2 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M502.2 429.2 L513.8 433.2 L509.7 444.7 L498.1 440.7 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M518.7 383.1 L530.2 387.1 L526.1 398.6 L514.6 394.6 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M514.6 394.6 L526.1 398.6 L522.0 410.2 L510.5 406.1 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M510.5 406.1 L522.0 410.2 L517.9 421.7 L506.3 417.7 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M506.3 417.7 L517.9 421.7 L513.8 433.2 L502.2 429.2 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M502.2 429.2 L513.8 433.2 L509.7 444.7 L498.1 440.7 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M550.8 329.4 L562.4 333.5 L558.2 345.0 L546.7 341.0 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M546.7 341.0 L558.2 345.0 L554.1 356.5 L542.6 352.5 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M542.6 352.5 L554.1 356.5 L550.0 368.1 L538.5 364.0 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M538.5 364.0 L550.0 368.1 L545.9 379.6 L534.3 375.6 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M534.3 375.6 L545.9 379.6 L541.8 391.1 L530.2 387.1 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M530.2 387.1 L541.8 391.1 L537.7 402.7 L526.1 398.6 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M526.1 398.6 L537.7 402.7 L533.6 414.2 L522.0 410.2 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M522.0 410.2 L533.6 414.2 L529.5 425.7 L517.9 421.7 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M517.9 421.7 L529.5 425.7 L525.4 437.2 L513.8 433.2 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M513.8 433.2 L525.4 437.2 L521.2 448.8 L509.7 444.7 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M530.2 387.1 L541.8 391.1 L537.7 402.7 L526.1 398.6 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M526.1 398.6 L537.7 402.7 L533.6 414.2 L522.0 410.2 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M522.0 410.2 L533.6 414.2 L529.5 425.7 L517.9 421.7 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M517.9 421.7 L529.5 425.7 L525.4 437.2 L513.8 433.2 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M513.8 433.2 L525.4 437.2 L521.2 448.8 L509.7 444.7 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M562.4 333.5 L573.9 337.5 L569.8 349.0 L558.2 345.0 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M558.2 345.0 L569.8 349.0 L565.7 360.6 L554.1 356.5 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M554.1 356.5 L565.7 360.6 L561.6 372.1 L550.0 368.1 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M550.0 368.1 L561.6 372.1 L557.5 383.6 L545.9 379.6 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M545.9 379.6 L557.5 383.6 L553.4 395.1 L541.8 391.1 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M541.8 391.1 L553.4 395.1 L549.2 406.7 L537.7 402.7 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M537.7 402.7 L549.2 406.7 L545.1 418.2 L533.6 414.2 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M533.6 414.2 L545.1 418.2 L541.0 429.7 L529.5 425.7 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M529.5 425.7 L541.0 429.7 L536.9 441.3 L525.4 437.2 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M525.4 437.2 L536.9 441.3 L532.8 452.8 L521.2 448.8 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M541.8 391.1 L553.4 395.1 L549.2 406.7 L537.7 402.7 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M537.7 402.7 L549.2 406.7 L545.1 418.2 L533.6 414.2 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M533.6 414.2 L545.1 418.2 L541.0 429.7 L529.5 425.7 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M529.5 425.7 L541.0 429.7 L536.9 441.3 L525.4 437.2 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M525.4 437.2 L536.9 441.3 L532.8 452.8 L521.2 448.8 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M573.9 337.5 L585.5 341.5 L581.4 353.0 L569.8 349.0 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M569.8 349.0 L581.4 353.0 L577.3 364.6 L565.7 360.6 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M565.7 360.6 L577.3 364.6 L573.1 376.1 L561.6 372.1 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M561.6 372.1 L573.1 376.1 L569.0 387.6 L557.5 383.6 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M557.5 383.6 L569.0 387.6 L564.9 399.2 L553.4 395.1 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M553.4 395.1 L564.9 399.2 L560.8 410.7 L549.2 406.7 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M549.2 406.7 L560.8 410.7 L556.7 422.2 L545.1 418.2 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M545.1 418.2 L556.7 422.2 L552.6 433.8 L541.0 429.7 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M541.0 429.7 L552.6 433.8 L548.5 445.3 L536.9 441.3 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M536.9 441.3 L548.5 445.3 L544.4 456.8 L532.8 452.8 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M553.4 395.1 L564.9 399.2 L560.8 410.7 L549.2 406.7 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M549.2 406.7 L560.8 410.7 L556.7 422.2 L545.1 418.2 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M545.1 418.2 L556.7 422.2 L552.6 433.8 L541.0 429.7 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M541.0 429.7 L552.6 433.8 L548.5 445.3 L536.9 441.3 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M536.9 441.3 L548.5 445.3 L544.4 456.8 L532.8 452.8 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M585.5 341.5 L597.0 345.5 L592.9 357.1 L581.4 353.0 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M581.4 353.0 L592.9 357.1 L588.8 368.6 L577.3 364.6 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M577.3 364.6 L588.8 368.6 L584.7 380.1 L573.1 376.1 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M573.1 376.1 L584.7 380.1 L580.6 391.7 L569.0 387.6 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M569.0 387.6 L580.6 391.7 L576.5 403.2 L564.9 399.2 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M564.9 399.2 L576.5 403.2 L572.4 414.7 L560.8 410.7 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M560.8 410.7 L572.4 414.7 L568.3 426.2 L556.7 422.2 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M556.7 422.2 L568.3 426.2 L564.2 437.8 L552.6 433.8 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M552.6 433.8 L564.2 437.8 L560.0 449.3 L548.5 445.3 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M548.5 445.3 L560.0 449.3 L555.9 460.8 L544.4 456.8 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M564.9 399.2 L576.5 403.2 L572.4 414.7 L560.8 410.7 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M560.8 410.7 L572.4 414.7 L568.3 426.2 L556.7 422.2 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M556.7 422.2 L568.3 426.2 L564.2 437.8 L552.6 433.8 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M552.6 433.8 L564.2 437.8 L560.0 449.3 L548.5 445.3 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M548.5 445.3 L560.0 449.3 L555.9 460.8 L544.4 456.8 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M597.0 345.5 L608.6 349.6 L604.5 361.1 L592.9 357.1 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M592.9 357.1 L604.5 361.1 L600.4 372.6 L588.8 368.6 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M588.8 368.6 L600.4 372.6 L596.3 384.1 L584.7 380.1 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M584.7 380.1 L596.3 384.1 L592.2 395.7 L580.6 391.7 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M580.6 391.7 L592.2 395.7 L588.0 407.2 L576.5 403.2 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M576.5 403.2 L588.0 407.2 L583.9 418.7 L572.4 414.7 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M572.4 414.7 L583.9 418.7 L579.8 430.3 L568.3 426.2 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M568.3 426.2 L579.8 430.3 L575.7 441.8 L564.2 437.8 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M564.2 437.8 L575.7 441.8 L571.6 453.3 L560.0 449.3 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M560.0 449.3 L571.6 453.3 L567.5 464.9 L555.9 460.8 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M576.5 403.2 L588.0 407.2 L583.9 418.7 L572.4 414.7 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M572.4 414.7 L583.9 418.7 L579.8 430.3 L568.3 426.2 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M568.3 426.2 L579.8 430.3 L575.7 441.8 L564.2 437.8 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M564.2 437.8 L575.7 441.8 L571.6 453.3 L560.0 449.3 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M560.0 449.3 L571.6 453.3 L567.5 464.9 L555.9 460.8 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M608.6 349.6 L620.2 353.6 L616.0 365.1 L604.5 361.1 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M604.5 361.1 L616.0 365.1 L611.9 376.6 L600.4 372.6 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M600.4 372.6 L611.9 376.6 L607.8 388.2 L596.3 384.1 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M596.3 384.1 L607.8 388.2 L603.7 399.7 L592.2 395.7 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M592.2 395.7 L603.7 399.7 L599.6 411.2 L588.0 407.2 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M588.0 407.2 L599.6 411.2 L595.5 422.8 L583.9 418.7 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M583.9 418.7 L595.5 422.8 L591.4 434.3 L579.8 430.3 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M579.8 430.3 L591.4 434.3 L587.3 445.8 L575.7 441.8 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M575.7 441.8 L587.3 445.8 L583.2 457.3 L571.6 453.3 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M571.6 453.3 L583.2 457.3 L579.1 468.9 L567.5 464.9 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M588.0 407.2 L599.6 411.2 L595.5 422.8 L583.9 418.7 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M583.9 418.7 L595.5 422.8 L591.4 434.3 L579.8 430.3 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M579.8 430.3 L591.4 434.3 L587.3 445.8 L575.7 441.8 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M575.7 441.8 L587.3 445.8 L583.2 457.3 L571.6 453.3 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M571.6 453.3 L583.2 457.3 L579.1 468.9 L567.5 464.9 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M620.2 353.6 L631.7 357.6 L627.6 369.1 L616.0 365.1 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M616.0 365.1 L627.6 369.1 L623.5 380.7 L611.9 376.6 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M611.9 376.6 L623.5 380.7 L619.4 392.2 L607.8 388.2 Z" fill="#CDEBD7" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
               <path d="M607.8 388.2 L619.4 392.2 L615.3 403.7 L603.7 399.7 Z" fill="#5FBF86" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M603.7 399.7 L615.3 403.7 L611.2 415.2 L599.6 411.2 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M599.6 411.2 L611.2 415.2 L607.1 426.8 L595.5 422.8 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M595.5 422.8 L607.1 426.8 L602.9 438.3 L591.4 434.3 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M591.4 434.3 L602.9 438.3 L598.8 449.8 L587.3 445.8 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M587.3 445.8 L598.8 449.8 L594.7 461.4 L583.2 457.3 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
-              <path d="M583.2 457.3 L594.7 461.4 L590.6 472.9 L579.1 468.9 Z" fill="#0B5E31" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M603.7 399.7 L615.3 403.7 L611.2 415.2 L599.6 411.2 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M599.6 411.2 L611.2 415.2 L607.1 426.8 L595.5 422.8 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M595.5 422.8 L607.1 426.8 L602.9 438.3 L591.4 434.3 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M591.4 434.3 L602.9 438.3 L598.8 449.8 L587.3 445.8 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M587.3 445.8 L598.8 449.8 L594.7 461.4 L583.2 457.3 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
+              <path d="M583.2 457.3 L594.7 461.4 L590.6 472.9 L579.1 468.9 Z" fill="#107C41" stroke="rgba(255,255,255,0.55)" stroke-width="0.6"></path>
             </g>
             <path d="M308 245 L630 357 L589 472 L267 360 Z" fill="none" stroke="#B4E319" stroke-width="3.5"></path>
-            <path d="M458.6 358.3 L611.6 408.8 L589 472 L444.1 421.6 Z" fill="none" stroke="#EF4122" stroke-width="2.5" stroke-dasharray="6 4"></path>
             <g>
               <circle cx="312" cy="252" r="7" fill="#FFFFFF" stroke="#0070C0" stroke-width="3"></circle>
               <rect x="236" y="216" width="70" height="18" rx="9" fill="#0070C0"></rect>
@@ -373,13 +368,6 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
               <circle cx="585" cy="465" r="7" fill="#FFFFFF" stroke="#0070C0" stroke-width="3"></circle>
               <rect x="560" y="482" width="62" height="18" rx="9" fill="#0070C0"></rect>
               <text x="591" y="495" font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">POI 끝</text>
-            </g>
-            <g>
-              <rect x="640" y="400" width="176" height="66" rx="6" fill="#FFFFFF"></rect>
-              <text x="652" y="422" font-size="13" font-weight="600" fill="#0E1C31">고 등급 격자 66개 선택</text>
-              <text x="652" y="440" font-size="12" fill="#475467">0.144 → 0.151 kg/격자 (보정)</text>
-              <text x="652" y="457" font-size="11" fill="#667085">격자 일괄 보정 중</text>
-              <path d="M640 433 L596 430" stroke="#FFFFFF" stroke-width="2"></path>
             </g>
           </svg>
           </div>
@@ -412,11 +400,11 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
           <div style="position: absolute; right: 12px; bottom: 10px; font-size: 10px; font-weight: 600; color: #FFFFFF;">NAVER · 국토지리정보원</div>
         </section>
 
-        <aside aria-label="처방 요약과 작업 계획" style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 12px;">
+        <aside aria-label="처방 요약과 임무 생성" style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 12px;">
 
           <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;">
             <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="총 면적" value="3,025" unit="평"></x-import>
-            <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="총 처방 파종량" value="36.1" unit="kg"></x-import>
+            <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="총 처방 파종량" value="35.6" unit="kg"></x-import>
             <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="6m 처방 격자" value="280" unit="개"></x-import>
           </div>
 
@@ -424,7 +412,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             <div style="display: flex; align-items: center; gap: 8px;">
               <h2 style="margin: 0; font-size: 16px; font-weight: 600;">등급별 격자 처방</h2>
               <div style="flex-grow: 1;"></div>
-              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="wait">v3 검토 대기</x-import>
+              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="success">v3 등록 완료</x-import>
             </div>
             <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
               <thead>
@@ -433,23 +421,22 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
               <tbody>
                 <tr style="border-bottom: 1px solid #EEEEEE;"><td style="padding: 8px;"><span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 2px; background: #CDEBD7;"></span>저</span></td><td style="padding: 8px; text-align: right;">71</td><td style="padding: 8px; text-align: right;">773</td><td style="padding: 8px; text-align: right;">0.108</td><td style="padding: 8px; text-align: right;">3.0</td></tr>
                 <tr style="border-bottom: 1px solid #EEEEEE;"><td style="padding: 8px;"><span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 2px; background: #5FBF86;"></span>중</span></td><td style="padding: 8px; text-align: right;">119</td><td style="padding: 8px; text-align: right;">1,296</td><td style="padding: 8px; text-align: right;">0.126</td><td style="padding: 8px; text-align: right;">3.5</td></tr>
-                <tr style="border-bottom: 1px solid #EEEEEE;"><td style="padding: 8px;"><span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 2px; background: #107C41;"></span>고</span></td><td style="padding: 8px; text-align: right;">24</td><td style="padding: 8px; text-align: right;">261</td><td style="padding: 8px; text-align: right;">0.144</td><td style="padding: 8px; text-align: right;">4.0</td></tr>
-                <tr style="border-bottom: 1px solid #EEEEEE; background: #FDECEA;"><td style="padding: 8px;"><span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 2px; background: #0B5E31;"></span>고 (보정)</span></td><td style="padding: 8px; text-align: right;">66</td><td style="padding: 8px; text-align: right;">719</td><td style="padding: 8px; text-align: right;"><span style="color: #E76F00; font-weight: 600;">0.151</span></td><td style="padding: 8px; text-align: right;">4.2</td></tr>
+                <tr style="border-bottom: 1px solid #EEEEEE;"><td style="padding: 8px;"><span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 2px; background: #107C41;"></span>고</span></td><td style="padding: 8px; text-align: right;">90</td><td style="padding: 8px; text-align: right;">980</td><td style="padding: 8px; text-align: right;">0.144</td><td style="padding: 8px; text-align: right;">4.0</td></tr>
               </tbody>
             </table>
-            <div style="font-size: 12px; color: #667085;">출처 경상국립대 AI 처방 · 6m 격자(락로보틱스 기준) · 1필지 1처방 · v3 등록 04.11 · 수동 보정 1건</div>
+            <div style="font-size: 12px; color: #667085;">출처 경상국립대 AI 처방 · 6m 격자(락로보틱스 기준) · 1필지 1처방 · v3 등록 04.11 (대동 관리자)</div>
           </div>
 
           <div style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
             <h2 style="margin: 0; font-size: 16px; font-weight: 600;">처방 버전</h2>
-            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;"><span style="font-weight: 600; width: 28px;">v3</span><span style="flex-grow: 1; color: #475467;">검토 대기 · 고 등급 격자 66개 +0.007 kg 보정 중 · 김OO</span><span style="color: #667085;">04.11</span></div>
-            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;"><span style="font-weight: 600; width: 28px;">v2</span><span style="flex-grow: 1; color: #475467;">반려 · 격자 원점 불일치</span><span style="color: #667085;">04.08</span></div>
-            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;"><span style="font-weight: 600; width: 28px;">v1</span><span style="flex-grow: 1; color: #475467;">반려 · 저지대 미반영</span><span style="color: #667085;">04.06</span></div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;"><span style="font-weight: 600; width: 28px;">v3</span><span style="flex-grow: 1; color: #475467;">등록 · 이 임무에 적용 · 김OO</span><span style="color: #667085;">04.11</span></div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;"><span style="font-weight: 600; width: 28px;">v2</span><span style="flex-grow: 1; color: #475467;">이전 버전 · 격자 원점 수정 전</span><span style="color: #667085;">04.08</span></div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;"><span style="font-weight: 600; width: 28px;">v1</span><span style="flex-grow: 1; color: #475467;">이전 버전</span><span style="color: #667085;">04.06</span></div>
           </div>
 
           <div style="background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
             <div style="display: flex; align-items: center; gap: 8px;">
-              <h2 style="margin: 0; font-size: 16px; font-weight: 600;">작업 계획</h2>
+              <h2 style="margin: 0; font-size: 16px; font-weight: 600;">임무 생성</h2>
               <div style="flex-grow: 1;"></div>
               <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="wait">작성 중</x-import>
             </div>
@@ -463,7 +450,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             </div>
             <div style="display: flex; align-items: flex-start; gap: 8px; padding: 10px 12px; background: #F9FAFB; border-radius: 6px; font-size: 12px; color: #475467; line-height: 18px;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0070C0" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01M11 12h1v4h1"></path></svg>
-              <span>1필지 1처방 · 드론 1대. 지그재그 비행 계획은 락로보틱스 GCS 서버가 처방맵으로 생성하고, 농가·법인이 조종기로 받아 비행합니다.</span>
+              <span>처방맵(v3)을 임무 파일에 넣어 GCS 서버로 보내면, 조종사가 조종기에서 임무를 확인하고 파종합니다. 지그재그 비행 계획은 락로보틱스 GCS 서버가 처방맵으로 생성합니다. 1필지 1처방 · 드론 1대.</span>
             </div>
             <div style="display: flex; gap: 8px; justify-content: flex-end;">
               <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="tertiary">임시 저장</x-import>

@@ -106,7 +106,7 @@ ol.decide b{font-weight:600}
 <div class="wrap">
 <p style="margin:0 0 8px"><a href="index.html" style="font-size:13px;font-weight:500;text-decoration:none;color:inherit">← 설계 산출물 목차</a></p>
 <header>
-  <div class="eyebrow">드론 파종 플랫폼 · 인터페이스 설계 v0.26 · 2027 Pilot 범위 · 2026.11.12</div>
+  <div class="eyebrow">드론 파종 플랫폼 · 인터페이스 설계 v0.27 · 2027 Pilot 범위 · 2026.11.12</div>
   <h1>드론 파종 플랫폼 데이터 흐름도 <span style="display:inline-block;vertical-align:middle;font-size:13px;font-weight:700;padding:3px 12px;border-radius:999px;color:#8A4B00;background:#FFF1DC;border:1px solid #F2C98B">논의 필요 · 협의 후 확정</span></h1>
   <p class="lead">락로보틱스·KETI·경상국립대 데이터가 기존 대동 커넥트(정밀농업)와 신규 드론 모듈 사이를 어떻게 흐르는지 정리했습니다. 근거는 과제 계획서, 9/17 미팅자료, 개발계 관리자·농민 사이트 조회 결과, 락로보틱스 미팅(11/03)입니다. 주기·포맷·프로토콜은 1차년도 API 명세에서 확정할 제안값입니다.</p>
 </header>
@@ -116,7 +116,7 @@ ol.decide b{font-weight:600}
   <div class="points">
     <div class="point"><b>새로 만드는 자동 연동은 락로보틱스 GCS 서버 한 곳</b><span>플랫폼은 조종기와 드론 사이에 있는 GCS 서버와만 연동합니다. 임무 파일을 보내고(IF-01), 조종기가 올린 드론 로그를 받습니다(IF-02·03, WebSocket 유력, 3~5초 지연). KETI 맵레이어·DEM과 경상대 처방맵은 파일로 받아 신규 '정밀진단 관리' 메뉴에서 등록합니다. 기존 필지 데이터 관리는 바꾸지 않습니다.</span></div>
     <div class="point"><b>기존 대동 커넥트 위에 얹는 구조</b><span>필지·필지 ID, 고객·법인 정보, 진단 레이어, 영농일지, 이벤트 코드·App Push, 조직·이력은 이미 있습니다. 신규는 드론 모듈(수집·임무·관제·이력·자산) 하나로 모입니다.</span></div>
-    <div class="point"><b>실증 필지는 대동이 지정, 운용은 농가·법인</b><span>신청 건을 모두 처방·파종하지 않고 대동이 지정한 실증 필지만 진행합니다(1필지 1처방 · 1드론, 큰 필지는 N회차). 처방 승인 후 대동 관리자가 임무를 보내면 농가·법인이 조종기로 직접 비행하고, 작업 기록은 영농일지에 처방맵과 운행 기록으로 남습니다. 기존 대행 흐름(공고·매칭·승인·정산)에는 연결하지 않습니다.</span></div>
+    <div class="point"><b>실증 필지는 대동이 지정, 운용은 농가·법인</b><span>신청 건을 모두 처방·파종하지 않고 대동이 지정한 실증 필지만 진행합니다(1필지 1처방 · 1드론, 큰 필지는 N회차). 대동 관리자가 처방맵을 등록하면 승인 단계 없이 처방맵을 넣은 임무 파일을 보내고, 조종사가 조종기에서 임무를 확인한 뒤 파종하며, 작업 기록은 영농일지에 처방맵과 운행 기록으로 남습니다. 기존 대행 흐름(공고·매칭·승인·정산)에는 연결하지 않습니다.</span></div>
     <div class="point"><b>플랫폼이 허브</b><span>필지 경계·ID(IF-05)를 세 기관에 같은 기준으로 내주고, 처방 버전(6m 격자)과 살포 범위·추정 투입량을 플랫폼에서 연결합니다. 기관끼리 직접 주고받으면 이 추적이 끊깁니다.</span></div>
     <div class="point"><b>드론은 드론 정밀진단 › '기체 관리' 메뉴</b><span>차량관리·차량유지관리는 농기계 전용이라 드론을 넣지 않습니다. 1차 메뉴 '드론 정밀진단'의 하위 메뉴(드론 현황·기체 관리·임무 관리·작업 이력)에서 기체(GCS 기체 식별자)·파종 모듈·배터리·정비 이력을 관리하고, 고객·조직 마스터만 참조합니다. 소유 주체(법인·농민·실증 운영자)는 아직 미정입니다.</span></div>
   </div>
@@ -230,8 +230,8 @@ ol.decide b{font-weight:600}
   <text class="t-b" x="626" y="96">수집·적재</text>
   <text class="t-m" x="626" y="114">실시간 스트림·시계열</text>
   <rect class="box-in" x="752" y="74" width="134" height="54" rx="4"/>
-  <text class="t-b" x="764" y="96">처방 검토·임무</text>
-  <text class="t-m" x="764" y="114">6m 격자·승인·GCS 전송</text>
+  <text class="t-b" x="764" y="96">처방 · 임무</text>
+  <text class="t-m" x="764" y="114">6m 격자 · GCS 전송</text>
   <rect class="box-in" x="614" y="136" width="134" height="54" rx="4"/>
   <text class="t-b" x="626" y="158">실시간 리플레이</text>
   <text class="t-m" x="626" y="176">로그 파싱 · 이벤트</text>
@@ -286,7 +286,7 @@ ol.decide b{font-weight:600}
   <text class="t-mono" x="940" y="88" text-anchor="middle">WS</text>
   <line class="a-rt" x1="902" y1="96" x2="976" y2="96" marker-end="url(#m-rt)"/>
   <line class="a-int" x1="976" y1="126" x2="904" y2="126" marker-end="url(#m-bt)"/>
-  <text class="t-m" x="940" y="142" text-anchor="middle">승인·임무</text>
+  <text class="t-m" x="940" y="142" text-anchor="middle">처방 등록·임무</text>
 
   <rect class="box" x="980" y="166" width="200" height="104" rx="6"/>
   <text class="t-title" x="996" y="190">농가 · 법인 웹</text>
@@ -330,10 +330,10 @@ ol.decide b{font-weight:600}
 <section>
   <div class="sec-head">
     <h2>2. 임무 1건의 데이터 시퀀스</h2>
-    <p class="lead">사전 센서 비행부터 리포트까지 28단계입니다. 신청 건 중 대동이 실증 필지로 지정한 건만 협력기관에 분석을 요청하고, 협력기관은 별도 API 없이 기관 계정으로 정밀진단 관리의 요청 건을 처리합니다. 처방 승인 후 대동 관리자가 임무 파일을 락로보틱스 GCS 서버로 보내면, 농가·법인이 조종기로 받아 직접 비행합니다(1필지 1드론). 드론 로그는 조종기 → GCS 서버 → 플랫폼으로 3~5초 지연을 두고 들어오고, 플랫폼 서버가 파싱해 실시간 리플레이로 보여줍니다. 단계 번호 옆의 ID는 아래 인터페이스 목록과 연결됩니다.</p>
+    <p class="lead">사전 센서 비행부터 리포트까지 29단계입니다. 신청 건 중 대동이 실증 필지로 지정한 건만 협력기관에 분석을 요청하고, 협력기관은 별도 API 없이 기관 계정으로 정밀진단 관리의 요청 건을 처리합니다. 대동 관리자가 처방맵을 등록하면 승인 단계 없이 처방맵을 넣은 임무 파일을 락로보틱스 GCS 서버로 보내고, 조종사가 조종기에서 임무를 확인한 뒤 파종합니다(1필지 1드론). 드론 로그는 조종기 → GCS 서버 → 플랫폼으로 3~5초 지연을 두고 들어오고, 플랫폼 서버가 파싱해 실시간 리플레이로 보여줍니다. 단계 번호 옆의 ID는 아래 인터페이스 목록과 연결됩니다.</p>
   </div>
   <figure>
-    <div class="seq-head" id="seqHead" aria-hidden="true"><svg class="dia" id="seqLanes"></svg></div><div class="scroll seq-body" id="seqScroll"><svg class="dia" id="seq" role="img" aria-label="준비, 비행 중, 작업 후 세 구간에 걸친 28단계 데이터 교환 순서"></svg></div>
+    <div class="seq-head" id="seqHead" aria-hidden="true"><svg class="dia" id="seqLanes"></svg></div><div class="scroll seq-body" id="seqScroll"><svg class="dia" id="seq" role="img" aria-label="준비, 비행 중, 작업 후 세 구간에 걸친 29단계 데이터 교환 순서"></svg></div>
     <figcaption>준비 단계는 대부분 파일과 기존 화면으로 처리하고, 비행 중에는 조종기 → GCS 서버 → 플랫폼 → 관제 화면 방향의 로그만 흐릅니다. 작업 후에는 영농일지 드론 작업 기록과 현장조사 입력이 이어지고, 살포 범위 피드백과 파종 후 센서 비행으로 처방 루프가 닫힙니다.</figcaption>
   </figure>
 </section>
@@ -346,9 +346,9 @@ ol.decide b{font-weight:600}
   <div class="tbl"><table>
     <thead><tr><th>ID</th><th>방향</th><th>데이터</th><th>포맷</th><th>Pilot('27) 방식</th><th>1차년도 명세</th><th>확정할 사항</th></tr></thead>
     <tbody>
-      <tr><td class="id">IF-01</td><td class="dir">플랫폼 → GCS 서버</td><td>임무 파일: 필지 경계, 6m 격자 처방맵(격자별 파종량 kg), 지그재그 양끝 POI 좌표·고도, 회차, mission_id</td><td>JSON / KML / SHP</td><td><span class="pill p-bt">관리자 전송(Push)</span><br>처방 승인 후</td><td><span class="pill p-deep">상세</span></td><td>파일 포맷, 전송 API, 비행속도·작업폭 입력 주체</td></tr>
+      <tr><td class="id">IF-01</td><td class="dir">플랫폼 → GCS 서버</td><td>임무 파일: 필지 경계, 6m 격자 처방맵(격자별 파종량 kg), 지그재그 양끝 POI 좌표·고도, 회차, mission_id</td><td>JSON / KML / SHP</td><td><span class="pill p-bt">관리자 전송(Push)</span><br>처방맵 등록 후</td><td><span class="pill p-deep">상세</span></td><td>파일 포맷, 전송 API, 비행속도·작업폭 입력 주체</td></tr>
       <tr><td class="id">IF-02</td><td class="dir">GCS 서버 → 플랫폼</td><td>드론 로그: 시각(Time), RTK 위치·고도, 속도, 자세(Roll/Pitch/Yaw), 살포 여부·잔량·분사량. 조종기가 GCS 서버로 올린 원시 데이터</td><td>JSON (MAVLink 변환)</td><td><span class="pill p-rt">10건 묶음 · 3~5초 지연</span><br>WebSocket 유력</td><td><span class="pill p-deep">상세</span></td><td>메시지 규격·단위, WebSocket 확정, 분사량 연산식</td></tr>
-      <tr><td class="id">IF-03</td><td class="dir">GCS 서버 → 플랫폼</td><td>이벤트(이륙·착륙·작업 중단·재수행·두절·비상정지), 완료 요약, 생성 비행 계획</td><td>JSON</td><td><span class="pill p-rt">발생 즉시</span> <span class="pill p-bt">임무 종료</span></td><td><span class="pill p-deep">상세</span></td><td>이벤트 코드표(기존 '이상 감지 이벤트 관리' 코드 체계에 추가), 비행 계획 회신 여부</td></tr>
+      <tr><td class="id">IF-03</td><td class="dir">GCS 서버 → 플랫폼</td><td>이벤트(조종기 임무 확인·이륙·착륙·작업 중단·재수행·두절·비상정지), 완료 요약, 생성 비행 계획</td><td>JSON</td><td><span class="pill p-rt">발생 즉시</span> <span class="pill p-bt">임무 종료</span></td><td><span class="pill p-deep">상세</span></td><td>이벤트 코드표(기존 '이상 감지 이벤트 관리' 코드 체계에 추가), 비행 계획 회신 여부</td></tr>
       <tr><td class="id">IF-04</td><td class="dir">GCS 서버 ↔ 플랫폼</td><td>서버 간 인증, 전송 암호화, 재전송·중복 제거</td><td>토큰</td><td>연결 시 · TLS</td><td><span class="pill p-deep">상세</span></td><td>서버 간 인증 방식, 기체 식별자</td></tr>
       <tr><td class="id">IF-05</td><td class="dir">플랫폼 → KETI·경상대·GCS</td><td>필지 경계·필지 ID(대동 커넥트에 구현된 기존 데이터)</td><td>GeoJSON</td><td><span class="pill p-bt">화면 내려받기</span><br>정밀진단 관리 신청 목록 · GCS는 임무 파일에 포함</td><td><span class="pill p-bt">포맷 정의</span></td><td>좌표계·파일 포맷</td></tr>
       <tr><td class="id">IF-06</td><td class="dir">플랫폼 ↔ 협력기관</td><td>대동이 실증 필지로 지정한 분석 요청 건(필지 ID·경계·희망 시기), 비행 일정·완료 처리. 신청은 기존 생육 진단 화면에서 발생</td><td>화면</td><td><span class="pill p-bt">화면 처리</span><br>정밀진단 관리 신청 목록 · 기관 계정</td><td><span class="pill p-bt">화면·권한 정의</span></td><td>협력기관 계정 권한 범위, 실증 필지 지정 기준</td></tr>
@@ -399,7 +399,7 @@ ol.decide b{font-weight:600}
       <li>처방맵 규격: 6m 격자 단위 파종량(kg), 격자 원점·좌표계, SHP/GeoJSON, 버전 규칙(1필지 1처방)</li>
       <li>실제 투입량 대신 살포 범위·관리자 추정 투입량으로 피드백해도 되는지</li>
       <li>현장조사 항목·조사 시점과 결과 회신 양식(CSV)</li>
-      <li>처방 반려 시 재산출 요청 경로</li>
+      <li>처방 오류를 발견했을 때 재산출 요청 경로(플랫폼 승인 단계 없음)</li>
       <li>경제성 평가 양식·산식과 평가 수행 기관</li>
     </ul></div>
     <div><h4>공통 <span class="t-mono">IF-05</span></h4><ul>
@@ -437,13 +437,14 @@ ol.decide b{font-weight:600}
     {f:'P',t:'F',m:'int',l:'드론 정밀·토양 정밀진단 탭에서 레이어 확인',id:'기존 화면'},
     {ph:'준비 ② 처방 · 임무'},
     {f:'P',t:'G',m:'int',l:'정밀진단 관리 › 분석 요청 건의 필지·맵레이어 확인·내려받기',id:'IF-05'},
-    {f:'G',t:'P',m:'bt',l:'6m 격자 처방맵(1필지 1처방) → 정밀진단 관리 › 결과 등록',id:'IF-08'},
-    {f:'A',t:'P',m:'int',l:'처방 검토·보정 → 승인 또는 반려 (드론 정밀진단 › 드론 파종)',id:'신규 화면'},
-    {f:'A',t:'P',m:'int',l:'임무 생성 · POI·고도 · 회차 (기체·조종사 배정 없음)',id:'신규 화면'},
-    {f:'P',t:'R',m:'bt',l:'임무 파일 전송 (대동 관리자)',id:'IF-01'},
+    {f:'G',t:'A',m:'bt',l:'6m 격자 처방맵 파일 전달 (1필지 1처방)',id:'파일'},
+    {f:'A',t:'P',m:'int',l:'정밀진단 관리 › 결과 등록 (처방맵 업로드, 승인 단계 없음)',id:'IF-08'},
+    {f:'A',t:'P',m:'int',l:'임무 생성 · 처방맵 포함 · POI·고도 · 회차 (드론 파종)',id:'신규 화면'},
+    {f:'P',t:'R',m:'bt',l:'임무 파일 전송 (처방맵 포함)',id:'IF-01'},
     {self:'R',l:'처방맵으로 지그재그 비행 계획 생성'},
     {f:'R',t:'P',m:'tbd',l:'생성 비행 계획 회신',id:'IF-03'},
-    {f:'R',t:'F',m:'bt',l:'조종기로 임무 수신',id:'GCS 앱'},
+    {f:'R',t:'F',m:'bt',l:'조종기로 임무 전달',id:'GCS 앱'},
+    {f:'F',t:'R',m:'bt',l:'조종사 임무 확인 → 파종 시작',id:'조종기'},
     {ph:'파종 비행 (농가·법인이 조종기로 운용 · 1필지 1드론 · 큰 필지는 N회차)'},
     {f:'F',t:'R',m:'rt',l:'조종기 → GCS 서버 로그 (원시 10건 묶음)',id:'GCS'},
     {f:'R',t:'P',m:'rt',l:'드론 로그 · 3~5초 지연',id:'IF-02 · WS'},

@@ -142,12 +142,12 @@ var CATS = [
   { id: 'seed', label: '파종 처방' }
 ];
 var ORGS = ['전체', 'KETI', '경상국립대'];
-var STATS = ['전체', '등록 완료', '검토 대기', '승인', '반려'];
-var ST = { '등록 완료': ['#1D4E89', '#E3EEFA'], '검토 대기': ['#8A4B00', '#FFF1DC'], '승인': ['#13633A', '#DFF3E7'], '반려': ['#9B1C1C', '#FCE4E4'] };
+var STATS = ['전체', '등록 완료', '임무 적용', '이전 버전'];
+var ST = { '등록 완료': ['#1D4E89', '#E3EEFA'], '임무 적용': ['#13633A', '#DFF3E7'], '이전 버전': ['#555555', '#EEEEEE'] };
 var ROWS = [
-  { cat: 'seed', catLabel: '파종 처방', req: 'DX-0402-01', cust: '신OO', farm: 'GJ-S1', sub: '6m 격자 파종량 (kg)', org: '경상국립대', ver: 'v3', st: '검토 대기', file: 'GJ-S1_seed_rx_v3.zip', analyzed: '2027-04-10', registered: '2027-04-11', by: '관리자 김OO' },
-  { cat: 'seed', catLabel: '파종 처방', req: 'DX-0402-01', cust: '신OO', farm: 'GJ-S1', sub: '6m 격자 파종량 (kg)', org: '경상국립대', ver: 'v2', st: '반려', file: 'GJ-S1_seed_rx_v2.zip', analyzed: '2027-04-07', registered: '2027-04-08', by: '관리자 김OO' },
-  { cat: 'seed', catLabel: '파종 처방', req: 'DX-0402-01', cust: '신OO', farm: 'GJ-S1', sub: '6m 격자 파종량 (kg)', org: '경상국립대', ver: 'v1', st: '반려', file: 'GJ-S1_seed_rx_v1.zip', analyzed: '2027-04-06', registered: '2027-04-06', by: '관리자 김OO' },
+  { cat: 'seed', catLabel: '파종 처방', req: 'DX-0402-01', cust: '신OO', farm: 'GJ-S1', sub: '6m 격자 파종량 (kg)', org: '경상국립대', ver: 'v3', st: '임무 적용', file: 'GJ-S1_seed_rx_v3.zip', analyzed: '2027-04-10', registered: '2027-04-11', by: '관리자 김OO' },
+  { cat: 'seed', catLabel: '파종 처방', req: 'DX-0402-01', cust: '신OO', farm: 'GJ-S1', sub: '6m 격자 파종량 (kg)', org: '경상국립대', ver: 'v2', st: '이전 버전', file: 'GJ-S1_seed_rx_v2.zip', analyzed: '2027-04-07', registered: '2027-04-08', by: '관리자 김OO' },
+  { cat: 'seed', catLabel: '파종 처방', req: 'DX-0402-01', cust: '신OO', farm: 'GJ-S1', sub: '6m 격자 파종량 (kg)', org: '경상국립대', ver: 'v1', st: '이전 버전', file: 'GJ-S1_seed_rx_v1.zip', analyzed: '2027-04-06', registered: '2027-04-06', by: '관리자 김OO' },
   { cat: 'terrain', catLabel: 'DEM · 토양수분', req: 'DX-0402-01', cust: '신OO', farm: 'GJ-S1', sub: 'DEM (1m 격자)', org: 'KETI', ver: '-', st: '등록 완료', file: 'GJ-S1_DEM_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06', by: '관리자 김OO' },
   { cat: 'terrain', catLabel: 'DEM · 토양수분', req: 'DX-0402-01', cust: '신OO', farm: 'GJ-S1', sub: '토양수분', org: 'KETI', ver: '-', st: '등록 완료', file: 'GJ-S1_SM_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06', by: '관리자 김OO' },
   { cat: 'layer', catLabel: '생육 맵레이어', req: 'DX-0402-01', cust: '신OO', farm: 'GJ-S1', sub: 'NDVI', org: 'KETI', ver: '-', st: '등록 완료', file: 'GJ-S1_NDVI_20270405.tif', analyzed: '2027-04-05', registered: '2027-04-06', by: '관리자 김OO' },
