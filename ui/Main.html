@@ -512,7 +512,7 @@ class Component extends DCLogic {
         return { n: String(i + 1), label: l, sep: i > 0, cur: now ? 'step' : 'false', fg: done ? '#066B36' : (now ? '#0E1C31' : '#667085'), fw: now ? 600 : 400,
           bg: done ? '#E6F4EC' : (now ? '#EF4122' : '#EAEDF0'), nfg: now ? '#FFFFFF' : (done ? '#066B36' : '#667085') };
       }),
-      msnStatus: sent ? 'progress' : (confirm ? 'progress' : 'wait'), msnLabel: sent ? 'GCS 전송' : (confirm ? '전송 전 확인' : '작성 중'),
+      msnStatus: sent ? 'wait' : (confirm ? 'progress' : 'wait'), msnLabel: sent ? '수행 대기' : (confirm ? '전송 전 확인' : '작성 중'),
       confirm: confirm,
       openConfirm: function () { self.setState({ confirm: true }); },
       closeConfirm: function () { self.setState({ confirm: false }); },

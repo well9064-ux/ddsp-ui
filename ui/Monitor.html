@@ -52,7 +52,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 
       <div role="group" aria-label="작업 일차" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px; background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; font-size: 13px;">
         <span style="font-weight: 600; color: #475467; margin-right: 4px;">작업 일차</span>
-        <button type="button" aria-pressed="{{d1On}}" onClick="{{pickDay1}}" style="height: 32px; padding: 0 12px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid {{d1Bd}}; border-radius: 6px; background: {{d1Bg}}; font: 600 13px var(--font-primary); color: #0E1C31; cursor: pointer;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #8FC3FF;"></span>1일차 · 04.11 · 45% <span style="font-weight: 400; color: #C0392B;">일몰로 중단</span></button>
+        <button type="button" aria-pressed="{{d1On}}" onClick="{{pickDay1}}" style="height: 32px; padding: 0 12px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid {{d1Bd}}; border-radius: 6px; background: {{d1Bg}}; font: 600 13px var(--font-primary); color: #0E1C31; cursor: pointer;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #8FC3FF;"></span>1일차 · 04.11 · 45% <span style="font-weight: 400; color: #C0392B;">중단</span></button>
         <span aria-hidden="true" style="color: #98A2B3;">→</span>
         <button type="button" aria-pressed="{{d2On}}" onClick="{{pickDay2}}" style="height: 32px; padding: 0 12px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid {{d2Bd}}; border-radius: 6px; background: {{d2Bg}}; font: 600 13px var(--font-primary); color: #0E1C31; cursor: pointer;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #5FD18F;"></span>2일차 · 04.12 · 남은 범위 이어하기 <span style="font-weight: 400; color: #066B36;">{{d2State}}</span></button>
         <div style="flex-grow: 1;"></div>
@@ -491,7 +491,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             </sc-if>
             <div style="display: flex; align-items: flex-start; gap: 10px; padding: 10px 0;">
               <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="neutral">이어하기</x-import>
-              <div style="flex-grow: 1; font-size: 14px; line-height: 18px;"><div>2일차 이어하기 시작 · 남은 격자 154개</div><div style="font-size: 12px; color: #667085;">04.12 09:00:12 · 1일차 04.11 18:12 일몰로 중단(45%)</div></div>
+              <div style="flex-grow: 1; font-size: 14px; line-height: 18px;"><div>2일차 이어하기 시작 · 남은 격자 154개</div><div style="font-size: 12px; color: #667085;">04.12 09:00:12 · 1일차 04.11 18:12 중단(45%)</div></div>
             </div>
           </div>
 
@@ -598,7 +598,7 @@ class Component extends DCLogic {
       speedLabel: s.fast ? '빠르게' : '보통 속도',
       liveBg: live ? '#EF4122' : 'rgba(255,255,255,0.2)',
       missionBadge: finished ? 'success' : 'progress',
-      missionLabel: finished ? '완료' : '작업중',
+      missionLabel: finished ? '완료' : '수행 중',
       linkColor: live ? (lost ? '#C0392B' : '#066B36') : '#475467',
       linkText: live ? (lost ? 'GCS 서버 로그 미수신 · ' + Math.round((t - 0.58) * TOTAL_SEC) + '초' : 'GCS 서버 수신 · 4초 지연 (10건 묶음)') : '기록 재생 중',
       kProg: String(Math.round(prog * 100)),

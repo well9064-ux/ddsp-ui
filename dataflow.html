@@ -106,7 +106,7 @@ ol.decide b{font-weight:600}
 <div class="wrap">
 <p style="margin:0 0 8px"><a href="index.html" style="font-size:13px;font-weight:500;text-decoration:none;color:inherit">← 설계 산출물 목차</a></p>
 <header>
-  <div class="eyebrow">드론 파종 플랫폼 · 인터페이스 설계 v1.6 · 2027 Pilot 범위 · 2026.11.12</div>
+  <div class="eyebrow">드론 파종 플랫폼 · 인터페이스 설계 v1.7 · 2027 Pilot 범위 · 2026.11.12</div>
   <h1>드론 파종 플랫폼 데이터 흐름도 <span style="display:inline-block;vertical-align:middle;font-size:13px;font-weight:700;padding:3px 12px;border-radius:999px;color:#8A4B00;background:#FFF1DC;border:1px solid #F2C98B">논의 필요 · 협의 후 확정</span></h1>
   <p class="lead">락로보틱스·KETI·경상국립대 데이터가 기존 대동 커넥트(정밀농업)와 신규 드론 모듈 사이를 어떻게 흐르는지 정리했습니다. 근거는 과제 계획서, 9/17 미팅자료, 개발계 관리자·농민 사이트 조회 결과, 락로보틱스 미팅(11/03)입니다. 주기·포맷·프로토콜은 1차년도 API 명세에서 확정할 제안값입니다.</p>
 </header>
@@ -348,7 +348,7 @@ ol.decide b{font-weight:600}
     <tbody>
       <tr><td class="id">IF-01</td><td class="dir">플랫폼 → GCS 서버</td><td>임무 파일: 필지 경계, 6m 격자 처방맵(격자별 파종량 kg), 지그재그 양끝 POI 좌표·고도, 회차, mission_id, 전송 대상 조종기 식별자</td><td>JSON / KML / SHP</td><td><span class="pill p-bt">관리자 전송(Push)</span><br>전송 전 확인 후</td><td><span class="pill p-deep">상세</span></td><td>파일 포맷, 전송 API, 대상 조종기 지정 방식, 비행속도·작업폭 입력 주체</td></tr>
       <tr><td class="id">IF-02</td><td class="dir">GCS 서버 → 플랫폼</td><td>드론 로그: 시각(Time), RTK 위치·고도, 속도, 자세(Roll/Pitch/Yaw), 살포 여부·잔량·분사량. 조종기가 GCS 서버로 올린 원시 데이터</td><td>JSON (MAVLink 변환)</td><td><span class="pill p-rt">10건 묶음 · 3~5초 지연</span><br>WebSocket 유력</td><td><span class="pill p-deep">상세</span></td><td>메시지 규격·단위, WebSocket 확정, 분사량 연산식</td></tr>
-      <tr><td class="id">IF-03</td><td class="dir">GCS 서버 → 플랫폼</td><td>이벤트(조종기 임무 확인·이륙·착륙·작업 중단·이어하기·두절·비상정지), 완료 요약(일차별), 생성 비행 계획</td><td>JSON</td><td><span class="pill p-rt">발생 즉시</span> <span class="pill p-bt">임무 종료</span></td><td><span class="pill p-deep">상세</span></td><td>이벤트 코드표(기존 '이상 감지 이벤트 관리' 코드 체계에 추가), 비행 계획 회신 여부</td></tr>
+      <tr><td class="id">IF-03</td><td class="dir">GCS 서버 → 플랫폼</td><td>이벤트(작업 시작·이륙·착륙·작업 중단·이어하기·두절·비상정지), 완료 요약(일차별), 생성 비행 계획</td><td>JSON</td><td><span class="pill p-rt">발생 즉시</span> <span class="pill p-bt">임무 종료</span></td><td><span class="pill p-deep">상세</span></td><td>이벤트 코드표(기존 '이상 감지 이벤트 관리' 코드 체계에 추가), 비행 계획 회신 여부</td></tr>
       <tr><td class="id">IF-04</td><td class="dir">GCS 서버 ↔ 플랫폼</td><td>서버 간 인증, 전송 암호화, 재전송·중복 제거</td><td>토큰</td><td>연결 시 · TLS</td><td><span class="pill p-deep">상세</span></td><td>서버 간 인증 방식, 기체 식별자</td></tr>
       <tr><td class="id">IF-05</td><td class="dir">플랫폼 → KETI·경상대·GCS</td><td>필지 경계·필지 ID(대동 커넥트에 구현된 기존 데이터)</td><td>GeoJSON</td><td><span class="pill p-bt">화면 내려받기</span><br>정밀진단 관리 신청 목록 · GCS는 임무 파일에 포함</td><td><span class="pill p-bt">포맷 정의</span></td><td>좌표계·파일 포맷</td></tr>
       <tr><td class="id">IF-06</td><td class="dir">플랫폼 ↔ 협력기관</td><td>농가·법인 신청 건 중 대동이 확인해 처방 분석을 요청한 건(필지 ID·경계). 신청은 농가·법인 필지 모니터링 화면에서 발생</td><td>화면</td><td><span class="pill p-bt">화면 처리</span><br>정밀진단 관리 신청 목록 · 기관 계정</td><td><span class="pill p-bt">화면·권한 정의</span></td><td>협력기관 계정 권한 범위, 처방 대상 선정 기준</td></tr>
