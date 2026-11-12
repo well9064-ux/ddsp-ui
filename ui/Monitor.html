@@ -38,15 +38,14 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
       <span style="font-size: 13px; font-weight: 600;">안녕하세요, 관리자 님</span>
     </header>
     <div role="tablist" aria-label="열린 화면" style="height: 34px; flex-shrink: 0; display: flex; align-items: flex-end; gap: 2px; padding: 0 10px; background: #EEEEEE; overflow-x: auto;">
-      <a href="DroneDx.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">정밀진단 관리 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
-      <a href="Field.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">드론 파종 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
-      <a href="Main.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">처방 확인 · 임무 생성 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
-      <a href="Missions.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">임무 관리 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
-      <a href="Fleet.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">드론 현황 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
-      <a href="#" role="tab" aria-selected="true" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #F4F6F9; color: #222222; font-size: 12px; font-weight: 700; border-top: 2px solid #EF4122; box-sizing: border-box;">실시간 리플레이 · DR-01 <span aria-hidden="true" style="font-size: 13px; color: #666666;">×</span></a>
-      <a href="HistoryList.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">작업 이력 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
+      <sc-for list="{{openTabs}}" as="t" hint-placeholder-count="7">
+        <div style="height: 30px; display: flex; align-items: center; flex-shrink: 0; background: {{t.bg}}; border-top: {{t.bt}}; box-sizing: border-box;">
+          <a href="{{t.href}}" role="tab" aria-selected="{{t.sel}}" style="height: 100%; display: flex; align-items: center; padding: 0 6px 0 16px; color: {{t.fg}}; font-size: 12px; font-weight: {{t.fw}}; white-space: nowrap;">{{t.label}}</a>
+          <button type="button" aria-label="{{t.closeLabel}}" onClick="{{t.close}}" style="height: 100%; padding: 0 10px 0 4px; border: 0; background: transparent; color: {{t.xc}}; font: 400 14px var(--font-primary); cursor: pointer;">×</button>
+        </div>
+      </sc-for>
       <div style="flex-grow: 1;"></div>
-      <span style="flex-shrink: 0; align-self: center; font-size: 11px; color: #777777; padding: 0 6px;">모두 닫기</span>
+      <button type="button" onClick="{{closeAllTabs}}" style="flex-shrink: 0; align-self: center; border: 0; background: transparent; font: 400 11px var(--font-primary); color: #777777; padding: 0 6px; cursor: pointer;">모두 닫기</button>
     </div>
 
     <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 20px 24px 32px; display: flex; flex-direction: column; gap: 16px;">
@@ -647,6 +646,40 @@ class Component extends DCLogic {
     };
   }
 }
+
+;(function () {
+  var PAGE = 'Monitor', ACT_BG = '#F4F6F9';
+  var BASE = [['DroneDx', '정밀진단 관리'], ['Field', '드론 파종'], ['Main', '처방 확인 · 임무 생성'], ['Missions', '임무 관리'], ['Fleet', '드론 현황'], ['Monitor', '실시간 리플레이 · DR-01'], ['HistoryList', '작업 이력']];
+  var EXTRA = { Aircraft: '기체 관리', History: '작업 이력 상세', DroneDxData: '결과 등록 · 이력', DroneDxReg: '결과 등록', AircraftForm: '기체 등록', AircraftEdit: '기체 수정 · DR-02' };
+  var KEY = PAGE === 'MainSend' ? 'Main' : PAGE;
+  var LS = 'ddsp-closed-tabs';
+  function load() { try { return JSON.parse(window.localStorage.getItem(LS) || '[]'); } catch (e) { return []; } }
+  function save(x) { try { window.localStorage.setItem(LS, JSON.stringify(x)); } catch (e) {} }
+  function go(href) { try { window.location.href = href; } catch (e) {} }
+  var orig = Component.prototype.renderVals;
+  Component.prototype.renderVals = function () {
+    var v = orig.call(this) || {}, self = this;
+    var st = this.state || {};
+    var closed = (st._tabsClosed || load()).filter(function (k) { return k !== KEY; });
+    var all = BASE.slice(); if (EXTRA[KEY]) all.push([KEY, EXTRA[KEY]]);
+    var vis = all.filter(function (t) { return closed.indexOf(t[0]) < 0; });
+    function closeTab(k) {
+      var c = closed.concat([k]); save(c);
+      if (k === KEY) {
+        var i = vis.map(function (t) { return t[0]; }).indexOf(k);
+        var nb = vis[i - 1] || vis[i + 1];
+        go(nb ? nb[0] + '.html' : 'Fleet.html');
+      } else { self.setState({ _tabsClosed: c }); }
+    }
+    v.openTabs = vis.map(function (t) {
+      var on = t[0] === KEY;
+      return { label: t[1], href: on ? '#' : t[0] + '.html', sel: on ? 'true' : 'false', bg: on ? ACT_BG : '#E2E2E2', bt: on ? '2px solid #EF4122' : '2px solid transparent',
+        fg: on ? '#222222' : '#555555', fw: on ? 700 : 600, xc: on ? '#666666' : '#999999', closeLabel: t[1] + ' 탭 닫기', close: function () { closeTab(t[0]); } };
+    });
+    v.closeAllTabs = function () { var c = all.map(function (t) { return t[0]; }).filter(function (k) { return k !== KEY; }); save(c); self.setState({ _tabsClosed: c }); };
+    return v;
+  };
+})();
 </script>
 </body>
 </html>

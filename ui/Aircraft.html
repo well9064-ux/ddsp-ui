@@ -23,7 +23,7 @@ body{margin:0}
 a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 </style>
 </helmet>
-<div style="min-height: 1000px; display: flex; background: #FFFFFF; font-family: var(--font-primary); color: #222222; font-variant-numeric: tabular-nums;">
+<div style="position: relative; min-height: 1000px; display: flex; background: #FFFFFF; font-family: var(--font-primary); color: #222222; font-variant-numeric: tabular-nums;">
 
   <div style="flex: 0 0 230px; display: flex;">
     <dc-import name="Nav" active="aircraft" hint-size="230px,1000px"></dc-import>
@@ -36,16 +36,14 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
       <span style="font-size: 13px; font-weight: 600;">안녕하세요, 관리자 님</span>
     </header>
     <div role="tablist" aria-label="열린 화면" style="height: 34px; flex-shrink: 0; display: flex; align-items: flex-end; gap: 2px; padding: 0 10px; background: #EEEEEE; overflow-x: auto;">
-      <a href="DroneDx.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">정밀진단 관리 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
-      <a href="Field.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">드론 파종 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
-      <a href="Main.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">처방 확인 · 임무 생성 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
-      <a href="Missions.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">임무 관리 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
-      <a href="Fleet.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">드론 현황 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
-      <a href="Monitor.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">실시간 리플레이 · DR-01 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
-      <a href="HistoryList.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">작업 이력 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
-      <a href="#" role="tab" aria-selected="true" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #FFFFFF; color: #222222; font-size: 12px; font-weight: 700; border-top: 2px solid #EF4122; box-sizing: border-box;">기체 관리 <span aria-hidden="true" style="font-size: 13px; color: #666666;">×</span></a>
+      <sc-for list="{{openTabs}}" as="t" hint-placeholder-count="7">
+        <div style="height: 30px; display: flex; align-items: center; flex-shrink: 0; background: {{t.bg}}; border-top: {{t.bt}}; box-sizing: border-box;">
+          <a href="{{t.href}}" role="tab" aria-selected="{{t.sel}}" style="height: 100%; display: flex; align-items: center; padding: 0 6px 0 16px; color: {{t.fg}}; font-size: 12px; font-weight: {{t.fw}}; white-space: nowrap;">{{t.label}}</a>
+          <button type="button" aria-label="{{t.closeLabel}}" onClick="{{t.close}}" style="height: 100%; padding: 0 10px 0 4px; border: 0; background: transparent; color: {{t.xc}}; font: 400 14px var(--font-primary); cursor: pointer;">×</button>
+        </div>
+      </sc-for>
       <div style="flex-grow: 1;"></div>
-      <span style="flex-shrink: 0; align-self: center; font-size: 11px; color: #777777; padding: 0 6px;">모두 닫기</span>
+      <button type="button" onClick="{{closeAllTabs}}" style="flex-shrink: 0; align-self: center; border: 0; background: transparent; font: 400 11px var(--font-primary); color: #777777; padding: 0 6px; cursor: pointer;">모두 닫기</button>
     </div>
 
     <main style="flex: 1 1 auto; box-sizing: border-box; padding: 18px 16px 32px; display: flex; flex-direction: column; gap: 12px;">
@@ -78,7 +76,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
       <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start;">
 
         <section aria-label="기체 선택" style="flex: 1 1 260px; max-width: 300px; min-width: 0; display: flex; flex-direction: column; gap: 6px;">
-          <div style="display: flex; align-items: center; font-size: 12px; padding-bottom: 2px;"><span>총 {{total}}대</span><div style="flex-grow: 1;"></div><button type="button" style="height: 26px; padding: 0 10px; border: 0; border-radius: 3px; background: #CE2315; color: #FFFFFF; font: 700 11px var(--font-primary);">기체 등록</button></div>
+          <div style="display: flex; align-items: center; font-size: 12px; padding-bottom: 2px;"><span>총 {{total}}대</span><div style="flex-grow: 1;"></div><a href="AircraftForm.html" style="height: 26px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 3px; background: #CE2315; color: #FFFFFF; font: 700 11px var(--font-primary);">기체 등록</a></div>
           <div style="max-height: 720px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 2px;">
           <sc-for list="{{list}}" as="d" hint-placeholder-count="3">
             <button type="button" aria-pressed="{{d.pressed}}" onClick="{{d.pick}}" style="width: 100%; text-align: left; display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border: {{d.border}}; background: {{d.bg}}; border-radius: 6px; color: #0E1C31; font-family: inherit; cursor: pointer;">
@@ -96,7 +94,8 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{cur.badge}}">{{cur.state}}</x-import>
             <span style="font-size: 13px; color: #667085;">aircraft_id (GCS 식별자) {{cur.gcs}}</span>
             <div style="flex-grow: 1;"></div>
-            <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="primary">수정</x-import>
+            <button type="button" onClick="{{openDelete}}" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #FFFFFF; color: #CE2315; border: 1px solid #CE2315; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">삭제</button>
+            <a href="AircraftEdit.html" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #CE2315; color: #FFFFFF; border: 1px solid #CE2315; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">수정</a>
           </div>
 
           <div role="tablist" aria-label="기체 정보" style="display: flex; gap: 4px; border-bottom: 1px solid #DFE7EB;">
@@ -137,6 +136,26 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
     </main>
   </div>
 </div>
+
+  <sc-if value="{{delOk}}" hint-placeholder-val="{{false}}">
+    <div style="position: absolute; inset: 0; background: rgba(14,28,49,0.45); display: flex; justify-content: center; align-items: flex-start; padding-top: 180px; z-index: 20; font-family: var(--font-primary); color: #222222;">
+      <div role="dialog" aria-modal="true" aria-label="기체 삭제" style="width: 460px; background: #FFFFFF; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.25); padding: 24px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 10px;"><span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 999px; background: #FDECEA; color: #CE2315; display: inline-flex; align-items: center; justify-content: center; font-weight: 800;">!</span><h2 style="margin: 0; font-size: 17px; font-weight: 700;">기체 삭제</h2></div>
+        <div style="font-size: 13px; line-height: 20px; color: #475467;"><b>{{cur.id}}</b>를 삭제할까요? 기체 관리 목록과 드론 현황에서 사라지고 되돌릴 수 없습니다. 작업 이력 · 영농일지에 남은 기록은 지워지지 않습니다.</div>
+        <div style="display: flex; justify-content: flex-end; gap: 8px;"><button type="button" onClick="{{closeDelete}}" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #FFFFFF; color: #333333; border: 1px solid #BBBBBB; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">취소</button><button type="button" onClick="{{doDelete}}" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #CE2315; color: #FFFFFF; border: 1px solid #CE2315; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">삭제</button></div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{delBlocked}}" hint-placeholder-val="{{false}}">
+    <div style="position: absolute; inset: 0; background: rgba(14,28,49,0.45); display: flex; justify-content: center; align-items: flex-start; padding-top: 180px; z-index: 20; font-family: var(--font-primary); color: #222222;">
+      <div role="dialog" aria-modal="true" aria-label="삭제할 수 없습니다" style="width: 460px; background: #FFFFFF; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.25); padding: 24px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 10px;"><span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 999px; background: #FDECEA; color: #CE2315; display: inline-flex; align-items: center; justify-content: center; font-weight: 800;">!</span><h2 style="margin: 0; font-size: 17px; font-weight: 700;">삭제할 수 없습니다</h2></div>
+        <div style="font-size: 13px; line-height: 20px; color: #475467;"><b>{{cur.id}}</b>는 지금 작업 중입니다. 수행 대기 · 수행 중 임무가 있는 기체는 삭제할 수 없습니다. 임무가 끝난 뒤 다시 시도하세요.</div>
+        <div style="display: flex; justify-content: flex-end; gap: 8px;"><button type="button" onClick="{{closeDelete}}" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #333333; color: #FFFFFF; border: 1px solid #333333; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">확인</button></div>
+      </div>
+    </div>
+  </sc-if>
 </script>
 <script type="text/x-dc-logic" id="dc-src">
 var AIRCRAFT = [
@@ -169,18 +188,24 @@ class Component extends DCLogic {
   renderVals() {
     var self = this;
     var s = this.state || {};
+    var removed = s.removed || [];
+    var LIVE = AIRCRAFT.filter(function (x) { return removed.indexOf(x.id) < 0; });
     var sel = s.sel || 'DR-01';
-    var a = AIRCRAFT.filter(function (x) { return x.id === sel; })[0];
+    var a = LIVE.filter(function (x) { return x.id === sel; })[0] || LIVE[0];
     return {
-      total: String(AIRCRAFT.length),
-      list: AIRCRAFT.map(function (x) {
-        var on = x.id === sel;
+      total: String(LIVE.length),
+      list: LIVE.map(function (x) {
+        var on = x.id === a.id;
         return {
           id: x.id, state: x.state, badge: x.badge, model: x.model, owner: x.owner,
           pressed: on ? 'true' : 'false', border: on ? '1px solid #EF4122' : '1px solid #DFE7EB', bg: on ? '#FDECEA' : '#FFFFFF',
           pick: function () { self.setState({ sel: x.id }); }
         };
       }),
+      delOk: !!s.del && a.state !== '작업 중', delBlocked: !!s.del && a.state === '작업 중',
+      openDelete: function () { self.setState({ del: true }); },
+      closeDelete: function () { self.setState({ del: false }); },
+      doDelete: function () { self.setState({ del: false, removed: (s.removed || []).concat([a.id]), sel: null }); },
       cur: {
         id: a.id, state: a.state, badge: a.badge, gcs: a.gcs,
         info: kv(a.info), module: kv(a.module), fwState: a.fwState, fwBadge: a.fwBadge,
@@ -189,6 +214,40 @@ class Component extends DCLogic {
     };
   }
 }
+
+;(function () {
+  var PAGE = 'Aircraft', ACT_BG = '#FFFFFF';
+  var BASE = [['DroneDx', '정밀진단 관리'], ['Field', '드론 파종'], ['Main', '처방 확인 · 임무 생성'], ['Missions', '임무 관리'], ['Fleet', '드론 현황'], ['Monitor', '실시간 리플레이 · DR-01'], ['HistoryList', '작업 이력']];
+  var EXTRA = { Aircraft: '기체 관리', History: '작업 이력 상세', DroneDxData: '결과 등록 · 이력', DroneDxReg: '결과 등록', AircraftForm: '기체 등록', AircraftEdit: '기체 수정 · DR-02' };
+  var KEY = PAGE === 'MainSend' ? 'Main' : PAGE;
+  var LS = 'ddsp-closed-tabs';
+  function load() { try { return JSON.parse(window.localStorage.getItem(LS) || '[]'); } catch (e) { return []; } }
+  function save(x) { try { window.localStorage.setItem(LS, JSON.stringify(x)); } catch (e) {} }
+  function go(href) { try { window.location.href = href; } catch (e) {} }
+  var orig = Component.prototype.renderVals;
+  Component.prototype.renderVals = function () {
+    var v = orig.call(this) || {}, self = this;
+    var st = this.state || {};
+    var closed = (st._tabsClosed || load()).filter(function (k) { return k !== KEY; });
+    var all = BASE.slice(); if (EXTRA[KEY]) all.push([KEY, EXTRA[KEY]]);
+    var vis = all.filter(function (t) { return closed.indexOf(t[0]) < 0; });
+    function closeTab(k) {
+      var c = closed.concat([k]); save(c);
+      if (k === KEY) {
+        var i = vis.map(function (t) { return t[0]; }).indexOf(k);
+        var nb = vis[i - 1] || vis[i + 1];
+        go(nb ? nb[0] + '.html' : 'Fleet.html');
+      } else { self.setState({ _tabsClosed: c }); }
+    }
+    v.openTabs = vis.map(function (t) {
+      var on = t[0] === KEY;
+      return { label: t[1], href: on ? '#' : t[0] + '.html', sel: on ? 'true' : 'false', bg: on ? ACT_BG : '#E2E2E2', bt: on ? '2px solid #EF4122' : '2px solid transparent',
+        fg: on ? '#222222' : '#555555', fw: on ? 700 : 600, xc: on ? '#666666' : '#999999', closeLabel: t[1] + ' 탭 닫기', close: function () { closeTab(t[0]); } };
+    });
+    v.closeAllTabs = function () { var c = all.map(function (t) { return t[0]; }).filter(function (k) { return k !== KEY; }); save(c); self.setState({ _tabsClosed: c }); };
+    return v;
+  };
+})();
 </script>
 </body>
 </html>

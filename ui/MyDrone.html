@@ -23,7 +23,7 @@ body{margin:0}
 a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 </style>
 </helmet>
-<div style="min-height: 1000px; display: flex; background: #FFFFFF; font-family: var(--font-primary); color: #222222; font-variant-numeric: tabular-nums;">
+<div style="position: relative; min-height: 1000px; display: flex; background: #FFFFFF; font-family: var(--font-primary); color: #222222; font-variant-numeric: tabular-nums;">
   <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column;">
     <header style="height: 50px; flex-shrink: 0; display: flex; align-items: center; gap: 16px; padding: 0 20px; background: #231F20; color: #FFFFFF;">
       <span style="font-size: 15px; font-weight: 700;">대동 커넥트 · 기체 관리</span>
@@ -51,22 +51,22 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
         <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: center;">
           <thead><tr style="background: #505050; color: #FFFFFF;"><th scope="col" style="padding: 10px; font-weight: 600;">닉네임</th><th scope="col" style="padding: 10px; font-weight: 600;">기종</th><th scope="col" style="padding: 10px; font-weight: 600;">기체 S/N</th><th scope="col" style="padding: 10px; font-weight: 600;">조종기 식별자 (GCS)</th><th scope="col" style="padding: 10px; font-weight: 600;">GCS 연결</th><th scope="col" style="padding: 10px; font-weight: 600;">운용자</th><th scope="col" style="padding: 10px; font-weight: 600;">임무 받을 필지</th><th scope="col" style="padding: 10px; font-weight: 600;">등록일</th><th scope="col" style="padding: 10px; font-weight: 600;">처리</th></tr></thead>
           <tbody>
-            <tr style="border-bottom: 1px solid #DDDDDD;"><td style="padding: 11px 10px; font-weight: 700;">DR-01</td><td style="padding: 11px 10px;">국산 파종드론 [모델명]</td><td style="padding: 11px 10px;">DSD-24-0001</td><td style="padding: 11px 10px;">RR-GCS-7731</td><td style="padding: 11px 10px;"><span style="font-size: 12px; font-weight: 700; color: #066B36; background: #E6F4EC; padding: 2px 8px; border-radius: 999px;">● 연결 확인</span></td><td style="padding: 11px 10px;">신OO · [자격번호]</td><td style="padding: 11px 10px;">GJ-S1 · GJ-S10 · GJ-S12</td><td style="padding: 11px 10px;">2027.03.02</td><td style="padding: 11px 10px;"><span style="display: inline-flex; height: 28px; align-items: center; padding: 0 12px; border: 1px solid #BBBBBB; border-radius: 3px; font-size: 12px;">수정</span></td></tr>
+            <tr style="border-bottom: 1px solid #DDDDDD;"><td style="padding: 11px 10px; font-weight: 700;">DR-01</td><td style="padding: 11px 10px;">국산 파종드론 [모델명]</td><td style="padding: 11px 10px;">DSD-24-0001</td><td style="padding: 11px 10px;">RR-GCS-7731</td><td style="padding: 11px 10px;"><span style="font-size: 12px; font-weight: 700; color: #066B36; background: #E6F4EC; padding: 2px 8px; border-radius: 999px;">● 연결 확인</span></td><td style="padding: 11px 10px;">신OO · [자격번호]</td><td style="padding: 11px 10px;">GJ-S1 · GJ-S10 · GJ-S12</td><td style="padding: 11px 10px;">2027.03.02</td><td style="padding: 11px 10px; white-space: nowrap;"><button type="button" onClick="{{edit}}" style="height: 28px; padding: 0 12px; margin: 0 2px; border: 1px solid #0070C0; border-radius: 3px; background: #FFFFFF; color: #0070C0; font: 700 12px var(--font-primary); cursor: pointer;">수정</button><button type="button" onClick="{{openDel}}" style="height: 28px; padding: 0 12px; margin: 0 2px; border: 1px solid #CE2315; border-radius: 3px; background: #FFFFFF; color: #CE2315; font: 700 12px var(--font-primary); cursor: pointer;">삭제</button></td></tr>
           </tbody>
         </table>
       </section>
 
       <section aria-label="드론 등록" style="display: flex; flex-direction: column; gap: 8px;">
-        <div style="display: flex; align-items: center; gap: 8px;"><h2 style="margin: 0; font-size: 13px; font-weight: 700;">드론 등록</h2><span style="font-size: 12px; color: #888888;"><span style="color: #CE2315;">*</span> 필수 입력</span></div>
+        <div style="display: flex; align-items: center; gap: 8px;"><h2 style="margin: 0; font-size: 13px; font-weight: 700;">{{formTitle}}</h2><span style="font-size: 12px; color: #888888;"><span style="color: #CE2315;">*</span> 필수 입력</span><sc-if value="{{isEdit}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; color: #0070C0; margin-left: 8px;">DR-01 정보를 수정합니다 · 조종기 식별자를 바꾸면 GCS 연결을 다시 확인해야 합니다</span></sc-if></div>
         <table style="width: 100%; border-collapse: collapse; font-size: 13px; border-top: 2px solid #505050;">
           <tbody>
-            <tr><th scope="row" style="width: 150px; padding: 12px 14px; background: #505050; color: #FFFFFF; font-size: 13px; font-weight: 700; text-align: left; vertical-align: middle;">기종 <span style="color: #CE2315;">*</span></th><td style="padding: 10px 14px; border-bottom: 1px solid #E5E5E5;"><span style="height: 34px; box-sizing: border-box; padding: 0 10px; border: 1px solid #BBBBBB; border-radius: 3px; font: 13px var(--font-primary); color: #222222; background: #FFFFFF; width: 320px; display: inline-flex; align-items: center; justify-content: space-between;">국산 파종드론 [모델명] <span style="color: #888888;">⌄</span></span></td>
-                <th scope="row" style="width: 150px; padding: 12px 14px; background: #505050; color: #FFFFFF; font-size: 13px; font-weight: 700; text-align: left; vertical-align: middle;">닉네임</th><td style="padding: 10px 14px; border-bottom: 1px solid #E5E5E5;"><span style="height: 34px; box-sizing: border-box; padding: 0 10px; border: 1px solid #BBBBBB; border-radius: 3px; font: 13px var(--font-primary); color: #222222; background: #FFFFFF; width: 260px; display: inline-flex; align-items: center;">DR-02</span></td></tr>
-            <tr><th scope="row" style="width: 150px; padding: 12px 14px; background: #505050; color: #FFFFFF; font-size: 13px; font-weight: 700; text-align: left; vertical-align: middle;">기체 S/N <span style="color: #CE2315;">*</span></th><td style="padding: 10px 14px; border-bottom: 1px solid #E5E5E5;"><span style="height: 34px; box-sizing: border-box; padding: 0 10px; border: 1px solid #BBBBBB; border-radius: 3px; font: 13px var(--font-primary); color: #222222; background: #FFFFFF; width: 320px; display: inline-flex; align-items: center;">DSD-24-0019</span></td>
+            <tr><th scope="row" style="width: 150px; padding: 12px 14px; background: #505050; color: #FFFFFF; font-size: 13px; font-weight: 700; text-align: left; vertical-align: middle;">기종 <span style="color: #CE2315;">*</span></th><td style="padding: 10px 14px; border-bottom: 1px solid #E5E5E5;"><span style="height: 34px; box-sizing: border-box; padding: 0 10px; border: 1px solid #BBBBBB; border-radius: 3px; font: 13px var(--font-primary); color: #222222; background: #FFFFFF; width: 320px; display: inline-flex; align-items: center; justify-content: space-between;">{{f.model}} <span style="color: #888888;">⌄</span></span></td>
+                <th scope="row" style="width: 150px; padding: 12px 14px; background: #505050; color: #FFFFFF; font-size: 13px; font-weight: 700; text-align: left; vertical-align: middle;">닉네임</th><td style="padding: 10px 14px; border-bottom: 1px solid #E5E5E5;"><span style="height: 34px; box-sizing: border-box; padding: 0 10px; border: 1px solid #BBBBBB; border-radius: 3px; font: 13px var(--font-primary); color: #222222; background: #FFFFFF; width: 260px; display: inline-flex; align-items: center;">{{f.nick}}</span></td></tr>
+            <tr><th scope="row" style="width: 150px; padding: 12px 14px; background: #505050; color: #FFFFFF; font-size: 13px; font-weight: 700; text-align: left; vertical-align: middle;">기체 S/N <span style="color: #CE2315;">*</span></th><td style="padding: 10px 14px; border-bottom: 1px solid #E5E5E5;"><span style="height: 34px; box-sizing: border-box; padding: 0 10px; border: 1px solid #BBBBBB; border-radius: 3px; font: 13px var(--font-primary); color: #222222; background: #FFFFFF; width: 320px; display: inline-flex; align-items: center;">{{f.sn}}</span></td>
                 <th scope="row" style="width: 150px; padding: 12px 14px; background: #505050; color: #FFFFFF; font-size: 13px; font-weight: 700; text-align: left; vertical-align: middle;">기체 신고번호</th><td style="padding: 10px 14px; border-bottom: 1px solid #E5E5E5;"><span style="height: 34px; box-sizing: border-box; padding: 0 10px; border: 1px solid #BBBBBB; border-radius: 3px; font: 13px var(--font-primary); color: #222222; background: #FFFFFF; width: 260px; display: inline-flex; align-items: center; color: #999999;">[신고번호]</span></td></tr>
             <tr><th scope="row" style="width: 150px; padding: 12px 14px; background: #505050; color: #FFFFFF; font-size: 13px; font-weight: 700; text-align: left; vertical-align: middle;">조종기 식별자 <span style="color: #CE2315;">*</span></th><td colspan="3" style="padding: 10px 14px; border-bottom: 1px solid #E5E5E5;">
                 <div style="display: flex; align-items: center; gap: 8px;">
-                  <span style="height: 34px; box-sizing: border-box; padding: 0 10px; border: 1px solid #BBBBBB; border-radius: 3px; font: 13px var(--font-primary); color: #222222; background: #FFFFFF; width: 320px; display: inline-flex; align-items: center;">RR-GCS-8104</span>
+                  <span style="height: 34px; box-sizing: border-box; padding: 0 10px; border: 1px solid #BBBBBB; border-radius: 3px; font: 13px var(--font-primary); color: #222222; background: #FFFFFF; width: 320px; display: inline-flex; align-items: center;">{{f.ctrl}}</span>
                   <button type="button" onClick="{{check}}" style="height: 34px; padding: 0 16px; border: 1px solid #505050; border-radius: 3px; background: #FFFFFF; font: 700 12px var(--font-primary); color: #222222; cursor: pointer;">GCS 연결 확인</button>
                   <sc-if value="{{checked}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; font-weight: 700; color: #066B36; background: #E6F4EC; padding: 3px 10px; border-radius: 999px;">● 락로보틱스 GCS 서버에 등록된 조종기입니다</span></sc-if>
                   <sc-if value="{{notChecked}}" hint-placeholder-val="{{true}}"><span style="font-size: 12px; color: #888888;">조종기 설정 화면의 식별자를 입력하고 연결을 확인하세요. 확인된 조종기로만 임무를 받을 수 있습니다.</span></sc-if>
@@ -87,14 +87,24 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
           </tbody>
         </table>
         <div style="display: flex; justify-content: center; gap: 8px; padding-top: 12px;">
-          <span style="width: 92px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #BBBBBB; font-size: 12px; font-weight: 700;">취소</span>
-          <span style="width: 120px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border-radius: 3px; background: {{regBg}}; color: #FFFFFF; font-size: 12px; font-weight: 700;">드론 등록</span>
+          <button type="button" onClick="{{cancel}}" style="width: 92px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #BBBBBB; background: #FFFFFF; font: 700 12px var(--font-primary); cursor: pointer;">취소</button>
+          <span style="width: 120px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border-radius: 3px; background: {{regBg}}; color: #FFFFFF; font-size: 12px; font-weight: 700;">{{saveLabel}}</span>
         </div>
         <p style="margin: 4px 0 0; font-size: 12px; color: #888888; text-align: center;">등록한 드론은 대동 관리자 화면의 기체 관리에 함께 표시되고, 필지 처방이 등록되면 이 드론의 조종기로 파종 임무가 전송됩니다.</p>
       </section>
     </main>
   </div>
 </div>
+
+  <sc-if value="{{delOpen}}" hint-placeholder-val="{{false}}">
+    <div style="position: absolute; inset: 0; background: rgba(14,28,49,0.45); display: flex; justify-content: center; align-items: flex-start; padding-top: 180px; z-index: 20; font-family: var(--font-primary); color: #222222;">
+      <div role="dialog" aria-modal="true" aria-label="삭제할 수 없습니다" style="width: 460px; background: #FFFFFF; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.25); padding: 24px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 10px;"><span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 999px; background: #FDECEA; color: #CE2315; display: inline-flex; align-items: center; justify-content: center; font-weight: 800;">!</span><h2 style="margin: 0; font-size: 17px; font-weight: 700;">삭제할 수 없습니다</h2></div>
+        <div style="font-size: 13px; line-height: 20px; color: #475467;"><b>DR-01</b>로 보낸 임무 <b>MSN-0412-02</b>(GJ-S10)가 수행 대기 중입니다. 수행 대기 · 수행 중 임무가 있는 드론은 삭제할 수 없습니다. 임무를 마친 뒤 삭제하거나, 대동 관리자에게 임무 취소를 요청하세요.</div>
+        <div style="display: flex; justify-content: flex-end; gap: 8px;"><button type="button" onClick="{{closeDel}}" style="height: 36px; min-width: 88px; padding: 0 16px; box-sizing: border-box; border-radius: 3px; background: #333333; color: #FFFFFF; border: 1px solid #333333; font: 700 13px var(--font-primary); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">확인</button></div>
+      </div>
+    </div>
+  </sc-if>
 </script>
 <script type="text/x-dc-logic" id="dc-src">
 var FARMS = ['GJ-S1', 'GJ-S10', 'GJ-S12'];
@@ -102,7 +112,13 @@ class Component extends DCLogic {
   renderVals() {
     var self = this, s = this.state || {};
     var sel = s.sel || {};
+    var ed = !!s.edit;
+    var F = ed ? { model: '국산 파종드론 [모델명]', nick: 'DR-01', sn: 'DSD-24-0001', ctrl: 'RR-GCS-7731' } : { model: '국산 파종드론 [모델명]', nick: 'DR-02', sn: 'DSD-24-0019', ctrl: 'RR-GCS-8104' };
     return {
+      f: F, isEdit: ed, formTitle: ed ? '드론 수정 · DR-01' : '드론 등록', saveLabel: ed ? '저장' : '드론 등록',
+      edit: function () { self.setState({ edit: true, checked: true }); },
+      cancel: function () { self.setState({ edit: false, checked: false }); },
+      delOpen: !!s.del, openDel: function () { self.setState({ del: true }); }, closeDel: function () { self.setState({ del: false }); },
       checked: !!s.checked, notChecked: !s.checked,
       check: function () { self.setState({ checked: true }); },
       regBg: s.checked ? '#CE2315' : '#C9C9C9',
