@@ -79,7 +79,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
           </a>
           <div style="display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 12px 14px; background: #F9FAFB; border: 1px dashed #D0D5DD; border-radius: 6px; grid-column: span 2;">
             <div style="font-size: 13px; font-weight: 600; color: #475467;">미작업 2대 · DR-02, DR-03</div>
-            <div style="font-size: 12px; color: #667085; line-height: 18px;">작업 중 여부는 GCS 서버 로그 수신으로 판단합니다. 1필지 1드론이며, 기체 배정과 정비·대기 상태는 관리하지 않습니다.</div>
+            <div style="font-size: 12px; color: #667085; line-height: 18px;">작업 중 여부는 GCS 서버 로그 수신으로 판단합니다. 1필지 1드론이며, 기체 배정과 대기 상태는 관리하지 않습니다.</div>
           </div>
         </div>
       </section>
@@ -147,20 +147,12 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
           </sc-if>
         </section>
 
-        <aside aria-label="점검 알림" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 12px;">
+        <aside aria-label="확인 필요" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 12px;">
           <div style="border: 1px solid #DFE7EB; border-radius: 6px; padding: 14px; display: flex; flex-direction: column; gap: 8px;">
             <h2 style="margin: 0; font-size: 15px; font-weight: 700;">확인 필요</h2>
-            <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #EEEEEE;">
+            <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0;">
               <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="wait">펌웨어</x-import>
               <div style="font-size: 13px; line-height: 18px;"><div>DR-02 파종 모듈 v1.4.2 배포 대상</div><div style="font-size: 12px; color: #777777;">현재 v1.4.0 · 다음 작업 전 적용</div></div>
-            </div>
-            <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #EEEEEE;">
-              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="error">배터리</x-import>
-              <div style="font-size: 13px; line-height: 18px;"><div>BT-0104 충방전 사이클 280 / 300회</div><div style="font-size: 12px; color: #777777;">DR-01 · 교체 권장 임박</div></div>
-            </div>
-            <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0;">
-              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="neutral">정기 점검</x-import>
-              <div style="font-size: 13px; line-height: 18px;"><div>DR-03 50시간 점검 예정</div><div style="font-size: 12px; color: #777777;">04.20 · DJI 공식 대리점</div></div>
             </div>
           </div>
         </aside>
@@ -173,9 +165,9 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 var OWNERS = [{ id: 'all', label: '전체' }, { id: 'corp', label: '법인' }, { id: 'farmer', label: '농민' }, { id: 'research', label: '실증 운영자' }];
 var STATES = [{ id: 'all', label: '전체' }, { id: 'work', label: '작업 중' }, { id: 'idle', label: '미작업' }];
 var DRONES = [
-  { id: 'DR-01', sn: 'DSD-24-0001', model: '국산 파종드론 [모델명]', owner: '신OO (농가)', ownerT: 'farmer', st: 'work', state: '작업 중', badge: 'progress', fw: 'SM-0107 · v1.4.2', bat: '4개', area: '8,470', last: '04.12 김제 GJ-S1' },
-  { id: 'DR-02', sn: 'DSD-24-0002', model: '국산 파종드론 [모델명]', owner: '락로보틱스(실증)', ownerT: 'research', st: 'idle', state: '미작업', badge: 'neutral', fw: 'SM-0108 · v1.4.0', fwWarn: true, bat: '4개', area: '6,050', last: '04.09 김제 GJ-S14' },
-  { id: 'DR-03', sn: 'AGR-T50-1183', model: 'DJI Agras T50', owner: '대동 실증 법인', ownerT: 'corp', st: 'idle', state: '미작업', badge: 'neutral', fw: '파종 키트 · v05.01', bat: '3개', area: '3,630', last: '04.10 김제 GJ-S10' }
+  { id: 'DR-01', sn: 'DSD-24-0001', model: '국산 파종드론 [모델명]', owner: '신OO (농가)', ownerT: 'farmer', st: 'work', state: '작업 중', badge: 'progress', fw: 'SM-0107 · v1.4.2', area: '8,470', last: '04.12 김제 GJ-S1' },
+  { id: 'DR-02', sn: 'DSD-24-0002', model: '국산 파종드론 [모델명]', owner: '락로보틱스(실증)', ownerT: 'research', st: 'idle', state: '미작업', badge: 'neutral', fw: 'SM-0108 · v1.4.0', fwWarn: true, area: '6,050', last: '04.09 김제 GJ-S14' },
+  { id: 'DR-03', sn: 'AGR-T50-1183', model: 'DJI Agras T50', owner: '대동 실증 법인', ownerT: 'corp', st: 'idle', state: '미작업', badge: 'neutral', fw: '파종 키트 · v05.01', area: '3,630', last: '04.10 김제 GJ-S10' }
 ];
 function seg(list, cur, onPick) {
   return list.map(function (x) {
