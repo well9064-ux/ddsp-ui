@@ -3,7 +3,7 @@
 <title>드론 파종 설계 산출물</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
-/* Layout: 회의용 목차. 과제 머리글 → 산출물 3개 카드(번호 = 검토 순서) → 버전·공유 안내 */
+/* Layout: 회의용 목차. 과제 머리글 → 산출물 4개 카드(번호 = 검토 순서) → 버전·공유 안내 */
 :root{
   --bg:#F6F5F3; --surface:#FFFFFF; --ink:#1F1B1A; --muted:#6B6460; --line:#E4DFDB;
   --accent:#C8261A; --accent-soft:#FBE9E6; --band:#231F20; --band-ink:#FFFFFF;
@@ -29,7 +29,7 @@ h1{margin:0;font-size:clamp(26px,4vw,36px);line-height:1.25;font-weight:700;text
 .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;opacity:.85}
 .meta b{font-family:var(--mono);font-weight:500}
 main .inner{padding-block:28px 48px;display:flex;flex-direction:column;gap:20px}
-.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 @media (max-width:860px){.cards{grid-template-columns:1fr}}
 a.card{display:flex;flex-direction:column;gap:14px;padding:22px;background:var(--surface);border:1px solid var(--line);border-radius:8px;color:inherit;text-decoration:none;transition:border-color .15s}
 a.card:hover{border-color:var(--accent)}
@@ -55,16 +55,24 @@ a.card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   <div class="inner">
     <div class="eyebrow">DAEDONG · DRONE SEEDING PLATFORM · 1차년도</div>
     <h1>드론 파종 플랫폼 설계 산출물</h1>
-    <p class="lead">'27 가을 IRG 실증(Pilot)에 필요한 범위를 기준으로 정리한 기능목록, 데이터 흐름도, 컨셉 화면입니다. 락로보틱스(GCS), KETI(맵레이어), 경상국립대(처방맵) 데이터가 대동 커넥트 정밀농업과 만나는 지점을 중심으로 봅니다.</p>
-    <div class="meta"><span>기준 버전 <b>v1.11</b></span><span>작성일 <b>2026.11.12</b></span></div>
+    <p class="lead">'27 가을 IRG 실증(Pilot)에 필요한 범위를 기준으로 정리한 서비스 시나리오, 기능목록, 컨셉 화면, 데이터 흐름도입니다. 락로보틱스(GCS), KETI(맵레이어), 경상국립대(처방맵) 데이터가 대동 커넥트 정밀농업과 만나는 지점을 중심으로 봅니다.</p>
+    <div class="meta"><span>기준 버전 <b>v1.12</b></span><span>작성일 <b>2026.11.12</b></span></div>
   </div>
 </header>
 
 <main>
   <div class="inner">
     <div class="cards">
-      <a class="card" href="functions.html">
+      <a class="card" href="scenario.html">
         <span class="num">1</span>
+        <h2>서비스 시나리오</h2>
+        <p>농가·법인이 드론을 등록하고 필지를 신청해 직접 파종하기까지, 누가 어떤 화면에서 무엇을 하는지 단계별로 정리했습니다.</p>
+        <div class="figs"><span class="fig">단계 <b>0~8</b></span><span class="fig">상태값 <b>3</b>종</span><span class="fig">확인 사항 <b>6</b>건</span></div>
+        <ul class="list"><li>전체 흐름(주체별)</li><li>단계별 화면 · 데이터 · 요구사항 ID</li><li>정한 것 · 남은 확인 사항</li></ul>
+        <span class="go">시나리오 보기 →</span>
+      </a>
+      <a class="card" href="functions.html">
+        <span class="num">2</span>
         <h2>기능목록</h2>
         <p>요구사항정의서의 바탕이 되는 '27 Pilot 요구사항과 협의할 사항입니다.</p>
         <div class="figs"><span class="fig">요구사항 <b>78</b>건</span><span class="fig">신규 <b>66</b> · 고도화 <b>12</b></span><span class="fig">제외 <b>10</b>건</span></div>
@@ -72,7 +80,7 @@ a.card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
         <span class="go">기능목록 보기 →</span>
       </a>
       <a class="card" href="ui/Field.html">
-        <span class="num">2</span>
+        <span class="num">3</span>
         <h2>화면 UI</h2>
         <p>기존 관리자 화면 틀 위에 신규·고도화 기능을 얹은 컨셉 화면입니다. 왼쪽 메뉴와 버튼으로 모든 화면이 이어져 있고, 실시간 리플레이는 재생됩니다.</p>
         <div class="figs"><span class="fig">화면 <b>20</b>개</span><span class="fig">신규 · 고도화 표시</span></div>
@@ -80,7 +88,7 @@ a.card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
         <span class="go">화면 실행 (드론 파종에서 시작) →</span>
       </a>
       <a class="card" href="dataflow.html">
-        <span class="top"><span class="num">3</span><span class="tbd">논의 필요</span></span>
+        <span class="top"><span class="num">4</span><span class="tbd">논의 필요</span></span>
         <h2>데이터 흐름도</h2>
         <p>세 기관 데이터가 어떤 경로·주기·포맷으로 플랫폼에 들어오고 나가는지 정리한 안입니다. 협력기관 협의 후 확정합니다.</p>
         <div class="figs"><span class="fig">자동 연동 <b>IF-01~04</b></span><span class="fig">임무 시퀀스 <b>29</b>단계</span><span class="fig">협의·결정 <b>23</b>건</span></div>
@@ -89,7 +97,7 @@ a.card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
       </a>
     </div>
     <div class="notes">
-      <span><b>버전</b> · 세 산출물은 같은 버전(v1.11)을 기준으로 맞춰 두었습니다. 요구사항 건수는 기능목록 엑셀과 같습니다.</span>
+      <span><b>버전</b> · 네 산출물은 같은 버전(v1.12)을 기준으로 맞춰 두었습니다. 요구사항 건수는 기능목록 엑셀과 같습니다.</span>
       <span><b>예시 데이터</b> · 화면의 필지·기체·임무 값은 컨셉 확인용 예시입니다. 위성지도는 NAVER · 국토지리정보원 캡처를 사용했습니다.</span>
       <span><b>실행</b> · 인터넷 연결 없이 동작합니다. 화면 UI는 왼쪽 메뉴와 버튼으로 이동하고, 화면 왼쪽 아래 ← 목차로 버튼을 누르면 이 목차로 돌아옵니다.</span>
     </div>
