@@ -35,6 +35,17 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
       <div style="flex-grow: 1;"></div>
       <span style="font-size: 13px; font-weight: 600;">안녕하세요, 관리자 님</span>
     </header>
+    <div role="tablist" aria-label="열린 화면" style="height: 34px; flex-shrink: 0; display: flex; align-items: flex-end; gap: 2px; padding: 0 10px; background: #EEEEEE; overflow-x: auto;">
+      <a href="DroneDx.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">정밀진단 관리 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
+      <a href="Field.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">드론 파종 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
+      <a href="Main.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">처방 확인 · 임무 생성 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
+      <a href="Missions.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">임무 관리 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
+      <a href="#" role="tab" aria-selected="true" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #FFFFFF; color: #222222; font-size: 12px; font-weight: 700; border-top: 2px solid #EF4122; box-sizing: border-box;">드론 현황 <span aria-hidden="true" style="font-size: 13px; color: #666666;">×</span></a>
+      <a href="Monitor.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">실시간 리플레이 · DR-01 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
+      <a href="HistoryList.html" role="tab" aria-selected="false" style="height: 30px; padding: 0 14px 0 18px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: #E2E2E2; color: #555555; font-size: 12px; font-weight: 600;">작업 이력 <span aria-hidden="true" style="font-size: 13px; color: #999999;">×</span></a>
+      <div style="flex-grow: 1;"></div>
+      <span style="flex-shrink: 0; align-self: center; font-size: 11px; color: #777777; padding: 0 6px;">모두 닫기</span>
+    </div>
 
     <main style="flex: 1 1 auto; box-sizing: border-box; padding: 18px 16px 32px; display: flex; flex-direction: column; gap: 12px;">
       <div style="display: flex; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #DDDDDD;">
@@ -45,12 +56,12 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 
       <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch;">
         <div style="flex: 1 1 480px; min-width: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;">
-          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="보유 기체" value="3" unit="대"></x-import>
-          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="작업 중" value="1" unit="대" accent="#0070C0"></x-import>
-          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="미작업" value="2" unit="대"></x-import>
-          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="이번 달 작업 필지" value="6" unit="필지"></x-import>
-          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="누적 작업면적" value="18,150" unit="평"></x-import>
-          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="누적 비행시간" value="6.2" unit="시간"></x-import>
+          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="보유 기체" value="12" unit="대"></x-import>
+          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="작업 중" value="6" unit="대" accent="#0070C0"></x-import>
+          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="미작업" value="6" unit="대"></x-import>
+          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="이번 달 작업 필지" value="14" unit="필지"></x-import>
+          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="누적 작업면적" value="52,340" unit="평"></x-import>
+          <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.KpiCard" label="누적 비행시간" value="19.6" unit="시간"></x-import>
         </div>
         <section aria-label="이번 주 가동" style="flex: 1.2 1 560px; min-width: 0; box-sizing: border-box; border: 1px solid #DFE7EB; border-radius: 6px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px;">
           <div style="display: flex; align-items: baseline; gap: 8px;"><h2 style="margin: 0; font-size: 15px; font-weight: 700;">이번 주 가동</h2><span style="font-size: 12px; color: #777777;">일별 비행시간 합계 · 전체 기체</span><div style="flex-grow: 1;"></div><span style="font-size: 12px; font-weight: 600;">합계 4.1시간</span></div>
@@ -66,22 +77,52 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
         </section>
       </div>
 
-      <section aria-label="지금 운항 중인 기체" style="display: flex; flex-direction: column; gap: 8px;">
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <h2 style="margin: 0; font-size: 15px; font-weight: 700;">지금 작업 중</h2>
-          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #066B36;"><span style="width: 8px; height: 8px; border-radius: 999px; background: #107C41;"></span>GCS 서버 로그 수신 중 · 3~5초 지연</span>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
-          <a href="Monitor.html" style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; background: #FFFFFF; border: 1px solid #EF4122; border-radius: 6px; color: #0E1C31;">
-            <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 15px; font-weight: 700;">DR-01</span><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="progress">작업중</x-import><div style="flex-grow: 1;"></div><span style="font-size: 12px; font-weight: 600; color: #EF4122;">실시간 리플레이 ›</span></div>
-            <div style="font-size: 13px; color: #475467;">MSN-0411-03 · 김제 A-03 · 2일차 이어하기 · 운용 신OO</div>
-            <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #475467;"><div style="flex-grow: 1; height: 6px; background: #EAEDF0; border-radius: 999px;"><div style="width: 62%; height: 6px; background: #0070C0; border-radius: 999px;"></div></div><span style="font-weight: 600; color: #0E1C31;">62%</span><span>살포 중</span></div>
-          </a>
-          <div style="display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 12px 14px; background: #F9FAFB; border: 1px dashed #D0D5DD; border-radius: 6px; grid-column: span 2;">
-            <div style="font-size: 13px; font-weight: 600; color: #475467;">미작업 2대 · DR-02, DR-03</div>
-            <div style="font-size: 12px; color: #667085; line-height: 18px;">작업 중 여부는 GCS 서버 로그 수신으로 판단합니다. 1필지 1드론이며, 기체 배정과 대기 상태는 관리하지 않습니다.</div>
+      <section aria-label="확인 필요" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 10px 14px; background: #FFF8F6; border: 1px solid #F6C9BF; border-radius: 6px; font-size: 13px;">
+        <span style="font-weight: 700; color: #B42318;">확인 필요 {{alertCount}}건</span>
+        <sc-for list="{{alerts}}" as="al" hint-placeholder-count="2">
+          <a href="{{al.href}}" style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; background: #FFFFFF; border: 1px solid #EAECF0; border-radius: 999px; color: #0E1C31;"><x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{al.badge}}">{{al.kind}}</x-import><span>{{al.text}}</span><span style="color: #667085; font-size: 12px;">{{al.sub}}</span></a>
+        </sc-for>
+      </section>
+
+      <section aria-label="지금 작업 중인 기체" style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px;">
+          <h2 style="margin: 0; font-size: 15px; font-weight: 700;">지금 작업 중 {{workCount}}대</h2>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #066B36;"><span style="width: 8px; height: 8px; border-radius: 999px; background: #107C41;"></span>GCS 서버 로그 수신 · 3~5초 지연</span>
+          <div style="flex-grow: 1;"></div>
+          <div role="group" aria-label="작업 중 보기" style="display: flex;">
+            <sc-for list="{{wFilters}}" as="o" hint-placeholder-count="2">
+              <button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="height: 28px; padding: 0 12px; margin-left: -1px; background: #FFFFFF; border: {{o.border}}; color: #222222; font: {{o.font}} 12px var(--font-primary); cursor: pointer; position: relative; z-index: {{o.z}};">{{o.label}}</button>
+            </sc-for>
           </div>
+          <span style="width: 220px; height: 28px; box-sizing: border-box; display: inline-flex; align-items: center; padding: 0 10px; background: #FFFFFF; border: 1px solid #CCCCCC; font-size: 12px; color: #999999;">기체 · 필지 · 운용자 검색</span>
         </div>
+        <div style="max-height: 292px; overflow-y: auto; border: 1px solid #E5E5E5;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <thead><tr style="color: #FFFFFF;">
+              <th scope="col" style="padding: 9px 10px; font-weight: 600; text-align: left; position: sticky; top: 0; background: #4D4D4D;">기체</th>
+              <th scope="col" style="padding: 9px 10px; font-weight: 600; text-align: left; position: sticky; top: 0; background: #4D4D4D;">운용자</th>
+              <th scope="col" style="padding: 9px 10px; font-weight: 600; text-align: left; position: sticky; top: 0; background: #4D4D4D;">필지 · 임무</th>
+              <th scope="col" style="padding: 9px 10px; font-weight: 600; text-align: left; position: sticky; top: 0; background: #4D4D4D; text-align: center;">작업 일차</th>
+              <th scope="col" style="padding: 9px 10px; font-weight: 600; text-align: left; position: sticky; top: 0; background: #4D4D4D; width: 220px;">진행률</th>
+              <th scope="col" style="padding: 9px 10px; font-weight: 600; text-align: left; position: sticky; top: 0; background: #4D4D4D;">마지막 로그</th>
+              <th scope="col" style="padding: 9px 10px; font-weight: 600; text-align: left; position: sticky; top: 0; background: #4D4D4D; text-align: center;">실시간 리플레이</th>
+            </tr></thead>
+            <tbody>
+              <sc-for list="{{working}}" as="w" hint-placeholder-count="6">
+                <tr style="background: {{w.bg}}; border-bottom: 1px solid #EEEEEE;">
+                  <td style="padding: 8px 10px; font-weight: 700;">{{w.id}}</td>
+                  <td style="padding: 8px 10px;">{{w.owner}}</td>
+                  <td style="padding: 8px 10px;">{{w.farm}} <span style="color: #777777; font-size: 12px;">· {{w.msn}}</span></td>
+                  <td style="padding: 8px 10px; text-align: center;">{{w.day}}</td>
+                  <td style="padding: 8px 10px;"><div style="display: flex; align-items: center; gap: 8px;"><div style="flex-grow: 1; height: 6px; background: #EAEDF0; border-radius: 999px;"><div style="width: {{w.prog}}; height: 6px; background: #0070C0; border-radius: 999px;"></div></div><span style="width: 34px; text-align: right; font-weight: 600;">{{w.prog}}</span></div></td>
+                  <td style="padding: 8px 10px; white-space: nowrap; color: {{w.logFg}}; font-weight: {{w.logFw}};">{{w.log}}</td>
+                  <td style="padding: 8px 10px; text-align: center;"><a href="Monitor.html" style="font-weight: 600; color: #EF4122;">보기 ›</a></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+        <div style="font-size: 12px; color: #667085;">통신 지연 기체를 맨 위에 둡니다. 작업 중 여부는 GCS 서버 로그 수신으로 판단하고, 1필지 1드론이며 기체 배정과 대기 상태는 관리하지 않습니다.</div>
       </section>
 
       <form role="search" aria-label="기체 검색" style="padding: 14px 16px; background: #F5F5F5; border: 1px solid #E2E2E2; display: grid; grid-template-columns: 90px 1fr; gap: 9px 10px; align-items: center; font-size: 12px;">
@@ -112,9 +153,9 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
       </form>
 
       <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start;">
-        <section aria-label="기체 목록" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 8px;">
+        <section aria-label="기체 목록" style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 8px;">
           <div style="display: flex; align-items: center; font-size: 12px;">
-            <span>조회결과 총 {{count}}건</span>
+            <h2 style="margin: 0 10px 0 0; font-size: 15px; font-weight: 700;">전체 기체</h2><span>조회결과 총 {{count}}건</span>
           </div>
           <div style="overflow-x: auto;">
             <table style="width: 100%; min-width: 820px; border-collapse: collapse; font-size: 13px;">
@@ -142,20 +183,16 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
               </tbody>
             </table>
           </div>
+          <nav aria-label="페이지" style="display: flex; justify-content: center; gap: 4px; padding-top: 6px;">
+            <sc-for list="{{pages}}" as="pg" hint-placeholder-count="2">
+              <button type="button" aria-current="{{pg.cur}}" onClick="{{pg.pick}}" style="min-width: 28px; height: 28px; border: 1px solid {{pg.bd}}; border-radius: 3px; background: {{pg.bg}}; color: {{pg.fg}}; font: 600 12px var(--font-primary); cursor: pointer;">{{pg.n}}</button>
+            </sc-for>
+          </nav>
           <sc-if value="{{empty}}" hint-placeholder-val="{{false}}">
             <div style="padding: 24px; text-align: center; font-size: 13px; color: #888888; border-bottom: 1px solid #E5E5E5;">조건에 맞는 기체가 없습니다.</div>
           </sc-if>
         </section>
 
-        <aside aria-label="확인 필요" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 12px;">
-          <div style="border: 1px solid #DFE7EB; border-radius: 6px; padding: 14px; display: flex; flex-direction: column; gap: 8px;">
-            <h2 style="margin: 0; font-size: 15px; font-weight: 700;">확인 필요</h2>
-            <div style="display: flex; gap: 10px; align-items: flex-start; padding: 8px 0;">
-              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="wait">펌웨어</x-import>
-              <div style="font-size: 13px; line-height: 18px;"><div>DR-02 파종 모듈 v1.4.2 배포 대상</div><div style="font-size: 12px; color: #777777;">현재 v1.4.0 · 다음 작업 전 적용</div></div>
-            </div>
-          </div>
-        </aside>
       </div>
     </main>
   </div>
@@ -165,10 +202,32 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 var OWNERS = [{ id: 'all', label: '전체' }, { id: 'corp', label: '법인' }, { id: 'farmer', label: '농민' }, { id: 'research', label: '실증 운영자' }];
 var STATES = [{ id: 'all', label: '전체' }, { id: 'work', label: '작업 중' }, { id: 'idle', label: '미작업' }];
 var DRONES = [
-  { id: 'DR-01', sn: 'DSD-24-0001', model: '국산 파종드론 [모델명]', owner: '신OO (농가)', ownerT: 'farmer', st: 'work', state: '작업 중', badge: 'progress', fw: 'SM-0107 · v1.4.2', area: '8,470', last: '04.12 김제 GJ-S1' },
-  { id: 'DR-02', sn: 'DSD-24-0002', model: '국산 파종드론 [모델명]', owner: '락로보틱스(실증)', ownerT: 'research', st: 'idle', state: '미작업', badge: 'neutral', fw: 'SM-0108 · v1.4.0', fwWarn: true, area: '6,050', last: '04.09 김제 GJ-S14' },
-  { id: 'DR-03', sn: 'AGR-T50-1183', model: 'DJI Agras T50', owner: '대동 실증 법인', ownerT: 'corp', st: 'idle', state: '미작업', badge: 'neutral', fw: '파종 키트 · v05.01', area: '3,630', last: '04.10 김제 GJ-S10' }
+  { id: 'DR-01', sn: 'DSD-24-0001', model: '국산 파종드론 [모델명]', owner: '신OO (농가)', ownerT: 'farmer', st: 'work', state: '작업 중', badge: 'progress', fw: 'SM-0107 · v1.4.2', area: '8,470', last: '04.12 김제 A-03' },
+  { id: 'DR-02', sn: 'DSD-24-0002', model: '국산 파종드론 [모델명]', owner: '락로보틱스(실증)', ownerT: 'research', st: 'idle', state: '미작업', badge: 'neutral', fw: 'SM-0108 · v1.4.0', area: '6,050', last: '04.09 김제 GJ-S14', fwWarn: true },
+  { id: 'DR-03', sn: 'AGR-T50-1183', model: 'DJI Agras T50', owner: '대동 실증 법인', ownerT: 'corp', st: 'idle', state: '미작업', badge: 'neutral', fw: '파종 키트 · v05.01', area: '3,630', last: '04.10 김제 GJ-S10' },
+  { id: 'DR-04', sn: 'DSD-24-0004', model: '국산 파종드론 [모델명]', owner: '윤OO (농가)', ownerT: 'farmer', st: 'idle', state: '미작업', badge: 'neutral', fw: 'SM-0110 · v1.4.2', area: '2,210', last: '04.08 김제 GJ-S19' },
+  { id: 'DR-05', sn: 'DSD-24-0005', model: '국산 파종드론 [모델명]', owner: '이OO (농가)', ownerT: 'farmer', st: 'idle', state: '미작업', badge: 'neutral', fw: 'SM-0111 · v1.4.2', area: '1,640', last: '04.06 김제 GJ-S33' },
+  { id: 'DR-06', sn: 'DSD-24-0006', model: '국산 파종드론 [모델명]', owner: '박OO (농가)', ownerT: 'farmer', st: 'work', state: '작업 중', badge: 'progress', fw: 'SM-0112 · v1.4.2', area: '3,980', last: '04.12 김제 GJ-S25' },
+  { id: 'DR-07', sn: 'DSD-24-0007', model: '국산 파종드론 [모델명]', owner: 'OO영농조합 (법인)', ownerT: 'corp', st: 'work', state: '작업 중', badge: 'progress', fw: 'SM-0113 · v1.4.2', area: '7,350', last: '04.12 보령 BR-05' },
+  { id: 'DR-08', sn: 'DSD-24-0008', model: '국산 파종드론 [모델명]', owner: 'OO영농조합 (법인)', ownerT: 'corp', st: 'work', state: '작업 중', badge: 'progress', fw: 'SM-0114 · v1.4.2', area: '6,920', last: '04.12 보령 BR-04' },
+  { id: 'DR-09', sn: 'DSD-24-0009', model: '국산 파종드론 [모델명]', owner: '김OO (농가)', ownerT: 'farmer', st: 'work', state: '작업 중', badge: 'progress', fw: 'SM-0115 · v1.4.2', area: '2,760', last: '04.12 김제 GJ-S27' },
+  { id: 'DR-10', sn: 'DSD-24-0010', model: '국산 파종드론 [모델명]', owner: '정OO (농가)', ownerT: 'farmer', st: 'idle', state: '미작업', badge: 'neutral', fw: 'SM-0116 · v1.4.2', area: '1,180', last: '04.05 김제 GJ-S29' },
+  { id: 'DR-11', sn: 'DSD-24-0011', model: '국산 파종드론 [모델명]', owner: '최OO (농가)', ownerT: 'farmer', st: 'work', state: '작업 중', badge: 'progress', fw: 'SM-0117 · v1.4.2', area: '3,050', last: '04.12 김제 GJ-S30' },
+  { id: 'DR-12', sn: 'DSD-24-0012', model: '국산 파종드론 [모델명]', owner: '한OO (농가)', ownerT: 'farmer', st: 'idle', state: '미작업', badge: 'neutral', fw: 'SM-0118 · v1.4.2', area: '1,100', last: '04.03 부안 BA-02' }
 ];
+var WORK = [
+  { id: 'DR-07', owner: 'OO영농조합 (법인)', farm: '보령 BR-05', msn: 'MSN-0412-04', day: '1일차', prog: '48%', log: '통신 지연 · 42초 전', late: true },
+  { id: 'DR-01', owner: '신OO (농가)', farm: '김제 A-03', msn: 'MSN-0411-03', day: '2일차', prog: '62%', log: '3초 전' },
+  { id: 'DR-09', owner: '김OO (농가)', farm: '김제 GJ-S27', msn: 'MSN-0412-05', day: '1일차', prog: '80%', log: '3초 전' },
+  { id: 'DR-08', owner: 'OO영농조합 (법인)', farm: '보령 BR-04', msn: 'MSN-0412-01', day: '1일차', prog: '35%', log: '4초 전' },
+  { id: 'DR-06', owner: '박OO (농가)', farm: '김제 GJ-S25', msn: 'MSN-0412-03', day: '1일차', prog: '22%', log: '5초 전' },
+  { id: 'DR-11', owner: '최OO (농가)', farm: '김제 GJ-S30', msn: 'MSN-0412-06', day: '1일차', prog: '12%', log: '4초 전' }
+];
+var ALERTS = [
+  { kind: '통신 지연', badge: 'error', text: 'DR-07 · 보령 BR-05', sub: '마지막 로그 42초 전', href: 'Monitor.html' },
+  { kind: '펌웨어', badge: 'wait', text: 'DR-02 파종 모듈 v1.4.0 → v1.4.2', sub: '다음 작업 전 적용', href: 'Aircraft.html' }
+];
+var PER = 10;
 function seg(list, cur, onPick) {
   return list.map(function (x) {
     var on = x.id === cur;
@@ -181,13 +240,21 @@ class Component extends DCLogic {
     var s = this.state || {};
     var ow = s.owner || 'all', st = s.st || 'all';
     var list = DRONES.filter(function (d) { return (ow === 'all' || d.ownerT === ow) && (st === 'all' || d.st === st); });
+    var np = Math.max(1, Math.ceil(list.length / PER)), pg = Math.min(s.pg || 1, np);
+    var wf = s.wf || 'all';
+    var wl = WORK.filter(function (w) { return wf === 'all' || w.late; });
     return {
-      owners: seg(OWNERS, ow, function (id) { self.setState({ owner: id }); }),
-      states: seg(STATES, st, function (id) { self.setState({ st: id }); }),
-      reset: function () { self.setState({ owner: 'all', st: 'all' }); },
+      owners: seg(OWNERS, ow, function (id) { self.setState({ owner: id, pg: 1 }); }),
+      states: seg(STATES, st, function (id) { self.setState({ st: id, pg: 1 }); }),
+      reset: function () { self.setState({ owner: 'all', st: 'all', pg: 1 }); },
+      alertCount: String(ALERTS.length), alerts: ALERTS,
+      workCount: String(WORK.length),
+      wFilters: seg([{ id: 'all', label: '전체' }, { id: 'late', label: '통신 지연' }], wf, function (id) { self.setState({ wf: id }); }),
+      working: wl.map(function (w, i) { var r = Object.assign({}, w); r.bg = w.late ? '#FFF4F2' : (i % 2 ? '#FAFAFA' : '#FFFFFF'); r.logFg = w.late ? '#B42318' : '#475467'; r.logFw = w.late ? 700 : 400; return r; }),
+      pages: Array.from({ length: np }, function (_, i) { var on = i + 1 === pg; return { n: String(i + 1), cur: on ? 'page' : 'false', bd: on ? '#222222' : '#CCCCCC', bg: on ? '#222222' : '#FFFFFF', fg: on ? '#FFFFFF' : '#222222', pick: function () { self.setState({ pg: i + 1 }); } }; }),
       count: String(list.length),
       empty: list.length === 0,
-      rows: list.map(function (d, i) { var r = Object.assign({}, d); r.fwWarn = !!d.fwWarn; r.bg = i % 2 ? '#FAFAFA' : '#FFFFFF'; return r; })
+      rows: list.slice((pg - 1) * PER, pg * PER).map(function (d, i) { var r = Object.assign({}, d); r.fwWarn = !!d.fwWarn; r.bg = i % 2 ? '#FAFAFA' : '#FFFFFF'; return r; })
     };
   }
 }
