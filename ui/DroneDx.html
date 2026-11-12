@@ -89,6 +89,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: left;">필지 주소</th>
             <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: right;">면적(평)</th>
             <th scope="col" style="padding: 10px 6px; font-weight: 600;">작물</th>
+            <th scope="col" style="padding: 10px 6px; font-weight: 600;">등록 드론</th>
             <th scope="col" style="padding: 10px 6px; font-weight: 600;">진행 상태</th>
             <th scope="col" style="padding: 10px 6px; font-weight: 600;">처리</th>
           </tr></thead>
@@ -104,6 +105,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
                 <td style="padding: 9px 6px; white-space: nowrap;">{{r.addr}}</td>
                 <td style="padding: 9px 6px; text-align: right;">{{r.area}}</td>
                 <td style="padding: 9px 6px; text-align: center;">IRG</td>
+                <td style="padding: 9px 6px; text-align: center; white-space: nowrap; color: {{r.drFg}}; font-weight: {{r.drFw}};">{{r.drone}}</td>
                 <td style="padding: 9px 6px; text-align: center;"><span style="display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; color: {{r.stFg}}; background: {{r.stBg}};">{{r.st}}</span></td>
                 <td style="padding: 6px; text-align: center; white-space: nowrap;">
                   <sc-for list="{{r.acts}}" as="a" hint-placeholder-count="1">
@@ -130,6 +132,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
           <div style="display: grid; grid-template-columns: 90px 1fr; gap: 6px 8px;">
             <span style="color: #888888;">필지 ID</span><span>{{sel.farm}} · {{sel.area}}평</span>
             <span style="color: #888888;">필지 경계</span><span style="display: flex; align-items: center; gap: 6px;">GeoJSON · EPSG:5186 <span style="height: 22px; padding: 0 9px; display: inline-flex; align-items: center; border: 1px solid #0070C0; border-radius: 3px; color: #0070C0; font-weight: 700;">내려받기</span></span>
+            <span style="color: #888888;">전송 대상</span><span>{{sel.droneLong}}</span>
             <span style="color: #888888;">등록 결과</span><span>{{sel.result}}</span>
           </div>
           <sc-if value="{{isAdmin}}" hint-placeholder-val="{{true}}">
@@ -139,7 +142,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             </div>
           </sc-if>
           <sc-if value="{{isPartner}}" hint-placeholder-val="{{false}}">
-            <span style="color: #888888; line-height: 18px;">협력기관 계정은 분석 요청 건을 보고, 상세에서 필지 경계·맵레이어 내려받기와 센서 비행 일정 입력을 합니다. 실증 필지 지정과 결과 등록은 대동 관리자가 합니다.</span>
+            <span style="color: #888888; line-height: 18px;">협력기관 계정은 처방 분석 요청 건을 보고, 상세에서 필지 경계·필지 정보를 내려받습니다. 신청 확인과 결과 등록은 대동 관리자가 합니다.</span>
           </sc-if>
         </div>
       </section>
@@ -151,18 +154,18 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 var ST = { '요청': ['#1D4E89', '#E3EEFA'], '처방': ['#5B3FA8', '#EEE8FB'], '파종': ['#0E6D6D', '#DDF3F3'], '완료': ['#13633A', '#DFF3E7'] };
 var STATS = ['전체', '요청', '처방', '파종', '완료'];
 var ROWS = [
-  { id: 'DX-0412-01', date: '04-12', kind: '법인', cust: 'OO영농조합', farm: 'BR-03', addr: '보령시 천북면 신죽리 211', area: '1,480.0', st: '요청',
-    log: [['04-12 08:40', '분석 신청 접수', '신청자'], ['04-12 08:40', '관리자 SMS 발송', '시스템'], ['04-12 10:15', '실증 필지 지정 · 분석 요청', '관리자 김OO']], result: '-' },
-  { id: 'DX-0411-02', date: '04-11', kind: '농가', cust: '박OO', farm: 'GJ-S21', addr: '김제시 부량면 옥정리 87', area: '1,205.4', st: '요청',
-    log: [['04-11 13:10', '분석 신청 접수', '신청자'], ['04-11 13:10', '관리자 SMS 발송', '시스템'], ['04-11 15:02', '실증 필지 지정 · 분석 요청', '관리자 김OO'], ['04-11 16:30', '필지 경계 내려받기 · 센서 비행 일정 04-14', '락로보틱스']], result: '-' },
-  { id: 'DX-0409-01', date: '04-09', kind: '법인', cust: 'OO영농조합', farm: 'GJ-S14', addr: '김제시 부량면 신용리 451', area: '1,198.2', st: '파종',
-    log: [['04-09 10:20', '분석 신청 접수', '신청자'], ['04-09 14:05', '실증 필지 지정 · 분석 요청', '관리자 김OO'], ['04-09 17:00', '센서 비행 · 맵레이어 등록', '관리자 김OO'], ['04-10 11:00', '파종 처방 v1 등록', '관리자 김OO'], ['04-10 16:00', '임무 파일 GCS 서버 전송', '관리자 김OO'], ['04-11 08:40', '1일차 파종 · 강풍으로 중단(64%)', 'GCS 서버']], result: '맵레이어 3건 · 처방 v1 · 임무 MSN-0411-01(이어하기 대기)' },
-  { id: 'DX-0407-01', date: '04-07', kind: '농가', cust: '신OO', farm: 'GJ-S10', addr: '김제시 부량면 신용리 447', area: '1,170.1', st: '요청',
-    log: [['04-07 11:00', '분석 신청 접수', '신청자'], ['04-07 16:30', '실증 필지 지정 · 분석 요청', '관리자 김OO'], ['04-08 09:10', '필지 경계 내려받기', '락로보틱스'], ['04-10 10:00', '센서 비행 완료', '락로보틱스'], ['04-10 10:05', '원본 가공 중', 'KETI']], result: '-' },
-  { id: 'DX-0402-01', date: '04-02', kind: '농가', cust: '신OO', farm: 'GJ-S1', addr: '김제시 부량면 신용리 439', area: '1,192.8', st: '완료',
-    log: [['04-02 09:15', '분석 신청 접수', '신청자'], ['04-02 14:20', '실증 필지 지정 · 분석 요청', '관리자 김OO'], ['04-05 10:20', '센서 비행 완료', '락로보틱스'], ['04-06 15:00', '맵레이어 · DEM 등록 · 신청자 SMS', '관리자 김OO'], ['04-11 10:30', '파종 처방 v3 등록 · 임무 전송', '관리자 김OO'], ['04-12 09:14', '파종 완료 (2일 작업)', 'GCS 서버']], result: '맵레이어 4건 · 처방 v3 · 파종 완료(살포 범위율 97.1%)' },
-  { id: 'DX-0401-02', date: '04-01', kind: '농가', cust: '이OO', farm: 'GJ-S33', addr: '김제시 진봉면 고사리 12', area: '820.5', st: '처방',
-    log: [['04-01 17:40', '분석 신청 접수', '신청자'], ['04-02 09:30', '실증 필지 지정 · 분석 요청', '관리자 김OO'], ['04-06 10:00', '센서 비행 · 맵레이어 등록 · 신청자 SMS', '관리자 김OO'], ['04-12 09:50', '경상국립대 처방맵 수령 · 등록 대기', '관리자 김OO']], result: '맵레이어 3건 · 처방 등록 전' }
+  { id: 'DX-0412-01', date: '04-12', kind: '법인', cust: 'OO영농조합', farm: 'BR-03', addr: '보령시 천북면 신죽리 211', area: '1,480.0', st: '요청', drone: 'DR-07 외 1대', droneLong: '등록 드론 2대 (DR-07 · DR-08) · 임무 생성 때 선택',
+    log: [['04-12 08:40', '정밀 진단 신청 접수', '신청자'], ['04-12 08:40', '관리자 SMS 발송', '시스템'], ['04-12 10:15', '신청 확인 · 처방 분석 요청', '관리자 김OO']], result: '-' },
+  { id: 'DX-0411-02', date: '04-11', kind: '농가', cust: '박OO', farm: 'GJ-S21', addr: '김제시 부량면 옥정리 87', area: '1,205.4', st: '요청', drone: '미등록', droneLong: '등록 드론 없음 · 드론을 등록해야 임무를 보낼 수 있음',
+    log: [['04-11 13:10', '정밀 진단 신청 접수', '신청자'], ['04-11 13:10', '관리자 SMS 발송', '시스템'], ['04-11 15:02', '신청 확인 · 처방 분석 요청', '관리자 김OO'], ['04-11 16:30', '필지 경계 내려받기', '경상국립대']], result: '-' },
+  { id: 'DX-0409-01', date: '04-09', kind: '법인', cust: 'OO영농조합', farm: 'GJ-S14', addr: '김제시 부량면 신용리 451', area: '1,198.2', st: '파종', drone: 'DR-07 외 1대', droneLong: 'DR-07 · 조종기 RR-GCS-7790 (등록 드론 2대 중 선택)',
+    log: [['04-09 10:20', '정밀 진단 신청 접수', '신청자'], ['04-09 14:05', '신청 확인 · 처방 분석 요청', '관리자 김OO'], ['04-09 17:00', '필지 경계 내려받기', '경상국립대'], ['04-10 11:00', '처방맵 v1 등록', '관리자 김OO'], ['04-10 16:00', '전송 전 확인 · 임무 전송 (DR-07)', '관리자 김OO'], ['04-11 08:40', '1일차 파종 · 강풍으로 중단(64%)', 'GCS 서버']], result: '처방 v1 · 임무 MSN-0411-01(이어하기 대기)' },
+  { id: 'DX-0407-01', date: '04-07', kind: '농가', cust: '신OO', farm: 'GJ-S10', addr: '김제시 부량면 신용리 447', area: '1,170.1', st: '파종', drone: 'DR-01', droneLong: 'DR-01 · 조종기 RR-GCS-7731 (신OO 등록)',
+    log: [['04-07 11:00', '정밀 진단 신청 접수', '신청자'], ['04-07 16:30', '신청 확인 · 처방 분석 요청', '관리자 김OO'], ['04-08 09:10', '필지 경계 내려받기', '경상국립대'], ['04-11 14:00', '처방맵 v1 등록', '관리자 김OO'], ['04-12 09:10', '전송 전 확인 · 임무 전송 (DR-01)', '관리자 김OO']], result: '처방 v1 · 예상 파종량 13.6kg · 조종기 임무 확인 대기' },
+  { id: 'DX-0402-01', date: '04-02', kind: '농가', cust: '신OO', farm: 'GJ-S1', addr: '김제시 부량면 신용리 439', area: '1,192.8', st: '완료', drone: 'DR-01', droneLong: 'DR-01 · 조종기 RR-GCS-7731 (신OO 등록)',
+    log: [['04-02 09:15', '정밀 진단 신청 접수', '신청자'], ['04-02 14:20', '신청 확인 · 처방 분석 요청', '관리자 김OO'], ['04-08 15:00', '처방맵 v3 등록', '관리자 김OO'], ['04-11 10:30', '전송 전 확인 · 임무 전송 (DR-01)', '관리자 김OO'], ['04-12 09:14', '파종 완료 (2일 작업) · 영농일지 기록', 'GCS 서버']], result: '처방 v3 · 파종 완료(살포 범위율 97.1%) · 영농일지 기록' },
+  { id: 'DX-0401-02', date: '04-01', kind: '농가', cust: '이OO', farm: 'GJ-S33', addr: '김제시 진봉면 고사리 12', area: '820.5', st: '처방', drone: 'DR-05', droneLong: 'DR-05 · 조종기 RR-GCS-7802 (이OO 등록)',
+    log: [['04-01 17:40', '정밀 진단 신청 접수', '신청자'], ['04-02 09:30', '신청 확인 · 처방 분석 요청', '관리자 김OO'], ['04-12 09:50', '처방맵 v1 등록 · 임무 생성 중', '관리자 김OO']], result: '처방 v1 · 임무 생성 중' }
 ];
 function act(label, kind) {
   var k = { primary: ['#FFFFFF', '#CE2315', '#CE2315'], line: ['#0070C0', '#FFFFFF', '#0070C0'], plain: ['#555555', '#FFFFFF', '#CCCCCC'] }[kind];
@@ -185,7 +188,7 @@ class Component extends DCLogic {
       pickAdmin: function () { self.setState({ role: 'admin', stt: null }); },
       pickPartner: function () { self.setState({ role: 'partner', stt: null, sel: 'DX-0402-01' }); },
       greeting: partner ? '안녕하세요, 락로보틱스 님' : '안녕하세요, 관리자 님',
-      scopeNote: partner ? '· 협력기관 계정: 분석 요청된 건만 표시' : '· 대동이 실증 필지로 지정해 분석을 요청한 건 · 진행 상태 요청 → 처방 → 파종 → 완료',
+      scopeNote: partner ? '· 협력기관 계정: 분석 요청된 건만 표시' : '· 농가·법인이 신청한 건 · 진행 상태 요청 → 처방 → 파종 → 완료 · 임무는 신청자가 등록한 드론으로 전송',
       stats: STATS.map(function (n) {
         var on = n === stt;
         var cnt = n === '전체' ? base.length : base.filter(function (r) { return r.st === n; }).length;
@@ -197,13 +200,13 @@ class Component extends DCLogic {
         var acts = partner ? [act('상세', 'plain')] : [act('상세', 'plain'), act('결과 등록', 'line')];
         return {
           no: String(list.length - i), id: r.id, date: r.date, kind: r.kind, cust: r.cust, farm: r.farm, addr: r.addr, area: r.area,
-          st: r.st, stFg: ST[r.st][0], stBg: ST[r.st][1], acts: acts,
+          st: r.st, stFg: ST[r.st][0], stBg: ST[r.st][1], acts: acts, drone: r.drone, drFg: r.drone === '미등록' ? '#CE2315' : '#222222', drFw: r.drone === '미등록' ? 700 : 400,
           bg: r.id === sel.id ? '#FFF6F4' : (i % 2 ? '#FAFAFA' : '#FFFFFF'), outline: r.id === sel.id ? '2px solid #EF4122' : 'none',
           select: function () { self.setState({ sel: r.id }); }
         };
       }),
       sel: {
-        id: sel.id, farm: sel.farm, cust: sel.cust, area: sel.area, result: sel.result,
+        id: sel.id, farm: sel.farm, cust: sel.cust, area: sel.area, result: sel.result, droneLong: sel.droneLong,
         log: sel.log.map(function (l, i) { var last = i === sel.log.length - 1; return { d: l[0], t: l[1], who: l[2], dot: last ? '#EF4122' : '#9AA4B2', fg: last ? '#222222' : '#555555' }; })
       }
     };

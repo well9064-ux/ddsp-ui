@@ -23,7 +23,7 @@ body{margin:0}
 a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
 </style>
 </helmet>
-<div style="min-height: 1000px; display: flex; flex-direction: column; background: #F4F6F9; font-family: var(--font-primary); color: #0E1C31; font-variant-numeric: tabular-nums;">
+<div style="position: relative; min-height: 1320px; display: flex; flex-direction: column; background: #F4F6F9; font-family: var(--font-primary); color: #0E1C31; font-variant-numeric: tabular-nums;">
 
   <div style="flex-grow: 1; display: flex; flex-wrap: wrap; align-items: stretch;">
 
@@ -56,15 +56,10 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
       </div>
 
       <ol aria-label="진행 단계" style="margin: 0; padding: 12px 16px; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: #FFFFFF; border: 1px solid #DFE7EB; border-radius: 6px; font-size: 14px;">
-        <li style="display: flex; align-items: center; gap: 6px; color: #066B36;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #E6F4EC; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">1</span>처방맵 등록</li>
-        <li aria-hidden="true" style="width: 28px; height: 1px; background: #D0D5DD;"></li>
-        <li aria-current="step" style="display: flex; align-items: center; gap: 6px; color: #0E1C31; font-weight: 600;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #EF4122; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">2</span>임무 생성</li>
-        <li aria-hidden="true" style="width: 28px; height: 1px; background: #D0D5DD;"></li>
-        <li style="display: flex; align-items: center; gap: 6px; color: #667085;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #EAEDF0; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">3</span>GCS 서버 전송</li>
-        <li aria-hidden="true" style="width: 28px; height: 1px; background: #D0D5DD;"></li>
-        <li style="display: flex; align-items: center; gap: 6px; color: #667085;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #EAEDF0; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">4</span>조종기 임무 확인</li>
-        <li aria-hidden="true" style="width: 28px; height: 1px; background: #D0D5DD;"></li>
-        <li style="display: flex; align-items: center; gap: 6px; color: #667085;"><span style="width: 20px; height: 20px; border-radius: 999px; background: #EAEDF0; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">5</span>파종</li>
+        <sc-for list="{{steps}}" as="st" hint-placeholder-count="6">
+          <sc-if value="{{st.sep}}" hint-placeholder-val="{{false}}"><li aria-hidden="true" style="width: 28px; height: 1px; background: #D0D5DD;"></li></sc-if>
+          <li aria-current="{{st.cur}}" style="display: flex; align-items: center; gap: 6px; color: {{st.fg}}; font-weight: {{st.fw}};"><span style="width: 20px; height: 20px; border-radius: 999px; background: {{st.bg}}; color: {{st.nfg}}; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">{{st.n}}</span>{{st.label}}</li>
+        </sc-for>
       </ol>
 
       <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch;">
@@ -438,7 +433,7 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
             <div style="display: flex; align-items: center; gap: 8px;">
               <h2 style="margin: 0; font-size: 16px; font-weight: 600;">임무 생성</h2>
               <div style="flex-grow: 1;"></div>
-              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="wait">작성 중</x-import>
+              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="{{msnStatus}}">{{msnLabel}}</x-import>
             </div>
             <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;">
               <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Input" label="POI 시작 (위도, 경도)" value="35.80123, 126.88301" read-only="{{yes}}"></x-import>
@@ -448,13 +443,22 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
               <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Input" label="비행 고도 (m)" value="3.0" read-only="{{yes}}"></x-import>
               <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Select" label="회차" value="1" options="{{rounds}}"></x-import>
             </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border: 1px solid #DFE7EB; border-radius: 6px;">
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;"><span style="font-weight: 600;">전송 대상</span><span style="font-size: 12px; color: #667085;">필지 소유 농가·법인이 등록한 드론</span><div style="flex-grow: 1;"></div><a href="Aircraft.html" style="font-size: 12px; font-weight: 600;">기체 관리 ›</a></div>
+              <div style="display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 6px 10px; font-size: 13px; align-items: center;">
+                <span style="color: #667085;">필지 소유</span><span>신OO (농가) · 등록 드론 1대</span>
+                <span style="color: #667085;">전송 드론</span>
+                <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Select" label="" value="dr01" options="{{drones}}"></x-import>
+                <span style="color: #667085;">조종기</span><span style="display: flex; align-items: center; gap: 8px;">RR-GCS-7731 <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.StatusBadge" status="success">GCS 연결 확인</x-import></span>
+              </div>
+            </div>
             <div style="display: flex; align-items: flex-start; gap: 8px; padding: 10px 12px; background: #F9FAFB; border-radius: 6px; font-size: 12px; color: #475467; line-height: 18px;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0070C0" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01M11 12h1v4h1"></path></svg>
-              <span>처방맵(v3)을 임무 파일에 넣어 GCS 서버로 보내면, 조종사가 조종기에서 임무를 확인하고 파종합니다. 지그재그 비행 계획은 락로보틱스 GCS 서버가 처방맵으로 생성합니다. 1필지 1처방 · 드론 1대. 하루에 못 끝내면 중단하고 다음 날 같은 임무를 남은 격자부터 이어서 작업합니다.</span>
+              <span>전송 대상은 필지 소유 농가·법인이 등록한 드론입니다(여러 대면 선택, 미등록이면 전송 불가). 전송하면 처방맵이 표시된 임무가 그 조종기로 가고, 농가·법인 화면에 처방맵과 예상 파종량이 표시됩니다. 비행 계획은 GCS 서버가 만들고, 못 끝내면 다음 날 이어서 작업합니다.</span>
             </div>
             <div style="display: flex; gap: 8px; justify-content: flex-end;">
               <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="tertiary">임시 저장</x-import>
-              <x-import component-from-global-scope="DaedongAgTechDesignSystem_822661.Button" variant="primary">임무 파일 GCS 서버 전송</x-import>
+              <button type="button" onClick="{{openConfirm}}" style="height: 40px; padding: 0 20px; border: 0; border-radius: 4px; background: #EF4122; color: #FFFFFF; font: 600 14px var(--font-primary); cursor: pointer;">전송 전 확인</button>
             </div>
           </div>
 
@@ -463,17 +467,62 @@ a{color:#0070C0;text-decoration:none}a:hover{color:#025996}
     </main>
     </div>
   </div>
+
+  <sc-if value="{{confirm}}" hint-placeholder-val="{{false}}">
+    <div style="position: absolute; inset: 0; background: rgba(14,28,49,0.45); display: flex; justify-content: center; align-items: flex-start; padding-top: 150px; z-index: 5;">
+      <div role="dialog" aria-modal="true" aria-label="임무 전송 전 확인" style="width: 560px; background: #FFFFFF; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.25); padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 8px;"><h2 style="margin: 0; font-size: 18px; font-weight: 700;">임무 전송 전 확인</h2><div style="flex-grow: 1;"></div><button type="button" onClick="{{closeConfirm}}" aria-label="닫기" style="border: 0; background: transparent; font-size: 20px; color: #667085; cursor: pointer;">×</button></div>
+        <p style="margin: 0; font-size: 13px; color: #475467; line-height: 20px;">전송하면 아래 드론의 조종기로 임무가 가고, 농가·법인 화면에 처방맵과 예상 파종량이 표시됩니다. 내용을 한 번 더 확인하세요.</p>
+        <div style="display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 8px 12px; padding: 14px 16px; background: #F9FAFB; border: 1px solid #EAECF0; border-radius: 6px; font-size: 14px;"><span style="color: #667085;">필지</span><span>김제 실증 A-03 · FLD-KJ-0003 · 3,025평</span><span style="color: #667085;">필지 소유</span><span>신OO (농가)</span><span style="color: #667085;">전송 드론</span><span>DR-01 · 국산 파종드론 · 조종기 RR-GCS-7731</span><span style="color: #667085;">처방맵</span><span>v3 · 경상국립대 · 6m 격자 280개</span><span style="color: #667085;">예상 파종량</span><span><b>35.6 kg</b> · 저 71 · 중 119 · 고 90 격자</span><span style="color: #667085;">비행 조건</span><span>POI 2점 · 고도 3.0m · 1회차 / 총 1회차</span></div>
+        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+          <sc-for list="{{checks}}" as="c" hint-placeholder-count="3">
+            <button type="button" role="checkbox" aria-checked="{{c.on}}" onClick="{{c.pick}}" style="display: flex; align-items: center; gap: 10px; border: 0; background: transparent; padding: 0; font: 14px var(--font-primary); color: #0E1C31; cursor: pointer; text-align: left;"><span style="width: 18px; height: 18px; border-radius: 4px; border: 1.5px solid {{c.bd}}; background: {{c.bg}}; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">{{c.mark}}</span>{{c.label}}</button>
+          </sc-for>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 8px;">
+          <button type="button" onClick="{{closeConfirm}}" style="height: 40px; padding: 0 18px; border: 1px solid #D0D5DD; border-radius: 4px; background: #FFFFFF; font: 600 14px var(--font-primary); color: #344054; cursor: pointer;">돌아가기</button>
+          <button type="button" onClick="{{send}}" aria-disabled="{{sendDisabled}}" style="height: 40px; padding: 0 20px; border: 0; border-radius: 4px; background: {{sendBg}}; color: #FFFFFF; font: 600 14px var(--font-primary); cursor: pointer;">임무 전송</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
 </div>
 </script>
 <script type="text/x-dc-logic" id="dc-src">
+var STEPS = ['처방맵 등록', '임무 생성', '전송 전 확인', 'GCS 서버 전송', '조종기 임무 확인', '파종'];
+var CHECKS = ['필지와 소유 농가·법인이 맞습니다', '전송할 드론과 조종기가 맞습니다', '처방맵 버전과 예상 파종량을 확인했습니다'];
+var INIT_CONFIRM = false;
 class Component extends DCLogic {
   renderVals() {
+    var self = this, s = this.state || {};
+    var confirm = s.confirm === undefined ? INIT_CONFIRM : s.confirm;
+    var sent = !!s.sent;
+    var ck = s.ck || (INIT_CONFIRM ? [true, true, true] : [false, false, false]);
+    var all = ck.every(function (x) { return x; });
+    var cur = sent ? 3 : (confirm ? 2 : 1);
     return {
       yes: true,
-rounds: [
+      rounds: [
         { value: '1', label: '1회차 / 총 1회차 (단일)' },
         { value: '2', label: '2회차로 나눔' }
-      ]
+      ],
+      drones: [{ value: 'dr01', label: 'DR-01 · 국산 파종드론' }],
+      steps: STEPS.map(function (l, i) {
+        var done = i < cur, now = i === cur;
+        return { n: String(i + 1), label: l, sep: i > 0, cur: now ? 'step' : 'false', fg: done ? '#066B36' : (now ? '#0E1C31' : '#667085'), fw: now ? 600 : 400,
+          bg: done ? '#E6F4EC' : (now ? '#EF4122' : '#EAEDF0'), nfg: now ? '#FFFFFF' : (done ? '#066B36' : '#667085') };
+      }),
+      msnStatus: sent ? 'progress' : (confirm ? 'progress' : 'wait'), msnLabel: sent ? 'GCS 전송' : (confirm ? '전송 전 확인' : '작성 중'),
+      confirm: confirm,
+      openConfirm: function () { self.setState({ confirm: true }); },
+      closeConfirm: function () { self.setState({ confirm: false }); },
+      checks: CHECKS.map(function (l, i) {
+        var on = ck[i];
+        return { label: l, on: on ? 'true' : 'false', bd: on ? '#EF4122' : '#98A2B3', bg: on ? '#EF4122' : '#FFFFFF', mark: on ? '✓' : '',
+          pick: function () { var x = ck.slice(); x[i] = !on; self.setState({ ck: x }); } };
+      }),
+      sendBg: all ? '#EF4122' : '#F4A797', sendDisabled: all ? 'false' : 'true',
+      send: function () { if (all) self.setState({ confirm: false, sent: true }); }
     };
   }
 }
